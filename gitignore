@@ -1,9 +1,0 @@
-*.class
-*.java
-*.token
-node_modules/*
-gen/*
-package-lock.json
-
-#exclude
-!gen/README.md
