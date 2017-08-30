@@ -1,0 +1,31 @@
+{
+  "name": "policy_lang",
+  "version": "0.0.1",
+  "description": "policy language compiler for freelog",
+  "main": "index.js",
+  "dependencies": {
+    "antlr4": "^4.7.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-parser": "java -jar C:/Users/Phil/lib/antlr-4.7-complete.jar -Dlanguage=JavaScript policy.g4 -o gen"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miushock/policy_language.git"
+  },
+  "keywords": [
+    "freelog",
+    "policy"
+  ],
+  "author": "Jin Xiao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miushock/policy_language/issues"
+  },
+  "homepage": "https://github.com/miushock/policy_language#readme"
+}

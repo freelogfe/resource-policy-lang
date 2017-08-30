@@ -1,0 +1,12 @@
+*.class
+*.java
+*.tokens
+*.js
+node_modules/*
+gen/*
+package-lock.json
+
+#exclude
+!gen/README.md
+!index.js
+!gulpfile.js

@@ -1,0 +1,4 @@
+for users in my_subscribers 
+grant access on
+  accepting FREELOG_LICENSE
+  paying 1 per view
