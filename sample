@@ -1,4 +1,4 @@
-for users in my_subscribers 
+for users my_subscribers
 grant access on
-  accepting FREELOG_LICENSE
+  accepting license FREELOG_LICENSE
   paying 1 per view

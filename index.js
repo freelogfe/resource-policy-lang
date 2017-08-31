@@ -1,8 +1,8 @@
 let output = (function ( ) {
     let antlr4 = require('antlr4/index');
-    let policyLexer = require('../gen/policyLexer');
-    let policyParser = require('../gen/policyParser');
-    let policyListener = require('../gen/policyListener').policyListener;
+    let policyLexer = require('./gen/policyLexer');
+    let policyParser = require('./gen/policyParser');
+    let policyListener = require('./gen/policyListener').policyListener;
     let _ = require('underscore');
     //重写ErrorListener,储存报错信息
     let ErrorListener = require('antlr4/error/ErrorListener').ConsoleErrorListener;
@@ -10,27 +10,30 @@ let output = (function ( ) {
     ErrorListener.prototype.syntaxError = function(recognizer, offendingSymbol, line, column, msg, e) {
         errorMsg = msg;
     };
+    //当前code block
+    let codeBlock = {};
+    //当前用户对象
+    let userObj = {};
 
-    let JSONGenerator = function() {
+    let JSONGenerator = function(indentLevel) {
       policyListener.call(this);
-      this.indentLevel =4;
+      this.indentLevel =indentLevel || 4;
       this.result = [];
       //缩进
       this.nextIndent = '';
       //储存每一个code block
-      this.objList = [];
-      //当前code block
-      this.obj = {};
-      //当前用户对象
-      this.userObj = {};
+      this.codeBlockList = [];
       return this;
     };
 
     function addIndent() {
-    _.each(_.range(this.indentLevel), ()=>{
-        this.nextIndent += ' ';
-    });
-}
+        _.each(_.range(this.indentLevel), ()=>{
+            this.nextIndent += ' ';
+        });
+    }
+    function deleteIndent() {
+        nextIndent= nextIndent.slice(0, Number('-'+this.indentLevel));
+    }
 JSONGenerator.prototype = Object.create(policyListener.prototype);
 JSONGenerator.prototype.constructor = JSONGenerator;
 
@@ -42,15 +45,15 @@ JSONGenerator.prototype.exitP = function(ctx) {
 
 // p由segments组成
 JSONGenerator.prototype.enterSegment = function(ctx) {
-    this.obj = {
+    codeBlock = {
         users : [],
         license: null,
         payments: null
     };
 };
 JSONGenerator.prototype.exitSegment = function(ctx) {
-    console.log(JSON.stringify(this.obj));
-    this.objList.push(this.obj);
+    console.log(JSON.stringify(codeBlock));
+    this.codeBlockList.push(codeBlock);
     this.result.push('\n');
 };
 
@@ -60,7 +63,7 @@ JSONGenerator.prototype.enterAudience_clause = function(ctx) {
 };
 JSONGenerator.prototype.exitAudience_clause = function(ctx) {
     this.result.push('\n'+this.nextIndent);
-    this.nextIndent= this.nextIndent.slice(0,-4);
+    deleteIndent.apply(this);
 };
 
 JSONGenerator.prototype.enterAudience_individuals_clause = function(ctx) {
@@ -84,7 +87,7 @@ JSONGenerator.prototype.enterAudience_self_clause = function(ctx) {
     this.userObj = {};
     this.userObj.userType = 'self'
     this.result.push('self');
-    this.obj.users? this.obj.users.push(this.userObj):  this.obj.users=[];
+    codeBlock.users? codeBlock.users.push(this.userObj):  codeBlock.users=[];
 };
 JSONGenerator.prototype.exitAudience_self_clause = function(ctx) {
 };
@@ -100,7 +103,7 @@ JSONGenerator.prototype.enterAccess_clause = function(ctx) {
     addIndent.apply(this)
 };
 JSONGenerator.prototype.exitAccess_clause = function(ctx) {
-    this.nextIndent= this.nextIndent.slice(0,-4);
+    deleteIndent.apply(this);
     this.result.push('\n');
 };
 
@@ -111,17 +114,17 @@ JSONGenerator.prototype.enterConditional_access_clause = function(ctx) {
 };
 
 JSONGenerator.prototype.exitConditional_access_clause = function(ctx) {
-    this.nextIndent= this.nextIndent.slice(0,-4);
+    deleteIndent.apply(this);
 };
 
 JSONGenerator.prototype.enterUnconditional_access_clause = function(ctx) {
     addIndent.apply(this)
-    this.obj.license = null;
-    this.obj.payments = null;
+    codeBlock.license = null;
+    codeBlock.payments = null;
     this.result.push('require nothing');
 };
 JSONGenerator.prototype.exitUnconditional_access_clause = function(ctx) {
-    this.nextIndent= this.nextIndent.slice(0,-4);
+    deleteIndent.apply(this);
 };
 
 
@@ -135,8 +138,8 @@ JSONGenerator.prototype.enterLicense_representation = function(ctx) {
     if (Object.getPrototypeOf(ctx.parentCtx).constructor.name == 'License_clauseContext') {
         this.result.push('license');
         this.result.push(ctx.children[1].getText() + '\n'+this.nextIndent);
-        this.obj.license = this.obj.license|| [];
-        this.obj.license.push(ctx.children[1].getText());
+        codeBlock.license = codeBlock.license|| [];
+        codeBlock.license.push(ctx.children[1].getText());
     }
 };
 JSONGenerator.prototype.exitLicense_clause = function(ctx) {
@@ -166,8 +169,8 @@ JSONGenerator.prototype.enterPayment_over_time = function(ctx) {
     }
     this.result.push(ctx.time_unit().getText());//unit
     paymentObj.unitType = ctx.time_unit().getText();
-    this.obj.payments = this.obj.payments || [];
-    this.obj.payments.push(paymentObj);
+    codeBlock.payments = codeBlock.payments || [];
+    codeBlock.payments.push(paymentObj);
 
 };
 JSONGenerator.prototype.exitPayment_over_time = function(ctx) {
@@ -193,7 +196,7 @@ JSONGenerator.prototype.enterUsers = function(ctx) {
             this.result.push(ctx.getChild(i).getText());
         }
     }
-    this.obj.users.push(this.userObj);
+    codeBlock.users.push(this.userObj);
 
 };
 JSONGenerator.prototype.exitUsers = function(ctx) {
@@ -207,22 +210,19 @@ JSONGenerator.prototype.enterUser_groups = function(ctx) {
         }
         this.result.push(ctx.getChild(i).getText());
     }
-    this.obj.users.push(this.userObj);
+    codeBlock.users.push(this.userObj);
 };
 JSONGenerator.prototype.exitUser_groups = function(ctx) {
 };
-
-
-    // console.log(gen.result.join(' ').replace(/\n\s/g,'\n'));
-    return function (input) {
-        let chars = new antlr4.InputStream(input);
+    return function (text, indentLevel) {
+        let chars = new antlr4.InputStream(text);
         let lexer = new policyLexer.policyLexer(chars);
         let tokens  = new antlr4.CommonTokenStream(lexer);
         let parser = new policyParser.policyParser(tokens);
 
         parser.buildParseTrees = true;
         let tree = parser.p();
-        let gen = new JSONGenerator();
+        let gen = new JSONGenerator(indentLevel);
         antlr4.tree.ParseTreeWalker.DEFAULT.walk(gen, tree);
         if(errorMsg) {
             return errorMsg;
@@ -231,6 +231,4 @@ JSONGenerator.prototype.exitUser_groups = function(ctx) {
     }
 })();
 
-module.exports = {
-    output: output
-}
+module.exports = output;
