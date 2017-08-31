@@ -1,36 +1,32 @@
-let antlr4 = require('antlr4/index');
-let policyLexer = require('./gen/policyLexer');
-let policyParser = require('./gen/policyParser');
-let policyListener = require('./gen/policyListener').policyListener;
-let _ = require('underscore');
-let input = `for users myusers_A, myusers_B, myusers_C and usergroups myusers_groupA, myusers_groupB, myusers_groupC grant access on
-                accepting license FREELOG_LICENSE
-                paying 1 per 2 view `+
-                ` for usergroups myusers_groupA, myusers_groupB, myusers_groupC
-                                require nothing `+
-                ` for self grant access on
-                accepting license FREELOG_LICENSE
-                paying 1 per 2 week and paying 1 per 2 week`;
+let output = (function ( ) {
+    let antlr4 = require('antlr4/index');
+    let policyLexer = require('../gen/policyLexer');
+    let policyParser = require('../gen/policyParser');
+    let policyListener = require('../gen/policyListener').policyListener;
+    let _ = require('underscore');
+    //重写ErrorListener,储存报错信息
+    let ErrorListener = require('antlr4/error/ErrorListener').ConsoleErrorListener;
+    let errorMsg;
+    ErrorListener.prototype.syntaxError = function(recognizer, offendingSymbol, line, column, msg, e) {
+        errorMsg = msg;
+    };
 
-let chars = new antlr4.InputStream(input);
-let lexer = new policyLexer.policyLexer(chars);
-let tokens  = new antlr4.CommonTokenStream(lexer);
-let parser = new policyParser.policyParser(tokens);
-parser.buildParseTrees = true;
-let tree = parser.p();
+    let JSONGenerator = function() {
+      policyListener.call(this);
+      this.indentLevel =4;
+      this.result = [];
+      //缩进
+      this.nextIndent = '';
+      //储存每一个code block
+      this.objList = [];
+      //当前code block
+      this.obj = {};
+      //当前用户对象
+      this.userObj = {};
+      return this;
+    };
 
-JSONGenerator = function() {
-  policyListener.call(this);
-  this.indentLevel =4;
-  this.result = [];
-  this.nextIndent = '';
-  this.objList = [];
-  this.obj = {};
-  this.userObj = {};
-  return this;
-};
-
-function addIndent() {
+    function addIndent() {
     _.each(_.range(this.indentLevel), ()=>{
         this.nextIndent += ' ';
     });
@@ -217,6 +213,24 @@ JSONGenerator.prototype.exitUser_groups = function(ctx) {
 };
 
 
-let gen = new JSONGenerator();
-antlr4.tree.ParseTreeWalker.DEFAULT.walk(gen, tree);
-console.log(gen.result.join(' ').replace(/\n\s/g,'\n'));
+    // console.log(gen.result.join(' ').replace(/\n\s/g,'\n'));
+    return function (input) {
+        let chars = new antlr4.InputStream(input);
+        let lexer = new policyLexer.policyLexer(chars);
+        let tokens  = new antlr4.CommonTokenStream(lexer);
+        let parser = new policyParser.policyParser(tokens);
+
+        parser.buildParseTrees = true;
+        let tree = parser.p();
+        let gen = new JSONGenerator();
+        antlr4.tree.ParseTreeWalker.DEFAULT.walk(gen, tree);
+        if(errorMsg) {
+            return errorMsg;
+        }
+        return gen;
+    }
+})();
+
+module.exports = {
+    output: output
+}
