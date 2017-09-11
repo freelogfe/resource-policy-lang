@@ -1,6 +1,6 @@
 {
   "name": "policy_lang",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "policy language compiler for freelog",
   "main": "index.js",
   "dependencies": {
