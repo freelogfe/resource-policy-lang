@@ -8,27 +8,14 @@ duration
 segment : FOR audience_clause+ ':' (state_clause)*
 ;
 audience_clause
-  : (and)* audience_individuals_clause
-  | (and)* audience_groups_clause
-  | (and)* audience_selfdefinedaudience_clause
-  | (and)* classified_user_clause
+  : audience_individuals_clause
+  | audience_groups_clause
   ;
 audience_individuals_clause
-: USERS users (',' users)*
+: users (',' users)*
 ;
 audience_groups_clause
-: USERGROUPS user_groups (',' user_groups)*
-;
-audience_selfdefinedaudience_clause
-: SELF
-;
-classified_user_clause
-: classified_user+ 'in' audience_groups_clause
-;
-classified_user
-: 'diamond_users'
-| ','
-| 'gold_users'
+: 'users in' user_groups (',' user_groups)*
 ;
 state_clause
 : current_state_clause (target_clause)+
@@ -37,48 +24,80 @@ current_state_clause
 : IN ID ':'
 ;
 target_clause
-: PROCEED TO ID event (and_event)*
+: PROCEED TO ID 'on' (accepting)* event (and_event)*
+;
+accepting
+: 'accepting'
 ;
 event
 : time_event
+| price_event
+| transaction_event
 | guaranty_event
 | signing_event
 | access_count_event
 | balance_event
+| settlement_event
 ;
 and_event
 : 'and' event
 ;
 time_event
-: 'at the end of hour'
-| 'at the end of day'
-| 'at the end of week'
-| 'at the end of month'
-| 'at the end of quarter'
-| 'at the end of year'
+: 'the end of hour'
+| 'the end of day'
+| 'the end of week'
+| 'the end of month'
+| 'the end of quarter'
+| 'the end of year'
+;
+price_event
+: 'price priceExpression'
+;
+transaction_event
+: 'transaction of' INT 'in total'
+| 'transaction of' INT 'for once'
 ;
 guaranty_event
-: 'guaranty no less than' INT
-| 'guaranty less than' INT
+: contract_guaranty
+| platform_guaranty
 ;
+contract_guaranty
+: 'contract_guaranty of' INT 'refund after' INT time_unit
+;
+platform_guaranty
+: 'platform_guaranty of' INT
+;
+
 signing_event
-: 'signing event'
-| 'on accepting' LICENSE license_resource_id
+: LICENSE (license_resource_id)+
 ;
 access_count_event
-: 'access count event'
+: 'visit_increment of' INT
+| 'visit of' INT
 ;
 balance_event
-: 'on balance no less than' INT
-| 'on balance less than' INT
+: balance_greater
+| balance_smaller
 ;
+balance_greater
+: 'account_balance greater than' INT
+;
+balance_smaller
+: 'account_balance smaller than' INT
+;
+settlement_event
+: 'account_settled'
+;
+
 
 license_resource_id : ID;
 users : ID (',' ID)*;
 user_groups : ID (',' ID)*;
 and : 'and';
+view_unit : 'in total' | 'per view';
+time_unit : 'year' | 'month' | 'day';
 
-FOR       : 'for';
+FOR       : 'For';
 USERGROUPS : 'usergroups';
 USERS : 'users';
 PROCEED : 'proceed';

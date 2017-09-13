@@ -1,9 +1,48 @@
 var GEN = require('./index.js');
-var string =
-'This contract shall commence with effect from 12/12/2012 03:30 and shall continue until 12/12/2012 03:30 unless terminated earlier in accordance with its terms and conditions'
-+ 'for users userA and usergroups goup_A, groupB and diamond_users, gold_users in usergroups groupA: in begining:proceed to activated on accepting license license_A and at the end of day and on balance no less than 123';
+var string1=
+'This contract shall commence with effect from 12/12/2012 03:30 and shall continue until 12/12/2012 03:30 unless terminated earlier in accordance with its terms and conditions'+
+'For userA, userB: in begining:proceed to s on accepting license license_A license_B and contract_guaranty of 5000 refund after 1 year '+
+   'in s: proceed to activate on accepting price priceExpression '+
+   'in activate: proceed to settlement on the end of year '+
+   'in settlement: proceed to activate on account_settled';
+
+var string2 =
+'This contract shall commence with effect from 12/12/2012 03:30 and shall continue until 12/12/2012 03:30 unless terminated earlier in accordance with its terms and conditions'+
+'For users in groupA, groupB:'+
+     'in begining:proceed to activated on accepting license license_A and platform_guaranty of 200000'+
+     'in activate: proceed to settlement on the end of month'+
+     'in settlement: proceed to activate on account_settled';
+
+var string3 =
+'This contract shall commence with effect from 12/12/2012 03:30 and shall continue until 12/12/2012 03:30 unless terminated earlier in accordance with its terms and conditions'+
+'For userA:'+
+  'in begining:proceed to suspend on accepting license license_A '+
+  'in activate: proceed to suspend on visit_increment of 1'+
+  'in suspend : proceed to activate on account_settled';
+var  string4 =
+'This contract shall commence with effect from 12/12/2012 03:30 and shall continue until 12/12/2012 03:30 unless terminated earlier in accordance with its terms and conditions'+
+'For userA:'+
+   'in begining:proceed to activate on accepting license license_A and price priceExpression '+
+   'in activate: proceed to suspend on visit of 200 '+
+   'in suspend : proceed to activate on account_settled';
+
+var  string5 =
+'This contract shall commence with effect from 12/12/2012 03:30 and shall continue until 12/12/2012 03:30 unless terminated earlier in accordance with its terms and conditions'+
+'For users in groupA:'+
+   'in begining:proceed to activate on accepting license license_A and price priceExpression'+
+   'in activate: proceed to suspend on transaction of 50000 in total';
+
+var string6 =
+'This contract shall commence with effect from 12/12/2012 03:30 and shall continue until 12/12/2012 03:30 unless terminated earlier in accordance with its terms and conditions'+
+'For free_log_group:'+
+   'in begining:proceed to activate on accepting license license_A and price priceExpression'+
+   'in activate: proceed to settlement on the end of year'+
+                'proceed to suspend on account_balance greater than 100000'
+   'in settlement: proceed to activate on account_settled'+
+   'in suspend : account_balance less than 100000';
+
 console.log('start gen');
-var re = GEN(string);
-console.log(re);
+var re = GEN(string4);
+console.log(re.result.join(' ').replace(/ \n /g, '\n'));
 console.log(re.codeblockList[0]);
 console.log('end gen');

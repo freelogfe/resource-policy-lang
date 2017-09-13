@@ -65,33 +65,6 @@ policyListener.prototype.exitAudience_groups_clause = function(ctx) {
 };
 
 
-// Enter a parse tree produced by policyParser#audience_selfdefinedaudience_clause.
-policyListener.prototype.enterAudience_selfdefinedaudience_clause = function(ctx) {
-};
-
-// Exit a parse tree produced by policyParser#audience_selfdefinedaudience_clause.
-policyListener.prototype.exitAudience_selfdefinedaudience_clause = function(ctx) {
-};
-
-
-// Enter a parse tree produced by policyParser#classified_user_clause.
-policyListener.prototype.enterClassified_user_clause = function(ctx) {
-};
-
-// Exit a parse tree produced by policyParser#classified_user_clause.
-policyListener.prototype.exitClassified_user_clause = function(ctx) {
-};
-
-
-// Enter a parse tree produced by policyParser#classified_user.
-policyListener.prototype.enterClassified_user = function(ctx) {
-};
-
-// Exit a parse tree produced by policyParser#classified_user.
-policyListener.prototype.exitClassified_user = function(ctx) {
-};
-
-
 // Enter a parse tree produced by policyParser#state_clause.
 policyListener.prototype.enterState_clause = function(ctx) {
 };
@@ -116,6 +89,15 @@ policyListener.prototype.enterTarget_clause = function(ctx) {
 
 // Exit a parse tree produced by policyParser#target_clause.
 policyListener.prototype.exitTarget_clause = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#accepting.
+policyListener.prototype.enterAccepting = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#accepting.
+policyListener.prototype.exitAccepting = function(ctx) {
 };
 
 
@@ -146,12 +128,48 @@ policyListener.prototype.exitTime_event = function(ctx) {
 };
 
 
+// Enter a parse tree produced by policyParser#price_event.
+policyListener.prototype.enterPrice_event = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#price_event.
+policyListener.prototype.exitPrice_event = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#transaction_event.
+policyListener.prototype.enterTransaction_event = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#transaction_event.
+policyListener.prototype.exitTransaction_event = function(ctx) {
+};
+
+
 // Enter a parse tree produced by policyParser#guaranty_event.
 policyListener.prototype.enterGuaranty_event = function(ctx) {
 };
 
 // Exit a parse tree produced by policyParser#guaranty_event.
 policyListener.prototype.exitGuaranty_event = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#contract_guaranty.
+policyListener.prototype.enterContract_guaranty = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#contract_guaranty.
+policyListener.prototype.exitContract_guaranty = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#platform_guaranty.
+policyListener.prototype.enterPlatform_guaranty = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#platform_guaranty.
+policyListener.prototype.exitPlatform_guaranty = function(ctx) {
 };
 
 
@@ -179,6 +197,33 @@ policyListener.prototype.enterBalance_event = function(ctx) {
 
 // Exit a parse tree produced by policyParser#balance_event.
 policyListener.prototype.exitBalance_event = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#balance_greater.
+policyListener.prototype.enterBalance_greater = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#balance_greater.
+policyListener.prototype.exitBalance_greater = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#balance_smaller.
+policyListener.prototype.enterBalance_smaller = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#balance_smaller.
+policyListener.prototype.exitBalance_smaller = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#settlement_event.
+policyListener.prototype.enterSettlement_event = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#settlement_event.
+policyListener.prototype.exitSettlement_event = function(ctx) {
 };
 
 
@@ -215,6 +260,24 @@ policyListener.prototype.enterAnd = function(ctx) {
 
 // Exit a parse tree produced by policyParser#and.
 policyListener.prototype.exitAnd = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#view_unit.
+policyListener.prototype.enterView_unit = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#view_unit.
+policyListener.prototype.exitView_unit = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#time_unit.
+policyListener.prototype.enterTime_unit = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#time_unit.
+policyListener.prototype.exitTime_unit = function(ctx) {
 };
 
 
