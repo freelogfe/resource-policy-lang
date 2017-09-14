@@ -281,5 +281,23 @@ policyListener.prototype.exitTime_unit = function(ctx) {
 };
 
 
+// Enter a parse tree produced by policyParser#start_hour.
+policyListener.prototype.enterStart_hour = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#start_hour.
+policyListener.prototype.exitStart_hour = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#end_hour.
+policyListener.prototype.enterEnd_hour = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#end_hour.
+policyListener.prototype.exitEnd_hour = function(ctx) {
+};
+
+
 
 exports.policyListener = policyListener;

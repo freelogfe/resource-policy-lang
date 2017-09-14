@@ -3,7 +3,7 @@ grammar policy;
 p : duration segment +
 ;
 duration
-: 'This contract shall commence with effect from' DATE ?HOUR  'and shall continue until' DATE ?HOUR 'unless terminated earlier in accordance with its terms and conditions'
+: 'This contract shall commence with effect from' DATE (start_hour)?  'and shall continue until' DATE (end_hour)? 'unless terminated earlier in accordance with its terms and conditions'
 ;
 segment : FOR audience_clause+ ':' (state_clause)*
 ;
@@ -96,6 +96,8 @@ user_groups : ID (',' ID)*;
 and : 'and';
 view_unit : 'in total' | 'per view';
 time_unit : 'year' | 'month' | 'day';
+start_hour : INT ':' INT;
+end_hour : INT ':' INT;
 
 FOR       : 'For';
 USERGROUPS : 'usergroups';
@@ -118,4 +120,3 @@ ID  : ([a-zA-Z]|'_')+;
 WS  : [ \t\r\n]+ -> skip;
 INT : [0-9]+;
 DATE : INT '/' INT '/' INT;
-HOUR : INT ':' INT;
