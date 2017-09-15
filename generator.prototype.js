@@ -2,17 +2,6 @@
 exports.extendModule = function(JSONGenerator) {
     JSONGenerator.prototype.constructor = JSONGenerator;
     let _ = require('underscore');
-    let users =[]; //代表用户
-    let first_state = false;
-    let states = [];//所有起始状态（不含中间态）
-    let initial_state;//初始状态
-    let state_transition;//转换方程
-    let state_transition_table;//储存 转换方程的数组
-    let current_state;//转换方程的当前状态
-    let next_state;//转换方程的目标状态
-    let segment_block;//一个segment
-    let events = []; //描述and并列的事件
-    let occured_states = []; //记录所有已经出现的state，包括中间态
     //缩进
     let nextIndent = " ";
     function addIndent() {
@@ -93,15 +82,13 @@ JSONGenerator.prototype.exitEnd_hour = function(ctx) {
 };
 // Enter a parse tree produced by policyParser#segment.
 JSONGenerator.prototype.enterSegment = function(ctx) {
-    //初始化
-    state_transition_table = [];
-    states = [];
+
     //对应一个segment
-    segment_block = {
+    ctx.segment_block = {
         users : [], //暂时只有两种user，个人的和组的
-        initial_state: null,
-        states : null,
-        state_transition_table: null
+        states : [],
+        all_occured_states: [],
+        state_transition_table: []
     };
     this.result.push('\n')
     this.result.push('For');
@@ -109,32 +96,32 @@ JSONGenerator.prototype.enterSegment = function(ctx) {
 
 // Exit a parse tree produced by policyParser#segment.
 JSONGenerator.prototype.exitSegment = function(ctx) {
-    //离开segment的时候把东西放进segment_block
-    segment_block.state_transition_table = state_transition_table;
-    segment_block.states = states;
-    //重置初始state
-    first_state = false;
-    //有多个segment
-    this.policy_segments.push(segment_block);
     deleteIndent();
     //加入终止事件
-    _.each(occured_states, (state) => {
-        state_transition_table.push({
+    _.each(ctx.segment_block.all_occured_states, (state) => {
+        ctx.segment_block.state_transition_table.push({
             current_state : state,
             event : this.terminated_event,
             next_state: 'terminated_state'
         })
     })
-    //清空
-    occured_states = [];
+    //有多个segment
+    this.policy_segments.push(ctx.segment_block);
 };
 
 
 // Enter a parse tree produced by policyParser#audience_clause.
 JSONGenerator.prototype.enterAudience_clause = function(ctx) {
+    ctx.segment_block = ctx.parentCtx.segment_block;
+
+
 };
 // Exit a parse tree produced by policyParser#audience_clause.
 JSONGenerator.prototype.exitAudience_clause = function(ctx) {
+    ctx.parentCtx.segment_block = ctx.segment_block;
+
+
+
     this.result.push(':');
     addIndent.apply(this);
     this.result.push(nextIndent);
@@ -142,60 +129,73 @@ JSONGenerator.prototype.exitAudience_clause = function(ctx) {
 
 // Enter a parse tree produced by policyParser#audience_individuals_clause.
 JSONGenerator.prototype.enterAudience_individuals_clause = function(ctx) {
-    userObj = {};
-    userObj.userType = 'individuals';
+    ctx.segment_block = ctx.parentCtx.segment_block;
+    ctx.userObj = {};
+    ctx.userObj.userType = 'individuals';
 };
 
 // Exit a parse tree produced by policyParser#audience_individuals_clause.
 JSONGenerator.prototype.exitAudience_individuals_clause = function(ctx) {
+    ctx.segment_block.users.push(ctx.userObj);
+    ctx.parentCtx.segment_block = ctx.segment_block;
+
 };
 
 
 // Enter a parse tree produced by policyParser#audience_groups_clause.
 JSONGenerator.prototype.enterAudience_groups_clause = function(ctx) {
-    userObj = {};
-    userObj.userType = 'groups';
+    ctx.segment_block = ctx.parentCtx.segment_block;
+    ctx.userObj = {};
+    ctx.userObj.userType = 'groups';
 };
 
 // Exit a parse tree produced by policyParser#audience_groups_clause.
 JSONGenerator.prototype.exitAudience_groups_clause = function(ctx) {
+    ctx.segment_block.users.push(ctx.userObj);
+    ctx.parentCtx.segment_block = ctx.segment_block;
 };
 
 
 // Enter a parse tree produced by policyParser#state_clause.
 JSONGenerator.prototype.enterState_clause = function(ctx) {
+    ctx.segment_block = ctx.parentCtx.segment_block;
     this.result.push('\n');
     this.result.push(nextIndent);
 };
 
 // Exit a parse tree produced by policyParser#state_clause.
 JSONGenerator.prototype.exitState_clause = function(ctx) {
+    ctx.parentCtx.segment_block = ctx.segment_block;
 };
 
 
 // Enter a parse tree produced by policyParser#current_state_clause.
 JSONGenerator.prototype.enterCurrent_state_clause = function(ctx) {
+    ctx.segment_block = ctx.parentCtx.segment_block;
     _.map(ctx.children , ( child )=> {
         this.result.push(child.getText());
     });
-    states.push(ctx.ID().getText());
-    occured_states.push(ctx.ID().getText());
-    occured_states = _.uniq(occured_states);
+    ctx.segment_block.states.push(ctx.ID().getText());
+    ctx.segment_block.all_occured_states.push(ctx.ID().getText());
+    ctx.segment_block.all_occured_states = _.uniq(ctx.segment_block.all_occured_states);
 };
 
 // Exit a parse tree produced by policyParser#current_state_clause.
 JSONGenerator.prototype.exitCurrent_state_clause = function(ctx) {
+    ctx.parentCtx.segment_block = ctx.segment_block;
 };
 
 
 // Enter a parse tree produced by policyParser#target_clause.
 JSONGenerator.prototype.enterTarget_clause = function(ctx) {
+    ctx.segment_block = ctx.parentCtx.segment_block;
+
     //重置state
-    current_state = ctx.parentCtx.current_state_clause().ID().getText();
+    ctx.current_state = ctx.parentCtx.current_state_clause().ID().getText();
     //next_state
-    next_state = ctx.ID().getText();
+    ctx.next_state = ctx.ID().getText();
     //重置event
-    events = [];
+    ctx.events = [];
     this.result.push('\n');
     addIndent.apply(this);
     this.result.push(nextIndent);
@@ -205,23 +205,23 @@ JSONGenerator.prototype.enterTarget_clause = function(ctx) {
 // Exit a parse tree produced by policyParser#target_clause.
 JSONGenerator.prototype.exitTarget_clause = function(ctx) {
     //生成中间状态
-    let tempCurrent = current_state;
+    let tempCurrent = ctx.current_state;
     //permute当前events
-    _.each( permute(events), (orderedEvt)=> {
-        tempCurrent = current_state;
+    _.each( permute(ctx.events), (orderedEvt)=> {
+        tempCurrent = ctx.current_state;
         while (orderedEvt.length !=0 ) {
             let randomStateName = genRandomStateName();
             let event = orderedEvt.pop();
             state_transition = {
                 current_state : tempCurrent,
                 event: event,
-                next_state : next_state
+                next_state : ctx.next_state
             };
-            state_transition_table.push(state_transition);
+            ctx.segment_block.state_transition_table.push(state_transition);
             if (orderedEvt.length != 0) {
                 state_transition.next_state = randomStateName;
                 tempCurrent = randomStateName;
-                occured_states.push(randomStateName);//记录同一个起始state下面所有的target state及中间state
+                ctx.segment_block.all_occured_states.push(randomStateName);//记录同一个起始state下面所有的target state及中间state
             }
         }
     })
@@ -229,7 +229,8 @@ JSONGenerator.prototype.exitTarget_clause = function(ctx) {
     deleteIndent.apply(this);
 
     //记录同一个curren_state 下的多个target
-    occured_states = _.uniq(occured_states);
+    ctx.segment_block.all_occured_states = _.uniq(ctx.segment_block.all_occured_states);
+    ctx.parentCtx.segment_block = ctx.segment_block;
 
 };
 
@@ -244,39 +245,45 @@ JSONGenerator.prototype.exitAccepting = function(ctx) {
 
 // Enter a parse tree produced by policyParser#event.
 JSONGenerator.prototype.enterEvent = function(ctx) {
-    // events.push(ctx.getText());
+    ctx.events = ctx.parentCtx.events;
 };
 
 // Exit a parse tree produced by policyParser#event.
 JSONGenerator.prototype.exitEvent = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 
 
 // Enter a parse tree produced by policyParser#and_event.
 JSONGenerator.prototype.enterAnd_event = function(ctx) {
-    this.result.push('and')
+    ctx.events = ctx.parentCtx.events;
+    this.result.push('and');
 };
 
 // Exit a parse tree produced by policyParser#and_event.
 JSONGenerator.prototype.exitAnd_event = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 
 
 // Enter a parse tree produced by policyParser#time_event.
 JSONGenerator.prototype.enterTime_event = function(ctx) {
-    events.push({
-        type:'time_event',
-        params : ctx.getText().split(' ').pop() //取出是year还是day
-    });
+    ctx.events = ctx.parentCtx.events;
+    // ctx.events.push({
+    //     type:'time_event',
+    //     params : ctx.getText().split(' ').pop() //取出是year还是day
+    // });
     this.result.push(ctx.getText());
 };
 
 // Exit a parse tree produced by policyParser#time_event.
 JSONGenerator.prototype.exitTime_event = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 // Enter a parse tree produced by policyParser#price_event.
 JSONGenerator.prototype.enterPrice_event = function(ctx) {
-    events.push({
+    ctx.events = ctx.parentCtx.events;
+    ctx.events.push({
         type:'price_event',
         params : ctx.getText()
     });
@@ -284,11 +291,13 @@ JSONGenerator.prototype.enterPrice_event = function(ctx) {
 };
 // Exit a parse tree produced by policyParser#price_event.
 JSONGenerator.prototype.exitPrice_event = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 
 // Enter a parse tree produced by policyParser#transaction_event.
 JSONGenerator.prototype.enterTransaction_event = function(ctx) {
-    events.push({
+    ctx.events = ctx.parentCtx.events;
+    ctx.events.push({
         type:'transaction_event',
         params : ctx.getText()
     });
@@ -299,19 +308,22 @@ JSONGenerator.prototype.enterTransaction_event = function(ctx) {
 
 // Exit a parse tree produced by policyParser#transaction_event.
 JSONGenerator.prototype.exitTransaction_event = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 
 // Enter a parse tree produced by policyParser#guaranty_event.
 JSONGenerator.prototype.enterGuaranty_event = function(ctx) {
-    // this.result.push(ctx.getText());
+    ctx.events = ctx.parentCtx.events;
 };
 
 // Exit a parse tree produced by policyParser#guaranty_event.
 JSONGenerator.prototype.exitGuaranty_event = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 // Enter a parse tree produced by policyParser#contract_guaranty.
 JSONGenerator.prototype.enterContract_guaranty = function(ctx) {
-    events.push({
+    ctx.events = ctx.parentCtx.events;
+    ctx.events.push({
         type:'guaranty_event',
         params : ctx.getText()
     });
@@ -322,12 +334,14 @@ JSONGenerator.prototype.enterContract_guaranty = function(ctx) {
 
 // Exit a parse tree produced by policyParser#contract_guaranty.
 JSONGenerator.prototype.exitContract_guaranty = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 
 
 // Enter a parse tree produced by policyParser#platform_guaranty.
 JSONGenerator.prototype.enterPlatform_guaranty = function(ctx) {
-    events.push({
+    ctx.events = ctx.parentCtx.events;
+    ctx.events.push({
         type:'transaction_event',
         params : ctx.getText()
     });
@@ -335,15 +349,15 @@ JSONGenerator.prototype.enterPlatform_guaranty = function(ctx) {
         this.result.push(child.getText());
     });
 };
-
-// Exit a parse tree produced by policyParser#platform_guaranty.
 JSONGenerator.prototype.exitPlatform_guaranty = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 
 
 // Enter a parse tree produced by policyParser#signing_event.
 JSONGenerator.prototype.enterSigning_event = function(ctx) {
-    events.push({
+    ctx.events = ctx.parentCtx.events;
+    ctx.events.push({
         type:'signing_event',
         params : ctx.license_resource_id()[0].getText()
     });
@@ -354,11 +368,13 @@ JSONGenerator.prototype.enterSigning_event = function(ctx) {
 
 // Exit a parse tree produced by policyParser#signing_event.
 JSONGenerator.prototype.exitSigning_event = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 
 // Enter a parse tree produced by policyParser#settlement_event.
 JSONGenerator.prototype.enterSettlement_event = function(ctx) {
-    events.push({
+    ctx.events = ctx.parentCtx.events;
+    ctx.events.push({
         type:'settlement_event',
         params : ctx.getText()
     });
@@ -367,12 +383,14 @@ JSONGenerator.prototype.enterSettlement_event = function(ctx) {
 
 // Exit a parse tree produced by policyParser#settlement_event.
 JSONGenerator.prototype.exitSettlement_event = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 
 
 // Enter a parse tree produced by policyParser#access_count_event.
 JSONGenerator.prototype.enterAccess_count_event = function(ctx) {
-    events.push({
+    ctx.events = ctx.parentCtx.events;
+    ctx.events.push({
         type:'access_count_event',
         params : ctx.getText()
     });
@@ -380,9 +398,11 @@ JSONGenerator.prototype.enterAccess_count_event = function(ctx) {
 
 // Exit a parse tree produced by policyParser#access_count_event.
 JSONGenerator.prototype.exitAccess_count_event = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 // Enter a parse tree produced by policyParser#visit_increment_event.
 JSONGenerator.prototype.enterVisit_increment_event = function(ctx) {
+    ctx.events = ctx.parentCtx.events;
     _.map(ctx.children , ( child )=> {
         this.result.push(child.getText());
     });
@@ -390,30 +410,34 @@ JSONGenerator.prototype.enterVisit_increment_event = function(ctx) {
 
 // Exit a parse tree produced by policyParser#visit_increment_event.
 JSONGenerator.prototype.exitVisit_increment_event = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 
 
 // Enter a parse tree produced by policyParser#visit_event.
 JSONGenerator.prototype.enterVisit_event = function(ctx) {
+    ctx.events = ctx.parentCtx.events;
     _.map(ctx.children , ( child )=> {
         this.result.push(child.getText());
     });
 };
-
-// Exit a parse tree produced by policyParser#visit_event.
 JSONGenerator.prototype.exitVisit_event = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 
 JSONGenerator.prototype.enterBalance_event = function(ctx) {
+    ctx.events = ctx.parentCtx.events;
 };
 
 // Exit a parse tree produced by policyParser#balance_event.
 JSONGenerator.prototype.exitBalance_event = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 
 // Enter a parse tree produced by policyParser#balance_greater.
 JSONGenerator.prototype.enterBalance_greater = function(ctx) {
-    events.push({
+    ctx.events = ctx.parentCtx.events;
+    ctx.events.push({
         type:'balance_smaller_event',
         params : ctx.getText()
     });
@@ -424,12 +448,14 @@ JSONGenerator.prototype.enterBalance_greater = function(ctx) {
 
 // Exit a parse tree produced by policyParser#balance_greater.
 JSONGenerator.prototype.exitBalance_greater = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 
 
 // Enter a parse tree produced by policyParser#balance_smaller.
 JSONGenerator.prototype.enterBalance_smaller = function(ctx) {
-    events.push({
+    ctx.events = ctx.parentCtx.events;
+    ctx.events.push({
         type:'balance_greater_event',
         params : ctx.getText()
     });
@@ -437,9 +463,8 @@ JSONGenerator.prototype.enterBalance_smaller = function(ctx) {
         this.result.push(child.getText());
     });
 };
-
-// Exit a parse tree produced by policyParser#balance_smaller.
 JSONGenerator.prototype.exitBalance_smaller = function(ctx) {
+    ctx.parentCtx.events = ctx.events;
 };
 // Enter a parse tree produced by policyParser#time_unit.
 JSONGenerator.prototype.enterTime_unit = function(ctx) {
@@ -470,38 +495,46 @@ JSONGenerator.prototype.exitLicense_resource_id = function(ctx) {
 
 // Enter a parse tree produced by policyParser#users.
 JSONGenerator.prototype.enterUsers = function(ctx) {
-    //get users name
-    userObj.users = userObj.users || [];
+    //继承
+    ctx.userObj = ctx.parentCtx.userObj;
+    //新增users
+    ctx.userObj.users = ctx.userObj.users || [];
     for(var i=0;i<ctx.getChildCount();i++) {
         if(ctx.getChild(i).getText() != ',') {
-            userObj.users.push(ctx.getChild(i).getText());
+            //修改
+            ctx.userObj.users.push(ctx.getChild(i).getText());
         }
         this.result.push(ctx.getChild(i).getText());
     }
-    segment_block.users.push(userObj);
 };
 
 // Exit a parse tree produced by policyParser#users.
 JSONGenerator.prototype.exitUsers = function(ctx) {
+    //回传
+    ctx.parentCtx.userObj = ctx.userObj ;
 };
 
 
 // Enter a parse tree produced by policyParser#user_groups.
 JSONGenerator.prototype.enterUser_groups = function(ctx) {
     this.result.push('users in');
-    //get users name
-    userObj.users = userObj.users || [];
+    //继承
+    ctx.userObj = ctx.parentCtx.userObj;
+    //新增users
+    ctx.userObj.users = ctx.userObj.users || [];
     for(var i=0;i<ctx.getChildCount();i++) {
         if(ctx.getChild(i).getText() != ',') {
-            userObj.users.push(ctx.getChild(i).getText());
+            ctx.userObj.users.push(ctx.getChild(i).getText());
         }
         this.result.push(ctx.getChild(i).getText());
     }
-    segment_block.users.push(userObj);
+
 };
 
 // Exit a parse tree produced by policyParser#user_groups.
 JSONGenerator.prototype.exitUser_groups = function(ctx) {
+    //回传
+    ctx.parentCtx.userObj = ctx.userObj ;
 };
 
 
