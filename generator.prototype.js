@@ -1,18 +1,18 @@
 
 exports.extendModule = function(JSONGenerator) {
-
+    JSONGenerator.prototype.constructor = JSONGenerator;
     let _ = require('underscore');
     let users =[]; //代表用户
     let first_state = false;
-    let states = [];//所有状态
+    let states = [];//所有起始状态（不含中间态）
     let initial_state;//初始状态
-    let state_transition_table;//储存 转换方程的数组
     let state_transition;//转换方程
+    let state_transition_table;//储存 转换方程的数组
     let current_state;//转换方程的当前状态
     let next_state;//转换方程的目标状态
     let segment_block;//一个segment
-    let events = [];
-    let occured_states = []; //记录已经出现的state
+    let events = []; //描述and并列的事件
+    let occured_states = []; //记录所有已经出现的state，包括中间态
     //缩进
     let nextIndent = " ";
     function addIndent() {
@@ -23,9 +23,11 @@ exports.extendModule = function(JSONGenerator) {
     function deleteIndent() {
         nextIndent= nextIndent.slice(0, Number('-'+this.indentLevel));
     }
+    //父级节点名称
     function getParentCtxName( ctx ) {
         return ctx.parentCtx.constructor.name;
     }
+    //随机的中间态名称
     function genRandomStateName() {
         return (new Date * Math.random()).toString(36).substring(0,8)
     }
@@ -46,9 +48,6 @@ exports.extendModule = function(JSONGenerator) {
       }
       return permute.permArr
     };
-
-
-
 
 // Enter a parse tree produced by policyParser#p.
 JSONGenerator.prototype.enterP = function(ctx) {
@@ -128,7 +127,6 @@ JSONGenerator.prototype.exitSegment = function(ctx) {
     })
     //清空
     occured_states = [];
-
 };
 
 
@@ -378,15 +376,33 @@ JSONGenerator.prototype.enterAccess_count_event = function(ctx) {
         type:'access_count_event',
         params : ctx.getText()
     });
-    _.map(ctx.children , ( child )=> {
-        this.result.push(child.getText());
-    });
 };
 
 // Exit a parse tree produced by policyParser#access_count_event.
 JSONGenerator.prototype.exitAccess_count_event = function(ctx) {
 };
+// Enter a parse tree produced by policyParser#visit_increment_event.
+JSONGenerator.prototype.enterVisit_increment_event = function(ctx) {
+    _.map(ctx.children , ( child )=> {
+        this.result.push(child.getText());
+    });
+};
 
+// Exit a parse tree produced by policyParser#visit_increment_event.
+JSONGenerator.prototype.exitVisit_increment_event = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#visit_event.
+JSONGenerator.prototype.enterVisit_event = function(ctx) {
+    _.map(ctx.children , ( child )=> {
+        this.result.push(child.getText());
+    });
+};
+
+// Exit a parse tree produced by policyParser#visit_event.
+JSONGenerator.prototype.exitVisit_event = function(ctx) {
+};
 
 JSONGenerator.prototype.enterBalance_event = function(ctx) {
 };

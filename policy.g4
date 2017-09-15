@@ -8,8 +8,8 @@ duration
 segment : FOR audience_clause+ ':' (state_clause)*
 ;
 audience_clause
-  : audience_individuals_clause
-  | audience_groups_clause
+  : audience_individuals_clause ('and' audience_groups_clause)?
+  | audience_groups_clause ('and' audience_individuals_clause)?
   ;
 audience_individuals_clause
 : users (',' users)*
@@ -49,6 +49,10 @@ time_event
 | 'the end of month'
 | 'the end of quarter'
 | 'the end of year'
+| end_time_event
+;
+end_time_event
+: 'the end of' DATE (end_hour)?
 ;
 price_event
 : 'price priceExpression'
@@ -67,13 +71,18 @@ contract_guaranty
 platform_guaranty
 : 'platform_guaranty of' INT
 ;
-
 signing_event
 : LICENSE (license_resource_id)+
 ;
 access_count_event
+: visit_increment_event
+| visit_event
+;
+visit_increment_event
 : 'visit_increment of' INT
-| 'visit of' INT
+;
+visit_event
+: 'visit of' INT
 ;
 balance_event
 : balance_greater
@@ -88,7 +97,6 @@ balance_smaller
 settlement_event
 : 'account_settled'
 ;
-
 
 license_resource_id : ID;
 users : ID (',' ID)*;
@@ -119,4 +127,4 @@ NOTHING   : 'nothing';
 ID  : ([a-zA-Z]|'_')+;
 WS  : [ \t\r\n]+ -> skip;
 INT : [0-9]+;
-DATE : INT '/' INT '/' INT;
+DATE : INT '-' INT '-' INT;

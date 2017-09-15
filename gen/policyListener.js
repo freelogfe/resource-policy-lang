@@ -128,6 +128,15 @@ policyListener.prototype.exitTime_event = function(ctx) {
 };
 
 
+// Enter a parse tree produced by policyParser#end_time_event.
+policyListener.prototype.enterEnd_time_event = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#end_time_event.
+policyListener.prototype.exitEnd_time_event = function(ctx) {
+};
+
+
 // Enter a parse tree produced by policyParser#price_event.
 policyListener.prototype.enterPrice_event = function(ctx) {
 };
@@ -188,6 +197,24 @@ policyListener.prototype.enterAccess_count_event = function(ctx) {
 
 // Exit a parse tree produced by policyParser#access_count_event.
 policyListener.prototype.exitAccess_count_event = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#visit_increment_event.
+policyListener.prototype.enterVisit_increment_event = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#visit_increment_event.
+policyListener.prototype.exitVisit_increment_event = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#visit_event.
+policyListener.prototype.enterVisit_event = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#visit_event.
+policyListener.prototype.exitVisit_event = function(ctx) {
 };
 
 

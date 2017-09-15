@@ -11,22 +11,22 @@ let output = (function ( ) {
         errorMsg = msg;
     };
     let JSONGenerator = function(indentLevel) {
-      policyListener.call(this);
-      this.indentLevel =indentLevel || 4;
-      //string result;
-      this.result = [];
-      //储存每一个segment
-      this.policy_segments = [];
-      this.duration = {
-          start_date: null,
-          end_date: null,
-          start_hour: null,
-          end_hour: null
-      };
-      return this;
+        policyListener.call(this);
+        this.indentLevel = indentLevel || 4;
+        //string result;
+        this.result = [];
+        //储存每一个segment
+        this.policy_segments = [];
+        this.duration = {
+            start_date: null,
+            end_date: null,
+            start_hour: null,
+            end_hour: null
+        };
+        return this;
     };
     JSONGenerator.prototype = Object.create(policyListener.prototype);
-    JSONGenerator.prototype.constructor = JSONGenerator;
+    //重写prototype
     require('./generator.prototype.js').extendModule(JSONGenerator);
 
     return {
@@ -35,7 +35,6 @@ let output = (function ( ) {
             let lexer = new policyLexer.policyLexer(chars);
             let tokens  = new antlr4.CommonTokenStream(lexer);
             let parser = new policyParser.policyParser(tokens);
-
             parser.buildParseTrees = true;
             let tree = parser.p();
             let gen = new JSONGenerator(indentLevel);
