@@ -1,4 +1,4 @@
-var GEN = require('./index.js');
+var compiler = require('./index.js');
 var string1=
 'This contract shall commence with effect from 12-12-2012 03:30 and shall continue until 12-12-2012 03:30 unless terminated earlier in accordance with its terms and conditions'+
 'For userA, userB: in begining:proceed to s on accepting license license_A license_B and contract_guaranty of 5000 refund after 1 year '+
@@ -42,8 +42,7 @@ var string6 =
    'in suspend : proceed to activate on account_balance smaller than 100000';
 
 console.log('start gen');
-var re = GEN.complier(string6);
-// console.log(re);
-console.log(re.result.join(' ').replace(/ \n /g, '\n'));
+var re = compiler.compile(string6);
+
 console.log(re.policy_segments[0]);
 console.log('end gen');
