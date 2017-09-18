@@ -1,6 +1,6 @@
 grammar policy;
 
-p : duration segment +
+p : duration segment + EOF
 ;
 duration
 : 'This contract shall commence with effect from' DATE (start_hour)?  'and shall continue until' DATE (end_hour)? 'unless terminated earlier in accordance with its terms and conditions'

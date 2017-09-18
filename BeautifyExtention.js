@@ -5,7 +5,8 @@ let indentLevel = 2
 class Beautify extends policyListener {
   constructor() {
     super();
-    this.result = [];
+    this.errorMsg = null;
+    this.stringArray = [];
     this._nextIndent = ' ';
   }
   addIndent() {
@@ -18,13 +19,13 @@ class Beautify extends policyListener {
   };
   enterDuration(ctx) {
     _.map(ctx.children, (child) => {
-      this.result.push(child.getText());
+      this.stringArray.push(child.getText());
     });
   };
   exitDuration(ctx) {};
   enterSegment(ctx) {
-    this.result.push('\n')
-    this.result.push('For');
+    this.stringArray.push('\n')
+    this.stringArray.push('For');
   };
   exitSegment(ctx) {
     this.deleteIndent();
@@ -33,94 +34,92 @@ class Beautify extends policyListener {
     ctx.segment_block = ctx.parentCtx.segment_block;
   };
   exitAudience_clause(ctx) {
-    this.result.push(':');
+    this.stringArray.push(':');
     this.addIndent();
-    this.result.push(this._nextIndent);
+    this.stringArray.push(this._nextIndent);
   };
   enterState_clause(ctx) {
-
-    this.result.push('\n');
-    this.result.push(this._nextIndent);
+    this.stringArray.push('\n');
+    this.stringArray.push(this._nextIndent);
   };
   enterCurrent_state_clause(ctx) {
     _.map(ctx.children, (child) => {
-      this.result.push(child.getText());
+      this.stringArray.push(child.getText());
     });
   };
   enterTarget_clause(ctx) {
-    this.result.push('\n');
+    this.stringArray.push('\n');
     this.addIndent();
-    this.result.push(this._nextIndent);
-    this.result = this.result.concat(['proceed to', ctx.ID().getText(), 'on']);
+    this.stringArray.push(this._nextIndent);
+    this.stringArray = this.stringArray.concat(['proceed to', ctx.ID().getText(), 'on']);
   };
   exitTarget_clause() {
     this.deleteIndent();
   }
   enterAccepting(ctx) {
-    this.result.push('accepting');
+    this.stringArray.push('accepting');
   };
   enterAnd_event(ctx) {
-    this.result.push('and');
+    this.stringArray.push('and');
   };
   enterTime_event(ctx) {
-    this.result.push(ctx.getText());
+    this.stringArray.push(ctx.getText());
   };
   enterPrice_event(ctx) {
-    this.result.push('price_event');
+    this.stringArray.push('price_event');
   };
   enterTransaction_event(ctx) {
     _.map(ctx.children, (child) => {
-      this.result.push(child.getText());
+      this.stringArray.push(child.getText());
     });
   };
   enterContract_guaranty(ctx) {
     _.map(ctx.children, (child) => {
-      this.result.push(child.getText());
+      this.stringArray.push(child.getText());
     });
   };
   enterPlatform_guaranty(ctx) {
     _.map(ctx.children, (child) => {
-      this.result.push(child.getText());
+      this.stringArray.push(child.getText());
     });
   };
   enterSigning_event(ctx) {
     _.map(ctx.children, (child) => {
-      this.result.push(child.getText());
+      this.stringArray.push(child.getText());
     });
   };
   enterSettlement_event(ctx) {
-    this.result.push('account_settled');
+    this.stringArray.push('account_settled');
   };
-
   enterVisit_increment_event(ctx) {
     _.map(ctx.children, (child) => {
-      this.result.push(child.getText());
+      this.stringArray.push(child.getText());
     });
   };
   enterVisit_event(ctx) {
     _.map(ctx.children, (child) => {
-      this.result.push(child.getText());
+      this.stringArray.push(child.getText());
     });
   };
   enterBalance_greater(ctx) {
     _.map(ctx.children, (child) => {
-      this.result.push(child.getText());
+      this.stringArray.push(child.getText());
     });
   };
   enterBalance_smaller(ctx) {
     _.map(ctx.children, (child) => {
-      this.result.push(child.getText());
+      this.stringArray.push(child.getText());
     });
   };
   enterUsers(ctx) {
     for (var i = 0; i < ctx.getChildCount(); i++) {
-      this.result.push(ctx.getChild(i).getText());
+      this.stringArray.push(ctx.getChild(i).getText());
     }
   };
   enterUser_groups(ctx) {
-    this.result.push('users in');
+    this.stringArray.push('users in');
     for (var i = 0; i < ctx.getChildCount(); i++) {
-      this.result.push(ctx.getChild(i).getText());
+      this.stringArray.push(ctx.getChild(i).getText());
     }
   };
 };

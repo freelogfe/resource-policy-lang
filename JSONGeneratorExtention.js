@@ -26,6 +26,7 @@ function genRandomStateName() {
 class JSONGeneratorExtentionClass extends policyListener {
   constructor() {
     super();
+    this.errorMsg = null;
     this.policy_segments = [];
     this.duration = {
       start_date: null,

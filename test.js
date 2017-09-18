@@ -35,7 +35,7 @@ var  string5 =
 var string6 =
 'This contract shall commence with effect from 12-12-2012 03:03 and shall continue until 12-13-2012 unless terminated earlier in accordance with its terms and conditions'+
 'For free_log_A and users in user_groups_A:'+
-   'in initial:proceed to activate on accepting license license_A and price priceExpression '+
+   'in initial:proceed to activate on accepting price priceExpression and  license license_A '+
    'in activate: proceed to settlement on the end of year '+
                 'proceed to suspend on account_balance greater than 100000 '+
    'in settlement: proceed to activate on account_settled '+
@@ -43,6 +43,6 @@ var string6 =
 
 console.log('start gen');
 var re = compiler.compile(string6);
-
-console.log(re.policy_segments[0]);
+console.log(re);
+console.log(re.stringArray);
 console.log('end gen');
