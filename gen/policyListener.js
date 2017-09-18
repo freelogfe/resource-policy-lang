@@ -119,21 +119,12 @@ policyListener.prototype.exitAnd_event = function(ctx) {
 };
 
 
-// Enter a parse tree produced by policyParser#time_event.
-policyListener.prototype.enterTime_event = function(ctx) {
+// Enter a parse tree produced by policyParser#settlement_time_event.
+policyListener.prototype.enterSettlement_time_event = function(ctx) {
 };
 
-// Exit a parse tree produced by policyParser#time_event.
-policyListener.prototype.exitTime_event = function(ctx) {
-};
-
-
-// Enter a parse tree produced by policyParser#end_time_event.
-policyListener.prototype.enterEnd_time_event = function(ctx) {
-};
-
-// Exit a parse tree produced by policyParser#end_time_event.
-policyListener.prototype.exitEnd_time_event = function(ctx) {
+// Exit a parse tree produced by policyParser#settlement_time_event.
+policyListener.prototype.exitSettlement_time_event = function(ctx) {
 };
 
 

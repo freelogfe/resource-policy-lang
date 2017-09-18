@@ -173,10 +173,11 @@ class JSONGeneratorExtentionClass extends policyListener {
     ctx.parentCtx.events = ctx.events;
   };
 
-  enterTime_event(ctx) {
+  enterSettlement_time_event(ctx) {
     ctx.events = ctx.parentCtx.events;
+    ctx.events.push({type: 'settlement_event', params: ctx.INT().getText()});
   };
-  exitTime_event(ctx) {
+  exitSettlement_time_event(ctx) {
     ctx.parentCtx.events = ctx.events;
   };
 
@@ -195,6 +196,14 @@ class JSONGeneratorExtentionClass extends policyListener {
   exitTransaction_event(ctx) {
     ctx.parentCtx.events = ctx.events;
   };
+  enterSigning_event(ctx) {
+    console.log('33333333333333333');
+    ctx.events = ctx.parentCtx.events;
+    ctx.events.push({type: 'license_event', params: ctx.license_resource_id().getText()});
+  }
+  exitSigning_event(ctx) {
+    ctx.parentCtx.events = ctx.events;
+  }
 
   enterGuaranty_event(ctx) {
     ctx.events = ctx.parentCtx.events;

@@ -30,7 +30,7 @@ accepting
 : 'accepting'
 ;
 event
-: time_event
+: settlement_time_event
 | price_event
 | transaction_event
 | guaranty_event
@@ -42,17 +42,8 @@ event
 and_event
 : 'and' event
 ;
-time_event
-: 'the end of hour'
-| 'the end of day'
-| 'the end of week'
-| 'the end of month'
-| 'the end of quarter'
-| 'the end of year'
-| end_time_event
-;
-end_time_event
-: 'the end of' DATE (end_hour)?
+settlement_time_event
+: 'every' INT 'day'
 ;
 price_event
 : 'price priceExpression'

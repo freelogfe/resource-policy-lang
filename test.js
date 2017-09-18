@@ -29,8 +29,7 @@ var  string4 =
 var  string5 =
 'This contract shall commence with effect from 12-12-2012 03:30 and shall continue until 12-13-2012 03:30 unless terminated earlier in accordance with its terms and conditions'+
 'For users in groupA:'+
-   'in begining:proceed to activate on accepting license license_A and price priceExpression'+
-   'in activate: proceed to suspend on transaction of 50000 in total';
+   'in begining:proceed to activate on every 3 day'
 
 var string6 =
 'This contract shall commence with effect from 12-12-2012 03:03 and shall continue until 12-13-2012 unless terminated earlier in accordance with its terms and conditions'+
@@ -42,7 +41,6 @@ var string6 =
    'in suspend : proceed to activate on account_balance smaller than 100000';
 
 console.log('start gen');
-var re = compiler.compile(string6);
-console.log(re);
-console.log(re.stringArray);
+var re = compiler.compile(string5);
+console.log(re.policy_segments[0].state_transition_table);
 console.log('end gen');
