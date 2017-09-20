@@ -4,14 +4,10 @@ const policyParser = require('./gen/policyParser');
 const _ = require('underscore');
 
 const ErrorListener = require('antlr4/error/ErrorListener').ConsoleErrorListener;
-ErrorListener.prototype.syntaxError = function(recognizer, offendingSymbol, line, column, msg, e) {
-  this.errorMsg = msg;
-};
-
-
+const ErrorListenerExtend = require('./ErrorListenerExtend');
+ErrorListenerExtend(ErrorListener.prototype);
 
 var compile = function (text, target='json'){
-  // ex(ErrorListener.prototype)
   let extentionClass = require('./JSONGeneratorExtention.js');
   if (target === 'beautify') {
     extentionClass = require('./BeautifyExtention.js');

@@ -38,15 +38,17 @@ class JSONGeneratorExtentionClass extends policyListener {
 
   enterP(ctx) {};
   exitP(ctx) {};
-  enterDuration(ctx) {
+  enterDuration_clause(ctx) {
     this.duration.start_date = ctx.DATE()[0].getText();
     this.duration.end_date = ctx.DATE()[1].getText();
   };
-  exitDuration(ctx) {
+  exitDuration_clause(ctx) {
     //合约到期即i一个终止事件
-    this.terminated_event = {
-      type: 'terminated',
-      params: [this.duration.end_date, this.duration.end_hour]
+    let end_hour = this.duration.end_hour?this.duration.end_hour:'00:00';
+    this.contract_expire = {
+      type: 'contractExpire',
+      params: [this.duration.end_date+end_hour],
+      eventName: 'contractExpire_'+this.duration.end_date + end_hour
     }
   };
   enterStart_hour(ctx) {
@@ -71,12 +73,50 @@ class JSONGeneratorExtentionClass extends policyListener {
   exitSegment(ctx) {
     //针对当前segment所有已经出现的states（all_occured_states）加入终止事件
     _.each(ctx.segment_block.all_occured_states, (state) => {
-      ctx.segment_block.state_transition_table.push({current_state: state, event: this.terminated_event, next_state: 'terminated_state'});
+      ctx.segment_block.state_transition_table.push({currentState: state, event: this.contract_expire, nextState: 'contractExpireState'});
     });
-    //有多个segment
-    this.policy_segments.push(ctx.segment_block);
+      this.policy_segments.push(ctx.segment_block);
   };
 
+  enterSettlement_clause (ctx) {};
+  exitSettlement_clause (ctx) {
+    //settlement事件
+    let settlementForward = {
+      type: 'settlementForward',
+      params: [3, 'day'],
+      eventName: 'settlementForward_3_day'
+    };
+    let accountSettled = {
+      type: 'accountSettled',
+      params: [],
+      eventName: 'accountSettled'
+    };
+    //列出所有token states
+    let tokenStates = _.reduce( ctx.ID(), (x, y)=> {
+      return x.concat(y.getText())
+    }, []);
+    //获取对应的segment
+    let segment = this.policy_segments[this.policy_segments.length-1];
+    //检查tokens staets 是否已经出现,并且暂存一起来，如果pass验证，那么就concat进去了
+    let tempStates = [];
+    let statesOccured = _.every(tokenStates, (el)=> {
+      tempStates.push({
+        currentState: el,
+        event: settlementForward,
+        nextState: 'settlement'
+      });
+      tempStates.push({
+        currentState: 'settlement',
+        event: accountSettled,
+        nextState: el
+      });
+      return _.contains(segment.all_occured_states, el);
+    });
+    // //针对当前segment加入结算事件
+    if ( statesOccured ) {
+      Array.prototype.push.apply(this.policy_segments[this.policy_segments.length-1].state_transition_table, tempStates);
+    }
+  };
   enterAudience_clause(ctx) {
     ctx.segment_block = ctx.parentCtx.segment_block;
   };
@@ -142,19 +182,20 @@ class JSONGeneratorExtentionClass extends policyListener {
         let randomStateName = genRandomStateName();
         let event = orderedEvt.pop();
         let state_transition = {
-          current_state: tempCurrent,
+          currentState: tempCurrent,
           event: event,
-          next_state: ctx.next_state
+          nextState: ctx.next_state
         };
         ctx.segment_block.state_transition_table.push(state_transition);
         if (orderedEvt.length != 0) {
-          state_transition.next_state = randomStateName;
+          state_transition.nextState = randomStateName;
           tempCurrent = randomStateName;
           ctx.segment_block.all_occured_states.push(randomStateName); //记录同一个起始state下面所有的target state及中间state
         }
       }
     });
     //记录同一个curren_state 下的多个target
+    ctx.segment_block.all_occured_states.push(ctx.next_state);
     ctx.segment_block.all_occured_states = _.uniq(ctx.segment_block.all_occured_states);
     ctx.parentCtx.segment_block = ctx.segment_block;
   };
@@ -183,7 +224,11 @@ class JSONGeneratorExtentionClass extends policyListener {
 
   enterPrice_event(ctx) {
     ctx.events = ctx.parentCtx.events;
-    ctx.events.push({type: 'price_event', params: ctx.getText()});
+    ctx.events.push({
+      type: 'pricingAgreement',
+      params:'tbd',
+      eventName: 'pricingAgreement'
+    });
   };
   exitPrice_event(ctx) {
     ctx.parentCtx.events = ctx.events;
@@ -191,19 +236,27 @@ class JSONGeneratorExtentionClass extends policyListener {
 
   enterTransaction_event(ctx) {
     ctx.events = ctx.parentCtx.events;
-    ctx.events.push({type: 'transaction_event', params: ctx.getText()});
+    ctx.events.push({
+      type: 'transaction',
+      params: ['userId', ctx.INT().getText()],
+      eventName: 'transaction_userid_'+ctx.INT().getText()
+    });
   };
   exitTransaction_event(ctx) {
     ctx.parentCtx.events = ctx.events;
   };
+
   enterSigning_event(ctx) {
-    console.log('33333333333333333');
     ctx.events = ctx.parentCtx.events;
-    ctx.events.push({type: 'license_event', params: ctx.license_resource_id().getText()});
-  }
+    ctx.events.push({
+      type: 'signing',
+      params: [ctx.license_resource_id()[0].getText()],
+      eventName: 'signing_'+ctx.license_resource_id()[0].getText()
+    });
+  };
   exitSigning_event(ctx) {
     ctx.parentCtx.events = ctx.events;
-  }
+  };
 
   enterGuaranty_event(ctx) {
     ctx.events = ctx.parentCtx.events;
@@ -214,7 +267,11 @@ class JSONGeneratorExtentionClass extends policyListener {
 
   enterContract_guaranty(ctx) {
     ctx.events = ctx.parentCtx.events;
-    ctx.events.push({type: 'guaranty_event', params: ctx.getText()});
+    ctx.events.push({
+      type: 'guarantyEvent',
+      params: 'tbd',
+      eventName: 'tbd'
+    });
   };
   exitContract_guaranty(ctx) {
     ctx.parentCtx.events = ctx.events;
@@ -222,25 +279,21 @@ class JSONGeneratorExtentionClass extends policyListener {
 
   enterPlatform_guaranty(ctx) {
     ctx.events = ctx.parentCtx.events;
-    ctx.events.push({type: 'transaction_event', params: ctx.getText()});
+    ctx.events.push({
+      type: 'platformGuaranty',
+      params: [ctx.INT().getText()]
+    });
   };
   exitPlatform_guaranty(ctx) {
     ctx.parentCtx.events = ctx.events;
   };
 
-  enterSigning_event(ctx) {
-    ctx.events = ctx.parentCtx.events;
-    ctx.events.push({
-      type: 'signing_event', params: ctx.license_resource_id()[0].getText()
-    });
-  };
-  exitSigning_event(ctx) {
-    ctx.parentCtx.events = ctx.events;
-  };
-
   enterSettlement_event(ctx) {
     ctx.events = ctx.parentCtx.events;
-    ctx.events.push({type: 'settlement_event', params: ctx.getText()});
+    ctx.events.push({
+      type: 'accountSettled',
+      params:[]
+    });
   };
   exitSettlement_event(ctx) {
     ctx.parentCtx.events = ctx.events;
@@ -248,7 +301,6 @@ class JSONGeneratorExtentionClass extends policyListener {
 
   enterAccess_count_event(ctx) {
     ctx.events = ctx.parentCtx.events;
-    ctx.events.push({type: 'access_count_event', params: ctx.getText()});
   };
   exitAccess_count_event(ctx) {
     ctx.parentCtx.events = ctx.events;
@@ -256,6 +308,10 @@ class JSONGeneratorExtentionClass extends policyListener {
 
   enterVisit_increment_event(ctx) {
     ctx.events = ctx.parentCtx.events;
+    ctx.events.push({
+      type: 'accessCountIncrement',
+      params: [ctx.INT().getText()]
+    });
   };
 
   // Exit a parse tree produced by policyParser#visit_increment_event.
@@ -265,6 +321,10 @@ class JSONGeneratorExtentionClass extends policyListener {
 
   enterVisit_event(ctx) {
     ctx.events = ctx.parentCtx.events;
+    ctx.events.push({
+      type: 'accessCount',
+      params: [ctx.INT().getText()]
+    });
   };
   exitVisit_event(ctx) {
     ctx.parentCtx.events = ctx.events;

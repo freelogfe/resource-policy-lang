@@ -20,12 +20,12 @@ policyListener.prototype.exitP = function(ctx) {
 };
 
 
-// Enter a parse tree produced by policyParser#duration.
-policyListener.prototype.enterDuration = function(ctx) {
+// Enter a parse tree produced by policyParser#duration_clause.
+policyListener.prototype.enterDuration_clause = function(ctx) {
 };
 
-// Exit a parse tree produced by policyParser#duration.
-policyListener.prototype.exitDuration = function(ctx) {
+// Exit a parse tree produced by policyParser#duration_clause.
+policyListener.prototype.exitDuration_clause = function(ctx) {
 };
 
 
@@ -35,6 +35,15 @@ policyListener.prototype.enterSegment = function(ctx) {
 
 // Exit a parse tree produced by policyParser#segment.
 policyListener.prototype.exitSegment = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#settlement_clause.
+policyListener.prototype.enterSettlement_clause = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#settlement_clause.
+policyListener.prototype.exitSettlement_clause = function(ctx) {
 };
 
 
@@ -251,6 +260,15 @@ policyListener.prototype.enterLicense_resource_id = function(ctx) {
 
 // Exit a parse tree produced by policyParser#license_resource_id.
 policyListener.prototype.exitLicense_resource_id = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#account_id.
+policyListener.prototype.enterAccount_id = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#account_id.
+policyListener.prototype.exitAccount_id = function(ctx) {
 };
 
 

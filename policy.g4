@@ -1,11 +1,14 @@
 grammar policy;
 
-p : duration segment + EOF
+p : duration_clause (segment settlement_clause)+ EOF
 ;
-duration
+duration_clause
 : 'This contract shall commence with effect from' DATE (start_hour)?  'and shall continue until' DATE (end_hour)? 'unless terminated earlier in accordance with its terms and conditions'
 ;
 segment : FOR audience_clause+ ':' (state_clause)*
+;
+settlement_clause
+: 'The account settlement shall be performed on every' INT 'day in token state' (ID)+
 ;
 audience_clause
   : audience_individuals_clause ('and' audience_groups_clause)?
@@ -49,15 +52,14 @@ price_event
 : 'price priceExpression'
 ;
 transaction_event
-: 'transaction of' INT 'in total'
-| 'transaction of' INT 'for once'
+: 'transaction of' INT 'to owner'
 ;
 guaranty_event
 : contract_guaranty
 | platform_guaranty
 ;
 contract_guaranty
-: 'contract_guaranty of' INT 'refund after' INT time_unit
+: 'contract_guaranty of' INT 'refund after' INT 'day'
 ;
 platform_guaranty
 : 'platform_guaranty of' INT
@@ -90,6 +92,7 @@ settlement_event
 ;
 
 license_resource_id : ID;
+account_id: ID;
 users : ID (',' ID)*;
 user_groups : ID (',' ID)*;
 and : 'and';

@@ -17,18 +17,27 @@ class Beautify extends policyListener {
   deleteIndent() {
     this._nextIndent = this._nextIndent.slice(0, Number('-' + indentLevel));
   };
-  enterDuration(ctx) {
+  enterDuration_clause(ctx) {
     _.map(ctx.children, (child) => {
       this.stringArray.push(child.getText());
     });
   };
-  exitDuration(ctx) {};
+  exitDuration_clause(ctx) {};
   enterSegment(ctx) {
     this.stringArray.push('\n')
     this.stringArray.push('For');
   };
   exitSegment(ctx) {
     this.deleteIndent();
+  };
+
+  enterSettlement_clause (ctx) {
+      this.stringArray.push('\n')
+    _.map(ctx.children, (child) => {
+      this.stringArray.push(child.getText());
+    });
+  };
+  exitSettlement_clause (ctx) {
   };
   enterAudience_clause(ctx) {
     ctx.segment_block = ctx.parentCtx.segment_block;
