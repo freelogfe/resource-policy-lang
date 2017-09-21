@@ -1,7 +1,7 @@
 var compiler = require('./index.js');
 var string1=
 'This contract shall commence with effect from 12-12-2012 03:30 and shall continue until 12-12-2012 unless terminated earlier in accordance with its terms and conditions'+
-'For userA, userB: in begining:proceed to activatetwo on accepting license licenseA licenseB and contract_guaranty of 5000 refund after 1 day '+
+'For userA, userB: in begining:proceed to activatetwo on accepting license licenseA licenseB and contract_guaranty of 5000 refund after 1 day and license licenseBN '+
    'in activatetwo: proceed to activate on accepting price priceExpression '+
 'The account settlement shall be performed on every 2 day in token state activate activatetwo'
 
@@ -44,9 +44,9 @@ var string6 =
    'in suspend : proceed to activate on account_balance smaller than 100000';
 
 console.log('start gen');
-var re = compiler.compile(string2,'beautify');
-console.log(re);
-console.log(re.stringArray.join(' ').replace(/\n\s/g,'\n'));
+var re = compiler.compile(string1);
+// console.log(re);
+// console.log(re.stringArray.join(' ').replace(/\n\s/g,'\n'));
 // console.log(re.policy_segments[0].state_transition_table);
-// console.log(JSON.stringify(re.policy_segments[0].state_transition_table));
+console.log(JSON.stringify(re.policy_segments[0].state_transition_table));
 console.log('end gen');

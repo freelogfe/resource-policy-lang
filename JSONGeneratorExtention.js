@@ -19,8 +19,8 @@ function permute(input) {
   return permute.permArr
 };
 //随机的中间态名称
-function genRandomStateName() {
-  return (new Date * Math.random()).toString(36).substring(0, 8)
+function genRandomStateName(evt1, evt2,evtName) {
+  return 'autoGenratedState_'+evt1+'_'+evt2+'_'+evtName+'_'+(new Date * Math.random()).toString(36).substring(0, 4);
 };
 
 class JSONGeneratorExtentionClass extends policyListener {
@@ -176,27 +176,30 @@ class JSONGeneratorExtentionClass extends policyListener {
     //生成中间状态
     let tempCurrent = ctx.current_state;
     //permute当前events
-    _.each(permute(ctx.events), (orderedEvt) => {
+    _.each(permute(ctx.events), (orderedEvts) => {
       tempCurrent = ctx.current_state;
-      while (orderedEvt.length != 0) {
-        let randomStateName = genRandomStateName();
-        let event = orderedEvt.pop();
+      let path = [];
+      while (orderedEvts.length != 0) {
+        let event = orderedEvts.pop();
+        path.push(event.type);
+        let randomStateName = genRandomStateName(ctx.current_state, ctx.next_state,path.join('-'));
         let state_transition = {
           currentState: tempCurrent,
           event: event,
           nextState: ctx.next_state
         };
-        ctx.segment_block.state_transition_table.push(state_transition);
-        if (orderedEvt.length != 0) {
+        if (orderedEvts.length != 0) {
           state_transition.nextState = randomStateName;
           tempCurrent = randomStateName;
           ctx.segment_block.all_occured_states.push(randomStateName); //记录同一个起始state下面所有的target state及中间state
         }
+        ctx.segment_block.state_transition_table.push(state_transition);
       }
     });
     //记录同一个curren_state 下的多个target
     ctx.segment_block.all_occured_states.push(ctx.next_state);
     ctx.segment_block.all_occured_states = _.uniq(ctx.segment_block.all_occured_states);
+    //回传
     ctx.parentCtx.segment_block = ctx.segment_block;
   };
 
