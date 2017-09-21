@@ -1,11 +1,10 @@
 {
   "name": "policy_lang",
   "version": "0.0.12",
-  "description": "policy language compiler for freelog",
+  "description": "policy language for freelog",
   "main": "index.js",
   "dependencies": {
-    "antlr4": "^4.7.0",
-    "underscore": "^1.8.3"
+    "antlr4": "^4.7.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1"
