@@ -1,6 +1,6 @@
 {
   "name": "policy_lang",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "policy language compiler for freelog",
   "main": "index.js",
   "dependencies": {
@@ -9,8 +9,8 @@
   "devDependencies": {
     "gulp": "^3.9.1"
   },
-  "script" : {
-    "gen" : "java -jar C:/Users/Phil/lib/antlr-4.7-complete.jar -Dlanguage=JavaScript policy.g4 -o gen"
+  "script": {
+    "gen": "java -jar C:/Users/Phil/lib/antlr-4.7-complete.jar -Dlanguage=JavaScript policy.g4 -o gen"
   },
   "repository": {
     "type": "git",
