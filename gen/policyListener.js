@@ -146,12 +146,12 @@ policyListener.prototype.exitRelative_date_event = function(ctx) {
 };
 
 
-// Enter a parse tree produced by policyParser#price_event.
-policyListener.prototype.enterPrice_event = function(ctx) {
+// Enter a parse tree produced by policyParser#pricing_agreement_event.
+policyListener.prototype.enterPricing_agreement_event = function(ctx) {
 };
 
-// Exit a parse tree produced by policyParser#price_event.
-policyListener.prototype.exitPrice_event = function(ctx) {
+// Exit a parse tree produced by policyParser#pricing_agreement_event.
+policyListener.prototype.exitPricing_agreement_event = function(ctx) {
 };
 
 

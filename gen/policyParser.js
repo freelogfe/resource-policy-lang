@@ -204,7 +204,7 @@ var ruleNames =  [ "p", "segment", "audience_clause", "athorize_token_clause",
                    "audience_individuals_clause", "audience_groups_clause", 
                    "state_clause", "current_state_clause", "target_clause", 
                    "accepting", "event", "and_event", "period_event", "specific_date_event", 
-                   "relative_date_event", "price_event", "transaction_event", 
+                   "relative_date_event", "pricing_agreement_event", "transaction_event", 
                    "guaranty_event", "contract_guaranty", "platform_guaranty", 
                    "signing_event", "access_count_event", "visit_increment_event", 
                    "visit_event", "balance_event", "balance_greater", "balance_smaller", 
@@ -292,7 +292,7 @@ policyParser.RULE_and_event = 11;
 policyParser.RULE_period_event = 12;
 policyParser.RULE_specific_date_event = 13;
 policyParser.RULE_relative_date_event = 14;
-policyParser.RULE_price_event = 15;
+policyParser.RULE_pricing_agreement_event = 15;
 policyParser.RULE_transaction_event = 16;
 policyParser.RULE_guaranty_event = 17;
 policyParser.RULE_contract_guaranty = 18;
@@ -1205,8 +1205,8 @@ EventContext.prototype.relative_date_event = function() {
     return this.getTypedRuleContext(Relative_date_eventContext,0);
 };
 
-EventContext.prototype.price_event = function() {
-    return this.getTypedRuleContext(Price_eventContext,0);
+EventContext.prototype.pricing_agreement_event = function() {
+    return this.getTypedRuleContext(Pricing_agreement_eventContext,0);
 };
 
 EventContext.prototype.transaction_event = function() {
@@ -1276,7 +1276,7 @@ policyParser.prototype.event = function() {
         case policyParser.T__10:
             this.enterOuterAlt(localctx, 4);
             this.state = 170;
-            this.price_event();
+            this.pricing_agreement_event();
             break;
         case policyParser.T__11:
             this.enterOuterAlt(localctx, 5);
@@ -1578,7 +1578,7 @@ policyParser.prototype.relative_date_event = function() {
     return localctx;
 };
 
-function Price_eventContext(parser, parent, invokingState) {
+function Pricing_agreement_eventContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
 	}
@@ -1587,35 +1587,35 @@ function Price_eventContext(parser, parent, invokingState) {
 	}
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
-    this.ruleIndex = policyParser.RULE_price_event;
+    this.ruleIndex = policyParser.RULE_pricing_agreement_event;
     return this;
 }
 
-Price_eventContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-Price_eventContext.prototype.constructor = Price_eventContext;
+Pricing_agreement_eventContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Pricing_agreement_eventContext.prototype.constructor = Pricing_agreement_eventContext;
 
 
-Price_eventContext.prototype.enterRule = function(listener) {
+Pricing_agreement_eventContext.prototype.enterRule = function(listener) {
     if(listener instanceof policyListener ) {
-        listener.enterPrice_event(this);
+        listener.enterPricing_agreement_event(this);
 	}
 };
 
-Price_eventContext.prototype.exitRule = function(listener) {
+Pricing_agreement_eventContext.prototype.exitRule = function(listener) {
     if(listener instanceof policyListener ) {
-        listener.exitPrice_event(this);
+        listener.exitPricing_agreement_event(this);
 	}
 };
 
 
 
 
-policyParser.Price_eventContext = Price_eventContext;
+policyParser.Pricing_agreement_eventContext = Pricing_agreement_eventContext;
 
-policyParser.prototype.price_event = function() {
+policyParser.prototype.pricing_agreement_event = function() {
 
-    var localctx = new Price_eventContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 30, policyParser.RULE_price_event);
+    var localctx = new Pricing_agreement_eventContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 30, policyParser.RULE_pricing_agreement_event);
     try {
         this.enterOuterAlt(localctx, 1);
         this.state = 192;

@@ -33,7 +33,7 @@ event
 : period_event
 | specific_date_event
 | relative_date_event
-| price_event
+| pricing_agreement_event
 | transaction_event
 | guaranty_event
 | signing_event
@@ -53,7 +53,7 @@ specific_date_event
 relative_date_event
 : INT time_unit 'after contract creation'
 ;
-price_event
+pricing_agreement_event
 : 'price priceExpression'
 ;
 transaction_event
