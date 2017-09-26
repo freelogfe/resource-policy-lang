@@ -11,7 +11,7 @@
   },
   "script" : {
     "gen" : "java -jar C:/Users/Phil/lib/antlr-4.7-complete.jar -Dlanguage=JavaScript policy.g4 -o gen"
-  }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/miushock/policy_language.git"
