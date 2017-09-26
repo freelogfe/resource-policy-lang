@@ -20,15 +20,6 @@ policyListener.prototype.exitP = function(ctx) {
 };
 
 
-// Enter a parse tree produced by policyParser#duration_clause.
-policyListener.prototype.enterDuration_clause = function(ctx) {
-};
-
-// Exit a parse tree produced by policyParser#duration_clause.
-policyListener.prototype.exitDuration_clause = function(ctx) {
-};
-
-
 // Enter a parse tree produced by policyParser#segment.
 policyListener.prototype.enterSegment = function(ctx) {
 };
@@ -38,21 +29,21 @@ policyListener.prototype.exitSegment = function(ctx) {
 };
 
 
-// Enter a parse tree produced by policyParser#settlement_clause.
-policyListener.prototype.enterSettlement_clause = function(ctx) {
-};
-
-// Exit a parse tree produced by policyParser#settlement_clause.
-policyListener.prototype.exitSettlement_clause = function(ctx) {
-};
-
-
 // Enter a parse tree produced by policyParser#audience_clause.
 policyListener.prototype.enterAudience_clause = function(ctx) {
 };
 
 // Exit a parse tree produced by policyParser#audience_clause.
 policyListener.prototype.exitAudience_clause = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#athorize_token_clause.
+policyListener.prototype.enterAthorize_token_clause = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#athorize_token_clause.
+policyListener.prototype.exitAthorize_token_clause = function(ctx) {
 };
 
 
@@ -128,12 +119,30 @@ policyListener.prototype.exitAnd_event = function(ctx) {
 };
 
 
-// Enter a parse tree produced by policyParser#settlement_time_event.
-policyListener.prototype.enterSettlement_time_event = function(ctx) {
+// Enter a parse tree produced by policyParser#period_event.
+policyListener.prototype.enterPeriod_event = function(ctx) {
 };
 
-// Exit a parse tree produced by policyParser#settlement_time_event.
-policyListener.prototype.exitSettlement_time_event = function(ctx) {
+// Exit a parse tree produced by policyParser#period_event.
+policyListener.prototype.exitPeriod_event = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#specific_date_event.
+policyListener.prototype.enterSpecific_date_event = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#specific_date_event.
+policyListener.prototype.exitSpecific_date_event = function(ctx) {
+};
+
+
+// Enter a parse tree produced by policyParser#relative_date_event.
+policyListener.prototype.enterRelative_date_event = function(ctx) {
+};
+
+// Exit a parse tree produced by policyParser#relative_date_event.
+policyListener.prototype.exitRelative_date_event = function(ctx) {
 };
 
 

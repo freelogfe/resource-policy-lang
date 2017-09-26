@@ -1,19 +1,16 @@
 grammar policy;
 
-p : duration_clause (segment settlement_clause)+ EOF
+p : (segment)+ EOF
 ;
-duration_clause
-: 'This contract shall commence with effect from' DATE (start_hour)?  'and shall continue until' DATE (end_hour)? 'unless terminated earlier in accordance with its terms and conditions'
-;
-segment : FOR audience_clause+ ':' (state_clause)*
-;
-settlement_clause
-: 'The account settlement shall be performed on every' INT 'day in token state' (ID)+
+segment : FOR audience_clause+ 'in the following states:' (state_clause)* athorize_token_clause
 ;
 audience_clause
   : audience_individuals_clause ('and' audience_groups_clause)?
   | audience_groups_clause ('and' audience_individuals_clause)?
   ;
+athorize_token_clause
+: 'I agree to authorize token in' ((',')* ID)*
+;
 audience_individuals_clause
 : users (',' users)*
 ;
@@ -33,7 +30,9 @@ accepting
 : 'accepting'
 ;
 event
-: settlement_time_event
+: period_event
+| specific_date_event
+| relative_date_event
 | price_event
 | transaction_event
 | guaranty_event
@@ -43,10 +42,16 @@ event
 | settlement_event
 ;
 and_event
-: 'and' event
+: 'and on' event
 ;
-settlement_time_event
-: 'every' INT 'day'
+period_event
+: 'the end of' time_unit
+;
+specific_date_event
+: 'date' DATE
+;
+relative_date_event
+: INT time_unit 'after contract creation'
 ;
 price_event
 : 'price priceExpression'
@@ -65,7 +70,7 @@ platform_guaranty
 : 'platform_guaranty of' INT
 ;
 signing_event
-: LICENSE (license_resource_id)+
+: LICENSE ((',')*license_resource_id)+
 ;
 access_count_event
 : visit_increment_event
@@ -97,7 +102,7 @@ users : ID (',' ID)*;
 user_groups : ID (',' ID)*;
 and : 'and';
 view_unit : 'in total' | 'per view';
-time_unit : 'year' | 'month' | 'day';
+time_unit :  'week' | 'day'| 'cycle';
 start_hour : INT ':' INT;
 end_hour : INT ':' INT;
 
