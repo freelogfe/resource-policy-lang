@@ -1,8 +1,8 @@
-#Events
+## Events
 ___
-###period
-#####Pattern: _the end of TIME_UNIT_
-#####Sample:  proceed to settlement on **the end of day**
+### period
+##### Pattern: _the end of TIME_UNIT_
+##### Sample:  proceed to settlement on **the end of day**
  ```
  {
    type: 'period',
@@ -11,9 +11,9 @@ ___
  ```
 ___
 
- ###specific_date
- #####Pattern: _date DATE_
- #####Sample:  proceed to settlement on **date 2012-12-12**
+ ### specific_date
+ ##### Pattern: _date DATE_
+ ##### Sample:  proceed to settlement on **date 2012-12-12**
   ```
   {
     type: 'arrivalDate',
@@ -22,9 +22,9 @@ ___
   ```
   ___
 
-  ###relative_date
-  #####Pattern: _INT TIME_UNIT after contract creation_
-  #####Sample:  proceed to settlement on **10 cycle after contract creation**
+  ### relative_date
+  ##### Pattern: _INT TIME_UNIT after contract creation_
+  ##### Sample:  proceed to settlement on **10 cycle after contract creation**
    ```
    {
      type: 'arrivalDate',
@@ -33,9 +33,9 @@ ___
    ```
    ___
 
-   ###pricingAgreement
-   #####Pattern: _pricingAgreement_
-   #####Sample:  proceed to settlement on **pricingAgreement**
+   ### pricingAgreement
+   ##### Pattern: _pricingAgreement_
+   ##### Sample:  proceed to settlement on **pricingAgreement**
    ```
   {
     type: 'pricingAgreement',
@@ -45,9 +45,9 @@ ___
    ```
    ___
 
-   ###transaction
-   #####Pattern: _transaction of INT to owner_
-   #####Sample:  proceed to settlement on ** transaction of 300 to owner**
+   ### transaction
+   ##### Pattern: _transaction of INT to owner_
+   ##### Sample:  proceed to settlement on ** transaction of 300 to owner**
    ```
   {
     type: 'transaction',
@@ -58,9 +58,9 @@ ___
 
    ___
 
-   ###signing
-   #####Pattern: _license LICENSEID_
-   #####Sample:  proceed to settlement on ** license l12312, l19992**
+   ### signing
+   ##### Pattern: _license LICENSEID_
+   ##### Sample:  proceed to settlement on ** license l12312, l19992**
    ```
   {
     type: 'signing',
@@ -71,9 +71,9 @@ ___
 
    ___
 
-   ###contractGuaranty
-   #####Pattern: _contract_guaranty of INT refund after INT day_
-   #####Sample:  proceed to settlement on **contract_guaranty of 3000 refund after 50 day**
+   ### contractGuaranty
+   ##### Pattern: _contract_guaranty of INT refund after INT day_
+   ##### Sample:  proceed to settlement on **contract_guaranty of 3000 refund after 50 day**
    ```
   {
     type: 'guaranty',
@@ -84,9 +84,9 @@ ___
 
    ___
 
-   ###platformGuaranty
-   #####Pattern: _platform_guaranty of INT_
-   #####Sample:  proceed to settlement on **platform_guaranty of 50000**
+   ### platformGuaranty
+   ##### Pattern: _platform_guaranty of INT_
+   ##### Sample:  proceed to settlement on **platform_guaranty of 50000**
    ```
   {
     type: 'guaranty',
