@@ -102,7 +102,7 @@ users : ID (',' ID)*;
 user_groups : ID (',' ID)*;
 and : 'and';
 view_unit : 'in total' | 'per view';
-time_unit :  'week' | 'day'| 'cycle';
+time_unit : 'year' | 'week' | 'day'| 'cycle';
 start_hour : INT ':' INT;
 end_hour : INT ':' INT;
 
