@@ -5,8 +5,8 @@ p : (segment)+ EOF
 segment : FOR audience_clause+ 'in the following states:' (state_clause)* athorize_token_clause
 ;
 audience_clause
-  : audience_individuals_clause ('and' audience_groups_clause)?
-  | audience_groups_clause ('and' audience_individuals_clause)?
+  : audience_individuals_clause (and audience_groups_clause)?
+  | audience_groups_clause (and audience_individuals_clause)?
   ;
 athorize_token_clause
 : 'I agree to authorize token in' ((',')* ID)*
@@ -98,8 +98,8 @@ settlement_event
 
 license_resource_id : ID;
 account_id: ID;
-users : ID (',' ID)*;
-user_groups : ID (',' ID)*;
+users :  ('.'|'@'|'_'|(ID))+ ;
+user_groups : 'RegisteredUser' | 'LoginUser' | 'AllVisiter' | 'RegisteredNode';
 and : 'and';
 view_unit : 'in total' | 'per view';
 time_unit : 'year' | 'week' | 'day'| 'cycle';
@@ -122,6 +122,7 @@ VIEW      : 'view';
 
 REQUIRE   : 'require';
 NOTHING   : 'nothing';
+
 
 ID  : ([a-zA-Z]|'_')+;
 WS  : [ \t\r\n]+ -> skip;
