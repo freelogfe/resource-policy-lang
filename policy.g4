@@ -9,7 +9,7 @@ audience_clause
   | audience_groups_clause (and audience_individuals_clause)?
   ;
 athorize_token_clause
-: 'I agree to authorize token in' ((',')* ID)*
+: 'I agree to authorize token in' ((',')* ID)+
 ;
 audience_individuals_clause
 : users (',' users)*
