@@ -57,7 +57,7 @@ pricing_agreement_event
 : 'price priceExpression'
 ;
 transaction_event
-: 'transaction of' INT 'to owner'
+: 'transaction of' INT 'to' FEATHERACCOUNT
 ;
 guaranty_event
 : contract_guaranty
@@ -125,6 +125,7 @@ NOTHING   : 'nothing';
 
 
 ID  : ([a-zA-Z]|'_')+;
-WS  : [ \t\r\n]+ -> skip;
 INT : [0-9]+;
+FEATHERACCOUNT : [0-9a-zA-Z]+;
+WS  : [ \t\r\n]+ -> skip;
 DATE : INT '-' INT '-' INT;
