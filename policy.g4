@@ -2,17 +2,19 @@ grammar policy;
 
 p : (segment)+ EOF
 ;
-segment : FOR audience_clause+ 'in the following states:' (state_clause)* athorize_token_clause
+segment : 'For' audience_clause+ 'in the following states:' (state_clause)* athorize_token_clause
 ;
 audience_clause
-  : audience_individuals_clause (and audience_groups_clause)?
-  | audience_groups_clause (and audience_individuals_clause)?
+  : audience_individuals_clause
+  | audience_groups_clause
+  | audience_individuals_clause 'and' audience_groups_clause
   ;
 athorize_token_clause
 : 'I agree to authorize token in' ((',')* ID)+
 ;
 audience_individuals_clause
-: users (',' users)*
+: audience_individuals_clause ',' audience_individuals_clause
+| users
 ;
 audience_groups_clause
 : 'users in' user_groups (',' user_groups)*
@@ -21,13 +23,10 @@ state_clause
 : current_state_clause (target_clause)+
 ;
 current_state_clause
-: IN ID ':'
+: 'in' ID ':'
 ;
 target_clause
-: PROCEED TO ID 'on' (accepting)* event (and_event)*
-;
-accepting
-: 'accepting'
+: 'proceed to' ID 'on' ('accepting')* event (and_event)*
 ;
 event
 : period_event
@@ -70,7 +69,7 @@ platform_guaranty
 : 'platform_guaranty of' INT
 ;
 signing_event
-: LICENSE ((',')*license_resource_id)+
+: 'license' ((',')*license_resource_id)+
 ;
 access_count_event
 : visit_increment_event
@@ -98,30 +97,11 @@ settlement_event
 
 license_resource_id : ID;
 account_id: ID;
-users :  ('.'|'@'|'_'|(ID))+ ;
+users : FEATHERACCOUNT;
 user_groups : 'RegisteredUser' | 'LoginUser' | 'AllVisiter' | 'RegisteredNode';
-and : 'and';
-view_unit : 'in total' | 'per view';
 time_unit : 'year' | 'week' | 'day'| 'cycle';
 start_hour : INT ':' INT;
 end_hour : INT ':' INT;
-
-FOR       : 'For';
-USERGROUPS : 'usergroups';
-USERS : 'users';
-PROCEED : 'proceed';
-TO: 'to';
-IN : 'in';
-ON : 'on';
-ACCEPTING : 'accepting';
-SELF : 'self' | 'SELF';
-LICENSE   : 'license';
-PAYING    : 'paying';
-PER       : 'per';
-VIEW      : 'view';
-
-REQUIRE   : 'require';
-NOTHING   : 'nothing';
 
 
 ID  : ([a-zA-Z]|'_')+;

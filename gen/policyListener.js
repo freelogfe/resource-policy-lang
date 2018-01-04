@@ -92,15 +92,6 @@ policyListener.prototype.exitTarget_clause = function(ctx) {
 };
 
 
-// Enter a parse tree produced by policyParser#accepting.
-policyListener.prototype.enterAccepting = function(ctx) {
-};
-
-// Exit a parse tree produced by policyParser#accepting.
-policyListener.prototype.exitAccepting = function(ctx) {
-};
-
-
 // Enter a parse tree produced by policyParser#event.
 policyListener.prototype.enterEvent = function(ctx) {
 };
@@ -296,15 +287,6 @@ policyListener.prototype.enterUser_groups = function(ctx) {
 
 // Exit a parse tree produced by policyParser#user_groups.
 policyListener.prototype.exitUser_groups = function(ctx) {
-};
-
-
-// Enter a parse tree produced by policyParser#and.
-policyListener.prototype.enterAnd = function(ctx) {
-};
-
-// Exit a parse tree produced by policyParser#and.
-policyListener.prototype.exitAnd = function(ctx) {
 };
 
 
