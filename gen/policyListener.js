@@ -263,21 +263,12 @@ policyListener.prototype.exitLicense_resource_id = function(ctx) {
 };
 
 
-// Enter a parse tree produced by policyParser#account_id.
-policyListener.prototype.enterAccount_id = function(ctx) {
+// Enter a parse tree produced by policyParser#user_individual.
+policyListener.prototype.enterUser_individual = function(ctx) {
 };
 
-// Exit a parse tree produced by policyParser#account_id.
-policyListener.prototype.exitAccount_id = function(ctx) {
-};
-
-
-// Enter a parse tree produced by policyParser#users.
-policyListener.prototype.enterUsers = function(ctx) {
-};
-
-// Exit a parse tree produced by policyParser#users.
-policyListener.prototype.exitUsers = function(ctx) {
+// Exit a parse tree produced by policyParser#user_individual.
+policyListener.prototype.exitUser_individual = function(ctx) {
 };
 
 
@@ -287,15 +278,6 @@ policyListener.prototype.enterUser_groups = function(ctx) {
 
 // Exit a parse tree produced by policyParser#user_groups.
 policyListener.prototype.exitUser_groups = function(ctx) {
-};
-
-
-// Enter a parse tree produced by policyParser#view_unit.
-policyListener.prototype.enterView_unit = function(ctx) {
-};
-
-// Exit a parse tree produced by policyParser#view_unit.
-policyListener.prototype.exitView_unit = function(ctx) {
 };
 
 

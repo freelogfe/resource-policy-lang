@@ -2,7 +2,7 @@ grammar policy;
 
 p : (segment)+ EOF
 ;
-segment : 'For' audience_clause+ 'in the following states:' (state_clause)* athorize_token_clause
+segment : 'For' audience_clause+ ':' (state_clause)* athorize_token_clause
 ;
 audience_clause
   : audience_individuals_clause
@@ -10,36 +10,36 @@ audience_clause
   | audience_individuals_clause 'and' audience_groups_clause
   ;
 athorize_token_clause
-: 'I agree to authorize token in' ((',')* ID)+
-;
+  : 'I agree to authorize token in' ((',')* ID)+
+  ;
 audience_individuals_clause
-: audience_individuals_clause ',' audience_individuals_clause
-| users
-;
+  : audience_individuals_clause ',' audience_individuals_clause
+  | user_individual
+  ;
 audience_groups_clause
-: 'users in' user_groups (',' user_groups)*
-;
+  : 'users in' user_groups (',' user_groups)*
+  ;
 state_clause
-: current_state_clause (target_clause)+
-;
+  : current_state_clause (target_clause)+
+  ;
 current_state_clause
-: 'in' ID ':'
-;
+  : 'in' ID ':'
+  ;
 target_clause
-: 'proceed to' ID 'on' ('accepting')* event (and_event)*
-;
+  : 'proceed to' ID 'on' ('accepting')* event (and_event)*
+  ;
 event
-: period_event
-| specific_date_event
-| relative_date_event
-| pricing_agreement_event
-| transaction_event
-| guaranty_event
-| signing_event
-| access_count_event
-| balance_event
-| settlement_event
-;
+  : period_event
+  | specific_date_event
+  | relative_date_event
+  | pricing_agreement_event
+  | transaction_event
+  | guaranty_event
+  | signing_event
+  | access_count_event
+  | balance_event
+  | settlement_event
+  ;
 and_event
 : 'and on' event
 ;
@@ -96,8 +96,7 @@ settlement_event
 ;
 
 license_resource_id : ID;
-account_id: ID;
-users : FEATHERACCOUNT;
+user_individual : FEATHERACCOUNT;
 user_groups : 'RegisteredUser' | 'LoginUser' | 'AllVisiter' | 'RegisteredNode';
 time_unit : 'year' | 'week' | 'day'| 'cycle';
 start_hour : INT ':' INT;
@@ -106,6 +105,6 @@ end_hour : INT ':' INT;
 
 ID  : ([a-zA-Z]|'_')+;
 INT : [0-9]+;
-FEATHERACCOUNT : [0-9a-zA-Z]+;
+FEATHERACCOUNT : [0-9a-zA-Z@.]+;
 WS  : [ \t\r\n]+ -> skip;
 DATE : INT '-' INT '-' INT;
