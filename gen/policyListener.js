@@ -38,15 +38,6 @@ policyListener.prototype.exitAudience_clause = function(ctx) {
 };
 
 
-// Enter a parse tree produced by policyParser#athorize_token_clause.
-policyListener.prototype.enterAthorize_token_clause = function(ctx) {
-};
-
-// Exit a parse tree produced by policyParser#athorize_token_clause.
-policyListener.prototype.exitAthorize_token_clause = function(ctx) {
-};
-
-
 // Enter a parse tree produced by policyParser#audience_individuals_clause.
 policyListener.prototype.enterAudience_individuals_clause = function(ctx) {
 };
