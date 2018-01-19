@@ -5,7 +5,7 @@ var policyListener = require('./policyListener').policyListener;
 var grammarFileName = "policy.g4";
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u0003(\u00ed\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
+    "\u0003\'\u00ed\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
     "\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007\u0004",
     "\b\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0004\f\t\f\u0004",
     "\r\t\r\u0004\u000e\t\u000e\u0004\u000f\t\u000f\u0004\u0010\t\u0010\u0004",
@@ -41,8 +41,8 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0003\u001d\u0003\u001e\u0003\u001e\u0003\u001f\u0003\u001f\u0003 ",
     "\u0003 \u0003 \u0003 \u0003!\u0003!\u0003!\u0003!\u0003!\u0002\u0003",
     "\b\"\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a",
-    "\u001c\u001e \"$&(*,.02468:<>@\u0002\u0004\u0003\u0002\u001d \u0004",
-    "\u0002\u0015\u0015!#\u0002\u00e4\u0002E\u0003\u0002\u0002\u0002\u0004",
+    "\u001c\u001e \"$&(*,.02468:<>@\u0002\u0004\u0003\u0002\u001d\u001f\u0004",
+    "\u0002\u0015\u0015 \"\u0002\u00e4\u0002E\u0003\u0002\u0002\u0002\u0004",
     "J\u0003\u0002\u0002\u0002\u0006]\u0003\u0002\u0002\u0002\b_\u0003\u0002",
     "\u0002\u0002\nj\u0003\u0002\u0002\u0002\fs\u0003\u0002\u0002\u0002\u000e",
     "y\u0003\u0002\u0002\u0002\u0010}\u0003\u0002\u0002\u0002\u0012\u0097",
@@ -80,9 +80,9 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u0002\u0002rp\u0003\u0002\u0002\u0002su\u0005\u000e\b\u0002t",
     "v\u0005\u0010\t\u0002ut\u0003\u0002\u0002\u0002vw\u0003\u0002\u0002",
     "\u0002wu\u0003\u0002\u0002\u0002wx\u0003\u0002\u0002\u0002x\r\u0003",
-    "\u0002\u0002\u0002yz\u0007\b\u0002\u0002z{\u0007$\u0002\u0002{|\u0007",
+    "\u0002\u0002\u0002yz\u0007\b\u0002\u0002z{\u0007#\u0002\u0002{|\u0007",
     "\u0004\u0002\u0002|\u000f\u0003\u0002\u0002\u0002}~\u0007\t\u0002\u0002",
-    "~\u007f\u0007$\u0002\u0002\u007f\u0083\u0007\n\u0002\u0002\u0080\u0082",
+    "~\u007f\u0007#\u0002\u0002\u007f\u0083\u0007\n\u0002\u0002\u0080\u0082",
     "\u0007\u000b\u0002\u0002\u0081\u0080\u0003\u0002\u0002\u0002\u0082\u0085",
     "\u0003\u0002\u0002\u0002\u0083\u0081\u0003\u0002\u0002\u0002\u0083\u0084",
     "\u0003\u0002\u0002\u0002\u0084\u0086\u0003\u0002\u0002\u0002\u0085\u0083",
@@ -104,19 +104,19 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u009a\u009b\u0005\u0012\n\u0002\u009b\u0015\u0003\u0002\u0002",
     "\u0002\u009c\u009d\u0007\r\u0002\u0002\u009d\u009e\u0005<\u001f\u0002",
     "\u009e\u0017\u0003\u0002\u0002\u0002\u009f\u00a0\u0007\u000e\u0002\u0002",
-    "\u00a0\u00a1\u0007(\u0002\u0002\u00a1\u0019\u0003\u0002\u0002\u0002",
-    "\u00a2\u00a3\u0007%\u0002\u0002\u00a3\u00a4\u0005<\u001f\u0002\u00a4",
+    "\u00a0\u00a1\u0007\'\u0002\u0002\u00a1\u0019\u0003\u0002\u0002\u0002",
+    "\u00a2\u00a3\u0007$\u0002\u0002\u00a3\u00a4\u0005<\u001f\u0002\u00a4",
     "\u00a5\u0007\u000f\u0002\u0002\u00a5\u001b\u0003\u0002\u0002\u0002\u00a6",
     "\u00a7\u0007\u0010\u0002\u0002\u00a7\u001d\u0003\u0002\u0002\u0002\u00a8",
-    "\u00a9\u0007\u0011\u0002\u0002\u00a9\u00aa\u0007%\u0002\u0002\u00aa",
-    "\u00ab\u0007\u0012\u0002\u0002\u00ab\u00ac\u0007&\u0002\u0002\u00ac",
+    "\u00a9\u0007\u0011\u0002\u0002\u00a9\u00aa\u0007$\u0002\u0002\u00aa",
+    "\u00ab\u0007\u0012\u0002\u0002\u00ab\u00ac\u0007%\u0002\u0002\u00ac",
     "\u001f\u0003\u0002\u0002\u0002\u00ad\u00b0\u0005\"\u0012\u0002\u00ae",
     "\u00b0\u0005$\u0013\u0002\u00af\u00ad\u0003\u0002\u0002\u0002\u00af",
     "\u00ae\u0003\u0002\u0002\u0002\u00b0!\u0003\u0002\u0002\u0002\u00b1",
-    "\u00b2\u0007\u0013\u0002\u0002\u00b2\u00b3\u0007%\u0002\u0002\u00b3",
-    "\u00b4\u0007\u0014\u0002\u0002\u00b4\u00b5\u0007%\u0002\u0002\u00b5",
+    "\u00b2\u0007\u0013\u0002\u0002\u00b2\u00b3\u0007$\u0002\u0002\u00b3",
+    "\u00b4\u0007\u0014\u0002\u0002\u00b4\u00b5\u0007$\u0002\u0002\u00b5",
     "\u00b6\u0007\u0015\u0002\u0002\u00b6#\u0003\u0002\u0002\u0002\u00b7",
-    "\u00b8\u0007\u0016\u0002\u0002\u00b8\u00b9\u0007%\u0002\u0002\u00b9",
+    "\u00b8\u0007\u0016\u0002\u0002\u00b8\u00b9\u0007$\u0002\u0002\u00b9",
     "%\u0003\u0002\u0002\u0002\u00ba\u00c2\u0007\u0017\u0002\u0002\u00bb",
     "\u00bd\u0007\u0006\u0002\u0002\u00bc\u00bb\u0003\u0002\u0002\u0002\u00bd",
     "\u00c0\u0003\u0002\u0002\u0002\u00be\u00bc\u0003\u0002\u0002\u0002\u00be",
@@ -127,22 +127,22 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\'\u0003\u0002\u0002\u0002\u00c6\u00c9\u0005*\u0016\u0002\u00c7\u00c9",
     "\u0005,\u0017\u0002\u00c8\u00c6\u0003\u0002\u0002\u0002\u00c8\u00c7",
     "\u0003\u0002\u0002\u0002\u00c9)\u0003\u0002\u0002\u0002\u00ca\u00cb",
-    "\u0007\u0018\u0002\u0002\u00cb\u00cc\u0007%\u0002\u0002\u00cc+\u0003",
+    "\u0007\u0018\u0002\u0002\u00cb\u00cc\u0007$\u0002\u0002\u00cc+\u0003",
     "\u0002\u0002\u0002\u00cd\u00ce\u0007\u0019\u0002\u0002\u00ce\u00cf\u0007",
-    "%\u0002\u0002\u00cf-\u0003\u0002\u0002\u0002\u00d0\u00d3\u00050\u0019",
+    "$\u0002\u0002\u00cf-\u0003\u0002\u0002\u0002\u00d0\u00d3\u00050\u0019",
     "\u0002\u00d1\u00d3\u00052\u001a\u0002\u00d2\u00d0\u0003\u0002\u0002",
     "\u0002\u00d2\u00d1\u0003\u0002\u0002\u0002\u00d3/\u0003\u0002\u0002",
-    "\u0002\u00d4\u00d5\u0007\u001a\u0002\u0002\u00d5\u00d6\u0007%\u0002",
+    "\u0002\u00d4\u00d5\u0007\u001a\u0002\u0002\u00d5\u00d6\u0007$\u0002",
     "\u0002\u00d61\u0003\u0002\u0002\u0002\u00d7\u00d8\u0007\u001b\u0002",
-    "\u0002\u00d8\u00d9\u0007%\u0002\u0002\u00d93\u0003\u0002\u0002\u0002",
+    "\u0002\u00d8\u00d9\u0007$\u0002\u0002\u00d93\u0003\u0002\u0002\u0002",
     "\u00da\u00db\u0007\u001c\u0002\u0002\u00db5\u0003\u0002\u0002\u0002",
-    "\u00dc\u00dd\u0007$\u0002\u0002\u00dd7\u0003\u0002\u0002\u0002\u00de",
-    "\u00df\u0007&\u0002\u0002\u00df9\u0003\u0002\u0002\u0002\u00e0\u00e1",
+    "\u00dc\u00dd\u0007#\u0002\u0002\u00dd7\u0003\u0002\u0002\u0002\u00de",
+    "\u00df\u0007%\u0002\u0002\u00df9\u0003\u0002\u0002\u0002\u00e0\u00e1",
     "\t\u0002\u0002\u0002\u00e1;\u0003\u0002\u0002\u0002\u00e2\u00e3\t\u0003",
-    "\u0002\u0002\u00e3=\u0003\u0002\u0002\u0002\u00e4\u00e5\u0007%\u0002",
-    "\u0002\u00e5\u00e6\u0007\u0004\u0002\u0002\u00e6\u00e7\u0007%\u0002",
-    "\u0002\u00e7?\u0003\u0002\u0002\u0002\u00e8\u00e9\u0007%\u0002\u0002",
-    "\u00e9\u00ea\u0007\u0004\u0002\u0002\u00ea\u00eb\u0007%\u0002\u0002",
+    "\u0002\u0002\u00e3=\u0003\u0002\u0002\u0002\u00e4\u00e5\u0007$\u0002",
+    "\u0002\u00e5\u00e6\u0007\u0004\u0002\u0002\u00e6\u00e7\u0007$\u0002",
+    "\u0002\u00e7?\u0003\u0002\u0002\u0002\u00e8\u00e9\u0007$\u0002\u0002",
+    "\u00e9\u00ea\u0007\u0004\u0002\u0002\u00ea\u00eb\u0007$\u0002\u0002",
     "\u00ebA\u0003\u0002\u0002\u0002\u0011ENT]gpw\u0083\u008a\u0097\u00af",
     "\u00be\u00c4\u00c8\u00d2"].join("");
 
@@ -160,15 +160,14 @@ var literalNames = [ null, "'For'", "':'", "'and'", "','", "'users in'",
                      "'contract_guaranty of'", "'refund after'", "'day'", 
                      "'platform_guaranty of'", "'license'", "'visit_increment of'", 
                      "'visit of'", "'account_balance greater than'", "'account_balance smaller than'", 
-                     "'account_settled'", "'RegisteredUser'", "'LoginUser'", 
-                     "'AllVisiter'", "'RegisteredNode'", "'year'", "'week'", 
-                     "'cycle'" ];
+                     "'account_settled'", "'REGISTERED_USERS'", "'PUBLIC'", 
+                     "'NODES'", "'year'", "'week'", "'cycle'" ];
 
 var symbolicNames = [ null, null, null, null, null, null, null, null, null, 
                       null, null, null, null, null, null, null, null, null, 
                       null, null, null, null, null, null, null, null, null, 
-                      null, null, null, null, null, null, null, "ID", "INT", 
-                      "FEATHERACCOUNT", "WS", "DATE" ];
+                      null, null, null, null, null, null, "ID", "INT", "FEATHERACCOUNT", 
+                      "WS", "DATE" ];
 
 var ruleNames =  [ "p", "segment", "audience_clause", "audience_individuals_clause", 
                    "audience_groups_clause", "state_clause", "current_state_clause", 
@@ -232,12 +231,11 @@ policyParser.T__28 = 29;
 policyParser.T__29 = 30;
 policyParser.T__30 = 31;
 policyParser.T__31 = 32;
-policyParser.T__32 = 33;
-policyParser.ID = 34;
-policyParser.INT = 35;
-policyParser.FEATHERACCOUNT = 36;
-policyParser.WS = 37;
-policyParser.DATE = 38;
+policyParser.ID = 33;
+policyParser.INT = 34;
+policyParser.FEATHERACCOUNT = 35;
+policyParser.WS = 36;
+policyParser.DATE = 37;
 
 policyParser.RULE_p = 0;
 policyParser.RULE_segment = 1;
@@ -2403,7 +2401,7 @@ policyParser.prototype.user_groups = function() {
         this.enterOuterAlt(localctx, 1);
         this.state = 222;
         _la = this._input.LA(1);
-        if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << policyParser.T__26) | (1 << policyParser.T__27) | (1 << policyParser.T__28) | (1 << policyParser.T__29))) !== 0))) {
+        if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << policyParser.T__26) | (1 << policyParser.T__27) | (1 << policyParser.T__28))) !== 0))) {
         this._errHandler.recoverInline(this);
         }
         else {
@@ -2467,7 +2465,7 @@ policyParser.prototype.time_unit = function() {
         this.enterOuterAlt(localctx, 1);
         this.state = 224;
         _la = this._input.LA(1);
-        if(!(((((_la - 19)) & ~0x1f) == 0 && ((1 << (_la - 19)) & ((1 << (policyParser.T__18 - 19)) | (1 << (policyParser.T__30 - 19)) | (1 << (policyParser.T__31 - 19)) | (1 << (policyParser.T__32 - 19)))) !== 0))) {
+        if(!(((((_la - 19)) & ~0x1f) == 0 && ((1 << (_la - 19)) & ((1 << (policyParser.T__18 - 19)) | (1 << (policyParser.T__29 - 19)) | (1 << (policyParser.T__30 - 19)) | (1 << (policyParser.T__31 - 19)))) !== 0))) {
         this._errHandler.recoverInline(this);
         }
         else {

@@ -95,7 +95,7 @@ settlement_event
 
 license_resource_id : ID;
 user_individual : FEATHERACCOUNT;
-user_groups : 'RegisteredUser' | 'LoginUser' | 'AllVisiter' | 'RegisteredNode';
+user_groups : 'REGISTERED_USERS' | 'PUBLIC' | 'NODES';
 time_unit : 'year' | 'week' | 'day'| 'cycle';
 start_hour : INT ':' INT;
 end_hour : INT ':' INT;
