@@ -5,21 +5,13 @@ p : (segment)* EOF
 segment : FOR audience_clause+ ':' (state_clause)*
 ;
 audience_clause
-  : audience_individuals_clause 'and' audience_groups_clause
-  | audience_individuals_clause
-  | audience_groups_clause
+  :  users
+  | audience_clause ','  audience_clause
+  ;
 
-  ;
-audience_individuals_clause
-  : audience_individuals_clause ',' audience_individuals_clause
-  | user_individual
-  ;
-audience_groups_clause
-  : 'user group' user_groups (',' user_groups)*
-  ;
 state_clause
-  : current_state_clause (target_clause)+
-  | TERMINATE
+  : TERMINATE
+  | current_state_clause (target_clause)+
   ;
 current_state_clause
   : 'in' ID ':'
@@ -96,18 +88,20 @@ settlement_event
 ;
 
 license_resource_id : ID;
-user_individual : REGISTERED_USERS | PUBLIC | NODES | USERACCOUNT | INTEGER_NUMBER;
-user_groups : ID;
+users : GROUPUSER | REGISTERED_USERS | PUBLIC | NODES | INTEGER_NUMBER | USERACCOUNT;
+
 time_unit : 'year' | 'week' | 'day'| 'cycle';
 start_hour : INTEGER_NUMBER ':' INTEGER_NUMBER;
 end_hour : INTEGER_NUMBER ':' INTEGER_NUMBER;
 
+GROUPUSER :  G R O U P '_' U S E R '_' ID*;
 
 FOR: F O R;
 REGISTERED_USERS : R E G I S T E R E D '_' U S R S;
 PUBLIC : P U B L I C;
 NODES : N O D E S;
 TERMINATE : T E R M I N A T E;
+fragment CHAR : . ;
 fragment A : ('A'|'a');
 fragment B : ('B'|'b');
 fragment C : ('C'|'c');
@@ -136,14 +130,13 @@ fragment Y : ('Y'|'y');
 fragment Z : ('Z'|'z');
 
 fragment DIGIT : [0-9] ;
-fragment LOWCASE : [a-z];
+fragment LOWERCASE : [a-z];
 fragment UPPERCASE : [A-Z];
 
 ID  : ([<>a-zA-Z]|'_')+;
 INTEGER_NUMBER:  DIGIT+;
-INT : [0-9]+;
 
-USERACCOUNT :  (UPPERCASE | LOWCASE | '.' | DIGIT)+  '@' (UPPERCASE | LOWCASE | '.' | DIGIT)+;
-FEATHERACCOUNT : (UPPERCASE | LOWCASE | DIGIT)+;
+USERACCOUNT :  (UPPERCASE | LOWERCASE | '.' | DIGIT)+  '@' (UPPERCASE | LOWERCASE | '.' | DIGIT)+;
+FEATHERACCOUNT : (UPPERCASE | LOWERCASE | DIGIT)+;
 WS  : [ \t\r\n]+ -> skip;
 DATE : INTEGER_NUMBER '-' INTEGER_NUMBER '-' INTEGER_NUMBER;

@@ -38,24 +38,6 @@ policyListener.prototype.exitAudience_clause = function(ctx) {
 };
 
 
-// Enter a parse tree produced by policyParser#audience_individuals_clause.
-policyListener.prototype.enterAudience_individuals_clause = function(ctx) {
-};
-
-// Exit a parse tree produced by policyParser#audience_individuals_clause.
-policyListener.prototype.exitAudience_individuals_clause = function(ctx) {
-};
-
-
-// Enter a parse tree produced by policyParser#audience_groups_clause.
-policyListener.prototype.enterAudience_groups_clause = function(ctx) {
-};
-
-// Exit a parse tree produced by policyParser#audience_groups_clause.
-policyListener.prototype.exitAudience_groups_clause = function(ctx) {
-};
-
-
 // Enter a parse tree produced by policyParser#state_clause.
 policyListener.prototype.enterState_clause = function(ctx) {
 };
@@ -254,21 +236,12 @@ policyListener.prototype.exitLicense_resource_id = function(ctx) {
 };
 
 
-// Enter a parse tree produced by policyParser#user_individual.
-policyListener.prototype.enterUser_individual = function(ctx) {
+// Enter a parse tree produced by policyParser#users.
+policyListener.prototype.enterUsers = function(ctx) {
 };
 
-// Exit a parse tree produced by policyParser#user_individual.
-policyListener.prototype.exitUser_individual = function(ctx) {
-};
-
-
-// Enter a parse tree produced by policyParser#user_groups.
-policyListener.prototype.enterUser_groups = function(ctx) {
-};
-
-// Exit a parse tree produced by policyParser#user_groups.
-policyListener.prototype.exitUser_groups = function(ctx) {
+// Exit a parse tree produced by policyParser#users.
+policyListener.prototype.exitUsers = function(ctx) {
 };
 
 
