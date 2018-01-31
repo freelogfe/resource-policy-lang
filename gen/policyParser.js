@@ -5,7 +5,7 @@ var policyListener = require('./policyListener').policyListener;
 var grammarFileName = "policy.g4";
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u0003#\u00da\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
+    "\u0003\"\u00d4\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
     "\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007\u0004",
     "\b\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0004\f\t\f\u0004",
     "\r\t\r\u0004\u000e\t\u000e\u0004\u000f\t\u000f\u0004\u0010\t\u0010\u0004",
@@ -20,44 +20,43 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0004\u0003\u0004\u0007\u0004X\n\u0004\f\u0004\u000e\u0004[\u000b\u0004",
     "\u0003\u0005\u0003\u0005\u0003\u0005\u0006\u0005`\n\u0005\r\u0005\u000e",
     "\u0005a\u0005\u0005d\n\u0005\u0003\u0006\u0003\u0006\u0003\u0006\u0003",
-    "\u0006\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0007\u0007n",
-    "\n\u0007\f\u0007\u000e\u0007q\u000b\u0007\u0003\u0007\u0003\u0007\u0007",
-    "\u0007u\n\u0007\f\u0007\u000e\u0007x\u000b\u0007\u0003\u0007\u0005\u0007",
-    "{\n\u0007\u0003\b\u0003\b\u0003\b\u0003\b\u0003\b\u0003\b\u0003\b\u0003",
-    "\b\u0003\b\u0003\b\u0005\b\u0087\n\b\u0003\t\u0003\t\u0003\t\u0003\n",
+    "\u0006\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0007",
+    "\u0007o\n\u0007\f\u0007\u000e\u0007r\u000b\u0007\u0003\u0007\u0005\u0007",
+    "u\n\u0007\u0003\b\u0003\b\u0003\b\u0003\b\u0003\b\u0003\b\u0003\b\u0003",
+    "\b\u0003\b\u0003\b\u0005\b\u0081\n\b\u0003\t\u0003\t\u0003\t\u0003\n",
     "\u0003\n\u0003\n\u0003\u000b\u0003\u000b\u0003\u000b\u0003\f\u0003\f",
     "\u0003\f\u0003\f\u0003\r\u0003\r\u0003\u000e\u0003\u000e\u0003\u000e",
-    "\u0003\u000e\u0003\u000e\u0003\u000f\u0003\u000f\u0005\u000f\u009f\n",
+    "\u0003\u000e\u0003\u000e\u0003\u000f\u0003\u000f\u0005\u000f\u0099\n",
     "\u000f\u0003\u0010\u0003\u0010\u0003\u0010\u0003\u0010\u0003\u0010\u0003",
     "\u0010\u0003\u0011\u0003\u0011\u0003\u0011\u0003\u0012\u0003\u0012\u0007",
-    "\u0012\u00ac\n\u0012\f\u0012\u000e\u0012\u00af\u000b\u0012\u0003\u0012",
-    "\u0006\u0012\u00b2\n\u0012\r\u0012\u000e\u0012\u00b3\u0003\u0013\u0003",
-    "\u0013\u0005\u0013\u00b8\n\u0013\u0003\u0014\u0003\u0014\u0003\u0014",
+    "\u0012\u00a6\n\u0012\f\u0012\u000e\u0012\u00a9\u000b\u0012\u0003\u0012",
+    "\u0006\u0012\u00ac\n\u0012\r\u0012\u000e\u0012\u00ad\u0003\u0013\u0003",
+    "\u0013\u0005\u0013\u00b2\n\u0013\u0003\u0014\u0003\u0014\u0003\u0014",
     "\u0003\u0015\u0003\u0015\u0003\u0015\u0003\u0016\u0003\u0016\u0005\u0016",
-    "\u00c2\n\u0016\u0003\u0017\u0003\u0017\u0003\u0017\u0003\u0018\u0003",
+    "\u00bc\n\u0016\u0003\u0017\u0003\u0017\u0003\u0017\u0003\u0018\u0003",
     "\u0018\u0003\u0018\u0003\u0019\u0003\u0019\u0003\u001a\u0003\u001a\u0003",
     "\u001b\u0003\u001b\u0003\u001c\u0003\u001c\u0003\u001d\u0003\u001d\u0003",
     "\u001d\u0003\u001d\u0003\u001e\u0003\u001e\u0003\u001e\u0003\u001e\u0003",
     "\u001e\u0002\u0003\u0006\u001f\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012",
     "\u0014\u0016\u0018\u001a\u001c\u001e \"$&(*,.02468:\u0002\u0003\u0004",
-    "\u0002\u0012\u0012\u001a\u001c\u0002\u00d3\u0002?\u0003\u0002\u0002",
+    "\u0002\u0011\u0011\u0019\u001b\u0002\u00cc\u0002?\u0003\u0002\u0002",
     "\u0002\u0004D\u0003\u0002\u0002\u0002\u0006Q\u0003\u0002\u0002\u0002",
-    "\bc\u0003\u0002\u0002\u0002\ne\u0003\u0002\u0002\u0002\fz\u0003\u0002",
-    "\u0002\u0002\u000e\u0086\u0003\u0002\u0002\u0002\u0010\u0088\u0003\u0002",
-    "\u0002\u0002\u0012\u008b\u0003\u0002\u0002\u0002\u0014\u008e\u0003\u0002",
-    "\u0002\u0002\u0016\u0091\u0003\u0002\u0002\u0002\u0018\u0095\u0003\u0002",
-    "\u0002\u0002\u001a\u0097\u0003\u0002\u0002\u0002\u001c\u009e\u0003\u0002",
-    "\u0002\u0002\u001e\u00a0\u0003\u0002\u0002\u0002 \u00a6\u0003\u0002",
-    "\u0002\u0002\"\u00a9\u0003\u0002\u0002\u0002$\u00b7\u0003\u0002\u0002",
-    "\u0002&\u00b9\u0003\u0002\u0002\u0002(\u00bc\u0003\u0002\u0002\u0002",
-    "*\u00c1\u0003\u0002\u0002\u0002,\u00c3\u0003\u0002\u0002\u0002.\u00c6",
-    "\u0003\u0002\u0002\u00020\u00c9\u0003\u0002\u0002\u00022\u00cb\u0003",
-    "\u0002\u0002\u00024\u00cd\u0003\u0002\u0002\u00026\u00cf\u0003\u0002",
-    "\u0002\u00028\u00d1\u0003\u0002\u0002\u0002:\u00d5\u0003\u0002\u0002",
+    "\bc\u0003\u0002\u0002\u0002\ne\u0003\u0002\u0002\u0002\ft\u0003\u0002",
+    "\u0002\u0002\u000e\u0080\u0003\u0002\u0002\u0002\u0010\u0082\u0003\u0002",
+    "\u0002\u0002\u0012\u0085\u0003\u0002\u0002\u0002\u0014\u0088\u0003\u0002",
+    "\u0002\u0002\u0016\u008b\u0003\u0002\u0002\u0002\u0018\u008f\u0003\u0002",
+    "\u0002\u0002\u001a\u0091\u0003\u0002\u0002\u0002\u001c\u0098\u0003\u0002",
+    "\u0002\u0002\u001e\u009a\u0003\u0002\u0002\u0002 \u00a0\u0003\u0002",
+    "\u0002\u0002\"\u00a3\u0003\u0002\u0002\u0002$\u00b1\u0003\u0002\u0002",
+    "\u0002&\u00b3\u0003\u0002\u0002\u0002(\u00b6\u0003\u0002\u0002\u0002",
+    "*\u00bb\u0003\u0002\u0002\u0002,\u00bd\u0003\u0002\u0002\u0002.\u00c0",
+    "\u0003\u0002\u0002\u00020\u00c3\u0003\u0002\u0002\u00022\u00c5\u0003",
+    "\u0002\u0002\u00024\u00c7\u0003\u0002\u0002\u00026\u00c9\u0003\u0002",
+    "\u0002\u00028\u00cb\u0003\u0002\u0002\u0002:\u00cf\u0003\u0002\u0002",
     "\u0002<>\u0005\u0004\u0003\u0002=<\u0003\u0002\u0002\u0002>A\u0003\u0002",
     "\u0002\u0002?=\u0003\u0002\u0002\u0002?@\u0003\u0002\u0002\u0002@B\u0003",
     "\u0002\u0002\u0002A?\u0003\u0002\u0002\u0002BC\u0007\u0002\u0002\u0003",
-    "C\u0003\u0003\u0002\u0002\u0002DF\u0007\u001d\u0002\u0002EG\u0005\u0006",
+    "C\u0003\u0003\u0002\u0002\u0002DF\u0007\u001c\u0002\u0002EG\u0005\u0006",
     "\u0004\u0002FE\u0003\u0002\u0002\u0002GH\u0003\u0002\u0002\u0002HF\u0003",
     "\u0002\u0002\u0002HI\u0003\u0002\u0002\u0002IJ\u0003\u0002\u0002\u0002",
     "JN\u0007\u0003\u0002\u0002KM\u0005\b\u0005\u0002LK\u0003\u0002\u0002",
@@ -67,73 +66,70 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "TU\f\u0003\u0002\u0002UV\u0007\u0004\u0002\u0002VX\u0005\u0006\u0004",
     "\u0004WT\u0003\u0002\u0002\u0002X[\u0003\u0002\u0002\u0002YW\u0003\u0002",
     "\u0002\u0002YZ\u0003\u0002\u0002\u0002Z\u0007\u0003\u0002\u0002\u0002",
-    "[Y\u0003\u0002\u0002\u0002\\d\u0007\u001e\u0002\u0002]_\u0005\n\u0006",
+    "[Y\u0003\u0002\u0002\u0002\\d\u0007\u001d\u0002\u0002]_\u0005\n\u0006",
     "\u0002^`\u0005\f\u0007\u0002_^\u0003\u0002\u0002\u0002`a\u0003\u0002",
     "\u0002\u0002a_\u0003\u0002\u0002\u0002ab\u0003\u0002\u0002\u0002bd\u0003",
     "\u0002\u0002\u0002c\\\u0003\u0002\u0002\u0002c]\u0003\u0002\u0002\u0002",
-    "d\t\u0003\u0002\u0002\u0002ef\u0007\u0005\u0002\u0002fg\u0007!\u0002",
+    "d\t\u0003\u0002\u0002\u0002ef\u0007\u0005\u0002\u0002fg\u0007 \u0002",
     "\u0002gh\u0007\u0003\u0002\u0002h\u000b\u0003\u0002\u0002\u0002ij\u0007",
-    "\u0006\u0002\u0002jk\u0007!\u0002\u0002ko\u0007\u0007\u0002\u0002ln",
-    "\u0007\b\u0002\u0002ml\u0003\u0002\u0002\u0002nq\u0003\u0002\u0002\u0002",
-    "om\u0003\u0002\u0002\u0002op\u0003\u0002\u0002\u0002pr\u0003\u0002\u0002",
-    "\u0002qo\u0003\u0002\u0002\u0002rv\u0005\u000e\b\u0002su\u0005\u0010",
-    "\t\u0002ts\u0003\u0002\u0002\u0002ux\u0003\u0002\u0002\u0002vt\u0003",
-    "\u0002\u0002\u0002vw\u0003\u0002\u0002\u0002w{\u0003\u0002\u0002\u0002",
-    "xv\u0003\u0002\u0002\u0002y{\u0007\u001e\u0002\u0002zi\u0003\u0002\u0002",
-    "\u0002zy\u0003\u0002\u0002\u0002{\r\u0003\u0002\u0002\u0002|\u0087\u0005",
-    "\u0012\n\u0002}\u0087\u0005\u0014\u000b\u0002~\u0087\u0005\u0016\f\u0002",
-    "\u007f\u0087\u0005\u0018\r\u0002\u0080\u0087\u0005\u001a\u000e\u0002",
-    "\u0081\u0087\u0005\u001c\u000f\u0002\u0082\u0087\u0005\"\u0012\u0002",
-    "\u0083\u0087\u0005$\u0013\u0002\u0084\u0087\u0005*\u0016\u0002\u0085",
-    "\u0087\u00050\u0019\u0002\u0086|\u0003\u0002\u0002\u0002\u0086}\u0003",
-    "\u0002\u0002\u0002\u0086~\u0003\u0002\u0002\u0002\u0086\u007f\u0003",
-    "\u0002\u0002\u0002\u0086\u0080\u0003\u0002\u0002\u0002\u0086\u0081\u0003",
-    "\u0002\u0002\u0002\u0086\u0082\u0003\u0002\u0002\u0002\u0086\u0083\u0003",
-    "\u0002\u0002\u0002\u0086\u0084\u0003\u0002\u0002\u0002\u0086\u0085\u0003",
-    "\u0002\u0002\u0002\u0087\u000f\u0003\u0002\u0002\u0002\u0088\u0089\u0007",
-    "\t\u0002\u0002\u0089\u008a\u0005\u000e\b\u0002\u008a\u0011\u0003\u0002",
-    "\u0002\u0002\u008b\u008c\u0007\n\u0002\u0002\u008c\u008d\u00056\u001c",
-    "\u0002\u008d\u0013\u0003\u0002\u0002\u0002\u008e\u008f\u0007\u000b\u0002",
-    "\u0002\u008f\u0090\u0007#\u0002\u0002\u0090\u0015\u0003\u0002\u0002",
-    "\u0002\u0091\u0092\u0007\u001f\u0002\u0002\u0092\u0093\u00056\u001c",
-    "\u0002\u0093\u0094\u0007\f\u0002\u0002\u0094\u0017\u0003\u0002\u0002",
-    "\u0002\u0095\u0096\u0007\r\u0002\u0002\u0096\u0019\u0003\u0002\u0002",
-    "\u0002\u0097\u0098\u0007\u000e\u0002\u0002\u0098\u0099\u0007\u001f\u0002",
-    "\u0002\u0099\u009a\u0007\u000f\u0002\u0002\u009a\u009b\u0007 \u0002",
-    "\u0002\u009b\u001b\u0003\u0002\u0002\u0002\u009c\u009f\u0005\u001e\u0010",
-    "\u0002\u009d\u009f\u0005 \u0011\u0002\u009e\u009c\u0003\u0002\u0002",
-    "\u0002\u009e\u009d\u0003\u0002\u0002\u0002\u009f\u001d\u0003\u0002\u0002",
-    "\u0002\u00a0\u00a1\u0007\u0010\u0002\u0002\u00a1\u00a2\u0007\u001f\u0002",
-    "\u0002\u00a2\u00a3\u0007\u0011\u0002\u0002\u00a3\u00a4\u0007\u001f\u0002",
-    "\u0002\u00a4\u00a5\u0007\u0012\u0002\u0002\u00a5\u001f\u0003\u0002\u0002",
-    "\u0002\u00a6\u00a7\u0007\u0013\u0002\u0002\u00a7\u00a8\u0007\u001f\u0002",
-    "\u0002\u00a8!\u0003\u0002\u0002\u0002\u00a9\u00b1\u0007\u0014\u0002",
-    "\u0002\u00aa\u00ac\u0007\u0004\u0002\u0002\u00ab\u00aa\u0003\u0002\u0002",
-    "\u0002\u00ac\u00af\u0003\u0002\u0002\u0002\u00ad\u00ab\u0003\u0002\u0002",
-    "\u0002\u00ad\u00ae\u0003\u0002\u0002\u0002\u00ae\u00b0\u0003\u0002\u0002",
-    "\u0002\u00af\u00ad\u0003\u0002\u0002\u0002\u00b0\u00b2\u00052\u001a",
-    "\u0002\u00b1\u00ad\u0003\u0002\u0002\u0002\u00b2\u00b3\u0003\u0002\u0002",
-    "\u0002\u00b3\u00b1\u0003\u0002\u0002\u0002\u00b3\u00b4\u0003\u0002\u0002",
-    "\u0002\u00b4#\u0003\u0002\u0002\u0002\u00b5\u00b8\u0005&\u0014\u0002",
-    "\u00b6\u00b8\u0005(\u0015\u0002\u00b7\u00b5\u0003\u0002\u0002\u0002",
-    "\u00b7\u00b6\u0003\u0002\u0002\u0002\u00b8%\u0003\u0002\u0002\u0002",
-    "\u00b9\u00ba\u0007\u0015\u0002\u0002\u00ba\u00bb\u0007\u001f\u0002\u0002",
-    "\u00bb\'\u0003\u0002\u0002\u0002\u00bc\u00bd\u0007\u0016\u0002\u0002",
-    "\u00bd\u00be\u0007\u001f\u0002\u0002\u00be)\u0003\u0002\u0002\u0002",
-    "\u00bf\u00c2\u0005,\u0017\u0002\u00c0\u00c2\u0005.\u0018\u0002\u00c1",
-    "\u00bf\u0003\u0002\u0002\u0002\u00c1\u00c0\u0003\u0002\u0002\u0002\u00c2",
-    "+\u0003\u0002\u0002\u0002\u00c3\u00c4\u0007\u0017\u0002\u0002\u00c4",
-    "\u00c5\u0007\u001f\u0002\u0002\u00c5-\u0003\u0002\u0002\u0002\u00c6",
-    "\u00c7\u0007\u0018\u0002\u0002\u00c7\u00c8\u0007\u001f\u0002\u0002\u00c8",
-    "/\u0003\u0002\u0002\u0002\u00c9\u00ca\u0007\u0019\u0002\u0002\u00ca",
-    "1\u0003\u0002\u0002\u0002\u00cb\u00cc\u0007!\u0002\u0002\u00cc3\u0003",
-    "\u0002\u0002\u0002\u00cd\u00ce\u0007!\u0002\u0002\u00ce5\u0003\u0002",
-    "\u0002\u0002\u00cf\u00d0\t\u0002\u0002\u0002\u00d07\u0003\u0002\u0002",
-    "\u0002\u00d1\u00d2\u0007\u001f\u0002\u0002\u00d2\u00d3\u0007\u0003\u0002",
-    "\u0002\u00d3\u00d4\u0007\u001f\u0002\u0002\u00d49\u0003\u0002\u0002",
-    "\u0002\u00d5\u00d6\u0007\u001f\u0002\u0002\u00d6\u00d7\u0007\u0003\u0002",
-    "\u0002\u00d7\u00d8\u0007\u001f\u0002\u0002\u00d8;\u0003\u0002\u0002",
-    "\u0002\u0011?HNYacovz\u0086\u009e\u00ad\u00b3\u00b7\u00c1"].join("");
+    "\u0006\u0002\u0002jk\u0007 \u0002\u0002kl\u0007\u0007\u0002\u0002lp",
+    "\u0005\u000e\b\u0002mo\u0005\u0010\t\u0002nm\u0003\u0002\u0002\u0002",
+    "or\u0003\u0002\u0002\u0002pn\u0003\u0002\u0002\u0002pq\u0003\u0002\u0002",
+    "\u0002qu\u0003\u0002\u0002\u0002rp\u0003\u0002\u0002\u0002su\u0007\u001d",
+    "\u0002\u0002ti\u0003\u0002\u0002\u0002ts\u0003\u0002\u0002\u0002u\r",
+    "\u0003\u0002\u0002\u0002v\u0081\u0005\u0012\n\u0002w\u0081\u0005\u0014",
+    "\u000b\u0002x\u0081\u0005\u0016\f\u0002y\u0081\u0005\u0018\r\u0002z",
+    "\u0081\u0005\u001a\u000e\u0002{\u0081\u0005\u001c\u000f\u0002|\u0081",
+    "\u0005\"\u0012\u0002}\u0081\u0005$\u0013\u0002~\u0081\u0005*\u0016\u0002",
+    "\u007f\u0081\u00050\u0019\u0002\u0080v\u0003\u0002\u0002\u0002\u0080",
+    "w\u0003\u0002\u0002\u0002\u0080x\u0003\u0002\u0002\u0002\u0080y\u0003",
+    "\u0002\u0002\u0002\u0080z\u0003\u0002\u0002\u0002\u0080{\u0003\u0002",
+    "\u0002\u0002\u0080|\u0003\u0002\u0002\u0002\u0080}\u0003\u0002\u0002",
+    "\u0002\u0080~\u0003\u0002\u0002\u0002\u0080\u007f\u0003\u0002\u0002",
+    "\u0002\u0081\u000f\u0003\u0002\u0002\u0002\u0082\u0083\u0007\b\u0002",
+    "\u0002\u0083\u0084\u0005\u000e\b\u0002\u0084\u0011\u0003\u0002\u0002",
+    "\u0002\u0085\u0086\u0007\t\u0002\u0002\u0086\u0087\u00056\u001c\u0002",
+    "\u0087\u0013\u0003\u0002\u0002\u0002\u0088\u0089\u0007\n\u0002\u0002",
+    "\u0089\u008a\u0007\"\u0002\u0002\u008a\u0015\u0003\u0002\u0002\u0002",
+    "\u008b\u008c\u0007\u001e\u0002\u0002\u008c\u008d\u00056\u001c\u0002",
+    "\u008d\u008e\u0007\u000b\u0002\u0002\u008e\u0017\u0003\u0002\u0002\u0002",
+    "\u008f\u0090\u0007\f\u0002\u0002\u0090\u0019\u0003\u0002\u0002\u0002",
+    "\u0091\u0092\u0007\r\u0002\u0002\u0092\u0093\u0007\u001e\u0002\u0002",
+    "\u0093\u0094\u0007\u000e\u0002\u0002\u0094\u0095\u0007\u001f\u0002\u0002",
+    "\u0095\u001b\u0003\u0002\u0002\u0002\u0096\u0099\u0005\u001e\u0010\u0002",
+    "\u0097\u0099\u0005 \u0011\u0002\u0098\u0096\u0003\u0002\u0002\u0002",
+    "\u0098\u0097\u0003\u0002\u0002\u0002\u0099\u001d\u0003\u0002\u0002\u0002",
+    "\u009a\u009b\u0007\u000f\u0002\u0002\u009b\u009c\u0007\u001e\u0002\u0002",
+    "\u009c\u009d\u0007\u0010\u0002\u0002\u009d\u009e\u0007\u001e\u0002\u0002",
+    "\u009e\u009f\u0007\u0011\u0002\u0002\u009f\u001f\u0003\u0002\u0002\u0002",
+    "\u00a0\u00a1\u0007\u0012\u0002\u0002\u00a1\u00a2\u0007\u001e\u0002\u0002",
+    "\u00a2!\u0003\u0002\u0002\u0002\u00a3\u00ab\u0007\u0013\u0002\u0002",
+    "\u00a4\u00a6\u0007\u0004\u0002\u0002\u00a5\u00a4\u0003\u0002\u0002\u0002",
+    "\u00a6\u00a9\u0003\u0002\u0002\u0002\u00a7\u00a5\u0003\u0002\u0002\u0002",
+    "\u00a7\u00a8\u0003\u0002\u0002\u0002\u00a8\u00aa\u0003\u0002\u0002\u0002",
+    "\u00a9\u00a7\u0003\u0002\u0002\u0002\u00aa\u00ac\u00052\u001a\u0002",
+    "\u00ab\u00a7\u0003\u0002\u0002\u0002\u00ac\u00ad\u0003\u0002\u0002\u0002",
+    "\u00ad\u00ab\u0003\u0002\u0002\u0002\u00ad\u00ae\u0003\u0002\u0002\u0002",
+    "\u00ae#\u0003\u0002\u0002\u0002\u00af\u00b2\u0005&\u0014\u0002\u00b0",
+    "\u00b2\u0005(\u0015\u0002\u00b1\u00af\u0003\u0002\u0002\u0002\u00b1",
+    "\u00b0\u0003\u0002\u0002\u0002\u00b2%\u0003\u0002\u0002\u0002\u00b3",
+    "\u00b4\u0007\u0014\u0002\u0002\u00b4\u00b5\u0007\u001e\u0002\u0002\u00b5",
+    "\'\u0003\u0002\u0002\u0002\u00b6\u00b7\u0007\u0015\u0002\u0002\u00b7",
+    "\u00b8\u0007\u001e\u0002\u0002\u00b8)\u0003\u0002\u0002\u0002\u00b9",
+    "\u00bc\u0005,\u0017\u0002\u00ba\u00bc\u0005.\u0018\u0002\u00bb\u00b9",
+    "\u0003\u0002\u0002\u0002\u00bb\u00ba\u0003\u0002\u0002\u0002\u00bc+",
+    "\u0003\u0002\u0002\u0002\u00bd\u00be\u0007\u0016\u0002\u0002\u00be\u00bf",
+    "\u0007\u001e\u0002\u0002\u00bf-\u0003\u0002\u0002\u0002\u00c0\u00c1",
+    "\u0007\u0017\u0002\u0002\u00c1\u00c2\u0007\u001e\u0002\u0002\u00c2/",
+    "\u0003\u0002\u0002\u0002\u00c3\u00c4\u0007\u0018\u0002\u0002\u00c41",
+    "\u0003\u0002\u0002\u0002\u00c5\u00c6\u0007 \u0002\u0002\u00c63\u0003",
+    "\u0002\u0002\u0002\u00c7\u00c8\u0007 \u0002\u0002\u00c85\u0003\u0002",
+    "\u0002\u0002\u00c9\u00ca\t\u0002\u0002\u0002\u00ca7\u0003\u0002\u0002",
+    "\u0002\u00cb\u00cc\u0007\u001e\u0002\u0002\u00cc\u00cd\u0007\u0003\u0002",
+    "\u0002\u00cd\u00ce\u0007\u001e\u0002\u0002\u00ce9\u0003\u0002\u0002",
+    "\u0002\u00cf\u00d0\u0007\u001e\u0002\u0002\u00d0\u00d1\u0007\u0003\u0002",
+    "\u0002\u00d1\u00d2\u0007\u001e\u0002\u0002\u00d2;\u0003\u0002\u0002",
+    "\u0002\u0010?HNYacpt\u0080\u0098\u00a7\u00ad\u00b1\u00bb"].join("");
 
 
 var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -143,19 +139,18 @@ var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new a
 var sharedContextCache = new antlr4.PredictionContextCache();
 
 var literalNames = [ null, "':'", "','", "'in'", "'proceed to'", "'on'", 
-                     "'accepting'", "'and on'", "'the end of'", "'date'", 
-                     "'after contract creation'", "'price priceExpression'", 
-                     "'transaction of'", "'to'", "'contract_guaranty of'", 
-                     "'refund after'", "'day'", "'platform_guaranty of'", 
-                     "'license'", "'visit_increment of'", "'visit of'", 
-                     "'account_balance greater than'", "'account_balance smaller than'", 
+                     "'and on'", "'the end of'", "'date'", "'after contract creation'", 
+                     "'price priceExpression'", "'transaction of'", "'to'", 
+                     "'contract_guaranty of'", "'refund after'", "'day'", 
+                     "'platform_guaranty of'", "'accepting license'", "'visit_increment of'", 
+                     "'visit of'", "'account_balance greater than'", "'account_balance smaller than'", 
                      "'account_settled'", "'year'", "'week'", "'cycle'" ];
 
 var symbolicNames = [ null, null, null, null, null, null, null, null, null, 
                       null, null, null, null, null, null, null, null, null, 
-                      null, null, null, null, null, null, null, null, null, 
-                      "FOR", "TERMINATE", "INTEGER_NUMBER", "FEATHERACCOUNT", 
-                      "ID", "WS", "DATE" ];
+                      null, null, null, null, null, null, null, null, "FOR", 
+                      "TERMINATE", "INTEGER_NUMBER", "FEATHERACCOUNT", "ID", 
+                      "WS", "DATE" ];
 
 var ruleNames =  [ "p", "segment", "audience_clause", "state_clause", "current_state_clause", 
                    "target_clause", "event", "and_event", "period_event", 
@@ -211,14 +206,13 @@ policyParser.T__21 = 22;
 policyParser.T__22 = 23;
 policyParser.T__23 = 24;
 policyParser.T__24 = 25;
-policyParser.T__25 = 26;
-policyParser.FOR = 27;
-policyParser.TERMINATE = 28;
-policyParser.INTEGER_NUMBER = 29;
-policyParser.FEATHERACCOUNT = 30;
-policyParser.ID = 31;
-policyParser.WS = 32;
-policyParser.DATE = 33;
+policyParser.FOR = 26;
+policyParser.TERMINATE = 27;
+policyParser.INTEGER_NUMBER = 28;
+policyParser.FEATHERACCOUNT = 29;
+policyParser.ID = 30;
+policyParser.WS = 31;
+policyParser.DATE = 32;
 
 policyParser.RULE_p = 0;
 policyParser.RULE_segment = 1;
@@ -762,7 +756,7 @@ policyParser.prototype.target_clause = function() {
     this.enterRule(localctx, 10, policyParser.RULE_target_clause);
     var _la = 0; // Token type
     try {
-        this.state = 120;
+        this.state = 114;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case policyParser.T__3:
@@ -773,32 +767,22 @@ policyParser.prototype.target_clause = function() {
             this.match(policyParser.ID);
             this.state = 105;
             this.match(policyParser.T__4);
-            this.state = 109;
+            this.state = 106;
+            this.event();
+            this.state = 110;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
             while(_la===policyParser.T__5) {
-                this.state = 106;
-                this.match(policyParser.T__5);
-                this.state = 111;
-                this._errHandler.sync(this);
-                _la = this._input.LA(1);
-            }
-            this.state = 112;
-            this.event();
-            this.state = 116;
-            this._errHandler.sync(this);
-            _la = this._input.LA(1);
-            while(_la===policyParser.T__6) {
-                this.state = 113;
+                this.state = 107;
                 this.and_event();
-                this.state = 118;
+                this.state = 112;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
             }
             break;
         case policyParser.TERMINATE:
             this.enterOuterAlt(localctx, 2);
-            this.state = 119;
+            this.state = 113;
             this.match(policyParser.TERMINATE);
             break;
         default:
@@ -896,60 +880,60 @@ policyParser.prototype.event = function() {
     var localctx = new EventContext(this, this._ctx, this.state);
     this.enterRule(localctx, 12, policyParser.RULE_event);
     try {
-        this.state = 132;
+        this.state = 126;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
-        case policyParser.T__7:
+        case policyParser.T__6:
             this.enterOuterAlt(localctx, 1);
-            this.state = 122;
+            this.state = 116;
             this.period_event();
             break;
-        case policyParser.T__8:
+        case policyParser.T__7:
             this.enterOuterAlt(localctx, 2);
-            this.state = 123;
+            this.state = 117;
             this.specific_date_event();
             break;
         case policyParser.INTEGER_NUMBER:
             this.enterOuterAlt(localctx, 3);
-            this.state = 124;
+            this.state = 118;
             this.relative_date_event();
             break;
-        case policyParser.T__10:
+        case policyParser.T__9:
             this.enterOuterAlt(localctx, 4);
-            this.state = 125;
+            this.state = 119;
             this.pricing_agreement_event();
             break;
-        case policyParser.T__11:
+        case policyParser.T__10:
             this.enterOuterAlt(localctx, 5);
-            this.state = 126;
+            this.state = 120;
             this.transaction_event();
             break;
-        case policyParser.T__13:
-        case policyParser.T__16:
+        case policyParser.T__12:
+        case policyParser.T__15:
             this.enterOuterAlt(localctx, 6);
-            this.state = 127;
+            this.state = 121;
             this.guaranty_event();
             break;
-        case policyParser.T__17:
+        case policyParser.T__16:
             this.enterOuterAlt(localctx, 7);
-            this.state = 128;
+            this.state = 122;
             this.signing_event();
             break;
+        case policyParser.T__17:
         case policyParser.T__18:
-        case policyParser.T__19:
             this.enterOuterAlt(localctx, 8);
-            this.state = 129;
+            this.state = 123;
             this.access_count_event();
             break;
+        case policyParser.T__19:
         case policyParser.T__20:
-        case policyParser.T__21:
             this.enterOuterAlt(localctx, 9);
-            this.state = 130;
+            this.state = 124;
             this.balance_event();
             break;
-        case policyParser.T__22:
+        case policyParser.T__21:
             this.enterOuterAlt(localctx, 10);
-            this.state = 131;
+            this.state = 125;
             this.settlement_event();
             break;
         default:
@@ -1012,9 +996,9 @@ policyParser.prototype.and_event = function() {
     this.enterRule(localctx, 14, policyParser.RULE_and_event);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 134;
-        this.match(policyParser.T__6);
-        this.state = 135;
+        this.state = 128;
+        this.match(policyParser.T__5);
+        this.state = 129;
         this.event();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1073,9 +1057,9 @@ policyParser.prototype.period_event = function() {
     this.enterRule(localctx, 16, policyParser.RULE_period_event);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 137;
-        this.match(policyParser.T__7);
-        this.state = 138;
+        this.state = 131;
+        this.match(policyParser.T__6);
+        this.state = 132;
         this.time_unit();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1134,9 +1118,9 @@ policyParser.prototype.specific_date_event = function() {
     this.enterRule(localctx, 18, policyParser.RULE_specific_date_event);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 140;
-        this.match(policyParser.T__8);
-        this.state = 141;
+        this.state = 134;
+        this.match(policyParser.T__7);
+        this.state = 135;
         this.match(policyParser.DATE);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1199,12 +1183,12 @@ policyParser.prototype.relative_date_event = function() {
     this.enterRule(localctx, 20, policyParser.RULE_relative_date_event);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 143;
+        this.state = 137;
         this.match(policyParser.INTEGER_NUMBER);
-        this.state = 144;
+        this.state = 138;
         this.time_unit();
-        this.state = 145;
-        this.match(policyParser.T__9);
+        this.state = 139;
+        this.match(policyParser.T__8);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -1259,8 +1243,8 @@ policyParser.prototype.pricing_agreement_event = function() {
     this.enterRule(localctx, 22, policyParser.RULE_pricing_agreement_event);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 147;
-        this.match(policyParser.T__10);
+        this.state = 141;
+        this.match(policyParser.T__9);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -1322,13 +1306,13 @@ policyParser.prototype.transaction_event = function() {
     this.enterRule(localctx, 24, policyParser.RULE_transaction_event);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 149;
-        this.match(policyParser.T__11);
-        this.state = 150;
+        this.state = 143;
+        this.match(policyParser.T__10);
+        this.state = 144;
         this.match(policyParser.INTEGER_NUMBER);
-        this.state = 151;
-        this.match(policyParser.T__12);
-        this.state = 152;
+        this.state = 145;
+        this.match(policyParser.T__11);
+        this.state = 146;
         this.match(policyParser.FEATHERACCOUNT);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1390,17 +1374,17 @@ policyParser.prototype.guaranty_event = function() {
     var localctx = new Guaranty_eventContext(this, this._ctx, this.state);
     this.enterRule(localctx, 26, policyParser.RULE_guaranty_event);
     try {
-        this.state = 156;
+        this.state = 150;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
-        case policyParser.T__13:
+        case policyParser.T__12:
             this.enterOuterAlt(localctx, 1);
-            this.state = 154;
+            this.state = 148;
             this.contract_guaranty();
             break;
-        case policyParser.T__16:
+        case policyParser.T__15:
             this.enterOuterAlt(localctx, 2);
-            this.state = 155;
+            this.state = 149;
             this.platform_guaranty();
             break;
         default:
@@ -1471,16 +1455,16 @@ policyParser.prototype.contract_guaranty = function() {
     this.enterRule(localctx, 28, policyParser.RULE_contract_guaranty);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 158;
+        this.state = 152;
+        this.match(policyParser.T__12);
+        this.state = 153;
+        this.match(policyParser.INTEGER_NUMBER);
+        this.state = 154;
         this.match(policyParser.T__13);
-        this.state = 159;
+        this.state = 155;
         this.match(policyParser.INTEGER_NUMBER);
-        this.state = 160;
+        this.state = 156;
         this.match(policyParser.T__14);
-        this.state = 161;
-        this.match(policyParser.INTEGER_NUMBER);
-        this.state = 162;
-        this.match(policyParser.T__15);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -1538,9 +1522,9 @@ policyParser.prototype.platform_guaranty = function() {
     this.enterRule(localctx, 30, policyParser.RULE_platform_guaranty);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 164;
-        this.match(policyParser.T__16);
-        this.state = 165;
+        this.state = 158;
+        this.match(policyParser.T__15);
+        this.state = 159;
         this.match(policyParser.INTEGER_NUMBER);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1607,25 +1591,25 @@ policyParser.prototype.signing_event = function() {
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 167;
-        this.match(policyParser.T__17);
-        this.state = 175; 
+        this.state = 161;
+        this.match(policyParser.T__16);
+        this.state = 169; 
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         do {
-            this.state = 171;
+            this.state = 165;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
             while(_la===policyParser.T__1) {
-                this.state = 168;
+                this.state = 162;
                 this.match(policyParser.T__1);
-                this.state = 173;
+                this.state = 167;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
             }
-            this.state = 174;
+            this.state = 168;
             this.license_resource_id();
-            this.state = 177; 
+            this.state = 171; 
             this._errHandler.sync(this);
             _la = this._input.LA(1);
         } while(_la===policyParser.T__1 || _la===policyParser.ID);
@@ -1689,17 +1673,17 @@ policyParser.prototype.access_count_event = function() {
     var localctx = new Access_count_eventContext(this, this._ctx, this.state);
     this.enterRule(localctx, 34, policyParser.RULE_access_count_event);
     try {
-        this.state = 181;
+        this.state = 175;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
-        case policyParser.T__18:
+        case policyParser.T__17:
             this.enterOuterAlt(localctx, 1);
-            this.state = 179;
+            this.state = 173;
             this.visit_increment_event();
             break;
-        case policyParser.T__19:
+        case policyParser.T__18:
             this.enterOuterAlt(localctx, 2);
-            this.state = 180;
+            this.state = 174;
             this.visit_event();
             break;
         default:
@@ -1762,9 +1746,9 @@ policyParser.prototype.visit_increment_event = function() {
     this.enterRule(localctx, 36, policyParser.RULE_visit_increment_event);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 183;
-        this.match(policyParser.T__18);
-        this.state = 184;
+        this.state = 177;
+        this.match(policyParser.T__17);
+        this.state = 178;
         this.match(policyParser.INTEGER_NUMBER);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1823,9 +1807,9 @@ policyParser.prototype.visit_event = function() {
     this.enterRule(localctx, 38, policyParser.RULE_visit_event);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 186;
-        this.match(policyParser.T__19);
-        this.state = 187;
+        this.state = 180;
+        this.match(policyParser.T__18);
+        this.state = 181;
         this.match(policyParser.INTEGER_NUMBER);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1887,17 +1871,17 @@ policyParser.prototype.balance_event = function() {
     var localctx = new Balance_eventContext(this, this._ctx, this.state);
     this.enterRule(localctx, 40, policyParser.RULE_balance_event);
     try {
-        this.state = 191;
+        this.state = 185;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
-        case policyParser.T__20:
+        case policyParser.T__19:
             this.enterOuterAlt(localctx, 1);
-            this.state = 189;
+            this.state = 183;
             this.balance_greater();
             break;
-        case policyParser.T__21:
+        case policyParser.T__20:
             this.enterOuterAlt(localctx, 2);
-            this.state = 190;
+            this.state = 184;
             this.balance_smaller();
             break;
         default:
@@ -1960,9 +1944,9 @@ policyParser.prototype.balance_greater = function() {
     this.enterRule(localctx, 42, policyParser.RULE_balance_greater);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 193;
-        this.match(policyParser.T__20);
-        this.state = 194;
+        this.state = 187;
+        this.match(policyParser.T__19);
+        this.state = 188;
         this.match(policyParser.INTEGER_NUMBER);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -2021,9 +2005,9 @@ policyParser.prototype.balance_smaller = function() {
     this.enterRule(localctx, 44, policyParser.RULE_balance_smaller);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 196;
-        this.match(policyParser.T__21);
-        this.state = 197;
+        this.state = 190;
+        this.match(policyParser.T__20);
+        this.state = 191;
         this.match(policyParser.INTEGER_NUMBER);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -2079,8 +2063,8 @@ policyParser.prototype.settlement_event = function() {
     this.enterRule(localctx, 46, policyParser.RULE_settlement_event);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 199;
-        this.match(policyParser.T__22);
+        this.state = 193;
+        this.match(policyParser.T__21);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -2138,7 +2122,7 @@ policyParser.prototype.license_resource_id = function() {
     this.enterRule(localctx, 48, policyParser.RULE_license_resource_id);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 201;
+        this.state = 195;
         this.match(policyParser.ID);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -2197,7 +2181,7 @@ policyParser.prototype.users = function() {
     this.enterRule(localctx, 50, policyParser.RULE_users);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 203;
+        this.state = 197;
         this.match(policyParser.ID);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -2254,9 +2238,9 @@ policyParser.prototype.time_unit = function() {
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 205;
+        this.state = 199;
         _la = this._input.LA(1);
-        if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << policyParser.T__15) | (1 << policyParser.T__23) | (1 << policyParser.T__24) | (1 << policyParser.T__25))) !== 0))) {
+        if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << policyParser.T__14) | (1 << policyParser.T__22) | (1 << policyParser.T__23) | (1 << policyParser.T__24))) !== 0))) {
         this._errHandler.recoverInline(this);
         }
         else {
@@ -2328,11 +2312,11 @@ policyParser.prototype.start_hour = function() {
     this.enterRule(localctx, 54, policyParser.RULE_start_hour);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 207;
+        this.state = 201;
         this.match(policyParser.INTEGER_NUMBER);
-        this.state = 208;
+        this.state = 202;
         this.match(policyParser.T__0);
-        this.state = 209;
+        this.state = 203;
         this.match(policyParser.INTEGER_NUMBER);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -2399,11 +2383,11 @@ policyParser.prototype.end_hour = function() {
     this.enterRule(localctx, 56, policyParser.RULE_end_hour);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 211;
+        this.state = 205;
         this.match(policyParser.INTEGER_NUMBER);
-        this.state = 212;
+        this.state = 206;
         this.match(policyParser.T__0);
-        this.state = 213;
+        this.state = 207;
         this.match(policyParser.INTEGER_NUMBER);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {

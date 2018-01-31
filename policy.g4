@@ -17,7 +17,7 @@ current_state_clause
   : 'in' ID ':'
   ;
 target_clause
-  : 'proceed to' ID 'on' ('accepting')* event (and_event)*
+  : 'proceed to' ID 'on' event (and_event)*
   | TERMINATE
   ;
 event
@@ -61,7 +61,7 @@ platform_guaranty
 : 'platform_guaranty of' INTEGER_NUMBER
 ;
 signing_event
-: 'license' ((',')*license_resource_id)+
+: 'accepting license' ((',')*license_resource_id)+
 ;
 access_count_event
 : visit_increment_event
