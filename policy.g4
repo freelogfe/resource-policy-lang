@@ -36,10 +36,10 @@ and_event
 : 'and on' event
 ;
 period_event
-: 'the end of' time_unit
+: 'on the end of' time_unit
 ;
 specific_date_event
-: 'date' DATE
+: 'on date' DATE
 ;
 relative_date_event
 : INTEGER_NUMBER time_unit 'after contract creation'
@@ -128,14 +128,15 @@ fragment DIGIT : [0-9] ;
 fragment LOWERCASE : [a-z];
 fragment UPPERCASE : [A-Z];
 
+ID : DIGIT+
+    | '<' (UPPERCASE | LOWERCASE | '_'| DIGIT)+ '>'
+    | (UPPERCASE | LOWERCASE | '_' | '-' | DIGIT)+
+  ;
 
 INTEGER_NUMBER:  DIGIT+;
 FEATHERACCOUNT : 'f' (UPPERCASE | LOWERCASE | DIGIT)*;
 
 
-ID : '<' (UPPERCASE | LOWERCASE | '_'| DIGIT)+ '>'
-    | (UPPERCASE | LOWERCASE | '_' | '-' | DIGIT)+
-  ;
 
 WS  : [ \t\r\n]+ -> skip;
 DATE : INTEGER_NUMBER '-' INTEGER_NUMBER '-' INTEGER_NUMBER;
