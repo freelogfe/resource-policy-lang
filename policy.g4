@@ -128,14 +128,14 @@ fragment DIGIT : [0-9] ;
 fragment LOWERCASE : [a-z];
 fragment UPPERCASE : [A-Z];
 
+INTEGER_NUMBER:  DIGIT+;
+
+FEATHERACCOUNT : 'f' (UPPERCASE | LOWERCASE | DIGIT)*;
+
 ID : DIGIT+
     | '<' (UPPERCASE | LOWERCASE | '_'| DIGIT)+ '>'
     | (UPPERCASE | LOWERCASE | '_' | '-' | DIGIT)+
   ;
-
-INTEGER_NUMBER:  DIGIT+;
-FEATHERACCOUNT : 'f' (UPPERCASE | LOWERCASE | DIGIT)*;
-
 
 
 WS  : [ \t\r\n]+ -> skip;
