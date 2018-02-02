@@ -36,10 +36,10 @@ and_event
 : 'and on' event
 ;
 period_event
-: 'on the end of' time_unit
+: 'every' time_unit
 ;
 specific_date_event
-: 'on date' DATE
+: 'date' DATE
 ;
 relative_date_event
 : INTEGER_NUMBER time_unit 'after contract creation'
