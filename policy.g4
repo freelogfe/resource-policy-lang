@@ -88,12 +88,17 @@ settlement_event
 ;
 
 license_resource_id : ID;
-users : ID;
+users : SELF | NODES | PUBLIC | GROUPUSER | GROUPNODE | ID;
 
 time_unit : 'year' | 'week' | 'day'| 'cycle';
 
 FOR: F O R;
 TERMINATE : T E R M I N A T E;
+SELF : S E L F;
+PUBLIC : P U B L I C;
+GROUPUSER : G R O U P '_' U S E R '_' ID;
+GROUPNODE : G R O U P '_' N O D E '_' ID;
+NODES : N O D E S;
 fragment A : ('A'|'a');
 fragment B : ('B'|'b');
 fragment C : ('C'|'c');
