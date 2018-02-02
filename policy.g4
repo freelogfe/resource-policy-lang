@@ -39,7 +39,7 @@ period_event
 : 'every' time_unit
 ;
 specific_date_event
-: 'date' DATE
+: 'date' ID
 ;
 relative_date_event
 : INTEGER_NUMBER time_unit 'after contract creation'
@@ -91,12 +91,9 @@ license_resource_id : ID;
 users : ID;
 
 time_unit : 'year' | 'week' | 'day'| 'cycle';
-start_hour : INTEGER_NUMBER ':' INTEGER_NUMBER;
-end_hour : INTEGER_NUMBER ':' INTEGER_NUMBER;
 
 FOR: F O R;
 TERMINATE : T E R M I N A T E;
-fragment CHAR : . ;
 fragment A : ('A'|'a');
 fragment B : ('B'|'b');
 fragment C : ('C'|'c');
@@ -136,7 +133,4 @@ ID : DIGIT+
     | '<' (UPPERCASE | LOWERCASE | '_'| DIGIT)+ '>'
     | (UPPERCASE | LOWERCASE | '_' | '-' | DIGIT)+
   ;
-
-
 WS  : [ \t\r\n]+ -> skip;
-DATE : INTEGER_NUMBER '-' INTEGER_NUMBER '-' INTEGER_NUMBER;
