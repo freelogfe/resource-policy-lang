@@ -36,7 +36,7 @@ and_event
 : 'and on' event
 ;
 period_event
-: 'every' time_unit
+: 'end of' time_unit
 ;
 specific_date_event
 : 'date' ID

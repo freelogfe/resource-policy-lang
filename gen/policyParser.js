@@ -130,7 +130,7 @@ var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new a
 var sharedContextCache = new antlr4.PredictionContextCache();
 
 var literalNames = [ null, "':'", "','", "'in'", "'proceed to'", "'on'", 
-                     "'and on'", "'every'", "'date'", "'after contract creation'", 
+                     "'and on'", "'end of'", "'date'", "'after contract creation'", 
                      "'price priceExpression'", "'transaction of'", "'to'", 
                      "'contract_guaranty of'", "'refund after'", "'day'", 
                      "'platform_guaranty of'", "'accepting license'", "'visit_increment of'", 
