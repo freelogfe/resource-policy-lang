@@ -1,16 +1,14 @@
 {
   "name": "@freelog/resource-policy-lang",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "policy language compiler for freelog",
   "main": "index.js",
   "dependencies": {
     "antlr4": "^4.7.0"
   },
-  "devDependencies": {
-    "gulp": "^3.9.1"
-  },
   "scripts": {
-    "build": "antlr4 -Dlanguage=JavaScript resourcePolicyLang.g4 -o lib"
+    "publish": "npm publish --access=public",
+    "build": "antlr4 -Dlanguage=JavaScript resourcePolicy.g4 -o lib"
   },
   "repository": {
     "type": "git",

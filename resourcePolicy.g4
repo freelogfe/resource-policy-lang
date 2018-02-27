@@ -1,4 +1,4 @@
-grammar resourcePolicyLang;
+grammar resourcePolicy;
 
 policy : (segment)* EOF
   ;

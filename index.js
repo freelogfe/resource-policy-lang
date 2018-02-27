@@ -1,9 +1,9 @@
-const {resourcePolicyLangLexer} = require('./lib/resourcePolicyLangLexer');
-const {resourcePolicyLangParser} = require('./lib/resourcePolicyLangParser');
-const {resourcePolicyLangListener} = require('./lib/resourcePolicyLangListener')
+const {resourcePolicyLexer} = require('./lib/resourcePolicyLexer');
+const {resourcePolicyParser} = require('./lib/resourcePolicyParser');
+const {resourcePolicyListener} = require('./lib/resourcePolicyListener')
 
 module.exports = {
-  resourcePolicyLangLexer,
-  resourcePolicyLangParser,
-  resourcePolicyLangListener
+  resourcePolicyLexer,
+  resourcePolicyParser,
+  resourcePolicyListener
 }
