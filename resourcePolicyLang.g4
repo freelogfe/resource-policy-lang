@@ -1,9 +1,9 @@
-grammar policy;
+grammar resourcePolicyLang;
 
-p : (segment)* EOF
-;
+policy : (segment)* EOF
+  ;
 segment : FOR audience_clause+ ':' (state_clause)*
-;
+  ;
 audience_clause
   :  users
   | audience_clause ','  audience_clause
@@ -61,7 +61,7 @@ platform_guaranty
 : 'platform_guaranty of' INTEGER_NUMBER
 ;
 signing_event
-: 'accepting license' ((',')*license_resource_id)+
+: 'accepting license' license_resource_id (','license_resource_id)*
 ;
 access_count_event
 : visit_increment_event
@@ -99,6 +99,7 @@ PUBLIC : P U B L I C;
 GROUPUSER : G R O U P '_' U S E R '_' ID;
 GROUPNODE : G R O U P '_' N O D E '_' ID;
 NODES : N O D E S;
+
 fragment A : ('A'|'a');
 fragment B : ('B'|'b');
 fragment C : ('C'|'c');
