@@ -10,16 +10,18 @@ audience_clause
   ;
 
 state_clause
-  : TERMINATE
-  | current_state_clause (target_clause)+
+  : current_state_clause (target_clause)+
   ;
+
 current_state_clause
   : 'in' ID ':'
   ;
+
 target_clause
   : 'proceed to' ID 'on' event (and_event)*
   | TERMINATE
   ;
+
 event
   : period_event
   | specific_date_event
@@ -32,63 +34,74 @@ event
   | balance_event
   | settlement_event
   ;
+
 and_event
 : 'and on' event
 ;
 period_event
-: 'end of' time_unit
+: 'end of' time_unit //TODO 多少个时间单位？INTEGER_NUMBER？复数情况？
 ;
 specific_date_event
-: 'date' ID
+: 'arriving date' ID  //todo ID改成date类型？
 ;
 relative_date_event
 : INTEGER_NUMBER time_unit 'after contract creation'
 ;
 pricing_agreement_event
-: 'price priceExpression'
+: 'price priceExpression' //这个事件是？
 ;
 transaction_event
-: 'transaction of' INTEGER_NUMBER 'to' FEATHERACCOUNT
+: 'transaction of' INTEGER_NUMBER 'to' FEATHERACCOUNT  //转账金额单位？不同币种？
 ;
 guaranty_event
 : contract_guaranty
 | platform_guaranty
 ;
+
+//待注释说明？
 contract_guaranty
 : 'contract_guaranty of' INTEGER_NUMBER 'refund after' INTEGER_NUMBER 'day'
 ;
 platform_guaranty
 : 'platform_guaranty of' INTEGER_NUMBER
 ;
+
+//签约事件
 signing_event
-: 'accepting license' license_resource_id (','license_resource_id)*
+: 'accepting license' license_resource_id (',' license_resource_id)*
 ;
+
 access_count_event
 : visit_increment_event
 | visit_event
 ;
+
 visit_increment_event
 : 'visit_increment of' INTEGER_NUMBER
 ;
 visit_event
 : 'visit of' INTEGER_NUMBER
 ;
+
 balance_event
 : balance_greater
 | balance_smaller
 ;
+
 balance_greater
 : 'account_balance greater than' INTEGER_NUMBER
 ;
+
 balance_smaller
 : 'account_balance smaller than' INTEGER_NUMBER
 ;
+
 settlement_event
 : 'account_settled'
 ;
 
 license_resource_id : ID;
-users : SELF | NODES | PUBLIC | GROUPUSER | GROUPNODE | ID;
+users : SELF | NODES | PUBLIC | GROUPUSER | GROUPNODE | ID; //禁止ID系统关键词重复
 
 time_unit : 'year' | 'week' | 'day'| 'cycle';
 
@@ -133,7 +146,7 @@ fragment UPPERCASE : [A-Z];
 
 INTEGER_NUMBER:  DIGIT+;
 
-FEATHERACCOUNT : 'f' (UPPERCASE | LOWERCASE | DIGIT)*;
+FEATHERACCOUNT : 'f' (UPPERCASE | LOWERCASE | DIGIT)+;
 
 ID : DIGIT+
     | '<' (UPPERCASE | LOWERCASE | '_'| DIGIT)+ '>'
