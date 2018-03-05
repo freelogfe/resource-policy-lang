@@ -1,9 +1,3 @@
-const {resourcePolicyLexer} = require('./lib/resourcePolicyLexer');
-const {resourcePolicyParser} = require('./lib/resourcePolicyParser');
-const {resourcePolicyListener} = require('./lib/resourcePolicyListener')
-
-module.exports = {
-  resourcePolicyLexer,
-  resourcePolicyParser,
-  resourcePolicyListener
-}
+module.exports.resourcePolicyLexer = require('./lib/resourcePolicyLexer').resourcePolicyLexer;
+module.exports.resourcePolicyParser = require('./lib/resourcePolicyParser').resourcePolicyParser;
+module.exports.resourcePolicyListener = require('./lib/resourcePolicyListener').resourcePolicyListener;
