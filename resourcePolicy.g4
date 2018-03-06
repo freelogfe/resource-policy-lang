@@ -10,108 +10,99 @@ audience_clause
   ;
 
 state_clause
-  : current_state_clause (target_clause)+
+  :  initial_state_clause target_clause+ (current_state_clause target_clause+)*
+  ;
+
+initial_state_clause
+  : 'in' ('initial' | '<initial>') ':'
   ;
 
 current_state_clause
   : 'in' ID ':'
   ;
-
 target_clause
-  : 'proceed to' ID 'on' event (and_event)*
+  : 'proceed to' ID event (and_event)*
   | TERMINATE
   ;
-
 event
-  : period_event
+  : 'on' period_event
   | specific_date_event
   | relative_date_event
   | pricing_agreement_event
-  | transaction_event
+  | 'on' transaction_event
   | guaranty_event
-  | signing_event
-  | access_count_event
-  | balance_event
+  | 'on' signing_event
+  | 'on' access_count_event
+  | 'on' balance_event
   | settlement_event
   ;
-
 and_event
-: 'and on' event
+: 'and' event
 ;
 period_event
-: 'end of' time_unit //TODO 多少个时间单位？INTEGER_NUMBER？复数情况？
+: 'end of' TIMEUNIT
 ;
 specific_date_event
-: 'arriving date' ID  //todo ID改成date类型？
+: 'at' DATE HOUR //具体到秒？
 ;
 relative_date_event
-: INTEGER_NUMBER time_unit 'after contract creation'
+: 'after' INTEGER_NUMBER TIMEUNIT 'of contract creation'
 ;
 pricing_agreement_event
-: 'price priceExpression' //这个事件是？
+: 'price priceExpression'
 ;
 transaction_event
-: 'transaction of' INTEGER_NUMBER 'to' FEATHERACCOUNT  //转账金额单位？不同币种？
+: 'receiving transaction of' INTEGER_NUMBER 'to' FEATHERACCOUNT//默认是每种币的最小单位
 ;
 guaranty_event
 : contract_guaranty
 | platform_guaranty
 ;
-
-//待注释说明？
 contract_guaranty
-: 'contract_guaranty of' INTEGER_NUMBER 'refund after' INTEGER_NUMBER 'day'
+: 'contract_guaranty of' INTEGER_NUMBER 'refund after' INTEGER_NUMBER TIMEUNIT
 ;
 platform_guaranty
 : 'platform_guaranty of' INTEGER_NUMBER
 ;
-
-//签约事件
 signing_event
-: 'accepting license' license_resource_id (',' license_resource_id)*
+: 'accepting license' license_resource_id (','license_resource_id)*
 ;
-
 access_count_event
 : visit_increment_event
 | visit_event
 ;
-
 visit_increment_event
 : 'visit_increment of' INTEGER_NUMBER
 ;
 visit_event
 : 'visit of' INTEGER_NUMBER
 ;
-
 balance_event
 : balance_greater
 | balance_smaller
 ;
-
 balance_greater
 : 'account_balance greater than' INTEGER_NUMBER
 ;
-
 balance_smaller
 : 'account_balance smaller than' INTEGER_NUMBER
 ;
-
 settlement_event
 : 'account_settled'
 ;
 
-license_resource_id : ID;
-users : SELF | NODES | PUBLIC | GROUPUSER | GROUPNODE | ID; //禁止ID系统关键词重复
+license_resource_id : ALPHANUMERIC;
+users : SELF | NODES | PUBLIC | GROUPUSER | GROUPNODE | ID;
 
-time_unit : 'year' | 'week' | 'day'| 'cycle';
+TIMEUNIT : C Y C L E S? | Y E A R S? | W E E K S? | D A Y S? | M O N T H S? ;
 
 FOR: F O R;
-TERMINATE : T E R M I N A T E;
 SELF : S E L F;
-PUBLIC : P U B L I C;
 GROUPUSER : G R O U P '_' U S E R '_' ID;
 GROUPNODE : G R O U P '_' N O D E '_' ID;
 NODES : N O D E S;
+PUBLIC : P U B L I C;
+TERMINATE : T E R M I N A T E;
 
 fragment A : ('A'|'a');
 fragment B : ('B'|'b');
@@ -143,13 +134,23 @@ fragment Z : ('Z'|'z');
 fragment DIGIT : [0-9] ;
 fragment LOWERCASE : [a-z];
 fragment UPPERCASE : [A-Z];
+fragment ALPHA : [a-zA-Z];
 
+MOBILEPHONE: '1' [34578] NIGHT_DIGITS;
+FEATHERACCOUNT : 'f' ALPHANUMERIC;
+ID
+  : MOBILEPHONE
+  | [<>a-zA-Z_]+;
+
+
+HOUR : TWO_DIGITS ':' TWO_DIGITS (':' TWO_DIGITS)?;
+DATE : FOUR_DIGITS '-' TWO_DIGITS '-' TWO_DIGITS;
 INTEGER_NUMBER:  DIGIT+;
+TWO_DIGITS : DIGIT DIGIT ;
+FOUR_DIGITS : DIGIT DIGIT DIGIT DIGIT;
+NIGHT_DIGITS : DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT;
 
-FEATHERACCOUNT : 'f' (UPPERCASE | LOWERCASE | DIGIT)+;
 
-ID : DIGIT+
-    | '<' (UPPERCASE | LOWERCASE | '_'| DIGIT)+ '>'
-    | (UPPERCASE | LOWERCASE | '_' | '-' | DIGIT)+
-  ;
+ALPHANUMERIC : (ALPHA | DIGIT)+;
+
 WS  : [ \t\r\n]+ -> skip;
