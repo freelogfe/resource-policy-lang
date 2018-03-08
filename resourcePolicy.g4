@@ -15,6 +15,7 @@ state_clause
 
 initial_state_clause
   : 'in' ('initial' | '<initial>') ':'
+  | 'in' ('init' | '<init>') ':'
   ;
 
 current_state_clause
@@ -40,52 +41,52 @@ and_event
 : 'and' event
 ;
 period_event
-: 'end of' TIMEUNIT
+: 'end' 'of' TIMEUNIT
 ;
 specific_date_event
 : 'at' DATE HOUR //具体到秒？
 ;
 relative_date_event
-: 'after' INTEGER_NUMBER TIMEUNIT 'of contract creation'
+: 'after' INTEGER_NUMBER TIMEUNIT 'of' 'contract' 'creation'
 ;
 pricing_agreement_event
 : 'price priceExpression'
 ;
 transaction_event
-: 'receiving transaction of' INTEGER_NUMBER 'to' FEATHERACCOUNT//默认是每种币的最小单位
+: 'receiving' 'transaction' 'of' INTEGER_NUMBER 'to' FEATHERACCOUNT//默认是每种币的最小单位
 ;
 guaranty_event
 : contract_guaranty
 | platform_guaranty
 ;
 contract_guaranty
-: 'contract_guaranty of' INTEGER_NUMBER 'refund after' INTEGER_NUMBER TIMEUNIT
+: 'contract_guaranty' 'of' INTEGER_NUMBER 'refund after' INTEGER_NUMBER TIMEUNIT
 ;
 platform_guaranty
-: 'platform_guaranty of' INTEGER_NUMBER
+: 'platform_guaranty' 'of' INTEGER_NUMBER
 ;
 signing_event
-: 'accepting license' license_resource_id (','license_resource_id)*
+: 'accepting' 'license' license_resource_id (','license_resource_id)*
 ;
 access_count_event
 : visit_increment_event
 | visit_event
 ;
 visit_increment_event
-: 'visit_increment of' INTEGER_NUMBER
+: 'visit_increment' 'of' INTEGER_NUMBER
 ;
 visit_event
-: 'visit of' INTEGER_NUMBER
+: 'visit' 'of' INTEGER_NUMBER
 ;
 balance_event
 : balance_greater
 | balance_smaller
 ;
 balance_greater
-: 'account_balance greater than' INTEGER_NUMBER
+: 'account_balance' 'greater' 'than' INTEGER_NUMBER
 ;
 balance_smaller
-: 'account_balance smaller than' INTEGER_NUMBER
+: 'account_balance' 'smaller' 'than' INTEGER_NUMBER
 ;
 settlement_event
 : 'account_settled'
