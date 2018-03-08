@@ -99,8 +99,8 @@ TIMEUNIT : C Y C L E S? | Y E A R S? | W E E K S? | D A Y S? | M O N T H S? ;
 
 FOR: F O R;
 SELF : S E L F;
-GROUPUSER : G R O U P '_' U S E R '_' ID;
-GROUPNODE : G R O U P '_' N O D E '_' ID;
+GROUPUSER : G R O U P '_' U S E R '_' ALPHANUMERIC;
+GROUPNODE : G R O U P '_' N O D E '_' ALPHANUMERIC;
 NODES : N O D E S;
 PUBLIC : P U B L I C;
 TERMINATE : T E R M I N A T E;
