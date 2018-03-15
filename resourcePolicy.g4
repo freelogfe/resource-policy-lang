@@ -52,7 +52,7 @@ pricing_agreement_event
 : 'price priceExpression'
 ;
 transaction_event
-: 'receiving' 'transaction' 'of' INTEGER_NUMBER 'to' FEATHERACCOUNT//默认是每种币的最小单位
+: 'receiving' 'transaction' 'of' INTEGER_NUMBER 'to' ID//默认是每种币的最小单位
 ;
 guaranty_event
 : contract_guaranty
@@ -91,15 +91,15 @@ settlement_event
 : 'account_settled'
 ;
 
-license_resource_id : ALPHANUMERIC;
-users : SELF | NODES | PUBLIC | GROUPUSER | GROUPNODE | DOMAIN;
+license_resource_id : ID;
+users : SELF | NODES | PUBLIC | GROUPUSER | GROUPNODE | INTEGER_NUMBER | ID;
 
 TIMEUNIT : C Y C L E S? | Y E A R S? | W E E K S? | D A Y S? | M O N T H S? ;
 
 FOR: F O R;
 SELF : S E L F;
-GROUPUSER : G R O U P '_' U S E R '_' ALPHANUMERIC;
-GROUPNODE : G R O U P '_' N O D E '_' ALPHANUMERIC;
+GROUPUSER : G R O U P '_' U S E R '_' ID;
+GROUPNODE : G R O U P '_' N O D E '_' ID;
 NODES : N O D E S;
 PUBLIC : P U B L I C;
 TERMINATE : T E R M I N A T E;
@@ -132,24 +132,22 @@ fragment Y : ('Y'|'y');
 fragment Z : ('Z'|'z');
 
 fragment DIGIT : [0-9] ;
-fragment LOWERCASE : [a-z];
-fragment UPPERCASE : [A-Z];
 fragment ALPHA : [a-zA-Z];
 
-MOBILEPHONE: '1' [34578] NIGHT_DIGITS;
-FEATHERACCOUNT : 'f' ALPHANUMERIC;
-DOMAIN: (ALPHA | DIGIT | '_')+;
-ID :[<>a-zA-Z_]+;
 
+INTEGER_NUMBER:  DIGIT+;
 
 HOUR : TWO_DIGITS ':' TWO_DIGITS (':' TWO_DIGITS)?;
 DATE : FOUR_DIGITS '-' TWO_DIGITS '-' TWO_DIGITS;
-INTEGER_NUMBER:  DIGIT+;
+
 TWO_DIGITS : DIGIT DIGIT ;
 FOUR_DIGITS : DIGIT DIGIT DIGIT DIGIT;
 NIGHT_DIGITS : DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT;
 
+ID
+  : (ALPHA | INTEGER_NUMBER | '<' | '>' | '-')+
+  | FEATHERACCOUNT;
 
-ALPHANUMERIC : (ALPHA | DIGIT)+;
+FEATHERACCOUNT : 'f' (DIGIT | ALPHA)+ ;
 
 WS  : [ \t\r\n]+ -> skip;
