@@ -92,7 +92,7 @@ settlement_event
 ;
 
 license_resource_id : ALPHANUMERIC;
-users : SELF | NODES | PUBLIC | GROUPUSER | GROUPNODE | ID;
+users : SELF | NODES | PUBLIC | GROUPUSER | GROUPNODE | DOMAIN;
 
 TIMEUNIT : C Y C L E S? | Y E A R S? | W E E K S? | D A Y S? | M O N T H S? ;
 
@@ -138,9 +138,8 @@ fragment ALPHA : [a-zA-Z];
 
 MOBILEPHONE: '1' [34578] NIGHT_DIGITS;
 FEATHERACCOUNT : 'f' ALPHANUMERIC;
-ID
-  : MOBILEPHONE
-  | [<>a-zA-Z_]+;
+DOMAIN: (ALPHA | DIGIT | '_')+;
+ID :[<>a-zA-Z_]+;
 
 
 HOUR : TWO_DIGITS ':' TWO_DIGITS (':' TWO_DIGITS)?;
