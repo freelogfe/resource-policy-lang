@@ -2,94 +2,159 @@ grammar resourcePolicy;
 
 policy : (segment)* EOF
   ;
-segment : FOR audience_clause+ ':' (state_clause)*
+segment : FOR audience_clause ':' declaration_section? state_definition_section
   ;
+
+declaration_section: declaration_statements+
+  ;
+
+declaration_statements
+  : custom_event_declaration
+  | expression_declaration
+  | contract_account_declaration
+  ;
+
+custom_event_declaration
+  : 'custom' 'event' one_or_more_event_decl
+  ;
+
+one_or_more_event_decl
+  : custom_event_owner '.' custom_event_name (',' custom_event_owner '.' custom_event_name)*
+  ;
+
+custom_event_name: ID ;
+
+custom_event_owner : proposer | acceptor
+  ;
+
+expression_declaration : 'place holder' ;
+
+contract_account_declaration
+  : contract_account_types contract_account_name
+  ;
+
+contract_account_types
+  : 'escrow' 'account'
+  ;
+
+contract_account_name : ID ;
+
 audience_clause
-  :  users
+  : users
   | audience_clause ','  audience_clause
   ;
 
-state_clause
-  :  initial_state_clause target_clause+ (current_state_clause target_clause+)*
+state_definition_section
+  :  state_definition+
   ;
 
-initial_state_clause
-  : 'in' ('initial' | '<initial>'|'init' | '<init>') ':'
+state_definition
+  : state_id ':' state_description* state_transition
   ;
 
-current_state_clause
-  : 'in' ID ':'
+state_description
+  : 'presentable'
+  | 'recontractable'
+  | 'active'
   ;
-target_clause
-  : 'proceed to' ID event (and_event)*
+
+state_transition
+  : 'proceed' 'to' state_id 'on' event
   | TERMINATE
   ;
+
+state_id : ID ;
+
 event
-  : 'on' period_event
+  : period_event
   | specific_date_event
   | relative_date_event
   | pricing_agreement_event
-  | 'on' transaction_event
+  | transaction_event
   | guaranty_event
-  | 'on' signing_event
-  | 'on' access_count_event
-  | 'on' balance_event
+  | signing_event
+  | access_count_event
+  | balance_event
   | settlement_event
+  | event_placeholder
   ;
+
+event_placeholder : EVENT ;
+
+
 and_event
-: 'and' event
-;
+  : 'and' event
+  ;
+
 period_event
-: 'end' 'of' TIMEUNIT
-;
+  : 'end' 'of' TIMEUNIT
+  ;
+
 specific_date_event
-: 'at' DATE HOUR //具体到秒？
-;
+  : 'at' DATE HOUR
+  ;
+
 relative_date_event
-: 'after' INTEGER_NUMBER TIMEUNIT 'of' 'contract' 'creation'
-;
+  : 'after' INTEGER_NUMBER TIMEUNIT 'of' 'contract' 'creation'
+  ;
+
 pricing_agreement_event
-: 'price priceExpression'
-;
+  : 'price priceExpression'
+  ;
+
 transaction_event
-: 'receiving' 'transaction' 'of' INTEGER_NUMBER 'to' ID//默认是每种币的最小单位
-;
+  : 'receiving' 'transaction' 'of' INTEGER_NUMBER 'to' ID//默认是每种币的最小单位
+  ;
+
 guaranty_event
-: contract_guaranty
-| platform_guaranty
-;
+  : contract_guaranty
+  | platform_guaranty
+  ;
+
 contract_guaranty
-: 'contract_guaranty' 'of' INTEGER_NUMBER 'refund after' INTEGER_NUMBER TIMEUNIT
-;
+  : 'contract_guaranty' 'of' INTEGER_NUMBER 'refund after' INTEGER_NUMBER TIMEUNIT
+  ;
+
 platform_guaranty
-: 'platform_guaranty' 'of' INTEGER_NUMBER
-;
+  : 'platform_guaranty' 'of' INTEGER_NUMBER
+  ;
+
 signing_event
-: 'accepting' 'license' license_resource_id (','license_resource_id)*
-;
+  : 'accepting' 'license' license_resource_id (','license_resource_id)*
+  ;
+
 access_count_event
-: visit_increment_event
-| visit_event
-;
+  : visit_increment_event
+  | visit_event
+  ;
+
 visit_increment_event
-: 'visit_increment' 'of' INTEGER_NUMBER
-;
+  : 'visit_increment' 'of' INTEGER_NUMBER
+  ;
+
 visit_event
-: 'visit' 'of' INTEGER_NUMBER
-;
+  : 'visit' 'of' INTEGER_NUMBER
+  ;
+
 balance_event
-: balance_greater
-| balance_smaller
-;
+  : balance_greater
+  | balance_smaller
+  ;
+
 balance_greater
-: 'account_balance' 'greater' 'than' INTEGER_NUMBER
-;
+  : 'account_balance' 'greater' 'than' INTEGER_NUMBER
+  ;
+
 balance_smaller
-: 'account_balance' 'smaller' 'than' INTEGER_NUMBER
-;
+  : 'account_balance' 'smaller' 'than' INTEGER_NUMBER
+  ;
+
 settlement_event
-: 'account_settled'
-;
+  : 'account_settled'
+  ;
+
+proposer: 'proposer';
+acceptor: 'acceptor';
 
 license_resource_id : ID;
 users : SELF | NODES | PUBLIC | GROUPUSER | GROUPNODE | INTEGER_NUMBER | ID;
@@ -112,7 +177,7 @@ fragment E : ('E'|'e');
 fragment F : ('F'|'f');
 fragment G : ('G'|'g');
 fragment H : ('H'|'h');
-fragment I  :  ('I'|'i');
+fragment I : ('I'|'i');
 fragment J : ('J'|'j');
 fragment K : ('K'|'k');
 fragment L : ('L'|'l');
@@ -132,7 +197,9 @@ fragment Y : ('Y'|'y');
 fragment Z : ('Z'|'z');
 
 fragment DIGIT : [0-9] ;
-fragment ALPHA : [a-zA-Z];
+fragment ALPHABET : [a-zA-Z];
+
+EVENT : 'event_' (DIGIT|ALPHABET)+;
 
 
 INTEGER_NUMBER:  DIGIT+;
@@ -145,9 +212,9 @@ FOUR_DIGITS : DIGIT DIGIT DIGIT DIGIT;
 NIGHT_DIGITS : DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT;
 
 ID
-  : (ALPHA | INTEGER_NUMBER | '<' | '>' | '-')+
+  : (ALPHABET | INTEGER_NUMBER | '_' | '-')+
   | FEATHERACCOUNT;
 
-FEATHERACCOUNT : 'f' (DIGIT | ALPHA)+ ;
+FEATHERACCOUNT : 'f' (DIGIT | ALPHABET)+ ;
 
 WS  : [ \t\r\n]+ -> skip;
