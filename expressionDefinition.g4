@@ -1,0 +1,3 @@
+grammar expressionDefinition;
+
+expression : INT;

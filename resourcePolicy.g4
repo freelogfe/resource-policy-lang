@@ -1,7 +1,9 @@
 grammar resourcePolicy;
 
-policy : (segment)* EOF
-  ;
+import eventDefinition, expressionDefinition;
+
+policy : (segment)* EOF;
+
 segment : FOR audience_clause ':' declaration_section? state_definition_section
   ;
 
@@ -63,101 +65,15 @@ state_transition
   | TERMINATE
   ;
 
+account : FEATHERACCOUNT ;
+
 state_id : ID ;
-
-event
-  : period_event
-  | specific_date_event
-  | relative_date_event
-  | pricing_agreement_event
-  | transaction_event
-  | guaranty_event
-  | signing_event
-  | access_count_event
-  | balance_event
-  | settlement_event
-  | event_placeholder
-  ;
-
-event_placeholder : EVENT ;
-
-
-and_event
-  : 'and' event
-  ;
-
-period_event
-  : 'end' 'of' TIMEUNIT
-  ;
-
-specific_date_event
-  : 'at' DATE HOUR
-  ;
-
-relative_date_event
-  : 'after' INTEGER_NUMBER TIMEUNIT 'of' 'contract' 'creation'
-  ;
-
-pricing_agreement_event
-  : 'price priceExpression'
-  ;
-
-transaction_event
-  : 'receiving' 'transaction' 'of' INTEGER_NUMBER 'to' ID//默认是每种币的最小单位
-  ;
-
-guaranty_event
-  : contract_guaranty
-  | platform_guaranty
-  ;
-
-contract_guaranty
-  : 'contract_guaranty' 'of' INTEGER_NUMBER 'refund after' INTEGER_NUMBER TIMEUNIT
-  ;
-
-platform_guaranty
-  : 'platform_guaranty' 'of' INTEGER_NUMBER
-  ;
-
-signing_event
-  : 'accepting' 'license' license_resource_id (','license_resource_id)*
-  ;
-
-access_count_event
-  : visit_increment_event
-  | visit_event
-  ;
-
-visit_increment_event
-  : 'visit_increment' 'of' INTEGER_NUMBER
-  ;
-
-visit_event
-  : 'visit' 'of' INTEGER_NUMBER
-  ;
-
-balance_event
-  : balance_greater
-  | balance_smaller
-  ;
-
-balance_greater
-  : 'account_balance' 'greater' 'than' INTEGER_NUMBER
-  ;
-
-balance_smaller
-  : 'account_balance' 'smaller' 'than' INTEGER_NUMBER
-  ;
-
-settlement_event
-  : 'account_settled'
-  ;
 
 proposer: 'proposer';
 acceptor: 'acceptor';
 
 license_resource_id : ID;
-users : SELF | NODES | PUBLIC | GROUPUSER | GROUPNODE | INTEGER_NUMBER | ID;
+users : SELF | NODES | PUBLIC | GROUPUSER | GROUPNODE | INT | ID;
 
 TIMEUNIT : C Y C L E S? | Y E A R S? | W E E K S? | D A Y S? | M O N T H S? ;
 
@@ -202,7 +118,7 @@ fragment ALPHABET : [a-zA-Z];
 EVENT : 'event_' (DIGIT|ALPHABET)+;
 
 
-INTEGER_NUMBER:  DIGIT+;
+INT:  DIGIT+;
 
 HOUR : TWO_DIGITS ':' TWO_DIGITS (':' TWO_DIGITS)?;
 DATE : FOUR_DIGITS '-' TWO_DIGITS '-' TWO_DIGITS;
@@ -212,7 +128,7 @@ FOUR_DIGITS : DIGIT DIGIT DIGIT DIGIT;
 NIGHT_DIGITS : DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT;
 
 ID
-  : (ALPHABET | INTEGER_NUMBER | '_' | '-')+
+  : (ALPHABET | INT | '_' | '-')+
   | FEATHERACCOUNT;
 
 FEATHERACCOUNT : 'f' (DIGIT | ALPHABET)+ ;
