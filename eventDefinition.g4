@@ -1,7 +1,5 @@
 grammar eventDefinition;
 
-import expressionDefinition;
-
 event
   : natural_event
   | reserved_event
@@ -37,11 +35,11 @@ time_event
   ;
 
 relative_time_event
-  : 'after' INT TIMEUNIT 'of' 'contract' 'creation'
+  : 'after' INT TIMEUNIT
   ;
 
 transaction_event
-  : 'receiving' 'transaction' 'of' INT 'to' ID
+  : 'receiving' expression_call 'to' ID
   ;
 
 signing_event

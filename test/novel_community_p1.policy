@@ -1,0 +1,24 @@
+for NODES:
+    escrow account acct
+    exp(a) = 10*a
+
+    initial:
+        proceed to signed on signing agreement 0x1234
+    signed:
+        proceed to auth on acct exceed 10 feather
+    auth:
+        presentable
+        viewable
+        proceed to settlement on end of day
+    settlement:
+        proceed to auth on receiving exp(presented_last_cycle) to 123455
+        proceed to refund on contractor termination
+        proceed to confiscation on end of day
+    confiscate_guarantee:
+        confiscatable
+        proceed to finish on guarantee confiscated
+    refund_guarantee:
+        refundable
+        proceed to finish on guarantee refunded
+    finish:
+        terminate

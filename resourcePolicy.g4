@@ -29,7 +29,13 @@ custom_event_name: ID ;
 custom_event_owner : proposer | acceptor
   ;
 
-expression_declaration : 'place holder' ;
+expression_declaration : expression_handle '(' (ID (',' ID)*)* ')' '=' expression_definition;
+
+expression_handle : ID ;
+
+expression_definition : expression ;
+
+expression_call : expression_handle '(' (ID (',' ID)*)* ')' ;
 
 contract_account_declaration
   : contract_account_types contract_account_name
