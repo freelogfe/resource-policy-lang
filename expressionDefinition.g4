@@ -32,14 +32,9 @@ funcname
 atom
   : scientific
   | constant
-  | environment_variable
   | LPAREN expression RPAREN
   | INT
   | variable
-  ;
-
-environment_variable
-  : 'presented_last_cycle'
   ;
 
 scientific

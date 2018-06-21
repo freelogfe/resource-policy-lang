@@ -35,7 +35,16 @@ expression_handle : ID ;
 
 expression_definition : expression ;
 
-expression_call : expression_handle '(' (ID (',' ID)*)* ')' ;
+expression_call : expression_handle '(' (expression_call_argument (',' expression_call_argument)*)* ')' ;
+
+expression_call_argument
+  : INT
+  | environment_variable
+  ;
+
+environment_variable
+  : 'presented_last_cycle'
+  ;
 
 contract_account_declaration
   : contract_account_types contract_account_name
@@ -57,13 +66,23 @@ state_definition_section
   ;
 
 state_definition
-  : state_id ':' state_description* state_transition
+  : state_id ':' state_description* state_transition+
   ;
 
 state_description
   : 'presentable'
   | 'recontractable'
   | 'active'
+  | contract_account_description
+  ;
+
+contract_account_description
+  : contract_account_name '.' contract_account_state
+  ;
+
+contract_account_state
+  : 'confiscable'
+  | 'refundable'
   ;
 
 state_transition
@@ -78,7 +97,10 @@ state_id : ID ;
 proposer: 'proposer';
 acceptor: 'acceptor';
 
-license_resource_id : ID;
+currency_unit : FEATHER | BARB ;
+
+license_resource_id : RESOURCE_ID;
+
 users : SELF | NODES | PUBLIC | GROUPUSER | GROUPNODE | INT | ID;
 
 TIMEUNIT : C Y C L E S? | Y E A R S? | W E E K S? | D A Y S? | M O N T H S? ;
@@ -120,9 +142,12 @@ fragment Z : ('Z'|'z');
 
 fragment DIGIT : [0-9] ;
 fragment ALPHABET : [a-zA-Z];
+fragment HEX_ALPHABET : [a-fA-F];
 
 EVENT : 'event_' (DIGIT|ALPHABET)+;
 
+FEATHER : 'feather' ;
+BARB : 'barb' ;
 
 INT:  DIGIT+;
 
@@ -134,9 +159,11 @@ FOUR_DIGITS : DIGIT DIGIT DIGIT DIGIT;
 NIGHT_DIGITS : DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT;
 
 ID
-  : (ALPHABET | INT | '_' | '-')+
-  | FEATHERACCOUNT;
+  : ALPHABET (ALPHABET | INT | '_' | '-')*
+  ;
 
-FEATHERACCOUNT : 'f' (DIGIT | ALPHABET)+ ;
+RESOURCE_ID : '0' X (DIGIT|HEX_ALPHABET)+ ;
+
+FEATHERACCOUNT : '$' (ALPHABET|DIGIT)+;
 
 WS  : [ \t\r\n]+ -> skip;

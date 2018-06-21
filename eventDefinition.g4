@@ -2,7 +2,8 @@ grammar eventDefinition;
 
 event
   : natural_event
-  | reserved_event
+  | reservation_event
+  | custom_event
   | event_placeholder
   ;
 
@@ -13,10 +14,33 @@ natural_event
   | settlement_event
   ;
 
-reserved_event
+reservation_event
   : time_event
   | relative_time_event
   | access_count_event
+  | contract_account_event
+  ;
+
+custom_event
+  : custom_event_owner '.' custom_event_name
+  ;
+
+contract_account_event
+  : escrow_exceed_amount
+  | escrow_confiscated
+  | escrow_refunded
+  ;
+
+escrow_exceed_amount
+  : contract_account_name 'exceed' expression currency_unit
+  ;
+
+escrow_confiscated
+  : contract_account_name '.' 'confiscated'
+  ;
+
+escrow_refunded
+  : contract_account_name '.' 'refunded'
   ;
 
 event_placeholder : EVENT ;
@@ -39,11 +63,11 @@ relative_time_event
   ;
 
 transaction_event
-  : 'receiving' expression_call 'to' ID
+  : 'receiving' (INT|expression_call) 'to' account
   ;
 
 signing_event
-  : 'accepting' 'license' license_resource_id (','license_resource_id)*
+  : 'accepting' 'agreement' license_resource_id (',' license_resource_id)*
   ;
 
 access_count_event
