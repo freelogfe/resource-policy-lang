@@ -6,6 +6,7 @@ logs/
 coverage/
 .cache/
 yarn-error.log
+package-lock.json
 
 # Editor directories and files
 .idea
@@ -21,3 +22,4 @@ yarn-error.log
 *.tokens
 *.java
 *.class
+resourcePolicy*.js

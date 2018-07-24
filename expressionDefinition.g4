@@ -25,7 +25,6 @@ built_in_function
 
 funcname
   : SUM
-
   ;
 
 

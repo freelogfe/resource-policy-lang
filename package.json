@@ -1,18 +1,16 @@
 {
-  "name": "@freelog/resource-policy-lang",
+  "name": "freelog_resource_policy",
   "version": "0.0.12",
   "description": "policy language compiler for freelog",
   "main": "index.js",
-  "dependencies": {
-    "antlr4": "^4.7.0"
-  },
+  "dependencies": {},
   "scripts": {
     "publish": "npm publish --access=public",
     "build": "antlr4 -Dlanguage=JavaScript resourcePolicy.g4 -o lib"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:freelogfe/resource-policy-lang.git"
+    "url": "git+ssh://git@github.com/freelogfe/resource-policy-lang.git"
   },
   "keywords": [
     "freelog",
@@ -21,5 +19,16 @@
     "language"
   ],
   "author": "Jin Xiao",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freelogfe/resource-policy-lang/issues"
+  },
+  "homepage": "https://github.com/freelogfe/resource-policy-lang#readme",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "devDependencies": {
+    "antlr4": "^4.7.1"
+  }
 }
