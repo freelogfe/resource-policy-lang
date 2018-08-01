@@ -14,11 +14,19 @@ $ npm i @freelog/resource-policy-lang -S
 1. [install antlr4](https://github.com/antlr/antlr4/blob/master/doc/getting-started.md)
 
 2. compile grammar
+
+  to JavaScript target
+  ```
+  antlr4 -Dlanguage=JavaScript -visitor resourcePolicy.g4
+  ```
+
+  to java target, for visualize AST and other purpose
   ```
   antlr4 resourcePolicy.g4
   ```
 
-3. compile generated java target
+3. compile generated JavaScript target
+  Java target
   ```
   javac *.java
   ```

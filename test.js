@@ -15,4 +15,4 @@ var tree = parser.policy();
 var gen = new SMGenerator(1);
 gen.visit(tree);
 
-console.log(gen.state_machine);
+console.log(JSON.stringify(gen.state_machine));
