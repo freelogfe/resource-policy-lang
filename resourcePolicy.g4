@@ -21,7 +21,11 @@ custom_event_declaration
   ;
 
 one_or_more_event_decl
-  : custom_event_owner '.' custom_event_name (',' custom_event_owner '.' custom_event_name)*
+  : single_custom_event_declaration (',' single_custom_event_declaration)*
+  ;
+
+single_custom_event_declaration
+  : custom_event_owner '.' custom_event_name
   ;
 
 custom_event_name: ID ;

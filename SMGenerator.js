@@ -25,6 +25,23 @@ class SMGenerator extends resourcePolicyVisitor {
 
   visitExpression_declaration (ctx) {
     this.state_machine['custom_expressions'].push(ctx.getText());
+    super.visitExpression_declaration(ctx);
+  }
+
+  visitContract_account_declaration (ctx) {
+    this.state_machine['contract_accounts'].push({
+      'type':ctx.getChild(0).getText(),
+      'name':ctx.getChild(1).getText()
+    });
+    super.visitContract_account_declaration(ctx);
+  }
+
+  visitSingle_custom_event_declaration (ctx) {
+    this.state_machine['custom_events'].push({
+      'type':ctx.getChild(0).getText(),
+      'name':ctx.getChild(2).getText()
+    });
+    super.visitSingle_custom_event_declaration(ctx);
   }
 
   visitState_definition (ctx) {
@@ -44,8 +61,11 @@ class SMGenerator extends resourcePolicyVisitor {
     super.visitState_transition(ctx);
   }
 
+  visitState_description (ctx) {
+    this.state_machine['states'][this.current_state]['authorization'].push(ctx.getChild(0).getText());
+  }
+
   visitEvent (ctx) {
-    this.state_machine['events'] = 'event';
     super.visitEvent(ctx);
   }
 }
