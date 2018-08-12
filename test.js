@@ -1,8 +1,10 @@
 antlr4 = require('antlr4');
 fs = require('fs');
-SMGenerator = require ('./SMGenerator').SMGenerator;
-resourcePolicyLexer = require ('./resourcePolicyLexer');
-resourcePolicyParser = require ('./resourcePolicyParser');
+
+var gen_dir = './gen'
+SMGenerator = require (`./SMGenerator`).SMGenerator;
+resourcePolicyLexer = require (`${gen_dir}/resourcePolicyLexer`);
+resourcePolicyParser = require (`${gen_dir}/resourcePolicyParser`);
 
 var input = fs.readFileSync('./test/novel_community_p1.policy','utf-8');
 var chars = new antlr4.InputStream(input);

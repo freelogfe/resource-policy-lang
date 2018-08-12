@@ -1,5 +1,5 @@
 var antlr4 = require('antlr4/index');
-var resourcePolicyVisitor = require ('./resourcePolicyVisitor').resourcePolicyVisitor
+var resourcePolicyVisitor = require ('./gen/resourcePolicyVisitor').resourcePolicyVisitor
 
 class SMGenerator extends resourcePolicyVisitor {
 
@@ -37,7 +37,7 @@ class SMGenerator extends resourcePolicyVisitor {
   }
 
   visitSingle_custom_event_declaration (ctx) {
-    this.state_machine['custom_events'].push({
+    this.state_machine['custom_events' ].push({
       'type':ctx.getChild(0).getText(),
       'name':ctx.getChild(2).getText()
     });
