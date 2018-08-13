@@ -3,7 +3,9 @@
   "version": "0.0.12",
   "description": "policy language compiler for freelog",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "freelog_event_definition": "0.0.1"
+  },
   "scripts": {
     "publish": "npm publish --access=public",
     "build": "antlr4 -Dlanguage=JavaScript resourcePolicy.g4 -o lib"
