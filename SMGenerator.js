@@ -1,5 +1,6 @@
 var antlr4 = require('antlr4/index');
 var resourcePolicyVisitor = require ('./gen/resourcePolicyVisitor').resourcePolicyVisitor
+var event_def = require('freelog_event_definition').EventDefinitions.JSONDefSync();
 
 class SMGenerator extends resourcePolicyVisitor {
 
@@ -46,18 +47,21 @@ class SMGenerator extends resourcePolicyVisitor {
 
   visitState_definition (ctx) {
     this.current_state = ctx.getChild(0).getText();
-    this.state_machine['states'][this.current_state]={'authorization':[],'transition':[]};
+    this.state_machine['states'][this.current_state]={'authorization':[],'transition':{}};
     super.visitState_definition(ctx);
   }
 
   visitState_transition (ctx) {
     let transition = this.state_machine['states'][this.current_state]['transition']
+
     if (ctx.getChildCount() > 1) {
-      transition.push({[ctx.getChild(2).getText()]:ctx.getChild(4).getText()});
+      this.current_transit_to = ctx.getChild(2).getText();
+      transition[this.current_transit_to] = null;
     }
     else {
-      transition.push({'terminate':null})
+      transition['terminate'] = null;
     }
+
     super.visitState_transition(ctx);
   }
 
@@ -68,6 +72,26 @@ class SMGenerator extends resourcePolicyVisitor {
   visitEvent (ctx) {
     super.visitEvent(ctx);
   }
+
+  callSuper(fName, ctx) {
+    super[fName](ctx);
+  }
 }
+
+var ruleName_to_functionName = (ruleName) => {
+  return 'visit'+ ruleName.charAt(0).toUpperCase() + ruleName.slice(1);
+}
+
+event_def.forEach ((event) => {
+  SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = new Function(
+    'ctx',
+    `
+    this.state_machine['states'][this.current_state]['transition'][this.current_transit_to]
+      = '${event['Code']}';
+    this.callSuper('${ruleName_to_functionName(event['RuleName'])}', ctx);
+    `
+  );
+});
+
 
 exports.SMGenerator = SMGenerator;
