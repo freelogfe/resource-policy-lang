@@ -86,8 +86,25 @@ event_def.forEach ((event) => {
   SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = new Function(
     'ctx',
     `
-    this.state_machine['states'][this.current_state]['transition'][this.current_transit_to]
-      = '${event['Code']}';
+    let translated_event = {};
+
+    translated_event.code  = '${event['Code']}';
+    translated_event.params = {};
+
+    ${event['Params'].split(',').map(item => {
+
+      return `if (Array.isArray(ctx.${item}())) {
+                translated_event.params.${item} = [];
+                ctx.${item}().forEach(item => {
+                  translated_event.params.${item}.push(item.getText());
+                });
+              }
+              else {
+                translated_event.params.${item} = ctx.${item}().getText();
+              }`
+    }).join('\n')};
+
+    this.state_machine['states'][this.current_state]['transition'][this.current_transit_to] = translated_event;
     this.callSuper('${ruleName_to_functionName(event['RuleName'])}', ctx);
     `
   );

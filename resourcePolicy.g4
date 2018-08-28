@@ -107,6 +107,8 @@ license_resource_id : RESOURCE_ID;
 
 users : SELF | NODES | PUBLIC | GROUPUSER | GROUPNODE | INT | ID;
 
+datetime: DATE TIME;
+
 TIMEUNIT : C Y C L E S? | Y E A R S? | W E E K S? | D A Y S? | M O N T H S? ;
 
 FOR: F O R;
@@ -155,7 +157,7 @@ BARB : 'barb' ;
 
 INT:  DIGIT+;
 
-HOUR : TWO_DIGITS ':' TWO_DIGITS (':' TWO_DIGITS)?;
+TIME : TWO_DIGITS ':' TWO_DIGITS (':' TWO_DIGITS)?;
 DATE : FOUR_DIGITS '-' TWO_DIGITS '-' TWO_DIGITS;
 
 TWO_DIGITS : DIGIT DIGIT ;

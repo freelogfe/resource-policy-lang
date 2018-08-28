@@ -55,15 +55,21 @@ cycle_end_event
   ;
 
 time_event
-  : 'at' DATE HOUR
+  : 'at' datetime
   ;
 
 relative_time_event
-  : 'after' INT TIMEUNIT
+  : 'after' elapsed TIMEUNIT
   ;
 
+elapsed: INT ;
+
 transaction_event
-  : 'receiving' (INT|expression_call) 'to' account
+  : 'receiving' transaction_amount 'to' account
+  ;
+
+transaction_amount
+  : (INT|expression_call)
   ;
 
 signing_event
