@@ -14,7 +14,7 @@ class SMGenerator extends resourcePolicyVisitor {
   visitPolicy (ctx) {
     this.state_machine['visited'] = true;
     this.state_machine['contract_accounts'] = [];
-    this.state_machine['custom_expressions'] = [];
+    this.state_machine['custom_expressions'] = {};
     this.state_machine['custom_events'] = [];
     this.state_machine['states'] = {};
     super.visitPolicy(ctx);
@@ -25,7 +25,11 @@ class SMGenerator extends resourcePolicyVisitor {
   }
 
   visitExpression_declaration (ctx) {
-    this.state_machine['custom_expressions'].push(ctx.getText());
+
+    let handle = ctx.expression_handle().getText();
+    let args = Array.isArray(ctx.ID()) ? ctx.ID().map(item => {return item.getText();}) : [ctx.ID().getText()];
+    this.state_machine['custom_expressions'][handle]= {'args' : args, 'body': ctx.expression_definition().getText()};
+
     super.visitExpression_declaration(ctx);
   }
 
@@ -73,8 +77,22 @@ class SMGenerator extends resourcePolicyVisitor {
     super.visitEvent(ctx);
   }
 
+  visitExpression_call (ctx) {
+    super.visitExpression_call(ctx);
+  }
+
+  //jump function for reflected event handling functions
   callSuper(fName, ctx) {
     super[fName](ctx);
+  }
+
+  //for inlining expression definitions
+  expression_inlining_substitution(expression_body, params) {
+    let result = expression_body;
+    Object.keys(params).map( key => {
+      result = result.replace(key, params[key]);
+    });
+    return result;
   }
 }
 
@@ -82,6 +100,10 @@ var ruleName_to_functionName = (ruleName) => {
   return 'visit'+ ruleName.charAt(0).toUpperCase() + ruleName.slice(1);
 }
 
+/*
+Inject generation actions for events dynamically based on definitions in package freelog_event_definition
+main purpose here is to minimize the change in code base in case of adding new event
+*/
 event_def.forEach ((event) => {
   SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = new Function(
     'ctx',
@@ -101,7 +123,8 @@ event_def.forEach ((event) => {
               }
               else {
                 translated_event.params.${item} = ctx.${item}().getText();
-              }`
+              }
+              `
     }).join('\n')};
 
     this.state_machine['states'][this.current_state]['transition'][this.current_transit_to] = translated_event;

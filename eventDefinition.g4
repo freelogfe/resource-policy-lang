@@ -69,7 +69,7 @@ transaction_event
   ;
 
 transaction_amount
-  : (INT|expression_call)
+  : expression_call_or_literal
   ;
 
 signing_event
@@ -87,13 +87,20 @@ settlement_event
   ;
 
 recontract_count_event
-  : expression 'of' 'recontractions' 'reached'
+  : amount 'of' 'recontractions' 'reached'
   ;
 
 present_count_event
-  : expression 'of' 'presentations' 'reached'
+  : amount 'of' 'presentations' 'reached'
   ;
 
 view_count_event
-  : expression 'of' 'views' 'reached'
+  : amount 'of' 'views' 'reached'
+  ;
+
+amount : expression_call_or_literal ;
+
+expression_call_or_literal
+  : expression_call
+  | expression
   ;

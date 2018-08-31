@@ -1,6 +1,7 @@
 for NODES:
     escrow account acct
     exp(a) = 10*a
+    exp2(a,b) = a + (b * 10)
     custom event acceptor.abcd
 
     initial:
