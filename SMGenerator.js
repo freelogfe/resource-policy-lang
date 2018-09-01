@@ -114,7 +114,6 @@ event_def.forEach ((event) => {
     translated_event.params = {};
 
     ${event['Params'].split(',').map(item => {
-
       return `if (Array.isArray(ctx.${item}())) {
                 translated_event.params.${item} = [];
                 ctx.${item}().forEach(item => {
@@ -122,6 +121,7 @@ event_def.forEach ((event) => {
                 });
               }
               else {
+                console.log(ctx.${item}().expression_call_or_literal === undefined);
                 translated_event.params.${item} = ctx.${item}().getText();
               }
               `
