@@ -18,3 +18,8 @@ var gen = new SMGenerator(1);
 gen.visit(tree);
 
 console.log(JSON.stringify(gen.state_machine));
+
+fs.writeFile('temp.json', JSON.stringify(gen.state_machine), (err) => {
+  if (err) throw err;
+  console.log('The file has been saved!');
+});

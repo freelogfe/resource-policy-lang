@@ -22,4 +22,5 @@ package-lock.json
 *.tokens
 *.java
 *.class
+temp.json
 resourcePolicy*.js

@@ -81,6 +81,24 @@ class SMGenerator extends resourcePolicyVisitor {
     super.visitExpression_call(ctx);
   }
 
+  //fill out event args in case of expression or a call to expression
+  get_call_frame (ctx) {
+    let call_frame = {};
+    if (ctx.expression()) {
+      call_frame.type = 'literal';
+      call_frame.literal = ctx.expression().getText();
+    }
+    else if (ctx.expression_call()) {
+      call_frame.type = 'invocation';
+      call_frame.handle = ctx.expression_call().expression_handle().getText();
+      call_frame.args = ctx.expression_call().expression_call_argument().map(arg => { return arg.getText(); });
+    }
+    else {
+      throw('expression syntax error');
+    }
+    return call_frame;
+  }
+
   //jump function for reflected event handling functions
   callSuper(fName, ctx) {
     super[fName](ctx);
@@ -121,9 +139,13 @@ event_def.forEach ((event) => {
                 });
               }
               else {
-                console.log(ctx.${item}().expression_call_or_literal === undefined);
+                if (typeof(ctx.${item}().expression_call_or_literal) === 'function') {
+                  let call_frame = this.get_call_frame(ctx.${item}().expression_call_or_literal());
+                  translated_event.params.${item} = call_frame;
+                }
                 translated_event.params.${item} = ctx.${item}().getText();
               }
+              this.current_param = null;
               `
     }).join('\n')};
 

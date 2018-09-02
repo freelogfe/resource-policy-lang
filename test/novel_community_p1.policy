@@ -7,7 +7,7 @@ for NODES:
     initial:
         proceed to signed on accepting agreement 0x1234
     signed:
-        proceed to auth on acct exceed 10 feather
+        proceed to auth on acct exceed 5+5 feather
     auth:
         presentable
         active
