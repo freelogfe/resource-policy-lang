@@ -4,7 +4,7 @@
   "description": "policy language compiler for freelog",
   "main": "index.js",
   "dependencies": {
-    "freelog_event_definition": "0.0.8"
+    "freelog_event_definition": "0.0.9"
   },
   "scripts": {
     "publish": "npm publish --access=public",

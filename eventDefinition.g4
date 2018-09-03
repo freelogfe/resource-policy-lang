@@ -32,7 +32,7 @@ contract_account_event
   ;
 
 escrow_exceed_amount
-  : contract_account_name 'exceed' expression currency_unit
+  : contract_account_name 'exceed' amount currency_unit
   ;
 
 escrow_confiscated
@@ -65,11 +65,7 @@ relative_time_event
 elapsed: INT ;
 
 transaction_event
-  : 'receiving' transaction_amount 'to' account
-  ;
-
-transaction_amount
-  : expression_call_or_literal
+  : 'receiving' amount 'to' account
   ;
 
 signing_event

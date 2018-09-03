@@ -143,7 +143,9 @@ event_def.forEach ((event) => {
                   let call_frame = this.get_call_frame(ctx.${item}().expression_call_or_literal());
                   translated_event.params.${item} = call_frame;
                 }
-                translated_event.params.${item} = ctx.${item}().getText();
+                else {
+                  translated_event.params.${item} = ctx.${item}().getText();
+                }
               }
               this.current_param = null;
               `
