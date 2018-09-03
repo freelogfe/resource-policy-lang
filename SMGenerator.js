@@ -7,12 +7,12 @@ class SMGenerator extends resourcePolicyVisitor {
     constructor(contract_number) {
         super();
         this.contract_number = contract_number;
-        this.state_machine = {'contract_number': contract_number};
+        this.state_machine = {};
         this.current_state = null;
     }
 
     visitPolicy(ctx) {
-        this.state_machine['visited'] = true;
+        //this.state_machine['visited'] = true;
         this.state_machine['declarations'] = {}
         this.state_machine['states'] = {};
         super.visitPolicy(ctx);
@@ -131,6 +131,11 @@ var ruleName_to_functionName = (ruleName) => {
     return 'visit' + ruleName.charAt(0).toUpperCase() + ruleName.slice(1);
 }
 
+
+var toCamelCase = (paramName) => {
+    return paramName.replace(/_(\w)/g, (all, letter) => letter.toUpperCase())
+}
+
 /*
 Inject generation actions for events dynamically based on definitions in package freelog_event_definition
 main purpose here is to minimize the change in code base in case of adding new event
@@ -145,19 +150,20 @@ event_def.forEach((event) => {
     translated_event.params = {};
 
     ${event['Params'].split(',').map(item => {
+            let camelName = toCamelCase(item)
             return `if (Array.isArray(ctx.${item}())) {
-                translated_event.params.${item} = [];
+                translated_event.params.${camelName} = [];
                 ctx.${item}().forEach(item => {
-                  translated_event.params.${item}.push(item.getText());
+                  translated_event.params.${camelName}.push(item.getText());
                 });
               }
               else {
                 if (typeof(ctx.${item}().expression_call_or_literal) === 'function') {
                   let call_frame = this.get_call_frame(ctx.${item}().expression_call_or_literal());
-                  translated_event.params.${item} = call_frame;
+                  translated_event.params.${camelName} = call_frame;
                 }
                 else {
-                  translated_event.params.${item} = ctx.${item}().getText();
+                  translated_event.params.${camelName} = ctx.${item}().getText();
                 }
               }
               this.current_param = null;
