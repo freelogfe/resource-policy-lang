@@ -8,7 +8,7 @@
   },
   "scripts": {
     "publish": "npm publish --access=public",
-    "build": "antlr4 -Dlanguage=JavaScript resourcePolicy.g4 -o lib"
+    "build": "java -Xmx500M -cp build/antlr-4.7.1-complete.jar org.antlr.v4.Tool -Dlanguage=JavaScript -visitor resourcePolicy.g4 -o gen"
   },
   "repository": {
     "type": "git",

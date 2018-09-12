@@ -17,7 +17,7 @@ $ npm i @freelog/resource-policy-lang -S
 
   to JavaScript target
   ```
-  antlr4 -Dlanguage=JavaScript -visitor resourcePolicy.g4
+  antlr4 -Dlanguage=JavaScript -visitor resourcePolicy.g4 -o gen
   ```
 
   to java target, for visualize AST and other purpose
