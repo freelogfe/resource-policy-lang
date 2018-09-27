@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>highlight policy</title>
+  <style>
+    .poliycy-beauty-box{
+      font-size: 14px; line-height: 1.6;
+      color: #999;
+    }
+
+    .pbeauty-audience{ }
+    .pbeauty-declaration, .pbeauty-state, .pbeauty-s-row:not(:first-child){
+      padding-left: 3em;
+    }
+    .pbeauty-state.active{
+      background: #E3F0FF;
+      border: 1px solid #B3D7FF; border-radius: 20px;
+      color: #222;
+    }
+    .pbeauty-state.active .pbeauty-s-transition{
+      color: #EE6723;
+    }
+    .pbeauty-state.active .pbeauty-s-event{
+      display: inline-block; cursor: pointer; color: #3e94f3;
+    }
+
+  </style>
+</head>
+<body>
+<div class="poliycy-beauty-box">
+  <div class="pbeauty-audience">for NODES:</div>
+  <div class="pbeauty-declaration pbeauty-d-contract-account">escrow account <span
+          class="peauty-d-accountname">acct</span></div>
+  <div class="pbeauty-declaration pbeauty-d-contract-expression">exp(a) = 10*a</div>
+  <div class="pbeauty-declaration pbeauty-d-contract-expression">exp2(a,b) = a + (b * 10)</div>
+  <div class="pbeauty-declaration pbeauty-d-custom-event">custom event <span class="peauty-d-custom-eventname">acceptor.abcd</span>
+  </div>
+  <div class="pbeauty-state pbeauty-state-initial active">
+    <div class="pbeauty-s-row"><span class="pbeauty-s-statename">initial</span>:</div>
+    <div class="pbeauty-s-row"> proceed to <span class="pbeauty-s-transition">signed</span> on <span
+            class="pbeauty-s-event bpeauty-s-signing-event" @click="signingEvent">accepting agreement 0x1234</span>
+    </div>
+  </div>
+  <div class="pbeauty-state pbeauty-state-signed">
+    <div class="pbeauty-s-row"><span class="pbeauty-s-statename">signed</span>:</div>
+    <div class="pbeauty-s-row"> proceed to <span class="pbeauty-s-transition">auth</span> on <span
+            class="pbeauty-s-event bpeauty-s-escrow-exceed-amount"
+            @click="escrowExceedAmount">acct exceed 5+5 feather</span></div>
+  </div>
+  <div class="pbeauty-state pbeauty-state-auth">
+    <div class="pbeauty-s-row"><span class="pbeauty-s-statename">auth</span>:</div>
+    <div class="pbeauty-s-row"><span class="pbeauty-s-authorization">presentable</span></div>
+    <div class="pbeauty-s-row"><span class="pbeauty-s-authorization">active</span></div>
+    <div class="pbeauty-s-row"> proceed to <span class="pbeauty-s-transition">settlement</span> on <span
+            class="pbeauty-s-event bpeauty-s-cycle-end-event" @click="cycleEndEvent">end of day</span></div>
+  </div>
+  <div class="pbeauty-state pbeauty-state-settlement">
+    <div class="pbeauty-s-row"><span class="pbeauty-s-statename">settlement</span>:</div>
+    <div class="pbeauty-s-row"> proceed to <span class="pbeauty-s-transition">auth</span> on <span
+            class="pbeauty-s-event bpeauty-s-transaction-event" @click="transactionEvent">receiving exp(presented_last_cycle) to $abcd1234</span>
+    </div>
+    <div class="pbeauty-s-row"> proceed to <span class="pbeauty-s-transition">refund</span> on acceptor.abcd</div>
+    <div class="pbeauty-s-row"> proceed to <span class="pbeauty-s-transition">confiscation</span> on <span
+            class="pbeauty-s-event bpeauty-s-cycle-end-event" @click="cycleEndEvent">end of day</span></div>
+  </div>
+  <div class="pbeauty-state pbeauty-state-confiscation">
+    <div class="pbeauty-s-row"><span class="pbeauty-s-statename">confiscation</span>:</div>
+    <div class="pbeauty-s-row"><span class="pbeauty-s-authorization">acct.confiscable</span></div>
+    <div class="pbeauty-s-row"> proceed to <span class="pbeauty-s-transition">finish</span> on <span
+            class="pbeauty-s-event bpeauty-s-escrow-confiscated" @click="escrowConfiscated">acct.confiscated</span>
+    </div>
+  </div>
+  <div class="pbeauty-state pbeauty-state-refund">
+    <div class="pbeauty-s-row"><span class="pbeauty-s-statename">refund</span>:</div>
+    <div class="pbeauty-s-row"><span class="pbeauty-s-authorization">acct.refundable</span></div>
+    <div class="pbeauty-s-row"> proceed to <span class="pbeauty-s-transition">finish</span> on <span
+            class="pbeauty-s-event bpeauty-s-escrow-refunded" @click="escrowRefunded">acct.refunded</span></div>
+  </div>
+  <div class="pbeauty-state pbeauty-state-finish">
+    <div class="pbeauty-s-row"><span class="pbeauty-s-statename">finish</span>:</div>
+    <div class="pbeauty-s-row"> terminate</div>
+  </div>
+</div>
+</body>
+</html>

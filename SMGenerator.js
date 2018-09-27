@@ -1,7 +1,6 @@
 var antlr4 = require('antlr4/index');
 var resourcePolicyVisitor = require('./gen/resourcePolicyVisitor').resourcePolicyVisitor
 var event_def = require('freelog_event_definition').EventDefinitions.JSONDefSync();
-
 class SMGenerator extends resourcePolicyVisitor {
 
     constructor(contract_number) {
@@ -136,45 +135,79 @@ var toCamelCase = (paramName) => {
     return paramName.replace(/_(\w)/g, (all, letter) => letter.toUpperCase())
 }
 
+function wrap(event) {
+  return function (ctx) {
+    let translated_event = {};
+
+    translated_event.code = event.Code;
+    translated_event.params = {};
+
+    event.Params.split(',').forEach(param => {
+      let camelName = toCamelCase(param)
+      if (Array.isArray(ctx[param]())) {
+        translated_event.params[camelName] = [];
+        ctx[param]().forEach(param => {
+          translated_event.params[camelName].push(param.getText());
+        });
+      }
+      else {
+        if (typeof(ctx[param]().expression_call_or_literal) === 'function') {
+          let call_frame = this.get_call_frame(ctx[param]().expression_call_or_literal());
+          translated_event.params[camelName] = call_frame;
+        }
+        else {
+          translated_event.params[camelName] = ctx[param]().getText();
+        }
+      }
+      this.current_param = null;
+    })
+
+    this.state_machine['states'][this.current_state]['transition'][this.current_transit_to] = translated_event;
+    this.callSuper(ruleName_to_functionName(event['RuleName'], ctx);
+  }
+}
+
 /*
 Inject generation actions for events dynamically based on definitions in package freelog_event_definition
 main purpose here is to minimize the change in code base in case of adding new event
 */
 event_def.forEach((event) => {
-    SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = new Function(
-        'ctx',
-        `
-    let translated_event = {};
-
-    translated_event.code  = '${event['Code']}';
-    translated_event.params = {};
-
-    ${event['Params'].split(',').map(item => {
-            let camelName = toCamelCase(item)
-            return `if (Array.isArray(ctx.${item}())) {
-                translated_event.params.${camelName} = [];
-                ctx.${item}().forEach(item => {
-                  translated_event.params.${camelName}.push(item.getText());
-                });
-              }
-              else {
-                if (typeof(ctx.${item}().expression_call_or_literal) === 'function') {
-                  let call_frame = this.get_call_frame(ctx.${item}().expression_call_or_literal());
-                  translated_event.params.${camelName} = call_frame;
-                }
-                else {
-                  translated_event.params.${camelName} = ctx.${item}().getText();
-                }
-              }
-              this.current_param = null;
-              `
-        }).join('\n')};
-
-    this.state_machine['states'][this.current_state]['transition'][this.current_transit_to] = translated_event;
-    this.callSuper('${ruleName_to_functionName(event['RuleName'])}', ctx);
-    `
-    );
+  SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = wrap(event)
+  // SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = new Function(
+  //       'ctx',
+  //       `
+  //   let translated_event = {};
+  //
+  //   translated_event.code  = '${event['Code']}';
+  //   translated_event.params = {};
+  //
+  //   ${event['Params'].split(',').map(item => {
+  //           let camelName = toCamelCase(item)
+  //           return `if (Array.isArray(ctx.${item}())) {
+  //               translated_event.params.${camelName} = [];
+  //               ctx.${item}().forEach(item => {
+  //                 translated_event.params.${camelName}.push(item.getText());
+  //               });
+  //             }
+  //             else {
+  //               if (typeof(ctx.${item}().expression_call_or_literal) === 'function') {
+  //                 let call_frame = this.get_call_frame(ctx.${item}().expression_call_or_literal());
+  //                 translated_event.params.${camelName} = call_frame;
+  //               }
+  //               else {
+  //                 translated_event.params.${camelName} = ctx.${item}().getText();
+  //               }
+  //             }
+  //             this.current_param = null;
+  //             `
+  //       }).join('\n')};
+  //
+  //   this.state_machine['states'][this.current_state]['transition'][this.current_transit_to] = translated_event;
+  //   this.callSuper('${ruleName_to_functionName(event['RuleName'])}', ctx);
+  //   `
+  //   );
 });
+
 
 
 exports.SMGenerator = SMGenerator;
