@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "camelcase": "^5.0.0",
-    "freelog_event_definition": "0.0.9"
+    "freelog_event_definition": "0.0.10"
   },
   "scripts": {
     "publish": "npm publish --access=public",
