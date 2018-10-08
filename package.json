@@ -1,9 +1,10 @@
 {
   "name": "@freelog/resource-policy-lang",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "policy language compiler for freelog",
   "main": "index.js",
   "dependencies": {
+    "antlr4": "^4.7.1",
     "camelcase": "^5.0.0",
     "freelog_event_definition": "0.0.10"
   },
