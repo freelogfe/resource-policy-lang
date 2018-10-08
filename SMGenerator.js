@@ -1,21 +1,26 @@
 var antlr4 = require('antlr4/index');
 var resourcePolicyVisitor = require('./gen/resourcePolicyVisitor').resourcePolicyVisitor
 var event_def = require('freelog_event_definition').EventDefinitions.JSONDefSync();
+
 class SMGenerator extends resourcePolicyVisitor {
 
-    constructor(contract_number) {
+    constructor() {
         super();
-        this.contract_number = contract_number;
+        this.error = null
         this.state_machine = {};
         this.current_state = null;
     }
 
     visitPolicy(ctx) {
-        //this.state_machine['visited'] = true;
-        this.state_machine['declarations'] = {}
-        this.state_machine['states'] = {};
-        this.state_machine['source'] = ctx.start.source[0]._input.strdata.slice(ctx.start.start, ctx.stop.stop + 1)
-        super.visitPolicy(ctx);
+        try {
+            //this.state_machine['visited'] = true;
+            this.state_machine['declarations'] = {}
+            this.state_machine['states'] = {};
+            this.state_machine['source'] = ctx.start.source[0]._input.strdata.slice(ctx.start.start, ctx.stop.stop + 1)
+            super.visitPolicy(ctx);
+        } catch (e) {
+            this.error = e
+        }
     }
 
     visitDeclaration_statements(ctx) {
@@ -173,42 +178,41 @@ Inject generation actions for events dynamically based on definitions in package
 main purpose here is to minimize the change in code base in case of adding new event
 */
 event_def.forEach((event) => {
-  SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = wrap(event)
-  // SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = new Function(
-  //       'ctx',
-  //       `
-  //   let translated_event = {};
-  //
-  //   translated_event.code  = '${event['Code']}';
-  //   translated_event.params = {};
-  //
-  //   ${event['Params'].split(',').map(item => {
-  //           let camelName = toCamelCase(item)
-  //           return `if (Array.isArray(ctx.${item}())) {
-  //               translated_event.params.${camelName} = [];
-  //               ctx.${item}().forEach(item => {
-  //                 translated_event.params.${camelName}.push(item.getText());
-  //               });
-  //             }
-  //             else {
-  //               if (typeof(ctx.${item}().expression_call_or_literal) === 'function') {
-  //                 let call_frame = this.get_call_frame(ctx.${item}().expression_call_or_literal());
-  //                 translated_event.params.${camelName} = call_frame;
-  //               }
-  //               else {
-  //                 translated_event.params.${camelName} = ctx.${item}().getText();
-  //               }
-  //             }
-  //             this.current_param = null;
-  //             `
-  //       }).join('\n')};
-  //
-  //   this.state_machine['states'][this.current_state]['transition'][this.current_transit_to] = translated_event;
-  //   this.callSuper('${ruleName_to_functionName(event['RuleName'])}', ctx);
-  //   `
-  //   );
+    SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = wrap(event)
+    // SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = new Function(
+    //       'ctx',
+    //       `
+    //   let translated_event = {};
+    //
+    //   translated_event.code  = '${event['Code']}';
+    //   translated_event.params = {};
+    //
+    //   ${event['Params'].split(',').map(item => {
+    //           let camelName = toCamelCase(item)
+    //           return `if (Array.isArray(ctx.${item}())) {
+    //               translated_event.params.${camelName} = [];
+    //               ctx.${item}().forEach(item => {
+    //                 translated_event.params.${camelName}.push(item.getText());
+    //               });
+    //             }
+    //             else {
+    //               if (typeof(ctx.${item}().expression_call_or_literal) === 'function') {
+    //                 let call_frame = this.get_call_frame(ctx.${item}().expression_call_or_literal());
+    //                 translated_event.params.${camelName} = call_frame;
+    //               }
+    //               else {
+    //                 translated_event.params.${camelName} = ctx.${item}().getText();
+    //               }
+    //             }
+    //             this.current_param = null;
+    //             `
+    //       }).join('\n')};
+    //
+    //   this.state_machine['states'][this.current_state]['transition'][this.current_transit_to] = translated_event;
+    //   this.callSuper('${ruleName_to_functionName(event['RuleName'])}', ctx);
+    //   `
+    //   );
 });
-
 
 
 exports.SMGenerator = SMGenerator;
