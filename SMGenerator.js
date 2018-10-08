@@ -14,6 +14,7 @@ class SMGenerator extends resourcePolicyVisitor {
         //this.state_machine['visited'] = true;
         this.state_machine['declarations'] = {}
         this.state_machine['states'] = {};
+        this.state_machine['source'] = ctx.start.source[0]._input.strdata.slice(ctx.start.start, ctx.stop.stop + 1)
         super.visitPolicy(ctx);
     }
 
@@ -136,35 +137,35 @@ var toCamelCase = (paramName) => {
 }
 
 function wrap(event) {
-  return function (ctx) {
-    let translated_event = {};
+    return function (ctx) {
+        let translated_event = {};
 
-    translated_event.code = event.Code;
-    translated_event.params = {};
+        translated_event.code = event.Code;
+        translated_event.params = {};
 
-    event.Params.split(',').forEach(param => {
-      let camelName = toCamelCase(param)
-      if (Array.isArray(ctx[param]())) {
-        translated_event.params[camelName] = [];
-        ctx[param]().forEach(param => {
-          translated_event.params[camelName].push(param.getText());
-        });
-      }
-      else {
-        if (typeof(ctx[param]().expression_call_or_literal) === 'function') {
-          let call_frame = this.get_call_frame(ctx[param]().expression_call_or_literal());
-          translated_event.params[camelName] = call_frame;
-        }
-        else {
-          translated_event.params[camelName] = ctx[param]().getText();
-        }
-      }
-      this.current_param = null;
-    })
+        event.Params.split(',').forEach(param => {
+            let camelName = toCamelCase(param)
+            if (Array.isArray(ctx[param]())) {
+                translated_event.params[camelName] = [];
+                ctx[param]().forEach(param => {
+                    translated_event.params[camelName].push(param.getText());
+                });
+            }
+            else {
+                if (typeof(ctx[param]().expression_call_or_literal) === 'function') {
+                    let call_frame = this.get_call_frame(ctx[param]().expression_call_or_literal());
+                    translated_event.params[camelName] = call_frame;
+                }
+                else {
+                    translated_event.params[camelName] = ctx[param]().getText();
+                }
+            }
+            this.current_param = null;
+        })
 
-    this.state_machine['states'][this.current_state]['transition'][this.current_transit_to] = translated_event;
-    this.callSuper(ruleName_to_functionName(event['RuleName'], ctx);
-  }
+        this.state_machine['states'][this.current_state]['transition'][this.current_transit_to] = translated_event;
+        this.callSuper(ruleName_to_functionName(event['RuleName']), ctx);
+    }
 }
 
 /*
