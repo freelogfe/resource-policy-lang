@@ -1,6 +1,7 @@
 
 var fs = require('fs');
-var input = fs.readFileSync('./novel_community_p1.policy','utf-8');
+var path = require('path')
+var input = fs.readFileSync('./fixtures/novel_community_p1.policy','utf-8');
 var highlightPolicy = require('../lib/presentablePolicyHighlight').highlightPolicy
 
 fs.writeFile('h2.html', highlightPolicy(input), (err) => {
