@@ -18,7 +18,6 @@ module.exports.compile = function (policyText) {
     parser.buildParseTrees = true;
     parser.addErrorListener(policyErrorListener)
 
-
     const tree = parser.policy();
     const gen = new SMGenerator(errors);
     gen.visit(tree);

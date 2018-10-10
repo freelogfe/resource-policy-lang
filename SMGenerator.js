@@ -9,6 +9,7 @@ class SMGenerator extends resourcePolicyVisitor {
         this.errors = errors
         this.state_machine = {};
         this.current_state = null;
+        this._userTypeMap = new Map([['GROUP', []], ['INDIVIDUAL', []], ['DOMAIN', []]])
     }
 
     visitPolicy(ctx) {
@@ -17,6 +18,44 @@ class SMGenerator extends resourcePolicyVisitor {
         this.state_machine['states'] = {};
         this.state_machine['source'] = ctx.start.source[0]._input.strdata.slice(ctx.start.start, ctx.stop.stop + 1)
         super.visitPolicy(ctx);
+    }
+
+    visitUsers(ctx) {
+
+        const userObject = ctx.getText().toUpperCase()
+        switch (userObject) {
+            case 'NODES':
+            case 'PUBLIC':
+            case 'REGISTERED_USERS':
+                this._userTypeMap.get('GROUP').push(userObject)
+                return
+            case 'SELF':
+                this._userTypeMap.get('INDIVIDUAL').push(userObject)
+                return
+        }
+
+        if (ctx.GROUPUSER()) {
+            this._userTypeMap.get('GROUP').push(ctx.GROUPUSER().getText())
+        }
+        else if (ctx.GROUPNODE()) {
+            this._userTypeMap.get('GROUP').push(ctx.GROUPNODE().getText())
+        }
+        else if (ctx.INT()) {
+            this._userTypeMap.get('INDIVIDUAL').push(userObject)
+        }
+        else if (/^[a-zA-Z0-9-]{4,24}.freelog.com$/i.test(userObject)) {
+            this._userTypeMap.get('DOMAIN').push(userObject)
+        }
+
+        super.visitUsers(ctx)
+    }
+
+    get users() {
+        const users = []
+        for (var [key, value] of this._userTypeMap.entries()) {
+            users.push({userType: key, users: value})
+        }
+        return users
     }
 
     visitDeclaration_statements(ctx) {
