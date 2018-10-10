@@ -4,23 +4,19 @@ var event_def = require('freelog_event_definition').EventDefinitions.JSONDefSync
 
 class SMGenerator extends resourcePolicyVisitor {
 
-    constructor() {
+    constructor(errors) {
         super();
-        this.error = null
+        this.errors = errors
         this.state_machine = {};
         this.current_state = null;
     }
 
     visitPolicy(ctx) {
-        try {
-            //this.state_machine['visited'] = true;
-            this.state_machine['declarations'] = {}
-            this.state_machine['states'] = {};
-            this.state_machine['source'] = ctx.start.source[0]._input.strdata.slice(ctx.start.start, ctx.stop.stop + 1)
-            super.visitPolicy(ctx);
-        } catch (e) {
-            this.error = e
-        }
+        //this.state_machine['visited'] = true;
+        this.state_machine['declarations'] = {}
+        this.state_machine['states'] = {};
+        this.state_machine['source'] = ctx.start.source[0]._input.strdata.slice(ctx.start.start, ctx.stop.stop + 1)
+        super.visitPolicy(ctx);
     }
 
     visitDeclaration_statements(ctx) {
