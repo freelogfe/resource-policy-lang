@@ -1,20 +1,61 @@
 var antlr4 = require('antlr4/index');
 var resourcePolicyVisitor = require('./gen/resourcePolicyVisitor').resourcePolicyVisitor
 var event_def = require('freelog_event_definition').EventDefinitions.JSONDefSync();
+
 class SMGenerator extends resourcePolicyVisitor {
 
-    constructor(contract_number) {
+    constructor(errors) {
         super();
-        this.contract_number = contract_number;
+        this.errors = errors
         this.state_machine = {};
         this.current_state = null;
+        this._userTypeMap = new Map([['GROUP', []], ['INDIVIDUAL', []], ['DOMAIN', []]])
     }
 
     visitPolicy(ctx) {
         //this.state_machine['visited'] = true;
         this.state_machine['declarations'] = {}
         this.state_machine['states'] = {};
+        this.state_machine['source'] = ctx.start.source[0]._input.strdata.slice(ctx.start.start, ctx.stop.stop + 1)
         super.visitPolicy(ctx);
+    }
+
+    visitUsers(ctx) {
+
+        const userObject = ctx.getText().toUpperCase()
+        switch (userObject) {
+            case 'NODES':
+            case 'PUBLIC':
+            case 'REGISTERED_USERS':
+                this._userTypeMap.get('GROUP').push(userObject)
+                return
+            case 'SELF':
+                this._userTypeMap.get('INDIVIDUAL').push(userObject)
+                return
+        }
+
+        if (ctx.GROUPUSER()) {
+            this._userTypeMap.get('GROUP').push(ctx.GROUPUSER().getText())
+        }
+        else if (ctx.GROUPNODE()) {
+            this._userTypeMap.get('GROUP').push(ctx.GROUPNODE().getText())
+        }
+        else if (ctx.INT()) {
+            this._userTypeMap.get('INDIVIDUAL').push(userObject)
+        }
+        else if (/^[a-zA-Z0-9-]{4,24}.freelog.com$/i.test(userObject)) {
+            this._userTypeMap.get('DOMAIN').push(userObject)
+        }
+
+        super.visitUsers(ctx)
+    }
+
+    get users() {
+        const users = []
+        for (var [key, value] of this._userTypeMap.entries()) {
+            value.length && users.push({userType: key, users: value})
+        }
+        return users
     }
 
     visitDeclaration_statements(ctx) {
@@ -136,35 +177,35 @@ var toCamelCase = (paramName) => {
 }
 
 function wrap(event) {
-  return function (ctx) {
-    let translated_event = {};
+    return function (ctx) {
+        let translated_event = {};
 
-    translated_event.code = event.Code;
-    translated_event.params = {};
+        translated_event.code = event.Code;
+        translated_event.params = {};
 
-    event.Params.split(',').forEach(param => {
-      let camelName = toCamelCase(param)
-      if (Array.isArray(ctx[param]())) {
-        translated_event.params[camelName] = [];
-        ctx[param]().forEach(param => {
-          translated_event.params[camelName].push(param.getText());
-        });
-      }
-      else {
-        if (typeof(ctx[param]().expression_call_or_literal) === 'function') {
-          let call_frame = this.get_call_frame(ctx[param]().expression_call_or_literal());
-          translated_event.params[camelName] = call_frame;
-        }
-        else {
-          translated_event.params[camelName] = ctx[param]().getText();
-        }
-      }
-      this.current_param = null;
-    })
+        event.Params.split(',').forEach(param => {
+            let camelName = toCamelCase(param)
+            if (Array.isArray(ctx[param]())) {
+                translated_event.params[camelName] = [];
+                ctx[param]().forEach(param => {
+                    translated_event.params[camelName].push(param.getText());
+                });
+            }
+            else {
+                if (typeof(ctx[param]().expression_call_or_literal) === 'function') {
+                    let call_frame = this.get_call_frame(ctx[param]().expression_call_or_literal());
+                    translated_event.params[camelName] = call_frame;
+                }
+                else {
+                    translated_event.params[camelName] = ctx[param]().getText();
+                }
+            }
+            this.current_param = null;
+        })
 
-    this.state_machine['states'][this.current_state]['transition'][this.current_transit_to] = translated_event;
-    this.callSuper(ruleName_to_functionName(event['RuleName'], ctx);
-  }
+        this.state_machine['states'][this.current_state]['transition'][this.current_transit_to] = translated_event;
+        this.callSuper(ruleName_to_functionName(event['RuleName']), ctx);
+    }
 }
 
 /*
@@ -172,42 +213,41 @@ Inject generation actions for events dynamically based on definitions in package
 main purpose here is to minimize the change in code base in case of adding new event
 */
 event_def.forEach((event) => {
-  SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = wrap(event)
-  // SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = new Function(
-  //       'ctx',
-  //       `
-  //   let translated_event = {};
-  //
-  //   translated_event.code  = '${event['Code']}';
-  //   translated_event.params = {};
-  //
-  //   ${event['Params'].split(',').map(item => {
-  //           let camelName = toCamelCase(item)
-  //           return `if (Array.isArray(ctx.${item}())) {
-  //               translated_event.params.${camelName} = [];
-  //               ctx.${item}().forEach(item => {
-  //                 translated_event.params.${camelName}.push(item.getText());
-  //               });
-  //             }
-  //             else {
-  //               if (typeof(ctx.${item}().expression_call_or_literal) === 'function') {
-  //                 let call_frame = this.get_call_frame(ctx.${item}().expression_call_or_literal());
-  //                 translated_event.params.${camelName} = call_frame;
-  //               }
-  //               else {
-  //                 translated_event.params.${camelName} = ctx.${item}().getText();
-  //               }
-  //             }
-  //             this.current_param = null;
-  //             `
-  //       }).join('\n')};
-  //
-  //   this.state_machine['states'][this.current_state]['transition'][this.current_transit_to] = translated_event;
-  //   this.callSuper('${ruleName_to_functionName(event['RuleName'])}', ctx);
-  //   `
-  //   );
+    SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = wrap(event)
+    // SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = new Function(
+    //       'ctx',
+    //       `
+    //   let translated_event = {};
+    //
+    //   translated_event.code  = '${event['Code']}';
+    //   translated_event.params = {};
+    //
+    //   ${event['Params'].split(',').map(item => {
+    //           let camelName = toCamelCase(item)
+    //           return `if (Array.isArray(ctx.${item}())) {
+    //               translated_event.params.${camelName} = [];
+    //               ctx.${item}().forEach(item => {
+    //                 translated_event.params.${camelName}.push(item.getText());
+    //               });
+    //             }
+    //             else {
+    //               if (typeof(ctx.${item}().expression_call_or_literal) === 'function') {
+    //                 let call_frame = this.get_call_frame(ctx.${item}().expression_call_or_literal());
+    //                 translated_event.params.${camelName} = call_frame;
+    //               }
+    //               else {
+    //                 translated_event.params.${camelName} = ctx.${item}().getText();
+    //               }
+    //             }
+    //             this.current_param = null;
+    //             `
+    //       }).join('\n')};
+    //
+    //   this.state_machine['states'][this.current_state]['transition'][this.current_transit_to] = translated_event;
+    //   this.callSuper('${ruleName_to_functionName(event['RuleName'])}', ctx);
+    //   `
+    //   );
 });
-
 
 
 exports.SMGenerator = SMGenerator;
