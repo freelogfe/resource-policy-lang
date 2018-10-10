@@ -53,7 +53,7 @@ class SMGenerator extends resourcePolicyVisitor {
     get users() {
         const users = []
         for (var [key, value] of this._userTypeMap.entries()) {
-            users.push({userType: key, users: value})
+            value.length && users.push({userType: key, users: value})
         }
         return users
     }
