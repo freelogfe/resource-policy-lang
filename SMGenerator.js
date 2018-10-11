@@ -1,4 +1,4 @@
-var antlr4 = require('antlr4/index');
+
 var resourcePolicyVisitor = require('./gen/resourcePolicyVisitor').resourcePolicyVisitor
 var event_def = require('freelog_event_definition').EventDefinitions.JSONDefSync();
 
@@ -7,8 +7,9 @@ class SMGenerator extends resourcePolicyVisitor {
     constructor(errors) {
         super();
         this.errors = errors
-        this.state_machine = {};
-        this.current_state = null;
+        this.state_machine = {}
+        this.policy_text = null
+        this.current_state = null
         this._userTypeMap = new Map([['GROUP', []], ['INDIVIDUAL', []], ['DOMAIN', []]])
     }
 
@@ -16,7 +17,7 @@ class SMGenerator extends resourcePolicyVisitor {
         //this.state_machine['visited'] = true;
         this.state_machine['declarations'] = {}
         this.state_machine['states'] = {};
-        this.state_machine['source'] = ctx.start.source[0]._input.strdata.slice(ctx.start.start, ctx.stop.stop + 1)
+        this.policy_text = ctx.start.source[0]._input.strdata.slice(ctx.start.start, ctx.stop.stop + 1)
         super.visitPolicy(ctx);
     }
 
@@ -44,18 +45,18 @@ class SMGenerator extends resourcePolicyVisitor {
             this._userTypeMap.get('INDIVIDUAL').push(userObject)
         }
         else if (/^[a-zA-Z0-9-]{4,24}.freelog.com$/i.test(userObject)) {
-            this._userTypeMap.get('DOMAIN').push(userObject)
+            this._userTypeMap.get('DOMAIN').push(ctx.getText())
         }
 
         super.visitUsers(ctx)
     }
 
-    get users() {
-        const users = []
+    get authorizedObjects() {
+        const authorizedObjects = []
         for (var [key, value] of this._userTypeMap.entries()) {
-            value.length && users.push({userType: key, users: value})
+            value.length && authorizedObjects.push({userType: key, users: value})
         }
-        return users
+        return authorizedObjects
     }
 
     visitDeclaration_statements(ctx) {
