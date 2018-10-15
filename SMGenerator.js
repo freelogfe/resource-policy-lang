@@ -1,6 +1,6 @@
 
 var resourcePolicyVisitor = require('./gen/resourcePolicyVisitor').resourcePolicyVisitor
-var event_def = require('freelog_event_definition').EventDefinitions.JSONDefSync();
+var event_def = require('freelog_event_definition/lib/event_definition')
 
 class SMGenerator extends resourcePolicyVisitor {
 
