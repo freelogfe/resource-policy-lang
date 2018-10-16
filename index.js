@@ -5,6 +5,8 @@ const SMGenerator = require('./SMGenerator').SMGenerator
 const resourcePolicyLexer = require('./gen/resourcePolicyLexer')
 const resourcePolicyParser = require('./gen/resourcePolicyParser')
 const PolicyErrorListener = require('./lib/policyErrorListener')
+const highlightPolicy = require('./lib/presentablePolicyHighlight').highlightPolicy
+const beautifyPolicy = require('./lib/policyBeautify').beautifyPolicy
 
 module.exports.compile = function (policyText) {
 
@@ -24,3 +26,6 @@ module.exports.compile = function (policyText) {
 
     return gen
 }
+
+module.exports.highlight = highlightPolicy
+module.exports.beautify = beautifyPolicy
