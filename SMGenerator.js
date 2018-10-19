@@ -1,4 +1,3 @@
-
 var resourcePolicyVisitor = require('./gen/resourcePolicyVisitor').resourcePolicyVisitor
 var event_def = require('freelog_event_definition/lib/event_definition')
 
@@ -131,6 +130,14 @@ class SMGenerator extends resourcePolicyVisitor {
 
     visitExpression_call(ctx) {
         super.visitExpression_call(ctx);
+    }
+
+    visitLicense_resource_id(ctx) {
+        const resourceId = ctx.getText()
+        if (resourceId.length !== 40) {
+            this.errors.push('license resource id 格式错误')
+        }
+        return resourceId
     }
 
     //fill out event args in case of expression or a call to expression
