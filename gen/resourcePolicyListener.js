@@ -308,6 +308,15 @@ resourcePolicyListener.prototype.exitDatetime = function(ctx) {
 };
 
 
+// Enter a parse tree produced by resourcePolicyParser#resource_id.
+resourcePolicyListener.prototype.enterResource_id = function(ctx) {
+};
+
+// Exit a parse tree produced by resourcePolicyParser#resource_id.
+resourcePolicyListener.prototype.exitResource_id = function(ctx) {
+};
+
+
 // Enter a parse tree produced by resourcePolicyParser#event.
 resourcePolicyListener.prototype.enterEvent = function(ctx) {
 };

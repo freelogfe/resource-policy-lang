@@ -5,7 +5,7 @@ for NODES:
     custom event acceptor.abcd
 
     initial:
-        proceed to signed on accepting agreement 0x1234
+        proceed to signed on accepting agreement @e759419923ea25bf6dff2694391a1e65c21739ce
     signed:
         proceed to auth on acct exceed 5+5 feather
     auth:

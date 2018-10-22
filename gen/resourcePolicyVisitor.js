@@ -210,6 +210,12 @@ resourcePolicyVisitor.prototype.visitDatetime = function(ctx) {
 };
 
 
+// Visit a parse tree produced by resourcePolicyParser#resource_id.
+resourcePolicyVisitor.prototype.visitResource_id = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by resourcePolicyParser#event.
 resourcePolicyVisitor.prototype.visitEvent = function(ctx) {
   return this.visitChildren(ctx);

@@ -103,11 +103,13 @@ acceptor: 'acceptor';
 
 currency_unit : FEATHER | BARB ;
 
-license_resource_id : RESOURCE_ID;
+license_resource_id : resource_id;
 
 users : SELF | NODES | PUBLIC | GROUPUSER | GROUPNODE | INT | ID;
 
 datetime: DATE TIME;
+
+resource_id : RESOURCE_ID_TOKEN { this._ctx.start._text = this._ctx.getText().substr(1) };
 
 TIMEUNIT : C Y C L E S? | Y E A R S? | W E E K S? | D A Y S? | M O N T H S? ;
 
@@ -146,9 +148,14 @@ fragment X : ('X'|'x');
 fragment Y : ('Y'|'y');
 fragment Z : ('Z'|'z');
 
-fragment DIGIT : [0-9] ;
+fragment DIGIT : [0-9];
 fragment ALPHABET : [a-zA-Z];
 fragment HEX_ALPHABET : [a-fA-F];
+fragment HEX_DIGIT : [0-9a-fA-F];
+
+fragment AT  :   '@';
+
+RESOURCE_ID_TOKEN : AT (HEX_DIGIT)+;
 
 EVENT : 'event_' (DIGIT|ALPHABET)+;
 
@@ -167,8 +174,6 @@ NIGHT_DIGITS : DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT DIGIT;
 ID
   : ALPHABET (ALPHABET | INT | '_' | '-')*
   ;
-
-RESOURCE_ID : (DIGIT|HEX_ALPHABET)+;
 
 FEATHERACCOUNT : '$' (ALPHABET|DIGIT)+;
 
