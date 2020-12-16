@@ -1,0 +1,130 @@
+{
+    "contract": {
+        "service": "zhaojn",
+        "organization": "freelog",
+        "id": "2f"
+    },
+    "declarations": {
+        "service_state_constants": [
+            {
+                "scope": "always",
+                "state": "presentable"
+            }
+        ],
+        "expressions": [
+            {
+                "func_name": "a",
+                "func_args": [],
+                "func_body": "1+2*3^4+self.exhibited"
+            },
+            {
+                "func_name": "ab",
+                "func_args": [
+                    "a",
+                    "c",
+                    "e"
+                ],
+                "func_body": "1+2*3^(a-c+e)"
+            }
+        ]
+    },
+    "states": {
+        "initial": {
+            "authorization": [],
+            "transition": {
+                "signed": null,
+                "event": {
+                    "service": "signed",
+                    "name": "start"
+                }
+            },
+            "service_states": [
+                "presentable"
+            ]
+        },
+        "signed": {
+            "authorization": [],
+            "transition": {
+                "auth": null,
+                "event": {
+                    "service": "auth",
+                    "name": "start"
+                }
+            },
+            "service_states": [
+                "presentable",
+                "citable"
+            ]
+        },
+        "auth": {
+            "authorization": [],
+            "transition": {
+                "settlement": null,
+                "event": {
+                    "service": "settlement",
+                    "path": "x.y",
+                    "name": "z"
+                }
+            },
+            "service_states": [
+                "presentable"
+            ]
+        },
+        "settlement": {
+            "authorization": [],
+            "transition": {
+                "auth": null,
+                "event": {
+                    "service": "confiscation",
+                    "name": "x"
+                },
+                "refund": null,
+                "confiscation": null
+            },
+            "service_states": [
+                "presentable",
+                "procurable"
+            ]
+        },
+        "confiscation": {
+            "authorization": [],
+            "transition": {
+                "finish": null,
+                "event": {
+                    "service": "finish",
+                    "name": "x",
+                    "args": [
+                        "a",
+                        "b",
+                        "c"
+                    ]
+                }
+            },
+            "service_states": [
+                "presentable"
+            ]
+        },
+        "refund": {
+            "authorization": [],
+            "transition": {
+                "finish": null,
+                "event": {
+                    "service": "finish",
+                    "name": "x"
+                }
+            },
+            "service_states": [
+                "presentable"
+            ]
+        },
+        "finish": {
+            "authorization": [],
+            "transition": {
+                "terminate": null
+            },
+            "service_states": [
+                "presentable"
+            ]
+        }
+    }
+}
