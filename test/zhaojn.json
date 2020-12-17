@@ -16,6 +16,7 @@
         ],
         "service_state_constants": [
             {
+                "scope": "always",
                 "state": "presentable"
             }
         ],
@@ -45,7 +46,10 @@
                     "name": "start"
                 }
             },
-            "service_states": []
+            "service_states": [
+                "presentable"
+            ],
+            "is_initial": true
         },
         "signed": {
             "transition": {
@@ -56,6 +60,7 @@
                 }
             },
             "service_states": [
+                "presentable",
                 "citable"
             ]
         },
@@ -68,7 +73,9 @@
                     "name": "z"
                 }
             },
-            "service_states": []
+            "service_states": [
+                "presentable"
+            ]
         },
         "settlement": {
             "transition": {
@@ -81,6 +88,7 @@
                 "confiscation": null
             },
             "service_states": [
+                "presentable",
                 "procurable"
             ]
         },
@@ -97,7 +105,9 @@
                     ]
                 }
             },
-            "service_states": []
+            "service_states": [
+                "presentable"
+            ]
         },
         "refund": {
             "transition": {
@@ -107,7 +117,9 @@
                     "name": "x"
                 }
             },
-            "service_states": []
+            "service_states": [
+                "presentable"
+            ]
         },
         "finish": {
             "transition": {
@@ -115,7 +127,8 @@
             },
             "service_states": [
                 "presentable"
-            ]
+            ],
+            "is_finish": true
         }
     }
 }

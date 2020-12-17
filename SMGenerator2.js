@@ -55,10 +55,10 @@ class SMGenerator2 extends resourcePolicyVisitor {
     }
 
     visitService_state_constant(ctx) {
-        this.service_state_constant_map.set(ctx.type.text, ctx.service_state().getText());
+        this.service_state_constant_map.set(ctx.type.getText(), ctx.service_state().getText());
         let service_state_constants = this.state_machine["declarations"]["service_state_constants"];
         let service_state = {
-            scope: ctx.type.text,
+            scope: ctx.type.getText(),
             state: ctx.service_state().getText()
         };
 
@@ -138,6 +138,12 @@ class SMGenerator2 extends resourcePolicyVisitor {
             transition: {},
             service_states: service_states
         };
+        if (this.current_state === "initial") {
+            this.state_machine["states"][this.current_state]["is_initial"] = true;
+        }
+        if (this.current_state === "finish") {
+            this.state_machine["states"][this.current_state]["is_finish"] = true;
+        }
 
         return super.visitState_definition(ctx);
     }
