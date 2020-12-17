@@ -92,6 +92,15 @@ resourcePolicyListener.prototype.exitService_state_constant = function(ctx) {
 };
 
 
+// Enter a parse tree produced by resourcePolicyParser#service_state_scope.
+resourcePolicyListener.prototype.enterService_state_scope = function(ctx) {
+};
+
+// Exit a parse tree produced by resourcePolicyParser#service_state_scope.
+resourcePolicyListener.prototype.exitService_state_scope = function(ctx) {
+};
+
+
 // Enter a parse tree produced by resourcePolicyParser#state_definition_section.
 resourcePolicyListener.prototype.enterState_definition_section = function(ctx) {
 };

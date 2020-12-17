@@ -1,0 +1,14 @@
+[
+  {
+    "name": "presentable",
+    "type": "auth"
+  },
+  {
+    "name": "procurable",
+    "type": "auth_test"
+  },
+  {
+    "name": "citable",
+    "type": "label"
+  }
+]

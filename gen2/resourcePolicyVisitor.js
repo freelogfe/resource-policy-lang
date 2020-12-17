@@ -66,6 +66,12 @@ resourcePolicyVisitor.prototype.visitService_state_constant = function(ctx) {
 };
 
 
+// Visit a parse tree produced by resourcePolicyParser#service_state_scope.
+resourcePolicyVisitor.prototype.visitService_state_scope = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by resourcePolicyParser#state_definition_section.
 resourcePolicyVisitor.prototype.visitState_definition_section = function(ctx) {
   return this.visitChildren(ctx);

@@ -1,13 +1,21 @@
 {
-    "contract": {
-        "service": "zhaojn",
-        "organization": "freelog",
-        "id": "2f"
-    },
     "declarations": {
+        "service_states": [
+            {
+                "name": "presentable",
+                "type": "auth"
+            },
+            {
+                "name": "procurable",
+                "type": "auth_test"
+            },
+            {
+                "name": "citable",
+                "type": "label"
+            }
+        ],
         "service_state_constants": [
             {
-                "scope": "always",
                 "state": "presentable"
             }
         ],
@@ -30,7 +38,6 @@
     },
     "states": {
         "initial": {
-            "authorization": [],
             "transition": {
                 "signed": null,
                 "event": {
@@ -38,12 +45,9 @@
                     "name": "start"
                 }
             },
-            "service_states": [
-                "presentable"
-            ]
+            "service_states": []
         },
         "signed": {
-            "authorization": [],
             "transition": {
                 "auth": null,
                 "event": {
@@ -52,12 +56,10 @@
                 }
             },
             "service_states": [
-                "presentable",
                 "citable"
             ]
         },
         "auth": {
-            "authorization": [],
             "transition": {
                 "settlement": null,
                 "event": {
@@ -66,12 +68,9 @@
                     "name": "z"
                 }
             },
-            "service_states": [
-                "presentable"
-            ]
+            "service_states": []
         },
         "settlement": {
-            "authorization": [],
             "transition": {
                 "auth": null,
                 "event": {
@@ -82,12 +81,10 @@
                 "confiscation": null
             },
             "service_states": [
-                "presentable",
                 "procurable"
             ]
         },
         "confiscation": {
-            "authorization": [],
             "transition": {
                 "finish": null,
                 "event": {
@@ -100,12 +97,9 @@
                     ]
                 }
             },
-            "service_states": [
-                "presentable"
-            ]
+            "service_states": []
         },
         "refund": {
-            "authorization": [],
             "transition": {
                 "finish": null,
                 "event": {
@@ -113,12 +107,9 @@
                     "name": "x"
                 }
             },
-            "service_states": [
-                "presentable"
-            ]
+            "service_states": []
         },
         "finish": {
-            "authorization": [],
             "transition": {
                 "terminate": null
             },
