@@ -1,6 +1,6 @@
 {
     "declarations": {
-        "service_states": [
+        "serviceStates": [
             {
                 "name": "presentable",
                 "type": "auth"
@@ -14,7 +14,7 @@
                 "type": "label"
             }
         ],
-        "service_state_constants": [
+        "serviceStateConstants": [
             {
                 "scope": "always",
                 "state": "presentable"
@@ -22,102 +22,118 @@
         ],
         "expressions": [
             {
-                "func_name": "a",
-                "func_args": [],
-                "func_body": "1+2*3^4+self.exhibited"
+                "funcName": "a",
+                "funcArgs": [],
+                "funcBody": "1+2*3^4+self.exhibited"
             },
             {
-                "func_name": "ab",
-                "func_args": [
+                "funcName": "ab",
+                "funcArgs": [
                     "a",
                     "c",
                     "e"
                 ],
-                "func_body": "1+2*3^(a-c+e)"
+                "funcBody": "1+2*3^(a-c+e)"
             }
         ]
     },
     "states": {
         "initial": {
             "transition": {
-                "signed": null,
-                "event": {
-                    "service": "signed",
-                    "name": "start"
+                "signed": {
+                    "event": {
+                        "service": "signed",
+                        "name": "start"
+                    }
                 }
             },
-            "service_states": [
+            "serviceStates": [
                 "presentable"
             ],
-            "is_initial": true
+            "isInitial": true
         },
         "signed": {
             "transition": {
-                "auth": null,
-                "event": {
-                    "service": "auth",
-                    "name": "start"
+                "auth": {
+                    "event": {
+                        "service": "auth",
+                        "name": "start"
+                    }
                 }
             },
-            "service_states": [
+            "serviceStates": [
                 "presentable",
                 "citable"
             ]
         },
         "auth": {
             "transition": {
-                "settlement": null,
-                "event": {
-                    "service": "settlement",
-                    "path": "x.y",
-                    "name": "z"
+                "settlement": {
+                    "event": {
+                        "service": "settlement",
+                        "path": "x.y",
+                        "name": "z"
+                    }
                 }
             },
-            "service_states": [
+            "serviceStates": [
                 "presentable"
             ]
         },
         "settlement": {
             "transition": {
-                "auth": null,
-                "event": {
-                    "service": "confiscation",
-                    "name": "x"
+                "auth": {
+                    "event": {
+                        "service": "auth",
+                        "name": "x"
+                    }
                 },
-                "refund": null,
-                "confiscation": null
+                "refund": {
+                    "event": {
+                        "service": "refund",
+                        "name": "x"
+                    }
+                },
+                "confiscation": {
+                    "event": {
+                        "service": "confiscation",
+                        "name": "x"
+                    }
+                }
             },
-            "service_states": [
+            "serviceStates": [
                 "presentable",
                 "procurable"
             ]
         },
         "confiscation": {
             "transition": {
-                "finish": null,
-                "event": {
-                    "service": "finish",
-                    "name": "x",
-                    "args": [
-                        "a",
-                        "b",
-                        "c"
-                    ]
+                "finish": {
+                    "event": {
+                        "service": "finish",
+                        "name": "x",
+                        "args": [
+                            "a",
+                            "b",
+                            "c"
+                        ]
+                    }
                 }
             },
-            "service_states": [
+            "serviceStates": [
                 "presentable"
             ]
         },
         "refund": {
             "transition": {
-                "finish": null,
-                "event": {
-                    "service": "finish",
-                    "name": "x"
+                "finish": {
+                    "event": {
+                        "service": "finish",
+                        "name": "x"
+                    }
                 }
             },
-            "service_states": [
+            "serviceStates": [
                 "presentable"
             ]
         },
@@ -125,10 +141,10 @@
             "transition": {
                 "terminate": null
             },
-            "service_states": [
+            "serviceStates": [
                 "presentable"
             ],
-            "is_finish": true
+            "isFinish": true
         }
     }
 }

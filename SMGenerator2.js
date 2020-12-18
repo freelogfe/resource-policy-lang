@@ -47,8 +47,8 @@ class SMGenerator2 extends resourcePolicyVisitor {
 
     visitDeclaration_section(ctx) {
         let declarations = this.state_machine["declarations"];
-        declarations["service_states"] = this.fetchServiceStates(); // 色块定义
-        declarations["service_state_constants"] = []; // 全局色块
+        declarations["serviceStates"] = this.fetchServiceStates(); // 色块定义
+        declarations["serviceStateConstants"] = []; // 全局色块
         declarations["expressions"] = []; // 表述
 
         return super.visitDeclaration_section(ctx);
@@ -56,7 +56,7 @@ class SMGenerator2 extends resourcePolicyVisitor {
 
     visitService_state_constant(ctx) {
         this.service_state_constant_map.set(ctx.type.getText(), ctx.service_state().getText());
-        let service_state_constants = this.state_machine["declarations"]["service_state_constants"];
+        let service_state_constants = this.state_machine["declarations"]["serviceStateConstants"];
         let service_state = {
             scope: ctx.type.getText(),
             state: ctx.service_state().getText()
@@ -75,7 +75,7 @@ class SMGenerator2 extends resourcePolicyVisitor {
 
         let func_name = ctx.expression_handle().getText();
         for (let ex of expressions) {
-            if (ex["func_name"] === func_name) {
+            if (ex["funcName"] === func_name) {
                 throw ("存在相同的函数名：" + func_name);
             }
         }
@@ -88,9 +88,9 @@ class SMGenerator2 extends resourcePolicyVisitor {
         }
 
         let expression = {
-            func_name: func_name,
-            func_args: func_args,
-            func_body: ctx.expression().getText()
+            funcName: func_name,
+            funcArgs: func_args,
+            funcBody: ctx.expression().getText()
         };
         expressions.push(expression);
         this.current_expression = func_name;
@@ -102,11 +102,11 @@ class SMGenerator2 extends resourcePolicyVisitor {
         let expressions = this.state_machine["declarations"]["expressions"];
         let expression = null;
         for (let ex of expressions) {
-            if (ex["func_name"] === this.current_expression) {
+            if (ex["funcName"] === this.current_expression) {
                 expression = ex;
             }
         }
-        if (expression["func_args"].indexOf(ctx.ID().getText()) === -1) {
+        if (expression["funcArgs"].indexOf(ctx.ID().getText()) === -1) {
             throw ("无效的参数名：" + ctx.ID().getText());
         }
 
@@ -136,13 +136,13 @@ class SMGenerator2 extends resourcePolicyVisitor {
         this.state_machine["states"][this.current_state] = {
             // authorization: [],
             transition: {},
-            service_states: service_states
+            serviceStates: service_states
         };
         if (this.current_state === "initial") {
-            this.state_machine["states"][this.current_state]["is_initial"] = true;
+            this.state_machine["states"][this.current_state]["isInitial"] = true;
         }
         if (this.current_state === "finish") {
-            this.state_machine["states"][this.current_state]["is_finish"] = true;
+            this.state_machine["states"][this.current_state]["isFinish"] = true;
         }
 
         return super.visitState_definition(ctx);
@@ -150,7 +150,7 @@ class SMGenerator2 extends resourcePolicyVisitor {
 
     visitService_state_definition(ctx) {
         // 染色集
-        let service_states = this.state_machine["states"][this.current_state]["service_states"];
+        let service_states = this.state_machine["states"][this.current_state]["serviceStates"];
 
         for (let st_ctx of ctx.service_state()) {
             if (service_states.indexOf(st_ctx.getText()) === -1) {
@@ -167,7 +167,7 @@ class SMGenerator2 extends resourcePolicyVisitor {
     visitState_transition(ctx) {
         let transition = this.state_machine["states"][this.current_state]["transition"];
         if (this.current_state !== "finish") {
-            transition[ctx.state_name().getText()] = null;
+            transition[ctx.state_name().getText()] = {};
 
             let event = {};
             event["service"] = ctx.event().event_service().getText().substring(1);
@@ -186,7 +186,7 @@ class SMGenerator2 extends resourcePolicyVisitor {
                 event["args"] = args;
             }
 
-            transition["event"] = event;
+            transition[ctx.state_name().getText()]["event"] = event;
         } else {
             transition[ctx.getText()] = null;
         }
@@ -244,7 +244,7 @@ class SMGenerator2 extends resourcePolicyVisitor {
      * 色块校验
      */
     checkServiceState(state) {
-        for (let service_state of this.state_machine["declarations"]["service_states"]) {
+        for (let service_state of this.state_machine["declarations"]["serviceStates"]) {
             if (service_state["name"] === state) {
                 return;
             }
