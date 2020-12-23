@@ -4,7 +4,7 @@
   "description": "policy language compiler for freelog",
   "main": "index.js",
   "dependencies": {
-    "antlr4": "^4.7.1",
+    "antlr4": "4.8.0",
     "camelcase": "^5.0.0",
     "freelog_event_definition": "0.0.10"
   },
@@ -34,7 +34,7 @@
     "test": "test"
   },
   "devDependencies": {
-    "antlr4": "^4.7.1",
+    "antlr4": "4.8.0",
     "gulp": "^3.9.1"
   }
 }
