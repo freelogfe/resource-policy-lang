@@ -4,15 +4,15 @@
 
     ab(a,c,e)=1+2*3^(a-c+e)
 
-    always presentable
+    always testActive
 
     initial:
         ~signed.start => signed
-    signed[citable]:
+    signed[active]:
         ~auth.start => auth
     auth:
         ~settlement.x.y.z => settlement
-    settlement[procurable]:
+    settlement[active]:
         ~auth.x => auth
         ~refund.x => refund
         ~confiscation.x => confiscation
@@ -20,5 +20,5 @@
         ~finish.x(a,b,c) => finish
     refund:
         ~finish.x => finish
-    finish[presentable]:
+    finish[active]:
         terminate

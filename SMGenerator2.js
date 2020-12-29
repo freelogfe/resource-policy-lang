@@ -1,11 +1,11 @@
-var resourcePolicyVisitor = require('./gen2/resourcePolicyVisitor').resourcePolicyVisitor
+var resourcePolicyVisitor = require('./gen2/resourcePolicyVisitor').resourcePolicyVisitor;
 var fs = require("fs");
+var http = require("http");
 
 class SMGenerator2 extends resourcePolicyVisitor {
 
-    constructor(errors) {
+    constructor() {
         super();
-        this.errors = errors;
         this.state_machine = {};
         // 当前状态
         this.current_state = null;
@@ -30,7 +30,7 @@ class SMGenerator2 extends resourcePolicyVisitor {
 
     visitPolicy(ctx) {
         // this.state_machine["contract"] = {};
-        this.state_machine['declarations'] = {}
+        this.state_machine['declarations'] = {};
         this.state_machine['states'] = {};
 
         return super.visitPolicy(ctx);
@@ -47,7 +47,7 @@ class SMGenerator2 extends resourcePolicyVisitor {
 
     visitDeclaration_section(ctx) {
         let declarations = this.state_machine["declarations"];
-        declarations["serviceStates"] = this.fetchServiceStates(); // 色块定义
+        declarations["serviceStates"] = []; // 色块定义
         declarations["serviceStateConstants"] = []; // 全局色块
         declarations["expressions"] = []; // 表述
 
@@ -62,8 +62,8 @@ class SMGenerator2 extends resourcePolicyVisitor {
             state: ctx.service_state().getText()
         };
 
-        // 色块校验
-        this.checkServiceState(service_state["state"]);
+        // // 色块校验
+        // this.checkServiceState(service_state["state"]);
 
         service_state_constants.push(service_state);
 
@@ -76,13 +76,13 @@ class SMGenerator2 extends resourcePolicyVisitor {
         let func_name = ctx.expression_handle().getText();
         for (let ex of expressions) {
             if (ex["funcName"] === func_name) {
-                throw ("存在相同的函数名：" + func_name);
+                throw new Error("存在相同的函数名：" + func_name);
             }
         }
         let func_args = [];
         for (let func_arg of ctx.ID()) {
             if (func_args.indexOf(func_arg.getText()) > -1) {
-                throw ("存在相同的参数名：" + func_arg.getText());
+                throw new Error("存在相同的参数名：" + func_arg.getText());
             }
             func_args.push(func_arg.getText());
         }
@@ -107,7 +107,7 @@ class SMGenerator2 extends resourcePolicyVisitor {
             }
         }
         if (expression["funcArgs"].indexOf(ctx.ID().getText()) === -1) {
-            throw ("无效的参数名：" + ctx.ID().getText());
+            throw new Error("无效的参数名：" + ctx.ID().getText());
         }
 
         return super.visitVariableArg(ctx);
@@ -155,7 +155,7 @@ class SMGenerator2 extends resourcePolicyVisitor {
         for (let st_ctx of ctx.service_state()) {
             if (service_states.indexOf(st_ctx.getText()) === -1) {
                 // 色块校验
-                this.checkServiceState(st_ctx.getText());
+                // this.checkServiceState(st_ctx.getText());
 
                 service_states.push(st_ctx.getText());
             }
@@ -179,7 +179,7 @@ class SMGenerator2 extends resourcePolicyVisitor {
                 let args = [];
                 for (let event_arg of ctx.event().event_args().ID()) {
                     if (args.indexOf(event_arg.getText()) > -1) {
-                        throw ("存在相同的参数名：" + event_arg.getText());
+                        throw new Error("存在相同的参数名：" + event_arg.getText());
                     }
                     args.push(event_arg.getText());
                 }
@@ -205,7 +205,6 @@ class SMGenerator2 extends resourcePolicyVisitor {
      * 初始化状态机状态名称关键字集合
      */
     init_keywords_state() {
-        // todo
         this.keywords_state = new Set();
     }
 
@@ -220,24 +219,77 @@ class SMGenerator2 extends resourcePolicyVisitor {
      * 初始化状态机状态名称必要的集合
      */
     init_necessary_states() {
-        // todo
         this.necessary_states = new Set(["initial", "finish"]);
+    }
+
+    verify() {
+        return new Promise((resolve) => {
+            this.fetchServiceStates()
+                .then(() => this.verifyServiceStates())
+                .then(() => {
+                    resolve()})
+                .catch((e) => {
+                    throw e;
+                });
+        });
     }
 
     /**
      * 取色块定义相关的内容
      */
     fetchServiceStates() {
-        let service_states = null;
-        try {
-            // todo
-            service_states = JSON.parse(fs.readFileSync('./fixtures/service-states.json', 'utf-8'));
-        } catch (e) {
-            console.error(e)
-            throw ("取色块定义出错！");
+        return new Promise((resolve, reject) => {
+            let service_states = this.state_machine["declarations"]["serviceStates"];
+
+            http.get("http://api.testfreelog.com/v2/auths/resources/serviceStates", (res) => {
+                let buffer = null;
+
+                res.on("data", function (data) {
+                    if (buffer == null) {
+                        buffer = data;
+                    } else {
+                        buffer = buffer + data;
+                    }
+                })
+
+                res.on("end", function () {
+                    let rspo = JSON.parse(buffer);
+                    if (rspo["errCode"] !== 0) {
+                        reject(new Error("取色块定义出错"));
+                        return;
+                    }
+
+                    let data = rspo["data"];
+                    data.map(x => {
+                        delete x.value;
+                        return x;
+                    });
+                    for (let key in data) {
+                        service_states.push({name: data[key]["name"], type: data[key]["type"]});
+                    }
+
+                    resolve();
+                });
+            }).on("error", (e) => {
+                reject(e);
+            });
+        });
+    }
+
+    verifyServiceStates() {
+        // 验证全局色块定义
+        let service_state_constants = this.state_machine["declarations"]["serviceStateConstants"];
+        for (let service_state of service_state_constants) {
+            this.checkServiceState(service_state["state"]);
         }
 
-        return service_states;
+        // 验证状态机色块值
+        let states = this.state_machine["states"];
+        for(let state in states){
+            for(let service_state of states[state]["serviceStates"]){
+                this.checkServiceState(service_state)
+            }
+        }
     }
 
     /**
@@ -250,7 +302,7 @@ class SMGenerator2 extends resourcePolicyVisitor {
             }
         }
 
-        throw("不合法的色块：" + state);
+        throw new Error("不合法的色块：" + state);
     }
 
     /**
@@ -263,15 +315,17 @@ class SMGenerator2 extends resourcePolicyVisitor {
         this.checkStateKeyword(state);
     }
 
+    // 检查状态机名称是否重复
     checkStateSingle(state) {
         if (state in this.state_machine["states"]) {
-            throw ("状态机名称冲突：" + state);
+            throw new Error("状态机名称冲突：" + state);
         }
     }
 
+    // 检查状态机名称是否与关键字冲突
     checkStateKeyword(state) {
         if (this.keywords_state.has(state)) {
-            throw ("关键字冲突：" + state);
+            throw new Error("关键字冲突：" + state);
         }
     }
 
@@ -280,7 +334,7 @@ class SMGenerator2 extends resourcePolicyVisitor {
      */
     checkStateComplete() {
         for (let necessary_state of this.necessary_states) {
-            if (!necessary_state in this.state_machine["states"]) throw ("缺少必要的状态：" + necessary_state);
+            if (!necessary_state in this.state_machine["states"]) throw new Error("缺少必要的状态：" + necessary_state);
         }
     }
 }

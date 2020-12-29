@@ -1,7 +1,7 @@
 antlr4 = require('antlr4');
 fs = require('fs');
 
-var gen_dir = '../gen2'
+var gen_dir = '../gen2';
 SMGenerator = require(`../SMGenerator2`).SMGenerator;
 resourcePolicyLexer = require(`${gen_dir}/resourcePolicyLexer`);
 resourcePolicyParser = require(`${gen_dir}/resourcePolicyParser`);
@@ -14,12 +14,14 @@ var parser = new resourcePolicyParser.resourcePolicyParser(tokens);
 parser.buildParseTrees = true;
 var tree = parser.policy();
 
-var gen = new SMGenerator(1);
+var gen = new SMGenerator();
 gen.visit(tree);
+gen.verify().then(() => {
+        // console.log(JSON.stringify(gen.state_machine, null, 4));
 
-console.log(JSON.stringify(gen.state_machine, null, 4));
-
-fs.writeFile('zhaojn.json', JSON.stringify(gen.state_machine, null, 4), (err) => {
-    if (err) throw err;
-    console.log('The file has been saved!');
-});
+        fs.writeFile('zhaojn.json', JSON.stringify(gen.state_machine, null, 4), (err) => {
+            if (err) throw err;
+            console.log('The file has been saved!');
+        });
+    }
+);
