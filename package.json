@@ -6,7 +6,8 @@
   "dependencies": {
     "antlr4": "4.8.0",
     "camelcase": "^5.0.0",
-    "freelog_event_definition": "0.0.10"
+    "freelog_event_definition": "0.0.10",
+    "minimist": "^1.2.5"
   },
   "scripts": {
     "publish": "npm publish --access=public",
@@ -34,7 +35,6 @@
     "test": "test"
   },
   "devDependencies": {
-    "antlr4": "4.8.0",
     "gulp": "^3.9.1"
   }
 }

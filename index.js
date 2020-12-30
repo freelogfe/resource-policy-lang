@@ -1,31 +1,23 @@
-'use strict'
+"use strict"
 
-const antlr4 = require('antlr4/index')
-const SMGenerator = require('./SMGenerator').SMGenerator
-const resourcePolicyLexer = require('./gen/resourcePolicyLexer')
-const resourcePolicyParser = require('./gen/resourcePolicyParser')
-const PolicyErrorListener = require('./lib/policyErrorListener')
-const highlightPolicy = require('./lib/presentablePolicyHighlight').highlightPolicy
-const beautifyPolicy = require('./lib/policyBeautify').beautifyPolicy
+const antlr4 = require("antlr4");
+const gen_dir = "./gen";
+const resourcePolicyLexer = require(`${gen_dir}/resourcePolicyLexer`);
+const resourcePolicyParser = require(`${gen_dir}/resourcePolicyParser`);
+const SMGenerator = require("./SMGenerator").SMGenerator;
 
-module.exports.compile = function (policyText) {
-
-    const errors = []
-    const chars = new antlr4.InputStream(policyText);
-    const lexer = new resourcePolicyLexer.resourcePolicyLexer(chars);
-    const tokens = new antlr4.CommonTokenStream(lexer);
-    const parser = new resourcePolicyParser.resourcePolicyParser(tokens);
-    const policyErrorListener = new PolicyErrorListener(errors)
-
+exports.compile = async function (policyText, targetType) {
+    let chars = new antlr4.InputStream(policyText);
+    let lexer = new resourcePolicyLexer.resourcePolicyLexer(chars);
+    let stream = new antlr4.CommonTokenStream(lexer);
+    let parser = new resourcePolicyParser.resourcePolicyParser(stream);
     parser.buildParseTrees = true;
-    parser.addErrorListener(policyErrorListener)
+    let tree = parser.policy();
 
-    const tree = parser.policy();
-    const gen = new SMGenerator(errors);
+    let gen = new SMGenerator(targetType);
     gen.visit(tree);
 
-    return gen
-}
+    await gen.verify();
 
-module.exports.highlight = highlightPolicy
-module.exports.beautify = beautifyPolicy
+    return gen;
+}

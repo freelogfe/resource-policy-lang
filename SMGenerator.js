@@ -1,261 +1,349 @@
-var resourcePolicyVisitor = require('./gen/resourcePolicyVisitor').resourcePolicyVisitor
-var event_def = require('freelog_event_definition/lib/event_definition')
+const resourcePolicyVisitor = require('./gen/resourcePolicyVisitor').resourcePolicyVisitor;
+const fs = require("fs");
+const http = require("http");
 
 class SMGenerator extends resourcePolicyVisitor {
 
-    constructor(errors) {
+    constructor(targetType) {
         super();
-        this.errors = errors
-        this.state_machine = {}
-        this.policy_text = null
-        this.current_state = null
-        this._userTypeMap = new Map([['GROUP', []], ['INDIVIDUAL', []], ['DOMAIN', []]])
+        this.targetType = targetType;
+        this.serviceStateResourceMap = new Map([
+            ["presentables", "http://api.testfreelog.com/v2/auths/presentables/serviceStates"],
+            ["resources", "http://api.testfreelog.com/v2/auths/resources/serviceStates"]
+        ]);
+
+        this.state_machine = {};
+        // 当前状态
+        this.current_state = null;
+        // 当前表述
+        this.current_expression = null;
+        // 色块常量映射
+        this.service_state_constant_map = new Map();
+        /**
+         * @see SMGenerator#init_keywords_state()
+         * 状态机状态名称关键字集合
+         */
+        this.keywords_state = null;
+        /**
+         * @see SMGenerator#init_necessary_states()
+         * 状态机状态名称必要的集合
+         */
+        this.necessary_states = null;
+
+        this.init_keywords();
+        this.init_necessary();
     }
 
     visitPolicy(ctx) {
-        //this.state_machine['visited'] = true;
-        this.state_machine['declarations'] = {}
+        // this.state_machine["contract"] = {};
+        this.state_machine['declarations'] = {};
         this.state_machine['states'] = {};
-        this.policy_text = ctx.start.source[0]._input.strdata.slice(ctx.start.start, ctx.stop.stop + 1)
-        super.visitPolicy(ctx);
+
+        return super.visitPolicy(ctx);
     }
 
-    visitUsers(ctx) {
+    visitSubject(ctx) {
+        // let contract = this.state_machine["contract"];
+        // contract["service"] = ctx.subject_service().getText().substring(1);
+        // contract["organization"] = ctx.user_organization_name().getText().substring(1);
+        // contract["id"] = ctx.SUBJECT_ID().getText().substring(1);
 
-        const userObject = ctx.getText().toUpperCase()
-        switch (userObject) {
-            case 'NODES':
-            case 'PUBLIC':
-            case 'REGISTERED_USERS':
-                this._userTypeMap.get('GROUP').push(userObject)
-                return
-            case 'SELF':
-                this._userTypeMap.get('INDIVIDUAL').push(userObject)
-                return
-        }
-
-        if (ctx.GROUPUSER()) {
-            this._userTypeMap.get('GROUP').push(ctx.GROUPUSER().getText())
-        }
-        else if (ctx.GROUPNODE()) {
-            this._userTypeMap.get('GROUP').push(ctx.GROUPNODE().getText())
-        }
-        else if (ctx.INT()) {
-            this._userTypeMap.get('INDIVIDUAL').push(userObject)
-        }
-        else if (/^[a-zA-Z0-9-]{4,24}.freelog.com$/i.test(userObject)) {
-            this._userTypeMap.get('DOMAIN').push(ctx.getText())
-        }
-
-        super.visitUsers(ctx)
+        return super.visitSubject(ctx);
     }
 
-    get authorizedObjects() {
-        const authorizedObjects = []
-        for (var [key, value] of this._userTypeMap.entries()) {
-            value.length && authorizedObjects.push({userType: key, users: value})
-        }
-        return authorizedObjects
+    visitDeclaration_section(ctx) {
+        let declarations = this.state_machine["declarations"];
+        declarations["serviceStates"] = []; // 色块定义
+        declarations["serviceStateConstants"] = []; // 全局色块
+        declarations["expressions"] = []; // 表述
+
+        return super.visitDeclaration_section(ctx);
     }
 
-    visitDeclaration_statements(ctx) {
-        super.visitDeclaration_statements(ctx);
+    visitService_state_constant(ctx) {
+        this.service_state_constant_map.set(ctx.type.getText(), ctx.service_state().getText());
+        let service_state_constants = this.state_machine["declarations"]["serviceStateConstants"];
+        let service_state = {
+            scope: ctx.type.getText(),
+            state: ctx.service_state().getText()
+        };
+
+        // // 色块校验
+        // this.checkServiceState(service_state["state"]);
+
+        service_state_constants.push(service_state);
+
+        return super.visitService_state_constant(ctx);
     }
 
-    visitExpression_declaration(ctx) {
+    visitExpression_assignment(ctx) {
+        let expressions = this.state_machine["declarations"]["expressions"];
 
-        let handle = ctx.expression_handle().getText();
-        let args = Array.isArray(ctx.ID()) ? ctx.ID().map(item => {
-            return item.getText();
-        }) : [ctx.ID().getText()];
-
-        this.state_machine['declarations'][handle] = {
-            'args': args,
-            'body': ctx.expression_definition().getText(),
-            'declareType': 'contractExpression'
+        let func_name = ctx.expression_handle().getText();
+        for (let ex of expressions) {
+            if (ex["funcName"] === func_name) {
+                throw new Error("存在相同的函数名：" + func_name);
+            }
+        }
+        let func_args = [];
+        for (let func_arg of ctx.ID()) {
+            if (func_args.indexOf(func_arg.getText()) > -1) {
+                throw new Error("存在相同的参数名：" + func_arg.getText());
+            }
+            func_args.push(func_arg.getText());
         }
 
-        super.visitExpression_declaration(ctx);
+        let expression = {
+            funcName: func_name,
+            funcArgs: func_args,
+            funcBody: ctx.expression().getText()
+        };
+        expressions.push(expression);
+        this.current_expression = func_name;
+
+        return super.visitExpression_assignment(ctx);
     }
 
-    visitContract_account_declaration(ctx) {
-
-        let handle = ctx.getChild(1).getText()
-        this.state_machine['declarations'][handle] = {
-            'type': ctx.getChild(0).getText(),
-            'declareType': 'contractAccount'
+    visitVariableArg(ctx) {
+        let expressions = this.state_machine["declarations"]["expressions"];
+        let expression = null;
+        for (let ex of expressions) {
+            if (ex["funcName"] === this.current_expression) {
+                expression = ex;
+            }
+        }
+        if (expression["funcArgs"].indexOf(ctx.ID().getText()) === -1) {
+            throw new Error("无效的参数名：" + ctx.ID().getText());
         }
 
-        super.visitContract_account_declaration(ctx);
+        return super.visitVariableArg(ctx);
     }
 
-    visitSingle_custom_event_declaration(ctx) {
+    visitState_definition_section(ctx) {
+        let result = super.visitState_definition_section(ctx);
+        // 状态机状态完整性校验
+        this.checkStateComplete();
 
-        let handle = ctx.getChild(2).getText()
-        this.state_machine['declarations'][handle] = {
-            'type': ctx.getChild(0).getText(),
-            'declareType': 'customEvent'
-        }
-
-        super.visitSingle_custom_event_declaration(ctx);
+        return result;
     }
 
     visitState_definition(ctx) {
-        this.current_state = ctx.getChild(0).getText();
-        this.state_machine['states'][this.current_state] = {'authorization': [], 'transition': {}};
-        super.visitState_definition(ctx);
+        this.current_state = ctx.state_name().getText();
+
+        // 状态机状态校验
+        this.checkState(this.current_state);
+
+        let service_states = [];
+        for (let scope of this.service_state_constant_map.keys()) {
+            if (scope === "always") {
+                service_states.push(this.service_state_constant_map.get(scope));
+            }
+        }
+        this.state_machine["states"][this.current_state] = {
+            // authorization: [],
+            transition: {},
+            serviceStates: service_states
+        };
+        if (this.current_state === "initial") {
+            this.state_machine["states"][this.current_state]["isInitial"] = true;
+        }
+        if (this.current_state === "finish") {
+            this.state_machine["states"][this.current_state]["isFinish"] = true;
+        }
+
+        return super.visitState_definition(ctx);
+    }
+
+    visitService_state_definition(ctx) {
+        // 染色集
+        let service_states = this.state_machine["states"][this.current_state]["serviceStates"];
+
+        for (let st_ctx of ctx.service_state()) {
+            if (service_states.indexOf(st_ctx.getText()) === -1) {
+                // 色块校验
+                // this.checkServiceState(st_ctx.getText());
+
+                service_states.push(st_ctx.getText());
+            }
+        }
+
+        return super.visitService_state_definition(ctx);
     }
 
     visitState_transition(ctx) {
-        let transition = this.state_machine['states'][this.current_state]['transition']
+        let transition = this.state_machine["states"][this.current_state]["transition"];
+        if (this.current_state !== "finish") {
+            transition[ctx.state_name().getText()] = {};
 
-        if (ctx.getChildCount() > 1) {
-            this.current_transit_to = ctx.getChild(2).getText();
-            transition[this.current_transit_to] = null;
+            let event = {};
+            event["service"] = ctx.event().event_service().getText().substring(1);
+            if (ctx.event().event_path() != null) {
+                event["path"] = ctx.event().event_path().getText();
+            }
+            event["name"] = ctx.event().event_name().getText();
+            if (ctx.event().event_args() != null) {
+                let args = [];
+                for (let event_arg of ctx.event().event_args().ID()) {
+                    if (args.indexOf(event_arg.getText()) > -1) {
+                        throw new Error("存在相同的参数名：" + event_arg.getText());
+                    }
+                    args.push(event_arg.getText());
+                }
+                event["args"] = args;
+            }
+
+            transition[ctx.state_name().getText()]["event"] = event;
+        } else {
+            transition[ctx.getText()] = null;
         }
-        else {
-            transition['terminate'] = null;
-        }
 
-        super.visitState_transition(ctx);
+        return super.visitState_transition(ctx);
     }
 
-    visitState_description(ctx) {
-        this.state_machine['states'][this.current_state]['authorization'].push(ctx.getChild(0).getText());
+    /**
+     * 初始化关键字集合
+     */
+    init_keywords() {
+        this.init_keywords_state();
     }
 
-    visitEvent(ctx) {
-        super.visitEvent(ctx);
+    /**
+     * 初始化状态机状态名称关键字集合
+     */
+    init_keywords_state() {
+        this.keywords_state = new Set();
     }
 
-    visitExpression_call(ctx) {
-        super.visitExpression_call(ctx);
+    /**
+     * 初始化必要的集合
+     */
+    init_necessary() {
+        this.init_necessary_states();
     }
 
-    visitLicense_resource_id(ctx) {
-        const resourceId = ctx.getText()
-        if (resourceId.length !== 40) {
-            this.errors.push('license resource id 格式错误')
-        }
-        return resourceId
+    /**
+     * 初始化状态机状态名称必要的集合
+     */
+    init_necessary_states() {
+        this.necessary_states = new Set(["initial", "finish"]);
     }
 
-    //fill out event args in case of expression or a call to expression
-    get_call_frame(ctx) {
-        let call_frame = {};
-        if (ctx.expression()) {
-            call_frame.type = 'literal';
-            call_frame.literal = ctx.expression().getText();
-        }
-        else if (ctx.expression_call()) {
-            call_frame.type = 'invocation';
-            call_frame.handle = ctx.expression_call().expression_handle().getText();
-            call_frame.args = ctx.expression_call().expression_call_argument().map(arg => {
-                return arg.getText();
-            });
-        }
-        else {
-            throw('expression syntax error');
-        }
-        return call_frame;
-    }
-
-    //jump function for reflected event handling functions
-    callSuper(fName, ctx) {
-        super[fName](ctx);
-    }
-
-    //for inlining expression definitions
-    expression_inlining_substitution(expression_body, params) {
-        let result = expression_body;
-        Object.keys(params).map(key => {
-            result = result.replace(key, params[key]);
-        });
-        return result;
-    }
-}
-
-var ruleName_to_functionName = (ruleName) => {
-    return 'visit' + ruleName.charAt(0).toUpperCase() + ruleName.slice(1);
-}
-
-
-var toCamelCase = (paramName) => {
-    return paramName.replace(/_(\w)/g, (all, letter) => letter.toUpperCase())
-}
-
-function wrap(event) {
-    return function (ctx) {
-        let translated_event = {};
-
-        translated_event.code = event.Code;
-        translated_event.params = {};
-
-        event.Params.split(',').forEach(param => {
-            let camelName = toCamelCase(param)
-            if (Array.isArray(ctx[param]())) {
-                translated_event.params[camelName] = [];
-                ctx[param]().forEach(param => {
-                    translated_event.params[camelName].push(param.getText());
+    verify() {
+        return new Promise((resolve) => {
+            this.fetchServiceStates()
+                .then(() => this.verifyServiceStates())
+                .then(() => {
+                    resolve()
+                })
+                .catch((e) => {
+                    throw e;
                 });
-            }
-            else {
-                if (typeof(ctx[param]().expression_call_or_literal) === 'function') {
-                    let call_frame = this.get_call_frame(ctx[param]().expression_call_or_literal());
-                    translated_event.params[camelName] = call_frame;
-                }
-                else {
-                    translated_event.params[camelName] = ctx[param]().getText();
-                }
-            }
-            this.current_param = null;
-        })
+        });
+    }
 
-        this.state_machine['states'][this.current_state]['transition'][this.current_transit_to] = translated_event;
-        this.callSuper(ruleName_to_functionName(event['RuleName']), ctx);
+    /**
+     * 取色块定义相关的内容
+     */
+    fetchServiceStates() {
+        return new Promise((resolve, reject) => {
+            let service_states = this.state_machine["declarations"]["serviceStates"];
+
+            http.get(this.serviceStateResourceMap.get(this.targetType), (res) => {
+                let buffer = null;
+
+                res.on("data", function (data) {
+                    if (buffer == null) {
+                        buffer = data;
+                    } else {
+                        buffer = buffer + data;
+                    }
+                })
+
+                res.on("end", function () {
+                    let rspo = JSON.parse(buffer);
+                    if (rspo["errCode"] !== 0) {
+                        reject(new Error("取色块定义出错"));
+                        return;
+                    }
+
+                    let data = rspo["data"];
+                    data.map(x => {
+                        delete x.value;
+                        return x;
+                    });
+                    for (let key in data) {
+                        service_states.push({name: data[key]["name"], type: data[key]["type"]});
+                    }
+
+                    resolve();
+                });
+            }).on("error", (e) => {
+                reject(e);
+            });
+        });
+    }
+
+    verifyServiceStates() {
+        // 验证全局色块定义
+        let service_state_constants = this.state_machine["declarations"]["serviceStateConstants"];
+        for (let service_state of service_state_constants) {
+            this.checkServiceState(service_state["state"]);
+        }
+
+        // 验证状态机色块值
+        let states = this.state_machine["states"];
+        for (let state in states) {
+            for (let service_state of states[state]["serviceStates"]) {
+                this.checkServiceState(service_state)
+            }
+        }
+    }
+
+    /**
+     * 色块校验
+     */
+    checkServiceState(state) {
+        for (let service_state of this.state_machine["declarations"]["serviceStates"]) {
+            if (service_state["name"] === state) {
+                return;
+            }
+        }
+
+        throw new Error("不合法的色块：" + state);
+    }
+
+    /**
+     * 状态机状态校验
+     */
+    checkState(state) {
+        // 是否状态机状态是单例的
+        this.checkStateSingle(state);
+        // 是否状态机状态名称与关键字冲突
+        this.checkStateKeyword(state);
+    }
+
+    // 检查状态机名称是否重复
+    checkStateSingle(state) {
+        if (state in this.state_machine["states"]) {
+            throw new Error("状态机名称冲突：" + state);
+        }
+    }
+
+    // 检查状态机名称是否与关键字冲突
+    checkStateKeyword(state) {
+        if (this.keywords_state.has(state)) {
+            throw new Error("关键字冲突：" + state);
+        }
+    }
+
+    /**
+     * 状态机状态完整性校验
+     */
+    checkStateComplete() {
+        for (let necessary_state of this.necessary_states) {
+            if (!necessary_state in this.state_machine["states"]) throw new Error("缺少必要的状态：" + necessary_state);
+        }
     }
 }
-
-/*
-Inject generation actions for events dynamically based on definitions in package freelog_event_definition
-main purpose here is to minimize the change in code base in case of adding new event
-*/
-event_def.forEach((event) => {
-    SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = wrap(event)
-    // SMGenerator.prototype[ruleName_to_functionName(event['RuleName'])] = new Function(
-    //       'ctx',
-    //       `
-    //   let translated_event = {};
-    //
-    //   translated_event.code  = '${event['Code']}';
-    //   translated_event.params = {};
-    //
-    //   ${event['Params'].split(',').map(item => {
-    //           let camelName = toCamelCase(item)
-    //           return `if (Array.isArray(ctx.${item}())) {
-    //               translated_event.params.${camelName} = [];
-    //               ctx.${item}().forEach(item => {
-    //                 translated_event.params.${camelName}.push(item.getText());
-    //               });
-    //             }
-    //             else {
-    //               if (typeof(ctx.${item}().expression_call_or_literal) === 'function') {
-    //                 let call_frame = this.get_call_frame(ctx.${item}().expression_call_or_literal());
-    //                 translated_event.params.${camelName} = call_frame;
-    //               }
-    //               else {
-    //                 translated_event.params.${camelName} = ctx.${item}().getText();
-    //               }
-    //             }
-    //             this.current_param = null;
-    //             `
-    //       }).join('\n')};
-    //
-    //   this.state_machine['states'][this.current_state]['transition'][this.current_transit_to] = translated_event;
-    //   this.callSuper('${ruleName_to_functionName(event['RuleName'])}', ctx);
-    //   `
-    //   );
-});
-
 
 exports.SMGenerator = SMGenerator;
