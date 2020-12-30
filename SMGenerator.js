@@ -7,6 +7,7 @@ class SMGenerator extends resourcePolicyVisitor {
     constructor(targetType) {
         super();
         this.targetType = targetType;
+        // todo
         this.serviceStateResourceMap = new Map([
             ["presentables", "http://api.testfreelog.com/v2/auths/presentables/serviceStates"],
             ["resources", "http://api.testfreelog.com/v2/auths/resources/serviceStates"]
@@ -229,14 +230,14 @@ class SMGenerator extends resourcePolicyVisitor {
     }
 
     verify() {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             this.fetchServiceStates()
                 .then(() => this.verifyServiceStates())
                 .then(() => {
                     resolve()
                 })
                 .catch((e) => {
-                    throw e;
+                    reject(e);
                 });
         });
     }
