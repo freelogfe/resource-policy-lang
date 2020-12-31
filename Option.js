@@ -6,9 +6,15 @@ class Option {
     }
 
     build() {
-        this.targetType = this.args.type;
-        if (this.targetType == null) {
+        console.log(this.args);
+
+        this.subjectType = this.args.subjectType;
+        if (this.subjectType == null) {
             throw new Error("缺少必要的参数 --type");
+        }
+        this.env = this.args.env;
+        if (this.env == null) {
+            this.env = "dev";
         }
     }
 }

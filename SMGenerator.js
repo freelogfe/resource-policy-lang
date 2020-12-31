@@ -4,14 +4,12 @@ const http = require("http");
 
 class SMGenerator extends resourcePolicyVisitor {
 
-    constructor(targetType) {
+    constructor(subjectType, env) {
         super();
-        this.targetType = targetType;
-        // todo
-        this.serviceStateResourceMap = new Map([
-            ["presentables", "http://api.testfreelog.com/v2/auths/presentables/serviceStates"],
-            ["resources", "http://api.testfreelog.com/v2/auths/resources/serviceStates"]
-        ]);
+        this.subjectType = subjectType.toLowerCase();
+        this.env = env.toLowerCase();
+
+        this.serviceStateResourceAddressMap = JSON.parse(fs.readFileSync("./resources/service_state_resource_addresses.json", "utf-8"));
 
         this.state_machine = {};
         // 当前状态
@@ -249,7 +247,7 @@ class SMGenerator extends resourcePolicyVisitor {
         return new Promise((resolve, reject) => {
             let service_states = this.state_machine["declarations"]["serviceStates"];
 
-            http.get(this.serviceStateResourceMap.get(this.targetType), (res) => {
+            http.get(this.serviceStateResourceAddressMap[this.subjectType][this.env], (res) => {
                 let buffer = null;
 
                 res.on("data", function (data) {

@@ -13,7 +13,7 @@ main();
 async function main() {
     let option = new Opiton(process.argv);
     option.build();
-    let input = fs.readFileSync("../resources/zhaojn.sc", "utf-8");
+    let input = fs.readFileSync("./resources/zhaojn.sc", "utf-8");
 
     let chars = new antlr4.InputStream(input);
     let lexer = new resourcePolicyLexer.resourcePolicyLexer(chars);
@@ -22,12 +22,12 @@ async function main() {
     parser.buildParseTrees = true;
     let tree = parser.policy();
 
-    let gen = new SMGenerator(option.targetType);
+    let gen = new SMGenerator(option.subjectType, option.env);
     gen.visit(tree);
     await gen.verify().then(() => {
             console.log(JSON.stringify(gen.state_machine, null, 4));
 
-            fs.writeFile("../resources/zhaojn.json", JSON.stringify(gen.state_machine, null, 4), (err) => {
+            fs.writeFile("./resources/zhaojn.json", JSON.stringify(gen.state_machine, null, 4), (err) => {
                 if (err) throw err;
                 console.log('The file has been saved!');
             });
