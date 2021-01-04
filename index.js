@@ -11,13 +11,26 @@ exports.compile = async function (policyText, targetType, env = "dev") {
     let lexer = new resourcePolicyLexer.resourcePolicyLexer(chars);
     let stream = new antlr4.CommonTokenStream(lexer);
     let parser = new resourcePolicyParser.resourcePolicyParser(stream);
+    parser._errHandler = new antlr4.error.BailErrorStrategy();
     parser.buildParseTrees = true;
-    let tree = parser.policy();
+
+    let tree = null;
+    try {
+        tree = parser.policy();
+    } catch (e) {
+        throw new Error("输入格式错误");
+    }
 
     let gen = new SMGenerator(targetType, env);
-    gen.visit(tree);
+    try {
+        gen.visit(tree);
+    } catch (e) {
+        throw new Error(e);
+    }
 
-    await gen.verify();
+    await gen.verify().catch((e) => {
+        throw new Error(e);
+    });
 
     return gen;
 }

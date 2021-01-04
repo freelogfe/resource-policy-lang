@@ -1,6 +1,9 @@
 const resourcePolicyVisitor = require('./gen/resourcePolicyVisitor').resourcePolicyVisitor;
+const path = require('path');
 const fs = require("fs");
 const http = require("http");
+
+const serviceStateResourceAddressMap = JSON.parse(fs.readFileSync(path.join(__dirname, './resources/service_state_resource_addresses.json')));
 
 class SMGenerator extends resourcePolicyVisitor {
 
@@ -8,8 +11,6 @@ class SMGenerator extends resourcePolicyVisitor {
         super();
         this.subjectType = subjectType.toLowerCase();
         this.env = env.toLowerCase();
-
-        this.serviceStateResourceAddressMap = JSON.parse(fs.readFileSync("./resources/service_state_resource_addresses.json", "utf-8"));
 
         this.state_machine = {};
         // 当前状态
@@ -36,6 +37,11 @@ class SMGenerator extends resourcePolicyVisitor {
     visitPolicy(ctx) {
         // this.state_machine["contract"] = {};
         this.state_machine['declarations'] = {};
+        let declarations = this.state_machine["declarations"];
+        declarations["serviceStates"] = []; // 色块定义
+        declarations["serviceStateConstants"] = []; // 全局色块
+        declarations["expressions"] = []; // 表述
+
         this.state_machine['states'] = {};
 
         return super.visitPolicy(ctx);
@@ -48,15 +54,6 @@ class SMGenerator extends resourcePolicyVisitor {
         // contract["id"] = ctx.SUBJECT_ID().getText().substring(1);
 
         return super.visitSubject(ctx);
-    }
-
-    visitDeclaration_section(ctx) {
-        let declarations = this.state_machine["declarations"];
-        declarations["serviceStates"] = []; // 色块定义
-        declarations["serviceStateConstants"] = []; // 全局色块
-        declarations["expressions"] = []; // 表述
-
-        return super.visitDeclaration_section(ctx);
     }
 
     visitService_state_constant(ctx) {
@@ -172,6 +169,9 @@ class SMGenerator extends resourcePolicyVisitor {
     visitState_transition(ctx) {
         let transition = this.state_machine["states"][this.current_state]["transition"];
         if (this.current_state !== "finish") {
+            if (ctx.event() == null) {
+                throw new Error("非 finish 状态缺少事件转换描述");
+            }
             transition[ctx.state_name().getText()] = {};
 
             let event = {};
@@ -247,7 +247,7 @@ class SMGenerator extends resourcePolicyVisitor {
         return new Promise((resolve, reject) => {
             let service_states = this.state_machine["declarations"]["serviceStates"];
 
-            http.get(this.serviceStateResourceAddressMap[this.subjectType][this.env], (res) => {
+            http.get(serviceStateResourceAddressMap[this.subjectType][this.env], (res) => {
                 let buffer = null;
 
                 res.on("data", function (data) {
@@ -259,22 +259,26 @@ class SMGenerator extends resourcePolicyVisitor {
                 })
 
                 res.on("end", function () {
-                    let rspo = JSON.parse(buffer);
-                    if (rspo["errCode"] !== 0) {
-                        reject(new Error("取色块定义出错"));
-                        return;
-                    }
+                    try {
+                        let rspo = JSON.parse(buffer);
+                        if (rspo["errCode"] !== 0) {
+                            reject(new Error("取色块定义出错"));
+                            return;
+                        }
 
-                    let data = rspo["data"];
-                    data.map(x => {
-                        delete x.value;
-                        return x;
-                    });
-                    for (let key in data) {
-                        service_states.push({name: data[key]["name"], type: data[key]["type"]});
-                    }
+                        let data = rspo["data"];
+                        data.map(x => {
+                            delete x.value;
+                            return x;
+                        });
+                        for (let key in data) {
+                            service_states.push({name: data[key]["name"], type: data[key]["type"]});
+                        }
 
-                    resolve();
+                        resolve();
+                    } catch (e) {
+                        reject(e);
+                    }
                 });
             }).on("error", (e) => {
                 reject(e);
