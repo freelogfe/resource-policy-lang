@@ -57,10 +57,10 @@ class SMGenerator extends resourcePolicyVisitor {
     }
 
     visitService_state_constant(ctx) {
-        this.service_state_constant_map.set(ctx.type.getText(), ctx.service_state().getText());
+        this.service_state_constant_map.set(ctx.service_state_scope().getText(), ctx.service_state().getText());
         let service_state_constants = this.state_machine["declarations"]["serviceStateConstants"];
         let service_state = {
-            scope: ctx.type.getText(),
+            scope: ctx.service_state_scope().getText(),
             state: ctx.service_state().getText()
         };
 
@@ -106,6 +106,7 @@ class SMGenerator extends resourcePolicyVisitor {
         for (let ex of expressions) {
             if (ex["funcName"] === this.current_expression) {
                 expression = ex;
+                break;
             }
         }
         if (expression["funcArgs"].indexOf(ctx.ID().getText()) === -1) {
@@ -143,9 +144,6 @@ class SMGenerator extends resourcePolicyVisitor {
         if (this.current_state === "initial") {
             this.state_machine["states"][this.current_state]["isInitial"] = true;
         }
-        if (this.current_state === "finish") {
-            this.state_machine["states"][this.current_state]["isFinish"] = true;
-        }
 
         return super.visitState_definition(ctx);
     }
@@ -168,10 +166,7 @@ class SMGenerator extends resourcePolicyVisitor {
 
     visitState_transition(ctx) {
         let transition = this.state_machine["states"][this.current_state]["transition"];
-        if (this.current_state !== "finish") {
-            if (ctx.event() == null) {
-                throw new Error("非 finish 状态缺少事件转换描述");
-            }
+        if (ctx.terminate == null) {
             transition[ctx.state_name().getText()] = {};
 
             let event = {};
@@ -193,7 +188,7 @@ class SMGenerator extends resourcePolicyVisitor {
 
             transition[ctx.state_name().getText()]["event"] = event;
         } else {
-            transition[ctx.getText()] = null;
+            this.state_machine["states"][this.current_state]["transition"] = null;
         }
 
         return super.visitState_transition(ctx);
@@ -224,13 +219,17 @@ class SMGenerator extends resourcePolicyVisitor {
      * 初始化状态机状态名称必要的集合
      */
     init_necessary_states() {
-        this.necessary_states = new Set(["initial", "finish"]);
+        this.necessary_states = new Set(["initial"]);
     }
 
+    /**
+     * 校验
+     */
     verify() {
         return new Promise((resolve, reject) => {
             this.fetchServiceStates()
                 .then(() => this.verifyServiceStates())
+                .then(() => this.verifyExpressions())
                 .then(() => {
                     resolve()
                 })
@@ -286,19 +285,43 @@ class SMGenerator extends resourcePolicyVisitor {
         });
     }
 
+    // 色块校验
     verifyServiceStates() {
-        // 验证全局色块定义
-        let service_state_constants = this.state_machine["declarations"]["serviceStateConstants"];
-        for (let service_state of service_state_constants) {
-            this.checkServiceState(service_state["state"]);
-        }
+        let serviceStateRecords = new Set();
 
         // 验证状态机色块值
         let states = this.state_machine["states"];
         for (let state in states) {
             for (let service_state of states[state]["serviceStates"]) {
                 this.checkServiceState(service_state)
+
+                // 记录使用的色块
+                serviceStateRecords.add(service_state);
             }
+        }
+        if (serviceStateRecords.size === 0) {
+            throw new Error("状态机状态至少包含一个色块");
+        }
+
+        // 验证全局色块定义
+        let service_state_constants = this.state_machine["declarations"]["serviceStateConstants"];
+        for (let service_state of service_state_constants) {
+            this.checkServiceState(service_state["state"]);
+
+            // 记录使用的色块
+            serviceStateRecords.add(service_state["state"]);
+        }
+
+        // 清理色块定义
+        let serviceStates = this.state_machine["declarations"]["serviceStates"];
+        serviceStates = serviceStates.filter((serviceState => {
+            return serviceStateRecords.has(serviceState["name"]);
+        }));
+        this.state_machine["declarations"]["serviceStates"] = serviceStates;
+
+        // 清理全局色块
+        if (this.state_machine["declarations"]["serviceStateConstants"].length === 0) {
+            delete this.state_machine["declarations"]["serviceStateConstants"];
         }
     }
 
@@ -313,6 +336,15 @@ class SMGenerator extends resourcePolicyVisitor {
         }
 
         throw new Error("不合法的色块：" + state);
+    }
+
+    /**
+     * 表达式校验
+     */
+    verifyExpressions() {
+        if (this.state_machine["declarations"]["expressions"].length === 0) {
+            delete this.state_machine["declarations"]["expressions"];
+        }
     }
 
     /**

@@ -19,6 +19,7 @@ async function main() {
     let lexer = new resourcePolicyLexer.resourcePolicyLexer(chars);
     let stream = new antlr4.CommonTokenStream(lexer);
     let parser = new resourcePolicyParser.resourcePolicyParser(stream);
+    // 关闭恢复机制
     parser._errHandler = new antlr4.error.BailErrorStrategy();
     parser.buildParseTrees = true;
 

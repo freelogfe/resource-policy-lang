@@ -16,7 +16,7 @@
     "prod": "http://api.freelog.com/v2/auths/presentables/serviceStates"
   },
   "3": {
-    "dev": "http://api.testfreelog.com/v2/auths/userGroups/serviceStates",
+    "dev": "http://api.testfreelog.com/v2/auths/userGroups/serviceStates",.
     "prod": "http://api.freelog.com/v2/auths/userGroups/serviceStates"
   },
   "usergroup": {
