@@ -30,7 +30,7 @@ async function main() {
         throw new Error("输入格式错误");
     }
 
-    let gen = new SMGenerator(option.subjectType, option.env);
+    let gen = new SMGenerator(option.subjectType, null, option.env);
     try {
         gen.visit(tree);
     } catch (e) {

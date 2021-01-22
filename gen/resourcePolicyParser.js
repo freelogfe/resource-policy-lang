@@ -8,7 +8,7 @@ var grammarFileName = "resourcePolicy.g4";
 
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u0003/\u015c\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
+    "\u0003-\u015c\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
     "\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007\u0004",
     "\b\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0004\f\t\f\u0004",
     "\r\t\r\u0004\u000e\t\u000e\u0004\u000f\t\u000f\u0004\u0010\t\u0010\u0004",
@@ -58,169 +58,169 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "-\u0003-\u0003-\u0003-\u0007-\u0155\n-\f-\u000e-\u0158\u000b-\u0003",
     "-\u0003-\u0003-\u0002\u0003\u0006.\u0002\u0004\u0006\b\n\f\u000e\u0010",
     "\u0012\u0014\u0016\u0018\u001a\u001c\u001e \"$&(*,.02468:<>@BDFHJLN",
-    "PRTVX\u0002\u0007\u0003\u0002\u0005\u0007\u0004\u0002\r\u000e!!\u0003",
-    "\u0002\u0017\u0018\u0003\u0002\u0019\u001a\u0003\u0002,-\u0002\u0153",
-    "\u0002Z\u0003\u0002\u0002\u0002\u0004a\u0003\u0002\u0002\u0002\u0006",
-    "d\u0003\u0002\u0002\u0002\bo\u0003\u0002\u0002\u0002\nq\u0003\u0002",
-    "\u0002\u0002\ft\u0003\u0002\u0002\u0002\u000ey\u0003\u0002\u0002\u0002",
-    "\u0010\u007f\u0003\u0002\u0002\u0002\u0012\u0081\u0003\u0002\u0002\u0002",
-    "\u0014\u0084\u0003\u0002\u0002\u0002\u0016\u0087\u0003\u0002\u0002\u0002",
-    "\u0018\u008b\u0003\u0002\u0002\u0002\u001a\u0095\u0003\u0002\u0002\u0002",
-    "\u001c\u0097\u0003\u0002\u0002\u0002\u001e\u00a2\u0003\u0002\u0002\u0002",
-    " \u00a9\u0003\u0002\u0002\u0002\"\u00ab\u0003\u0002\u0002\u0002$\u00b4",
-    "\u0003\u0002\u0002\u0002&\u00b9\u0003\u0002\u0002\u0002(\u00bb\u0003",
-    "\u0002\u0002\u0002*\u00c1\u0003\u0002\u0002\u0002,\u00c3\u0003\u0002",
-    "\u0002\u0002.\u00c6\u0003\u0002\u0002\u00020\u00cc\u0003\u0002\u0002",
-    "\u00022\u00dc\u0003\u0002\u0002\u00024\u00de\u0003\u0002\u0002\u0002",
-    "6\u00e6\u0003\u0002\u0002\u00028\u00ee\u0003\u0002\u0002\u0002:\u00fc",
-    "\u0003\u0002\u0002\u0002<\u00fe\u0003\u0002\u0002\u0002>\u010a\u0003",
-    "\u0002\u0002\u0002@\u0114\u0003\u0002\u0002\u0002B\u0116\u0003\u0002",
-    "\u0002\u0002D\u0118\u0003\u0002\u0002\u0002F\u011c\u0003\u0002\u0002",
-    "\u0002H\u0120\u0003\u0002\u0002\u0002J\u0122\u0003\u0002\u0002\u0002",
-    "L\u0135\u0003\u0002\u0002\u0002N\u0137\u0003\u0002\u0002\u0002P\u0139",
-    "\u0003\u0002\u0002\u0002R\u0144\u0003\u0002\u0002\u0002T\u0148\u0003",
-    "\u0002\u0002\u0002V\u014e\u0003\u0002\u0002\u0002X\u0150\u0003\u0002",
-    "\u0002\u0002Z\\\u0005\u0004\u0003\u0002[]\u0005\u000e\b\u0002\\[\u0003",
-    "\u0002\u0002\u0002\\]\u0003\u0002\u0002\u0002]^\u0003\u0002\u0002\u0002",
-    "^_\u0005\u0016\f\u0002_`\u0007\u0002\u0002\u0003`\u0003\u0003\u0002",
-    "\u0002\u0002ab\u0007\u0003\u0002\u0002bc\u0005\u0006\u0004\u0002c\u0005",
-    "\u0003\u0002\u0002\u0002de\b\u0004\u0001\u0002ef\u0005\b\u0005\u0002",
-    "fl\u0003\u0002\u0002\u0002gh\f\u0003\u0002\u0002hi\u0007\u0004\u0002",
-    "\u0002ik\u0005\u0006\u0004\u0004jg\u0003\u0002\u0002\u0002kn\u0003\u0002",
-    "\u0002\u0002lj\u0003\u0002\u0002\u0002lm\u0003\u0002\u0002\u0002m\u0007",
-    "\u0003\u0002\u0002\u0002nl\u0003\u0002\u0002\u0002op\t\u0002\u0002\u0002",
-    "p\t\u0003\u0002\u0002\u0002qr\u0007\b\u0002\u0002rs\u0005\f\u0007\u0002",
-    "s\u000b\u0003\u0002\u0002\u0002tu\u0007\t\u0002\u0002uv\u0007\n\u0002",
-    "\u0002vw\u0005(\u0015\u0002w\r\u0003\u0002\u0002\u0002xz\u0005\u0010",
-    "\t\u0002yx\u0003\u0002\u0002\u0002z{\u0003\u0002\u0002\u0002{y\u0003",
-    "\u0002\u0002\u0002{|\u0003\u0002\u0002\u0002|\u000f\u0003\u0002\u0002",
-    "\u0002}\u0080\u0005\u0012\n\u0002~\u0080\u00050\u0019\u0002\u007f}\u0003",
-    "\u0002\u0002\u0002\u007f~\u0003\u0002\u0002\u0002\u0080\u0011\u0003",
-    "\u0002\u0002\u0002\u0081\u0082\u0005\u0014\u000b\u0002\u0082\u0083\u0005",
-    "\u001e\u0010\u0002\u0083\u0013\u0003\u0002\u0002\u0002\u0084\u0085\u0007",
-    "\u000b\u0002\u0002\u0085\u0015\u0003\u0002\u0002\u0002\u0086\u0088\u0005",
-    "\u0018\r\u0002\u0087\u0086\u0003\u0002\u0002\u0002\u0088\u0089\u0003",
-    "\u0002\u0002\u0002\u0089\u0087\u0003\u0002\u0002\u0002\u0089\u008a\u0003",
-    "\u0002\u0002\u0002\u008a\u0017\u0003\u0002\u0002\u0002\u008b\u008d\u0005",
-    "\u001a\u000e\u0002\u008c\u008e\u0005\u001c\u000f\u0002\u008d\u008c\u0003",
-    "\u0002\u0002\u0002\u008d\u008e\u0003\u0002\u0002\u0002\u008e\u008f\u0003",
-    "\u0002\u0002\u0002\u008f\u0091\u0007\f\u0002\u0002\u0090\u0092\u0005",
-    " \u0011\u0002\u0091\u0090\u0003\u0002\u0002\u0002\u0092\u0093\u0003",
-    "\u0002\u0002\u0002\u0093\u0091\u0003\u0002\u0002\u0002\u0093\u0094\u0003",
-    "\u0002\u0002\u0002\u0094\u0019\u0003\u0002\u0002\u0002\u0095\u0096\t",
-    "\u0003\u0002\u0002\u0096\u001b\u0003\u0002\u0002\u0002\u0097\u0098\u0007",
-    "\u000f\u0002\u0002\u0098\u009d\u0005\u001e\u0010\u0002\u0099\u009a\u0007",
-    "\u0004\u0002\u0002\u009a\u009c\u0005\u001e\u0010\u0002\u009b\u0099\u0003",
-    "\u0002\u0002\u0002\u009c\u009f\u0003\u0002\u0002\u0002\u009d\u009b\u0003",
-    "\u0002\u0002\u0002\u009d\u009e\u0003\u0002\u0002\u0002\u009e\u00a0\u0003",
-    "\u0002\u0002\u0002\u009f\u009d\u0003\u0002\u0002\u0002\u00a0\u00a1\u0007",
-    "\u0010\u0002\u0002\u00a1\u001d\u0003\u0002\u0002\u0002\u00a2\u00a3\u0007",
-    "!\u0002\u0002\u00a3\u001f\u0003\u0002\u0002\u0002\u00a4\u00a5\u0005",
-    "P)\u0002\u00a5\u00a6\u0007\u0011\u0002\u0002\u00a6\u00a7\u0005\u001a",
-    "\u000e\u0002\u00a7\u00aa\u0003\u0002\u0002\u0002\u00a8\u00aa\u0007\u0012",
-    "\u0002\u0002\u00a9\u00a4\u0003\u0002\u0002\u0002\u00a9\u00a8\u0003\u0002",
-    "\u0002\u0002\u00aa!\u0003\u0002\u0002\u0002\u00ab\u00ac\u0005(\u0015",
-    "\u0002\u00ac\u00ad\b\u0012\u0001\u0002\u00ad#\u0003\u0002\u0002\u0002",
-    "\u00ae\u00b3\u0005&\u0014\u0002\u00af\u00b3\u0005(\u0015\u0002\u00b0",
-    "\u00b3\u0005*\u0016\u0002\u00b1\u00b3\u0005,\u0017\u0002\u00b2\u00ae",
-    "\u0003\u0002\u0002\u0002\u00b2\u00af\u0003\u0002\u0002\u0002\u00b2\u00b0",
-    "\u0003\u0002\u0002\u0002\u00b2\u00b1\u0003\u0002\u0002\u0002\u00b3\u00b6",
-    "\u0003\u0002\u0002\u0002\u00b4\u00b2\u0003\u0002\u0002\u0002\u00b4\u00b5",
-    "\u0003\u0002\u0002\u0002\u00b5\u00b7\u0003\u0002\u0002\u0002\u00b6\u00b4",
-    "\u0003\u0002\u0002\u0002\u00b7\u00b8\u0007\u0002\u0002\u0003\u00b8%",
-    "\u0003\u0002\u0002\u0002\u00b9\u00ba\u0007\u001d\u0002\u0002\u00ba\'",
-    "\u0003\u0002\u0002\u0002\u00bb\u00bc\u0005*\u0016\u0002\u00bc\u00bd",
-    "\u0007\u0013\u0002\u0002\u00bd\u00be\u0005,\u0017\u0002\u00be\u00bf",
-    "\u0007\u0013\u0002\u0002\u00bf\u00c0\u0007 \u0002\u0002\u00c0)\u0003",
-    "\u0002\u0002\u0002\u00c1\u00c2\u0007\u001e\u0002\u0002\u00c2+\u0003",
-    "\u0002\u0002\u0002\u00c3\u00c4\u0007\u001f\u0002\u0002\u00c4-\u0003",
-    "\u0002\u0002\u0002\u00c5\u00c7\u00054\u001b\u0002\u00c6\u00c5\u0003",
-    "\u0002\u0002\u0002\u00c7\u00c8\u0003\u0002\u0002\u0002\u00c8\u00c6\u0003",
-    "\u0002\u0002\u0002\u00c8\u00c9\u0003\u0002\u0002\u0002\u00c9\u00ca\u0003",
-    "\u0002\u0002\u0002\u00ca\u00cb\u0007\u0002\u0002\u0003\u00cb/\u0003",
-    "\u0002\u0002\u0002\u00cc\u00cd\u00052\u001a\u0002\u00cd\u00d6\u0007",
-    "\u0014\u0002\u0002\u00ce\u00d3\u0007!\u0002\u0002\u00cf\u00d0\u0007",
-    "\u0004\u0002\u0002\u00d0\u00d2\u0007!\u0002\u0002\u00d1\u00cf\u0003",
-    "\u0002\u0002\u0002\u00d2\u00d5\u0003\u0002\u0002\u0002\u00d3\u00d1\u0003",
-    "\u0002\u0002\u0002\u00d3\u00d4\u0003\u0002\u0002\u0002\u00d4\u00d7\u0003",
-    "\u0002\u0002\u0002\u00d5\u00d3\u0003\u0002\u0002\u0002\u00d6\u00ce\u0003",
-    "\u0002\u0002\u0002\u00d6\u00d7\u0003\u0002\u0002\u0002\u00d7\u00d8\u0003",
-    "\u0002\u0002\u0002\u00d8\u00d9\u0007\u0015\u0002\u0002\u00d9\u00da\u0007",
-    "\u0016\u0002\u0002\u00da\u00db\u00054\u001b\u0002\u00db1\u0003\u0002",
-    "\u0002\u0002\u00dc\u00dd\u0007!\u0002\u0002\u00dd3\u0003\u0002\u0002",
-    "\u0002\u00de\u00e3\u00056\u001c\u0002\u00df\u00e0\t\u0004\u0002\u0002",
-    "\u00e0\u00e2\u00056\u001c\u0002\u00e1\u00df\u0003\u0002\u0002\u0002",
-    "\u00e2\u00e5\u0003\u0002\u0002\u0002\u00e3\u00e1\u0003\u0002\u0002\u0002",
-    "\u00e3\u00e4\u0003\u0002\u0002\u0002\u00e45\u0003\u0002\u0002\u0002",
-    "\u00e5\u00e3\u0003\u0002\u0002\u0002\u00e6\u00eb\u00058\u001d\u0002",
-    "\u00e7\u00e8\t\u0005\u0002\u0002\u00e8\u00ea\u00058\u001d\u0002\u00e9",
-    "\u00e7\u0003\u0002\u0002\u0002\u00ea\u00ed\u0003\u0002\u0002\u0002\u00eb",
-    "\u00e9\u0003\u0002\u0002\u0002\u00eb\u00ec\u0003\u0002\u0002\u0002\u00ec",
-    "7\u0003\u0002\u0002\u0002\u00ed\u00eb\u0003\u0002\u0002\u0002\u00ee",
-    "\u00f3\u0005:\u001e\u0002\u00ef\u00f0\u0007\u001b\u0002\u0002\u00f0",
-    "\u00f2\u0005:\u001e\u0002\u00f1\u00ef\u0003\u0002\u0002\u0002\u00f2",
-    "\u00f5\u0003\u0002\u0002\u0002\u00f3\u00f1\u0003\u0002\u0002\u0002\u00f3",
-    "\u00f4\u0003\u0002\u0002\u0002\u00f49\u0003\u0002\u0002\u0002\u00f5",
-    "\u00f3\u0003\u0002\u0002\u0002\u00f6\u00f7\u0007\u0017\u0002\u0002\u00f7",
-    "\u00fd\u0005:\u001e\u0002\u00f8\u00f9\u0007\u0018\u0002\u0002\u00f9",
-    "\u00fd\u0005:\u001e\u0002\u00fa\u00fd\u0005<\u001f\u0002\u00fb\u00fd",
-    "\u0005@!\u0002\u00fc\u00f6\u0003\u0002\u0002\u0002\u00fc\u00f8\u0003",
-    "\u0002\u0002\u0002\u00fc\u00fa\u0003\u0002\u0002\u0002\u00fc\u00fb\u0003",
-    "\u0002\u0002\u0002\u00fd;\u0003\u0002\u0002\u0002\u00fe\u00ff\u0005",
-    "> \u0002\u00ff\u0100\u0007\u0014\u0002\u0002\u0100\u0105\u00054\u001b",
-    "\u0002\u0101\u0102\u0007\u0004\u0002\u0002\u0102\u0104\u00054\u001b",
-    "\u0002\u0103\u0101\u0003\u0002\u0002\u0002\u0104\u0107\u0003\u0002\u0002",
-    "\u0002\u0105\u0103\u0003\u0002\u0002\u0002\u0105\u0106\u0003\u0002\u0002",
-    "\u0002\u0106\u0108\u0003\u0002\u0002\u0002\u0107\u0105\u0003\u0002\u0002",
-    "\u0002\u0108\u0109\u0007\u0015\u0002\u0002\u0109=\u0003\u0002\u0002",
-    "\u0002\u010a\u010b\u0007\u001c\u0002\u0002\u010b?\u0003\u0002\u0002",
-    "\u0002\u010c\u0115\u0005B\"\u0002\u010d\u0115\u0005D#\u0002\u010e\u010f",
-    "\u0007\u0014\u0002\u0002\u010f\u0110\u00054\u001b\u0002\u0110\u0111",
-    "\u0007\u0015\u0002\u0002\u0111\u0115\u0003\u0002\u0002\u0002\u0112\u0115",
-    "\u0007\"\u0002\u0002\u0113\u0115\u0005F$\u0002\u0114\u010c\u0003\u0002",
-    "\u0002\u0002\u0114\u010d\u0003\u0002\u0002\u0002\u0114\u010e\u0003\u0002",
-    "\u0002\u0002\u0114\u0112\u0003\u0002\u0002\u0002\u0114\u0113\u0003\u0002",
-    "\u0002\u0002\u0115A\u0003\u0002\u0002\u0002\u0116\u0117\u0007+\u0002",
-    "\u0002\u0117C\u0003\u0002\u0002\u0002\u0118\u0119\t\u0006\u0002\u0002",
-    "\u0119E\u0003\u0002\u0002\u0002\u011a\u011d\u0005N(\u0002\u011b\u011d",
-    "\u0007!\u0002\u0002\u011c\u011a\u0003\u0002\u0002\u0002\u011c\u011b",
-    "\u0003\u0002\u0002\u0002\u011dG\u0003\u0002\u0002\u0002\u011e\u0121",
-    "\u0005J&\u0002\u011f\u0121\u00054\u001b\u0002\u0120\u011e\u0003\u0002",
-    "\u0002\u0002\u0120\u011f\u0003\u0002\u0002\u0002\u0121I\u0003\u0002",
-    "\u0002\u0002\u0122\u0123\u00052\u001a\u0002\u0123\u012e\u0007\u0014",
-    "\u0002\u0002\u0124\u0129\u0005L\'\u0002\u0125\u0126\u0007\u0004\u0002",
-    "\u0002\u0126\u0128\u0005L\'\u0002\u0127\u0125\u0003\u0002\u0002\u0002",
-    "\u0128\u012b\u0003\u0002\u0002\u0002\u0129\u0127\u0003\u0002\u0002\u0002",
-    "\u0129\u012a\u0003\u0002\u0002\u0002\u012a\u012d\u0003\u0002\u0002\u0002",
-    "\u012b\u0129\u0003\u0002\u0002\u0002\u012c\u0124\u0003\u0002\u0002\u0002",
-    "\u012d\u0130\u0003\u0002\u0002\u0002\u012e\u012c\u0003\u0002\u0002\u0002",
-    "\u012e\u012f\u0003\u0002\u0002\u0002\u012f\u0131\u0003\u0002\u0002\u0002",
-    "\u0130\u012e\u0003\u0002\u0002\u0002\u0131\u0132\u0007\u0015\u0002\u0002",
-    "\u0132K\u0003\u0002\u0002\u0002\u0133\u0136\u0007\"\u0002\u0002\u0134",
-    "\u0136\u0005N(\u0002\u0135\u0133\u0003\u0002\u0002\u0002\u0135\u0134",
-    "\u0003\u0002\u0002\u0002\u0136M\u0003\u0002\u0002\u0002\u0137\u0138",
-    "\u0007.\u0002\u0002\u0138O\u0003\u0002\u0002\u0002\u0139\u013a\u0005",
-    "R*\u0002\u013a\u013e\u0007\u0013\u0002\u0002\u013b\u013c\u0005T+\u0002",
-    "\u013c\u013d\u0007\u0013\u0002\u0002\u013d\u013f\u0003\u0002\u0002\u0002",
-    "\u013e\u013b\u0003\u0002\u0002\u0002\u013e\u013f\u0003\u0002\u0002\u0002",
-    "\u013f\u0140\u0003\u0002\u0002\u0002\u0140\u0142\u0005V,\u0002\u0141",
-    "\u0143\u0005X-\u0002\u0142\u0141\u0003\u0002\u0002\u0002\u0142\u0143",
-    "\u0003\u0002\u0002\u0002\u0143Q\u0003\u0002\u0002\u0002\u0144\u0145",
-    "\u0007/\u0002\u0002\u0145S\u0003\u0002\u0002\u0002\u0146\u0147\u0007",
-    "!\u0002\u0002\u0147\u0149\u0007\u0013\u0002\u0002\u0148\u0146\u0003",
-    "\u0002\u0002\u0002\u0149\u014a\u0003\u0002\u0002\u0002\u014a\u0148\u0003",
-    "\u0002\u0002\u0002\u014a\u014b\u0003\u0002\u0002\u0002\u014b\u014c\u0003",
-    "\u0002\u0002\u0002\u014c\u014d\u0007!\u0002\u0002\u014dU\u0003\u0002",
-    "\u0002\u0002\u014e\u014f\u0007!\u0002\u0002\u014fW\u0003\u0002\u0002",
-    "\u0002\u0150\u0151\u0007\u0014\u0002\u0002\u0151\u0156\u0007!\u0002",
-    "\u0002\u0152\u0153\u0007\u0004\u0002\u0002\u0153\u0155\u0007!\u0002",
-    "\u0002\u0154\u0152\u0003\u0002\u0002\u0002\u0155\u0158\u0003\u0002\u0002",
-    "\u0002\u0156\u0154\u0003\u0002\u0002\u0002\u0156\u0157\u0003\u0002\u0002",
-    "\u0002\u0157\u0159\u0003\u0002\u0002\u0002\u0158\u0156\u0003\u0002\u0002",
-    "\u0002\u0159\u015a\u0007\u0015\u0002\u0002\u015aY\u0003\u0002\u0002",
-    "\u0002\u001f\\l{\u007f\u0089\u008d\u0093\u009d\u00a9\u00b2\u00b4\u00c8",
-    "\u00d3\u00d6\u00e3\u00eb\u00f3\u00fc\u0105\u0114\u011c\u0120\u0129\u012e",
-    "\u0135\u013e\u0142\u014a\u0156"].join("");
+    "PRTVX\u0002\u0006\u0003\u0002\u0005\u0007\u0003\u0002\u0015\u0016\u0003",
+    "\u0002\u0017\u0018\u0003\u0002*+\u0002\u0153\u0002Z\u0003\u0002\u0002",
+    "\u0002\u0004a\u0003\u0002\u0002\u0002\u0006d\u0003\u0002\u0002\u0002",
+    "\bo\u0003\u0002\u0002\u0002\nq\u0003\u0002\u0002\u0002\ft\u0003\u0002",
+    "\u0002\u0002\u000ey\u0003\u0002\u0002\u0002\u0010\u007f\u0003\u0002",
+    "\u0002\u0002\u0012\u0081\u0003\u0002\u0002\u0002\u0014\u0084\u0003\u0002",
+    "\u0002\u0002\u0016\u0087\u0003\u0002\u0002\u0002\u0018\u008b\u0003\u0002",
+    "\u0002\u0002\u001a\u0095\u0003\u0002\u0002\u0002\u001c\u0097\u0003\u0002",
+    "\u0002\u0002\u001e\u00a2\u0003\u0002\u0002\u0002 \u00a9\u0003\u0002",
+    "\u0002\u0002\"\u00ab\u0003\u0002\u0002\u0002$\u00b4\u0003\u0002\u0002",
+    "\u0002&\u00b9\u0003\u0002\u0002\u0002(\u00bb\u0003\u0002\u0002\u0002",
+    "*\u00c1\u0003\u0002\u0002\u0002,\u00c3\u0003\u0002\u0002\u0002.\u00c6",
+    "\u0003\u0002\u0002\u00020\u00cc\u0003\u0002\u0002\u00022\u00dc\u0003",
+    "\u0002\u0002\u00024\u00de\u0003\u0002\u0002\u00026\u00e6\u0003\u0002",
+    "\u0002\u00028\u00ee\u0003\u0002\u0002\u0002:\u00fc\u0003\u0002\u0002",
+    "\u0002<\u00fe\u0003\u0002\u0002\u0002>\u010a\u0003\u0002\u0002\u0002",
+    "@\u0114\u0003\u0002\u0002\u0002B\u0116\u0003\u0002\u0002\u0002D\u0118",
+    "\u0003\u0002\u0002\u0002F\u011c\u0003\u0002\u0002\u0002H\u0120\u0003",
+    "\u0002\u0002\u0002J\u0122\u0003\u0002\u0002\u0002L\u0135\u0003\u0002",
+    "\u0002\u0002N\u0137\u0003\u0002\u0002\u0002P\u0139\u0003\u0002\u0002",
+    "\u0002R\u0144\u0003\u0002\u0002\u0002T\u0148\u0003\u0002\u0002\u0002",
+    "V\u014e\u0003\u0002\u0002\u0002X\u0150\u0003\u0002\u0002\u0002Z\\\u0005",
+    "\u0004\u0003\u0002[]\u0005\u000e\b\u0002\\[\u0003\u0002\u0002\u0002",
+    "\\]\u0003\u0002\u0002\u0002]^\u0003\u0002\u0002\u0002^_\u0005\u0016",
+    "\f\u0002_`\u0007\u0002\u0002\u0003`\u0003\u0003\u0002\u0002\u0002ab",
+    "\u0007\u0003\u0002\u0002bc\u0005\u0006\u0004\u0002c\u0005\u0003\u0002",
+    "\u0002\u0002de\b\u0004\u0001\u0002ef\u0005\b\u0005\u0002fl\u0003\u0002",
+    "\u0002\u0002gh\f\u0003\u0002\u0002hi\u0007\u0004\u0002\u0002ik\u0005",
+    "\u0006\u0004\u0004jg\u0003\u0002\u0002\u0002kn\u0003\u0002\u0002\u0002",
+    "lj\u0003\u0002\u0002\u0002lm\u0003\u0002\u0002\u0002m\u0007\u0003\u0002",
+    "\u0002\u0002nl\u0003\u0002\u0002\u0002op\t\u0002\u0002\u0002p\t\u0003",
+    "\u0002\u0002\u0002qr\u0007\b\u0002\u0002rs\u0005\f\u0007\u0002s\u000b",
+    "\u0003\u0002\u0002\u0002tu\u0007\t\u0002\u0002uv\u0007\n\u0002\u0002",
+    "vw\u0005(\u0015\u0002w\r\u0003\u0002\u0002\u0002xz\u0005\u0010\t\u0002",
+    "yx\u0003\u0002\u0002\u0002z{\u0003\u0002\u0002\u0002{y\u0003\u0002\u0002",
+    "\u0002{|\u0003\u0002\u0002\u0002|\u000f\u0003\u0002\u0002\u0002}\u0080",
+    "\u0005\u0012\n\u0002~\u0080\u00050\u0019\u0002\u007f}\u0003\u0002\u0002",
+    "\u0002\u007f~\u0003\u0002\u0002\u0002\u0080\u0011\u0003\u0002\u0002",
+    "\u0002\u0081\u0082\u0005\u0014\u000b\u0002\u0082\u0083\u0005\u001e\u0010",
+    "\u0002\u0083\u0013\u0003\u0002\u0002\u0002\u0084\u0085\u0007\u000b\u0002",
+    "\u0002\u0085\u0015\u0003\u0002\u0002\u0002\u0086\u0088\u0005\u0018\r",
+    "\u0002\u0087\u0086\u0003\u0002\u0002\u0002\u0088\u0089\u0003\u0002\u0002",
+    "\u0002\u0089\u0087\u0003\u0002\u0002\u0002\u0089\u008a\u0003\u0002\u0002",
+    "\u0002\u008a\u0017\u0003\u0002\u0002\u0002\u008b\u008d\u0005\u001a\u000e",
+    "\u0002\u008c\u008e\u0005\u001c\u000f\u0002\u008d\u008c\u0003\u0002\u0002",
+    "\u0002\u008d\u008e\u0003\u0002\u0002\u0002\u008e\u008f\u0003\u0002\u0002",
+    "\u0002\u008f\u0091\u0007\f\u0002\u0002\u0090\u0092\u0005 \u0011\u0002",
+    "\u0091\u0090\u0003\u0002\u0002\u0002\u0092\u0093\u0003\u0002\u0002\u0002",
+    "\u0093\u0091\u0003\u0002\u0002\u0002\u0093\u0094\u0003\u0002\u0002\u0002",
+    "\u0094\u0019\u0003\u0002\u0002\u0002\u0095\u0096\u0007\u001f\u0002\u0002",
+    "\u0096\u001b\u0003\u0002\u0002\u0002\u0097\u0098\u0007\r\u0002\u0002",
+    "\u0098\u009d\u0005\u001e\u0010\u0002\u0099\u009a\u0007\u0004\u0002\u0002",
+    "\u009a\u009c\u0005\u001e\u0010\u0002\u009b\u0099\u0003\u0002\u0002\u0002",
+    "\u009c\u009f\u0003\u0002\u0002\u0002\u009d\u009b\u0003\u0002\u0002\u0002",
+    "\u009d\u009e\u0003\u0002\u0002\u0002\u009e\u00a0\u0003\u0002\u0002\u0002",
+    "\u009f\u009d\u0003\u0002\u0002\u0002\u00a0\u00a1\u0007\u000e\u0002\u0002",
+    "\u00a1\u001d\u0003\u0002\u0002\u0002\u00a2\u00a3\u0007\u001f\u0002\u0002",
+    "\u00a3\u001f\u0003\u0002\u0002\u0002\u00a4\u00a5\u0005P)\u0002\u00a5",
+    "\u00a6\u0007\u000f\u0002\u0002\u00a6\u00a7\u0005\u001a\u000e\u0002\u00a7",
+    "\u00aa\u0003\u0002\u0002\u0002\u00a8\u00aa\u0007\u0010\u0002\u0002\u00a9",
+    "\u00a4\u0003\u0002\u0002\u0002\u00a9\u00a8\u0003\u0002\u0002\u0002\u00aa",
+    "!\u0003\u0002\u0002\u0002\u00ab\u00ac\u0005(\u0015\u0002\u00ac\u00ad",
+    "\b\u0012\u0001\u0002\u00ad#\u0003\u0002\u0002\u0002\u00ae\u00b3\u0005",
+    "&\u0014\u0002\u00af\u00b3\u0005(\u0015\u0002\u00b0\u00b3\u0005*\u0016",
+    "\u0002\u00b1\u00b3\u0005,\u0017\u0002\u00b2\u00ae\u0003\u0002\u0002",
+    "\u0002\u00b2\u00af\u0003\u0002\u0002\u0002\u00b2\u00b0\u0003\u0002\u0002",
+    "\u0002\u00b2\u00b1\u0003\u0002\u0002\u0002\u00b3\u00b6\u0003\u0002\u0002",
+    "\u0002\u00b4\u00b2\u0003\u0002\u0002\u0002\u00b4\u00b5\u0003\u0002\u0002",
+    "\u0002\u00b5\u00b7\u0003\u0002\u0002\u0002\u00b6\u00b4\u0003\u0002\u0002",
+    "\u0002\u00b7\u00b8\u0007\u0002\u0002\u0003\u00b8%\u0003\u0002\u0002",
+    "\u0002\u00b9\u00ba\u0007\u001b\u0002\u0002\u00ba\'\u0003\u0002\u0002",
+    "\u0002\u00bb\u00bc\u0005*\u0016\u0002\u00bc\u00bd\u0007\u0011\u0002",
+    "\u0002\u00bd\u00be\u0005,\u0017\u0002\u00be\u00bf\u0007\u0011\u0002",
+    "\u0002\u00bf\u00c0\u0007\u001e\u0002\u0002\u00c0)\u0003\u0002\u0002",
+    "\u0002\u00c1\u00c2\u0007\u001c\u0002\u0002\u00c2+\u0003\u0002\u0002",
+    "\u0002\u00c3\u00c4\u0007\u001d\u0002\u0002\u00c4-\u0003\u0002\u0002",
+    "\u0002\u00c5\u00c7\u00054\u001b\u0002\u00c6\u00c5\u0003\u0002\u0002",
+    "\u0002\u00c7\u00c8\u0003\u0002\u0002\u0002\u00c8\u00c6\u0003\u0002\u0002",
+    "\u0002\u00c8\u00c9\u0003\u0002\u0002\u0002\u00c9\u00ca\u0003\u0002\u0002",
+    "\u0002\u00ca\u00cb\u0007\u0002\u0002\u0003\u00cb/\u0003\u0002\u0002",
+    "\u0002\u00cc\u00cd\u00052\u001a\u0002\u00cd\u00d6\u0007\u0012\u0002",
+    "\u0002\u00ce\u00d3\u0007\u001f\u0002\u0002\u00cf\u00d0\u0007\u0004\u0002",
+    "\u0002\u00d0\u00d2\u0007\u001f\u0002\u0002\u00d1\u00cf\u0003\u0002\u0002",
+    "\u0002\u00d2\u00d5\u0003\u0002\u0002\u0002\u00d3\u00d1\u0003\u0002\u0002",
+    "\u0002\u00d3\u00d4\u0003\u0002\u0002\u0002\u00d4\u00d7\u0003\u0002\u0002",
+    "\u0002\u00d5\u00d3\u0003\u0002\u0002\u0002\u00d6\u00ce\u0003\u0002\u0002",
+    "\u0002\u00d6\u00d7\u0003\u0002\u0002\u0002\u00d7\u00d8\u0003\u0002\u0002",
+    "\u0002\u00d8\u00d9\u0007\u0013\u0002\u0002\u00d9\u00da\u0007\u0014\u0002",
+    "\u0002\u00da\u00db\u00054\u001b\u0002\u00db1\u0003\u0002\u0002\u0002",
+    "\u00dc\u00dd\u0007\u001f\u0002\u0002\u00dd3\u0003\u0002\u0002\u0002",
+    "\u00de\u00e3\u00056\u001c\u0002\u00df\u00e0\t\u0003\u0002\u0002\u00e0",
+    "\u00e2\u00056\u001c\u0002\u00e1\u00df\u0003\u0002\u0002\u0002\u00e2",
+    "\u00e5\u0003\u0002\u0002\u0002\u00e3\u00e1\u0003\u0002\u0002\u0002\u00e3",
+    "\u00e4\u0003\u0002\u0002\u0002\u00e45\u0003\u0002\u0002\u0002\u00e5",
+    "\u00e3\u0003\u0002\u0002\u0002\u00e6\u00eb\u00058\u001d\u0002\u00e7",
+    "\u00e8\t\u0004\u0002\u0002\u00e8\u00ea\u00058\u001d\u0002\u00e9\u00e7",
+    "\u0003\u0002\u0002\u0002\u00ea\u00ed\u0003\u0002\u0002\u0002\u00eb\u00e9",
+    "\u0003\u0002\u0002\u0002\u00eb\u00ec\u0003\u0002\u0002\u0002\u00ec7",
+    "\u0003\u0002\u0002\u0002\u00ed\u00eb\u0003\u0002\u0002\u0002\u00ee\u00f3",
+    "\u0005:\u001e\u0002\u00ef\u00f0\u0007\u0019\u0002\u0002\u00f0\u00f2",
+    "\u0005:\u001e\u0002\u00f1\u00ef\u0003\u0002\u0002\u0002\u00f2\u00f5",
+    "\u0003\u0002\u0002\u0002\u00f3\u00f1\u0003\u0002\u0002\u0002\u00f3\u00f4",
+    "\u0003\u0002\u0002\u0002\u00f49\u0003\u0002\u0002\u0002\u00f5\u00f3",
+    "\u0003\u0002\u0002\u0002\u00f6\u00f7\u0007\u0015\u0002\u0002\u00f7\u00fd",
+    "\u0005:\u001e\u0002\u00f8\u00f9\u0007\u0016\u0002\u0002\u00f9\u00fd",
+    "\u0005:\u001e\u0002\u00fa\u00fd\u0005<\u001f\u0002\u00fb\u00fd\u0005",
+    "@!\u0002\u00fc\u00f6\u0003\u0002\u0002\u0002\u00fc\u00f8\u0003\u0002",
+    "\u0002\u0002\u00fc\u00fa\u0003\u0002\u0002\u0002\u00fc\u00fb\u0003\u0002",
+    "\u0002\u0002\u00fd;\u0003\u0002\u0002\u0002\u00fe\u00ff\u0005> \u0002",
+    "\u00ff\u0100\u0007\u0012\u0002\u0002\u0100\u0105\u00054\u001b\u0002",
+    "\u0101\u0102\u0007\u0004\u0002\u0002\u0102\u0104\u00054\u001b\u0002",
+    "\u0103\u0101\u0003\u0002\u0002\u0002\u0104\u0107\u0003\u0002\u0002\u0002",
+    "\u0105\u0103\u0003\u0002\u0002\u0002\u0105\u0106\u0003\u0002\u0002\u0002",
+    "\u0106\u0108\u0003\u0002\u0002\u0002\u0107\u0105\u0003\u0002\u0002\u0002",
+    "\u0108\u0109\u0007\u0013\u0002\u0002\u0109=\u0003\u0002\u0002\u0002",
+    "\u010a\u010b\u0007\u001a\u0002\u0002\u010b?\u0003\u0002\u0002\u0002",
+    "\u010c\u0115\u0005B\"\u0002\u010d\u0115\u0005D#\u0002\u010e\u010f\u0007",
+    "\u0012\u0002\u0002\u010f\u0110\u00054\u001b\u0002\u0110\u0111\u0007",
+    "\u0013\u0002\u0002\u0111\u0115\u0003\u0002\u0002\u0002\u0112\u0115\u0007",
+    " \u0002\u0002\u0113\u0115\u0005F$\u0002\u0114\u010c\u0003\u0002\u0002",
+    "\u0002\u0114\u010d\u0003\u0002\u0002\u0002\u0114\u010e\u0003\u0002\u0002",
+    "\u0002\u0114\u0112\u0003\u0002\u0002\u0002\u0114\u0113\u0003\u0002\u0002",
+    "\u0002\u0115A\u0003\u0002\u0002\u0002\u0116\u0117\u0007)\u0002\u0002",
+    "\u0117C\u0003\u0002\u0002\u0002\u0118\u0119\t\u0005\u0002\u0002\u0119",
+    "E\u0003\u0002\u0002\u0002\u011a\u011d\u0005N(\u0002\u011b\u011d\u0007",
+    "\u001f\u0002\u0002\u011c\u011a\u0003\u0002\u0002\u0002\u011c\u011b\u0003",
+    "\u0002\u0002\u0002\u011dG\u0003\u0002\u0002\u0002\u011e\u0121\u0005",
+    "J&\u0002\u011f\u0121\u00054\u001b\u0002\u0120\u011e\u0003\u0002\u0002",
+    "\u0002\u0120\u011f\u0003\u0002\u0002\u0002\u0121I\u0003\u0002\u0002",
+    "\u0002\u0122\u0123\u00052\u001a\u0002\u0123\u012e\u0007\u0012\u0002",
+    "\u0002\u0124\u0129\u0005L\'\u0002\u0125\u0126\u0007\u0004\u0002\u0002",
+    "\u0126\u0128\u0005L\'\u0002\u0127\u0125\u0003\u0002\u0002\u0002\u0128",
+    "\u012b\u0003\u0002\u0002\u0002\u0129\u0127\u0003\u0002\u0002\u0002\u0129",
+    "\u012a\u0003\u0002\u0002\u0002\u012a\u012d\u0003\u0002\u0002\u0002\u012b",
+    "\u0129\u0003\u0002\u0002\u0002\u012c\u0124\u0003\u0002\u0002\u0002\u012d",
+    "\u0130\u0003\u0002\u0002\u0002\u012e\u012c\u0003\u0002\u0002\u0002\u012e",
+    "\u012f\u0003\u0002\u0002\u0002\u012f\u0131\u0003\u0002\u0002\u0002\u0130",
+    "\u012e\u0003\u0002\u0002\u0002\u0131\u0132\u0007\u0013\u0002\u0002\u0132",
+    "K\u0003\u0002\u0002\u0002\u0133\u0136\u0007 \u0002\u0002\u0134\u0136",
+    "\u0005N(\u0002\u0135\u0133\u0003\u0002\u0002\u0002\u0135\u0134\u0003",
+    "\u0002\u0002\u0002\u0136M\u0003\u0002\u0002\u0002\u0137\u0138\u0007",
+    ",\u0002\u0002\u0138O\u0003\u0002\u0002\u0002\u0139\u013a\u0005R*\u0002",
+    "\u013a\u013e\u0007\u0011\u0002\u0002\u013b\u013c\u0005T+\u0002\u013c",
+    "\u013d\u0007\u0011\u0002\u0002\u013d\u013f\u0003\u0002\u0002\u0002\u013e",
+    "\u013b\u0003\u0002\u0002\u0002\u013e\u013f\u0003\u0002\u0002\u0002\u013f",
+    "\u0140\u0003\u0002\u0002\u0002\u0140\u0142\u0005V,\u0002\u0141\u0143",
+    "\u0005X-\u0002\u0142\u0141\u0003\u0002\u0002\u0002\u0142\u0143\u0003",
+    "\u0002\u0002\u0002\u0143Q\u0003\u0002\u0002\u0002\u0144\u0145\u0007",
+    "-\u0002\u0002\u0145S\u0003\u0002\u0002\u0002\u0146\u0147\u0007\u001f",
+    "\u0002\u0002\u0147\u0149\u0007\u0011\u0002\u0002\u0148\u0146\u0003\u0002",
+    "\u0002\u0002\u0149\u014a\u0003\u0002\u0002\u0002\u014a\u0148\u0003\u0002",
+    "\u0002\u0002\u014a\u014b\u0003\u0002\u0002\u0002\u014b\u014c\u0003\u0002",
+    "\u0002\u0002\u014c\u014d\u0007\u001f\u0002\u0002\u014dU\u0003\u0002",
+    "\u0002\u0002\u014e\u014f\u0007\u001f\u0002\u0002\u014fW\u0003\u0002",
+    "\u0002\u0002\u0150\u0151\u0007\u0012\u0002\u0002\u0151\u0156\u0007\u001f",
+    "\u0002\u0002\u0152\u0153\u0007\u0004\u0002\u0002\u0153\u0155\u0007\u001f",
+    "\u0002\u0002\u0154\u0152\u0003\u0002\u0002\u0002\u0155\u0158\u0003\u0002",
+    "\u0002\u0002\u0156\u0154\u0003\u0002\u0002\u0002\u0156\u0157\u0003\u0002",
+    "\u0002\u0002\u0157\u0159\u0003\u0002\u0002\u0002\u0158\u0156\u0003\u0002",
+    "\u0002\u0002\u0159\u015a\u0007\u0013\u0002\u0002\u015aY\u0003\u0002",
+    "\u0002\u0002\u001f\\l{\u007f\u0089\u008d\u0093\u009d\u00a9\u00b2\u00b4",
+    "\u00c8\u00d3\u00d6\u00e3\u00eb\u00f3\u00fc\u0105\u0114\u011c\u0120\u0129",
+    "\u012e\u0135\u013e\u0142\u014a\u0156"].join("");
 
 
 var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -231,20 +231,18 @@ var sharedContextCache = new antlr4.PredictionContextCache();
 
 var literalNames = [ null, "'for'", "','", "'public'", "'nodes'", "'registered_users'", 
                      "'require'", "'contract'", "'with'", "'always'", "':'", 
-                     "'initial'", "'finish'", "'['", "']'", "'=>'", "'terminate'", 
-                     "'.'", "'('", "')'", "'='", "'+'", "'-'", "'*'", "'/'", 
-                     "'^'", "'sum'", null, null, null, null, null, null, 
+                     "'['", "']'", "'=>'", "'terminate'", "'.'", "'('", 
+                     "')'", "'='", "'+'", "'-'", "'*'", "'/'", "'^'", "'sum'", 
                      null, null, null, null, null, null, null, null, null, 
-                     "'pi'", "'e'" ];
+                     null, null, null, null, null, null, "'pi'", "'e'" ];
 
 var symbolicNames = [ null, null, null, null, null, null, null, null, null, 
                       null, null, null, null, null, null, null, null, null, 
-                      null, null, null, null, null, null, null, null, null, 
-                      "ACCOUNT_NUMBER", "SUBJECT_SERVICE_NAME", "UOID", 
-                      "SUBJECT_ID", "ID", "INT", "USER_ID", "PHONE_NUMBER_CN_MOBILE", 
-                      "EMAIL", "PERIOD", "TIME", "DATE", "MONEY_AMOUNT", 
-                      "WS", "SCIENTIFIC_NUMBER", "PI", "EULER", "VARIABLE_CONTRACT", 
-                      "EVENT_SERVICE_NAME" ];
+                      null, null, null, null, null, null, null, "ACCOUNT_NUMBER", 
+                      "SUBJECT_SERVICE_NAME", "UOID", "SUBJECT_ID", "ID", 
+                      "INT", "USER_ID", "PHONE_NUMBER_CN_MOBILE", "EMAIL", 
+                      "PERIOD", "TIME", "DATE", "MONEY_AMOUNT", "WS", "SCIENTIFIC_NUMBER", 
+                      "PI", "EULER", "VARIABLE_CONTRACT", "EVENT_SERVICE_NAME" ];
 
 var ruleNames =  [ "policy", "audience_strict", "audience_clause", "users", 
                    "requirement", "contract_with_subject", "declaration_section", 
@@ -304,27 +302,25 @@ resourcePolicyParser.T__20 = 21;
 resourcePolicyParser.T__21 = 22;
 resourcePolicyParser.T__22 = 23;
 resourcePolicyParser.T__23 = 24;
-resourcePolicyParser.T__24 = 25;
-resourcePolicyParser.T__25 = 26;
-resourcePolicyParser.ACCOUNT_NUMBER = 27;
-resourcePolicyParser.SUBJECT_SERVICE_NAME = 28;
-resourcePolicyParser.UOID = 29;
-resourcePolicyParser.SUBJECT_ID = 30;
-resourcePolicyParser.ID = 31;
-resourcePolicyParser.INT = 32;
-resourcePolicyParser.USER_ID = 33;
-resourcePolicyParser.PHONE_NUMBER_CN_MOBILE = 34;
-resourcePolicyParser.EMAIL = 35;
-resourcePolicyParser.PERIOD = 36;
-resourcePolicyParser.TIME = 37;
-resourcePolicyParser.DATE = 38;
-resourcePolicyParser.MONEY_AMOUNT = 39;
-resourcePolicyParser.WS = 40;
-resourcePolicyParser.SCIENTIFIC_NUMBER = 41;
-resourcePolicyParser.PI = 42;
-resourcePolicyParser.EULER = 43;
-resourcePolicyParser.VARIABLE_CONTRACT = 44;
-resourcePolicyParser.EVENT_SERVICE_NAME = 45;
+resourcePolicyParser.ACCOUNT_NUMBER = 25;
+resourcePolicyParser.SUBJECT_SERVICE_NAME = 26;
+resourcePolicyParser.UOID = 27;
+resourcePolicyParser.SUBJECT_ID = 28;
+resourcePolicyParser.ID = 29;
+resourcePolicyParser.INT = 30;
+resourcePolicyParser.USER_ID = 31;
+resourcePolicyParser.PHONE_NUMBER_CN_MOBILE = 32;
+resourcePolicyParser.EMAIL = 33;
+resourcePolicyParser.PERIOD = 34;
+resourcePolicyParser.TIME = 35;
+resourcePolicyParser.DATE = 36;
+resourcePolicyParser.MONEY_AMOUNT = 37;
+resourcePolicyParser.WS = 38;
+resourcePolicyParser.SCIENTIFIC_NUMBER = 39;
+resourcePolicyParser.PI = 40;
+resourcePolicyParser.EULER = 41;
+resourcePolicyParser.VARIABLE_CONTRACT = 42;
+resourcePolicyParser.EVENT_SERVICE_NAME = 43;
 
 resourcePolicyParser.RULE_policy = 0;
 resourcePolicyParser.RULE_audience_strict = 1;
@@ -1239,7 +1235,7 @@ resourcePolicyParser.prototype.state_definition_section = function() {
             this.state = 135; 
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-        } while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << resourcePolicyParser.T__10) | (1 << resourcePolicyParser.T__11) | (1 << resourcePolicyParser.ID))) !== 0));
+        } while(_la===resourcePolicyParser.ID);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -1327,7 +1323,7 @@ resourcePolicyParser.prototype.state_definition = function() {
         this.state = 139;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===resourcePolicyParser.T__12) {
+        if(_la===resourcePolicyParser.T__10) {
             this.state = 138;
             this.service_state_definition();
         }
@@ -1343,7 +1339,7 @@ resourcePolicyParser.prototype.state_definition = function() {
             this.state = 145; 
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-        } while(_la===resourcePolicyParser.T__15 || _la===resourcePolicyParser.EVENT_SERVICE_NAME);
+        } while(_la===resourcePolicyParser.T__13 || _la===resourcePolicyParser.EVENT_SERVICE_NAME);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -1408,18 +1404,10 @@ resourcePolicyParser.prototype.state_name = function() {
 
     var localctx = new State_nameContext(this, this._ctx, this.state);
     this.enterRule(localctx, 24, resourcePolicyParser.RULE_state_name);
-    var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
         this.state = 147;
-        _la = this._input.LA(1);
-        if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << resourcePolicyParser.T__10) | (1 << resourcePolicyParser.T__11) | (1 << resourcePolicyParser.ID))) !== 0))) {
-        this._errHandler.recoverInline(this);
-        }
-        else {
-        	this._errHandler.reportMatch(this);
-            this.consume();
-        }
+        this.match(resourcePolicyParser.ID);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -1495,7 +1483,7 @@ resourcePolicyParser.prototype.service_state_definition = function() {
     try {
         this.enterOuterAlt(localctx, 1);
         this.state = 149;
-        this.match(resourcePolicyParser.T__12);
+        this.match(resourcePolicyParser.T__10);
         this.state = 150;
         this.service_state();
         this.state = 155;
@@ -1511,7 +1499,7 @@ resourcePolicyParser.prototype.service_state_definition = function() {
             _la = this._input.LA(1);
         }
         this.state = 158;
-        this.match(resourcePolicyParser.T__13);
+        this.match(resourcePolicyParser.T__11);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -1658,14 +1646,14 @@ resourcePolicyParser.prototype.state_transition = function() {
             this.state = 162;
             this.event();
             this.state = 163;
-            this.match(resourcePolicyParser.T__14);
+            this.match(resourcePolicyParser.T__12);
             this.state = 164;
             this.state_name();
             break;
-        case resourcePolicyParser.T__15:
+        case resourcePolicyParser.T__13:
             this.enterOuterAlt(localctx, 2);
             this.state = 166;
-            localctx.terminate = this.match(resourcePolicyParser.T__15);
+            localctx.terminate = this.match(resourcePolicyParser.T__13);
             break;
         default:
             throw new antlr4.error.NoViableAltException(this);
@@ -2030,11 +2018,11 @@ resourcePolicyParser.prototype.subject = function() {
         this.state = 185;
         this.subject_service();
         this.state = 186;
-        this.match(resourcePolicyParser.T__16);
+        this.match(resourcePolicyParser.T__14);
         this.state = 187;
         this.user_organization_name();
         this.state = 188;
-        this.match(resourcePolicyParser.T__16);
+        this.match(resourcePolicyParser.T__14);
         this.state = 189;
         this.match(resourcePolicyParser.SUBJECT_ID);
     } catch (re) {
@@ -2260,7 +2248,7 @@ resourcePolicyParser.prototype.expression_test = function() {
             this.state = 198; 
             this._errHandler.sync(this);
             _la = this._input.LA(1);
-        } while(((((_la - 18)) & ~0x1f) == 0 && ((1 << (_la - 18)) & ((1 << (resourcePolicyParser.T__17 - 18)) | (1 << (resourcePolicyParser.T__20 - 18)) | (1 << (resourcePolicyParser.T__21 - 18)) | (1 << (resourcePolicyParser.T__25 - 18)) | (1 << (resourcePolicyParser.ID - 18)) | (1 << (resourcePolicyParser.INT - 18)) | (1 << (resourcePolicyParser.SCIENTIFIC_NUMBER - 18)) | (1 << (resourcePolicyParser.PI - 18)) | (1 << (resourcePolicyParser.EULER - 18)) | (1 << (resourcePolicyParser.VARIABLE_CONTRACT - 18)))) !== 0));
+        } while(((((_la - 16)) & ~0x1f) == 0 && ((1 << (_la - 16)) & ((1 << (resourcePolicyParser.T__15 - 16)) | (1 << (resourcePolicyParser.T__18 - 16)) | (1 << (resourcePolicyParser.T__19 - 16)) | (1 << (resourcePolicyParser.T__23 - 16)) | (1 << (resourcePolicyParser.ID - 16)) | (1 << (resourcePolicyParser.INT - 16)) | (1 << (resourcePolicyParser.SCIENTIFIC_NUMBER - 16)) | (1 << (resourcePolicyParser.PI - 16)) | (1 << (resourcePolicyParser.EULER - 16)) | (1 << (resourcePolicyParser.VARIABLE_CONTRACT - 16)))) !== 0));
         this.state = 200;
         this.match(resourcePolicyParser.EOF);
     } catch (re) {
@@ -2349,7 +2337,7 @@ resourcePolicyParser.prototype.expression_assignment = function() {
         this.state = 202;
         this.expression_handle();
         this.state = 203;
-        this.match(resourcePolicyParser.T__17);
+        this.match(resourcePolicyParser.T__15);
         this.state = 212;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
@@ -2371,9 +2359,9 @@ resourcePolicyParser.prototype.expression_assignment = function() {
         }
 
         this.state = 214;
-        this.match(resourcePolicyParser.T__18);
+        this.match(resourcePolicyParser.T__16);
         this.state = 215;
-        this.match(resourcePolicyParser.T__19);
+        this.match(resourcePolicyParser.T__17);
         this.state = 216;
         this.expression();
     } catch (re) {
@@ -2527,7 +2515,7 @@ resourcePolicyParser.prototype.expression = function() {
             if(_alt===1) {
                 this.state = 221;
                 _la = this._input.LA(1);
-                if(!(_la===resourcePolicyParser.T__20 || _la===resourcePolicyParser.T__21)) {
+                if(!(_la===resourcePolicyParser.T__18 || _la===resourcePolicyParser.T__19)) {
                 this._errHandler.recoverInline(this);
                 }
                 else {
@@ -2621,10 +2609,10 @@ resourcePolicyParser.prototype.multiplyingExpression = function() {
         this.state = 233;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        while(_la===resourcePolicyParser.T__22 || _la===resourcePolicyParser.T__23) {
+        while(_la===resourcePolicyParser.T__20 || _la===resourcePolicyParser.T__21) {
             this.state = 229;
             _la = this._input.LA(1);
-            if(!(_la===resourcePolicyParser.T__22 || _la===resourcePolicyParser.T__23)) {
+            if(!(_la===resourcePolicyParser.T__20 || _la===resourcePolicyParser.T__21)) {
             this._errHandler.recoverInline(this);
             }
             else {
@@ -2716,9 +2704,9 @@ resourcePolicyParser.prototype.powExpression = function() {
         this.state = 241;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        while(_la===resourcePolicyParser.T__24) {
+        while(_la===resourcePolicyParser.T__22) {
             this.state = 237;
-            this.match(resourcePolicyParser.T__24);
+            this.match(resourcePolicyParser.T__22);
             this.state = 238;
             this.signedAtom();
             this.state = 243;
@@ -2801,26 +2789,26 @@ resourcePolicyParser.prototype.signedAtom = function() {
         this.state = 250;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
-        case resourcePolicyParser.T__20:
+        case resourcePolicyParser.T__18:
             this.enterOuterAlt(localctx, 1);
             this.state = 244;
-            this.match(resourcePolicyParser.T__20);
+            this.match(resourcePolicyParser.T__18);
             this.state = 245;
             this.signedAtom();
             break;
-        case resourcePolicyParser.T__21:
+        case resourcePolicyParser.T__19:
             this.enterOuterAlt(localctx, 2);
             this.state = 246;
-            this.match(resourcePolicyParser.T__21);
+            this.match(resourcePolicyParser.T__19);
             this.state = 247;
             this.signedAtom();
             break;
-        case resourcePolicyParser.T__25:
+        case resourcePolicyParser.T__23:
             this.enterOuterAlt(localctx, 3);
             this.state = 248;
             this.built_in_function();
             break;
-        case resourcePolicyParser.T__17:
+        case resourcePolicyParser.T__15:
         case resourcePolicyParser.ID:
         case resourcePolicyParser.INT:
         case resourcePolicyParser.SCIENTIFIC_NUMBER:
@@ -2915,7 +2903,7 @@ resourcePolicyParser.prototype.built_in_function = function() {
         this.state = 252;
         this.funcname();
         this.state = 253;
-        this.match(resourcePolicyParser.T__17);
+        this.match(resourcePolicyParser.T__15);
         this.state = 254;
         this.expression();
         this.state = 259;
@@ -2931,7 +2919,7 @@ resourcePolicyParser.prototype.built_in_function = function() {
             _la = this._input.LA(1);
         }
         this.state = 262;
-        this.match(resourcePolicyParser.T__18);
+        this.match(resourcePolicyParser.T__16);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -2996,7 +2984,7 @@ resourcePolicyParser.prototype.funcname = function() {
     try {
         this.enterOuterAlt(localctx, 1);
         this.state = 264;
-        this.match(resourcePolicyParser.T__25);
+        this.match(resourcePolicyParser.T__23);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -3092,14 +3080,14 @@ resourcePolicyParser.prototype.atom = function() {
             this.state = 267;
             this.constant();
             break;
-        case resourcePolicyParser.T__17:
+        case resourcePolicyParser.T__15:
             this.enterOuterAlt(localctx, 3);
             this.state = 268;
-            this.match(resourcePolicyParser.T__17);
+            this.match(resourcePolicyParser.T__15);
             this.state = 269;
             this.expression();
             this.state = 270;
-            this.match(resourcePolicyParser.T__18);
+            this.match(resourcePolicyParser.T__16);
             break;
         case resourcePolicyParser.INT:
             this.enterOuterAlt(localctx, 4);
@@ -3564,7 +3552,7 @@ resourcePolicyParser.prototype.expression_call = function() {
         this.state = 288;
         this.expression_handle();
         this.state = 289;
-        this.match(resourcePolicyParser.T__17);
+        this.match(resourcePolicyParser.T__15);
         this.state = 300;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
@@ -3588,7 +3576,7 @@ resourcePolicyParser.prototype.expression_call = function() {
             _la = this._input.LA(1);
         }
         this.state = 303;
-        this.match(resourcePolicyParser.T__18);
+        this.match(resourcePolicyParser.T__16);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -3824,7 +3812,7 @@ resourcePolicyParser.prototype.event = function() {
         this.state = 311;
         this.event_service();
         this.state = 312;
-        this.match(resourcePolicyParser.T__16);
+        this.match(resourcePolicyParser.T__14);
         this.state = 316;
         this._errHandler.sync(this);
         var la_ = this._interp.adaptivePredict(this._input,25,this._ctx);
@@ -3832,7 +3820,7 @@ resourcePolicyParser.prototype.event = function() {
             this.state = 313;
             this.event_path();
             this.state = 314;
-            this.match(resourcePolicyParser.T__16);
+            this.match(resourcePolicyParser.T__14);
 
         }
         this.state = 318;
@@ -3840,7 +3828,7 @@ resourcePolicyParser.prototype.event = function() {
         this.state = 320;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===resourcePolicyParser.T__17) {
+        if(_la===resourcePolicyParser.T__15) {
             this.state = 319;
             this.event_args();
         }
@@ -3996,7 +3984,7 @@ resourcePolicyParser.prototype.event_path = function() {
         		this.state = 324;
         		this.match(resourcePolicyParser.ID);
         		this.state = 325;
-        		this.match(resourcePolicyParser.T__16);
+        		this.match(resourcePolicyParser.T__14);
         		break;
         	default:
         		throw new antlr4.error.NoViableAltException(this);
@@ -4151,7 +4139,7 @@ resourcePolicyParser.prototype.event_args = function() {
     try {
         this.enterOuterAlt(localctx, 1);
         this.state = 334;
-        this.match(resourcePolicyParser.T__17);
+        this.match(resourcePolicyParser.T__15);
         this.state = 335;
         this.match(resourcePolicyParser.ID);
         this.state = 340;
@@ -4167,7 +4155,7 @@ resourcePolicyParser.prototype.event_args = function() {
             _la = this._input.LA(1);
         }
         this.state = 343;
-        this.match(resourcePolicyParser.T__18);
+        this.match(resourcePolicyParser.T__16);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;

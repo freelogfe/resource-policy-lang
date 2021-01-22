@@ -6,7 +6,7 @@ const resourcePolicyLexer = require(`${gen_dir}/resourcePolicyLexer`);
 const resourcePolicyParser = require(`${gen_dir}/resourcePolicyParser`);
 const SMGenerator = require("./SMGenerator").SMGenerator;
 
-exports.compile = async function (policyText, targetType, env = "dev") {
+exports.compile = async function (policyText, targetType, targetUrl, env) {
     let chars = new antlr4.InputStream(policyText);
     let lexer = new resourcePolicyLexer.resourcePolicyLexer(chars);
     let stream = new antlr4.CommonTokenStream(lexer);
@@ -22,7 +22,7 @@ exports.compile = async function (policyText, targetType, env = "dev") {
         throw new Error("输入格式错误");
     }
 
-    let gen = new SMGenerator(targetType, env);
+    let gen = new SMGenerator(targetType, targetUrl, env);
     try {
         gen.visit(tree);
     } catch (e) {

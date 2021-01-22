@@ -3,14 +3,42 @@ const path = require('path');
 const fs = require("fs");
 const http = require("http");
 
-const serviceStateResourceAddressMap = JSON.parse(fs.readFileSync(path.join(__dirname, './resources/service_state_resource_addresses.json')));
+const serviceStateResourceAddressMap = JSON.parse(fs.readFileSync(path.join(__dirname, "./resources/service_state_resource_addresses.json")));
 
 class SMGenerator extends resourcePolicyVisitor {
 
-    constructor(subjectType, env) {
+    /**
+     * @param subjectType 标的物类型
+     * @param targetUrl 目标服务器地址前缀
+     * @param env 环境
+     */
+    constructor(subjectType, targetUrl, env) {
         super();
+        if (subjectType == null || !(subjectType in serviceStateResourceAddressMap)) {
+            throw new Error("参数错误${subjectType}");
+        }
         this.subjectType = subjectType.toLowerCase();
+
+        this.targetUrl = targetUrl;
+
+        if (env == null || !(env in serviceStateResourceAddressMap[subjectType])) {
+            throw new Error("参数错误${env}");
+        }
         this.env = env.toLowerCase();
+
+        if (targetUrl == null) {
+            switch (env) {
+                case "dev":
+                    this.targetUrl = "http://api.testfreelog.com";
+                    break;
+                case "prod":
+                    this.targetUrl = "http://api.freelog.com";
+                    break;
+                default:
+                    // 即便${env}在服务器地址映射表中，但是却没有默认的前缀赋值，故抛出错误
+                    throw new Error("参数错误${env}");
+            }
+        }
 
         this.state_machine = {};
         // 当前状态
@@ -246,7 +274,7 @@ class SMGenerator extends resourcePolicyVisitor {
         return new Promise((resolve, reject) => {
             let service_states = this.state_machine["declarations"]["serviceStates"];
 
-            http.get(serviceStateResourceAddressMap[this.subjectType][this.env], (res) => {
+            http.get(this.getRemoteUrl(), (res) => {
                 let buffer = null;
 
                 res.on("data", function (data) {
@@ -378,6 +406,10 @@ class SMGenerator extends resourcePolicyVisitor {
         for (let necessary_state of this.necessary_states) {
             if (!necessary_state in this.state_machine["states"]) throw new Error("缺少必要的状态：" + necessary_state);
         }
+    }
+
+    getRemoteUrl() {
+        return `${this.targetUrl}${serviceStateResourceAddressMap[this.subjectType][this.env]}`;
     }
 }
 

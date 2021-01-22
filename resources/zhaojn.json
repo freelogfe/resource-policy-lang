@@ -4,16 +4,141 @@
             {
                 "name": "active",
                 "type": "authorization"
+            },
+            {
+                "name": "testActive",
+                "type": "testAuthorization"
+            }
+        ],
+        "serviceStateConstants": [
+            {
+                "scope": "always",
+                "state": "testActive"
+            }
+        ],
+        "expressions": [
+            {
+                "funcName": "a",
+                "funcArgs": [],
+                "funcBody": "1+2*3^4+self.exhibited"
+            },
+            {
+                "funcName": "ab",
+                "funcArgs": [
+                    "a",
+                    "c",
+                    "e"
+                ],
+                "funcBody": "1+2*3^(a-c+e)"
             }
         ]
     },
     "states": {
         "initial": {
-            "transition": null,
+            "transition": {
+                "signed": {
+                    "event": {
+                        "service": "signed",
+                        "name": "start"
+                    }
+                }
+            },
             "serviceStates": [
-                "active"
+                "testActive"
             ],
             "isInitial": true
+        },
+        "signed": {
+            "transition": {
+                "auth": {
+                    "event": {
+                        "service": "auth",
+                        "name": "start"
+                    }
+                }
+            },
+            "serviceStates": [
+                "testActive",
+                "active"
+            ]
+        },
+        "auth": {
+            "transition": {
+                "settlement": {
+                    "event": {
+                        "service": "settlement",
+                        "path": "x.y",
+                        "name": "z"
+                    }
+                }
+            },
+            "serviceStates": [
+                "testActive"
+            ]
+        },
+        "settlement": {
+            "transition": {
+                "auth": {
+                    "event": {
+                        "service": "auth",
+                        "name": "x"
+                    }
+                },
+                "refund": {
+                    "event": {
+                        "service": "refund",
+                        "name": "x"
+                    }
+                },
+                "confiscation": {
+                    "event": {
+                        "service": "confiscation",
+                        "name": "x"
+                    }
+                }
+            },
+            "serviceStates": [
+                "testActive",
+                "active"
+            ]
+        },
+        "confiscation": {
+            "transition": {
+                "finish": {
+                    "event": {
+                        "service": "finish",
+                        "name": "x",
+                        "args": [
+                            "a",
+                            "b",
+                            "c"
+                        ]
+                    }
+                }
+            },
+            "serviceStates": [
+                "testActive"
+            ]
+        },
+        "refund": {
+            "transition": {
+                "finish": {
+                    "event": {
+                        "service": "finish",
+                        "name": "x"
+                    }
+                }
+            },
+            "serviceStates": [
+                "testActive"
+            ]
+        },
+        "finish": {
+            "transition": null,
+            "serviceStates": [
+                "testActive",
+                "active"
+            ]
         }
     }
 }

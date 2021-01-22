@@ -1,26 +1,26 @@
 {
   "1": {
-    "dev": "http://api.testfreelog.com/v2/auths/resources/serviceStates",
-    "prod": "http://api.freelog.com/v2/auths/resources/serviceStates"
+    "dev": "/v2/auths/resources/serviceStates",
+    "prod": "/v2/auths/resources/serviceStates"
   },
   "resource": {
-    "dev": "http://api.testfreelog.com/v2/auths/resources/serviceStates",
-    "prod": "http://api.freelog.com/v2/auths/resources/serviceStates"
+    "dev": "/v2/auths/resources/serviceStates",
+    "prod": "/v2/auths/resources/serviceStates"
   },
   "2": {
-    "dev": "http://api.testfreelog.com/v2/auths/presentables/serviceStates",
-    "prod": "http://api.freelog.com/v2/auths/presentables/serviceStates"
+    "dev": "/v2/auths/presentables/serviceStates",
+    "prod": "/v2/auths/presentables/serviceStates"
   },
   "presentable": {
-    "dev": "http://api.testfreelog.com/v2/auths/presentables/serviceStates",
-    "prod": "http://api.freelog.com/v2/auths/presentables/serviceStates"
+    "dev": "/v2/auths/presentables/serviceStates",
+    "prod": "/v2/auths/presentables/serviceStates"
   },
   "3": {
-    "dev": "http://api.testfreelog.com/v2/auths/userGroups/serviceStates",.
-    "prod": "http://api.freelog.com/v2/auths/userGroups/serviceStates"
+    "dev": "/v2/auths/userGroups/serviceStates",
+    "prod": "/v2/auths/userGroups/serviceStates"
   },
   "usergroup": {
-    "dev": "http://api.testfreelog.com/v2/auths/userGroups/serviceStates",
-    "prod": "http://api.freelog.com/v2/auths/userGroups/serviceStates"
+    "dev": "/v2/auths/userGroups/serviceStates",
+    "prod": "/v2/auths/userGroups/serviceStates"
   }
 }
