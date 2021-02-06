@@ -1,24 +1,24 @@
-    for public
+    for public, 18035541373, Yaoqinsanchi@qq.com
 
     a()=1+2*3^4+self.exhibited
 
-    ab(a,c,e)=1+2*3^(a-c+e)
+    ab(a,c)=1+2*3^(a-c+e)
 
     always testActive
 
     initial:
-        ~signed.start => signed
+        ~freelog.SigningEvent("abc/abc") => signed
     signed[active]:
-        ~auth.start => auth
+        ~freelog.CycleEndEvent("week") => auth
     auth:
-        ~settlement.x.y.z => settlement
+        ~freelog.x.y.TransactionEvent("5","Yaoqinsanchi@qq.com") => settlement
     settlement[active]:
-        ~auth.x => auth
-        ~refund.x => refund
-        ~confiscation.x => confiscation
+        ~freelog.SettlementEvent("1990856408@qq.com") => auth
+        ~freelog.TimeEvent("2021-02-06 14:16:00") => refund
+        ~freelog.RelativeTimeEvent("30","day") => confiscation
     confiscation:
-        ~finish.x(a,b,c) => finish
+        ~freelog.ViewCountEvent("100") => finish
     refund:
-        ~finish.x => finish
+        ~freelog.EscrowExceedAmount("18035541373@163.com","888","feather") => finish
     finish[active]:
         terminate

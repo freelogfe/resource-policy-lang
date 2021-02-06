@@ -1,0 +1,114 @@
+[
+  {
+    "code": "S101",
+    "name": "SigningEvent",
+    "description": "acknowledge a resource",
+    "params": [
+      "resourceName"
+    ],
+    "singleton": true
+  },
+  {
+    "code": "A101",
+    "name": "CycleEndEvent",
+    "description": "raise when n cycle ends",
+    "params": [
+      "timeUnit"
+    ],
+    "singleton": false
+  },
+  {
+    "code": "S201",
+    "name": "TransactionEvent",
+    "description": "one time transaction",
+    "params": [
+      "amount",
+      "account"
+    ],
+    "singleton": true
+  },
+  {
+    "code": "S202",
+    "name": "SettlementEvent",
+    "description": "fired when settlement cleared",
+    "params": [
+      "account"
+    ],
+    "singleton": true
+  },
+  {
+    "code": "A102",
+    "name": "TimeEvent",
+    "description": "fired on a pre-determined time",
+    "params": [
+      "dateTime"
+    ],
+    "singleton": false
+  },
+  {
+    "code": "A103",
+    "name": "RelativeTimeEvent",
+    "description": "fired when certain amount of time elapsed",
+    "params": [
+      "elapsed",
+      "timeUnit"
+    ],
+    "singleton": false
+  },
+  {
+    "code": "S301",
+    "name": "ViewCountEvent",
+    "description": "reserve a target number of authorizations, fires when such number reached",
+    "params": [
+      "amount"
+    ],
+    "singleton": true
+  },
+  {
+    "code": "S302",
+    "name": "ReContractCountEvent",
+    "description": "",
+    "params": [
+      "amount"
+    ],
+    "singleton": true
+  },
+  {
+    "code": "S303",
+    "name": "PresentCountEvent",
+    "description": "",
+    "params": [
+      "amount"
+    ],
+    "singleton": true
+  },
+  {
+    "code": "S210",
+    "name": "EscrowExceedAmount",
+    "description": "",
+    "params": [
+      "account",
+      "amount",
+      "currencyUnit"
+    ],
+    "singleton": true
+  },
+  {
+    "code": "S211",
+    "name": "EscrowConfiscated",
+    "description": "",
+    "params": [
+      "account"
+    ],
+    "singleton": true
+  },
+  {
+    "code": "S212",
+    "name": "EscrowRefunded",
+    "description": "",
+    "params": [
+      "account"
+    ],
+    "singleton": true
+  }
+]

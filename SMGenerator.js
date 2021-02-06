@@ -1,9 +1,18 @@
+const gen_dir = "./gen";
+const resourcePolicy = require(`${gen_dir}/resourcePolicy`);
 const resourcePolicyVisitor = require('./gen/resourcePolicyVisitor').resourcePolicyVisitor;
 const path = require('path');
 const fs = require("fs");
 const http = require("http");
 
 const serviceStateResourceAddressMap = JSON.parse(fs.readFileSync(path.join(__dirname, "./resources/service_state_resource_addresses.json")));
+const eventDefinitionMap = {};
+{
+    let eventDefinitionArrayTmp = JSON.parse(fs.readFileSync(path.join(__dirname, "./resources/event_definition.json")));
+    for (let eventDefinition of eventDefinitionArrayTmp) {
+        eventDefinitionMap[eventDefinition["name"]] = eventDefinition;
+    }
+}
 
 class SMGenerator extends resourcePolicyVisitor {
 
@@ -47,6 +56,8 @@ class SMGenerator extends resourcePolicyVisitor {
         this.current_expression = null;
         // 色块常量映射
         this.service_state_constant_map = new Map();
+        // 状态机状态转换过程事件集合
+        this.transitionEvents = [];
         /**
          * @see SMGenerator#init_keywords_state()
          * 状态机状态名称关键字集合
@@ -63,6 +74,7 @@ class SMGenerator extends resourcePolicyVisitor {
     }
 
     visitPolicy(ctx) {
+        this.state_machine['audiences'] = [];
         // this.state_machine["contract"] = {};
         this.state_machine['declarations'] = {};
         let declarations = this.state_machine["declarations"];
@@ -73,6 +85,42 @@ class SMGenerator extends resourcePolicyVisitor {
         this.state_machine['states'] = {};
 
         return super.visitPolicy(ctx);
+    }
+
+    visitAudience(ctx) {
+        let audience = ctx.getChild(0);
+        let name = audience.getText();
+        let type = null;
+        switch (audience.getSymbol().type){
+            case resourcePolicy.resourcePolicy.USER_ID:
+                type = "userId";
+                break;
+            default:
+                type = audience.getText();
+        }
+
+        let repeated = false;
+        for (let audienceInstance of this.state_machine["audiences"]) {
+            if (audienceInstance["type"] === type) {
+                if (type === "userId") {
+                    if (audienceInstance["name"] === name) {
+                        repeated = true;
+                    }
+                } else {
+                    repeated = true;
+                }
+            }
+        }
+
+        if (!repeated) {
+            let audienceInstance = {
+                name: name,
+                type: type
+            }
+            this.state_machine["audiences"].push(audienceInstance);
+        }
+
+        return super.visitAudience(ctx);
     }
 
     visitSubject(ctx) {
@@ -198,18 +246,15 @@ class SMGenerator extends resourcePolicyVisitor {
             transition[ctx.state_name().getText()] = {};
 
             let event = {};
-            event["service"] = ctx.event().event_service().getText().substring(1);
+            event["service"] = ctx.event().eventService.text;
             if (ctx.event().event_path() != null) {
                 event["path"] = ctx.event().event_path().getText();
             }
-            event["name"] = ctx.event().event_name().getText();
+            event["name"] = ctx.event().eventName.text;
             if (ctx.event().event_args() != null) {
                 let args = [];
-                for (let event_arg of ctx.event().event_args().ID()) {
-                    if (args.indexOf(event_arg.getText()) > -1) {
-                        throw new Error("存在相同的参数名：" + event_arg.getText());
-                    }
-                    args.push(event_arg.getText());
+                for (let event_arg of ctx.event().event_args().EVENT_ARG()) {
+                    args.push(event_arg.getText().substring(1, event_arg.getText().length - 1));
                 }
                 event["args"] = args;
             }

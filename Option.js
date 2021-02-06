@@ -6,8 +6,6 @@ class Option {
     }
 
     build() {
-        console.log(this.args);
-
         this.subjectType = this.args.subjectType;
         if (this.subjectType == null) {
             throw new Error("缺少必要的参数 --type");

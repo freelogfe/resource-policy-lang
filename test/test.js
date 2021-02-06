@@ -4,8 +4,8 @@ const Opiton = require("../Option").Option;
 const fs = require("fs");
 const antlr4 = require("antlr4");
 const gen_dir = "../gen";
-const resourcePolicyLexer = require(`${gen_dir}/resourcePolicyLexer`);
-const resourcePolicyParser = require(`${gen_dir}/resourcePolicyParser`);
+const LexToken = require(`${gen_dir}/LexToken`);
+const resourcePolicy = require(`${gen_dir}/resourcePolicy`);
 const SMGenerator = require("../SMGenerator").SMGenerator;
 
 main();
@@ -16,9 +16,9 @@ async function main() {
     let input = fs.readFileSync("./resources/zhaojn.sc", "utf-8");
 
     let chars = new antlr4.InputStream(input);
-    let lexer = new resourcePolicyLexer.resourcePolicyLexer(chars);
+    let lexer = new LexToken.LexToken(chars);
     let stream = new antlr4.CommonTokenStream(lexer);
-    let parser = new resourcePolicyParser.resourcePolicyParser(stream);
+    let parser = new resourcePolicy.resourcePolicy(stream);
     // 关闭恢复机制
     parser._errHandler = new antlr4.error.BailErrorStrategy();
     parser.buildParseTrees = true;

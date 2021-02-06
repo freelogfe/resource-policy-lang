@@ -1,4 +1,18 @@
 {
+    "audiences": [
+        {
+            "name": "public",
+            "type": "public"
+        },
+        {
+            "name": "18035541373",
+            "type": "userId"
+        },
+        {
+            "name": "Yaoqinsanchi@qq.com",
+            "type": "userId"
+        }
+    ],
     "declarations": {
         "serviceStates": [
             {
@@ -26,8 +40,7 @@
                 "funcName": "ab",
                 "funcArgs": [
                     "a",
-                    "c",
-                    "e"
+                    "c"
                 ],
                 "funcBody": "1+2*3^(a-c+e)"
             }
@@ -38,8 +51,11 @@
             "transition": {
                 "signed": {
                     "event": {
-                        "service": "signed",
-                        "name": "start"
+                        "service": "freelog",
+                        "name": "SigningEvent",
+                        "args": [
+                            "abc/abc"
+                        ]
                     }
                 }
             },
@@ -52,8 +68,11 @@
             "transition": {
                 "auth": {
                     "event": {
-                        "service": "auth",
-                        "name": "start"
+                        "service": "freelog",
+                        "name": "CycleEndEvent",
+                        "args": [
+                            "week"
+                        ]
                     }
                 }
             },
@@ -66,9 +85,13 @@
             "transition": {
                 "settlement": {
                     "event": {
-                        "service": "settlement",
+                        "service": "freelog",
                         "path": "x.y",
-                        "name": "z"
+                        "name": "TransactionEvent",
+                        "args": [
+                            "5",
+                            "Yaoqinsanchi@qq.com"
+                        ]
                     }
                 }
             },
@@ -80,20 +103,30 @@
             "transition": {
                 "auth": {
                     "event": {
-                        "service": "auth",
-                        "name": "x"
+                        "service": "freelog",
+                        "name": "SettlementEvent",
+                        "args": [
+                            "1990856408@qq.com"
+                        ]
                     }
                 },
                 "refund": {
                     "event": {
-                        "service": "refund",
-                        "name": "x"
+                        "service": "freelog",
+                        "name": "TimeEvent",
+                        "args": [
+                            "2021-02-06 14:16:00"
+                        ]
                     }
                 },
                 "confiscation": {
                     "event": {
-                        "service": "confiscation",
-                        "name": "x"
+                        "service": "freelog",
+                        "name": "RelativeTimeEvent",
+                        "args": [
+                            "30",
+                            "day"
+                        ]
                     }
                 }
             },
@@ -106,12 +139,10 @@
             "transition": {
                 "finish": {
                     "event": {
-                        "service": "finish",
-                        "name": "x",
+                        "service": "freelog",
+                        "name": "ViewCountEvent",
                         "args": [
-                            "a",
-                            "b",
-                            "c"
+                            "100"
                         ]
                     }
                 }
@@ -124,8 +155,13 @@
             "transition": {
                 "finish": {
                     "event": {
-                        "service": "finish",
-                        "name": "x"
+                        "service": "freelog",
+                        "name": "EscrowExceedAmount",
+                        "args": [
+                            "18035541373@163.com",
+                            "888",
+                            "feather"
+                        ]
                     }
                 }
             },
