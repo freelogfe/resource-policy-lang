@@ -1,10 +1,12 @@
 const gen_dir = "./gen";
 const resourcePolicy = require(`${gen_dir}/resourcePolicy`);
 const resourcePolicyVisitor = require('./gen/resourcePolicyVisitor').resourcePolicyVisitor;
+const TransitionEventArgsMatchUtil = require('./TransitionEventArgsMatchUtil');
 const path = require('path');
 const fs = require("fs");
 const http = require("http");
 
+const transitionEventArgsMatchUtil = new TransitionEventArgsMatchUtil.TransitionEventArgsMatchUtil();
 const serviceStateResourceAddressMap = JSON.parse(fs.readFileSync(path.join(__dirname, "./resources/service_state_resource_addresses.json")));
 const eventDefinitionMap = {};
 {
@@ -91,7 +93,7 @@ class SMGenerator extends resourcePolicyVisitor {
         let audience = ctx.getChild(0);
         let name = audience.getText();
         let type = null;
-        switch (audience.getSymbol().type){
+        switch (audience.getSymbol().type) {
             case resourcePolicy.resourcePolicy.USER_ID:
                 type = "userId";
                 break;
@@ -260,6 +262,7 @@ class SMGenerator extends resourcePolicyVisitor {
             }
 
             transition[ctx.state_name().getText()]["event"] = event;
+            this.transitionEvents.push(event);
         } else {
             this.state_machine["states"][this.current_state]["transition"] = null;
         }
@@ -303,6 +306,7 @@ class SMGenerator extends resourcePolicyVisitor {
             this.fetchServiceStates()
                 .then(() => this.verifyServiceStates())
                 .then(() => this.verifyExpressions())
+                .then(() => this.verifyEvents())
                 .then(() => {
                     resolve()
                 })
@@ -417,6 +421,41 @@ class SMGenerator extends resourcePolicyVisitor {
     verifyExpressions() {
         if (this.state_machine["declarations"]["expressions"].length === 0) {
             delete this.state_machine["declarations"]["expressions"];
+        }
+    }
+
+    /**
+     * 事件校验
+     */
+    verifyEvents() {
+        for (let event of this.transitionEvents) {
+            if (event["service"] !== "freelog") {
+                throw new Error("该事件服务不合法：" + JSON.stringify(event));
+            }
+
+            let eventDefinition = eventDefinitionMap[event["name"]];
+            if (eventDefinition == null) {
+                throw new Error("该事件未定义：" + JSON.stringify(event));
+            }
+
+            let params = eventDefinition["params"];
+            if (params != null) {
+                let args = event["args"];
+                if (args == null || args.length !== params.length) {
+                    throw new Error("该事件缺少参数：" + JSON.stringify(event));
+                }
+
+                for (let i = 0; i < params.length; i++) {
+                    let param = params[i];
+                    if (!transitionEventArgsMatchUtil.match(param, args[i])) {
+                        throw new Error("该事件参数不合法：" + JSON.stringify(event));
+                    }
+                }
+            }
+
+            event["code"] = eventDefinition["code"];
+            event["description"] = eventDefinition["description"];
+            event["singleton"] = eventDefinition["singleton"];
         }
     }
 
