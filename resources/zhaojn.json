@@ -50,16 +50,14 @@
         "initial": {
             "transition": {
                 "signed": {
-                    "event": {
-                        "service": "freelog",
-                        "name": "SigningEvent",
-                        "args": [
-                            "abc/abc"
-                        ],
-                        "code": "S101",
-                        "description": "acknowledge a resource",
-                        "singleton": true
-                    }
+                    "service": "freelog",
+                    "name": "SigningEvent",
+                    "args": [
+                        "abc/abc"
+                    ],
+                    "code": "S101",
+                    "description": "acknowledge a resource",
+                    "singleton": true
                 }
             },
             "serviceStates": [
@@ -70,16 +68,14 @@
         "signed": {
             "transition": {
                 "auth": {
-                    "event": {
-                        "service": "freelog",
-                        "name": "CycleEndEvent",
-                        "args": [
-                            "week"
-                        ],
-                        "code": "A101",
-                        "description": "raise when n cycle ends",
-                        "singleton": false
-                    }
+                    "service": "freelog",
+                    "name": "CycleEndEvent",
+                    "args": [
+                        "week"
+                    ],
+                    "code": "A101",
+                    "description": "raise when n cycle ends",
+                    "singleton": false
                 }
             },
             "serviceStates": [
@@ -90,18 +86,16 @@
         "auth": {
             "transition": {
                 "settlement": {
-                    "event": {
-                        "service": "freelog",
-                        "path": "x.y",
-                        "name": "TransactionEvent",
-                        "args": [
-                            "5",
-                            "Yaoqinsanchi@qq.com"
-                        ],
-                        "code": "S201",
-                        "description": "one time transaction",
-                        "singleton": true
-                    }
+                    "service": "freelog",
+                    "path": "x.y",
+                    "name": "TransactionEvent",
+                    "args": [
+                        5,
+                        "Yaoqinsanchi@qq.com"
+                    ],
+                    "code": "S201",
+                    "description": "one time transaction",
+                    "singleton": true
                 }
             },
             "serviceStates": [
@@ -111,41 +105,35 @@
         "settlement": {
             "transition": {
                 "auth": {
-                    "event": {
-                        "service": "freelog",
-                        "name": "SettlementEvent",
-                        "args": [
-                            "1990856408@qq.com"
-                        ],
-                        "code": "S202",
-                        "description": "fired when settlement cleared",
-                        "singleton": true
-                    }
+                    "service": "freelog",
+                    "name": "SettlementEvent",
+                    "args": [
+                        "1990856408@qq.com"
+                    ],
+                    "code": "S202",
+                    "description": "fired when settlement cleared",
+                    "singleton": true
                 },
                 "refund": {
-                    "event": {
-                        "service": "freelog",
-                        "name": "TimeEvent",
-                        "args": [
-                            "2021-02-06 14:16:00"
-                        ],
-                        "code": "A102",
-                        "description": "fired on a pre-determined time",
-                        "singleton": false
-                    }
+                    "service": "freelog",
+                    "name": "TimeEvent",
+                    "args": [
+                        "2021-02-06 14:16:00"
+                    ],
+                    "code": "A102",
+                    "description": "fired on a pre-determined time",
+                    "singleton": false
                 },
                 "confiscation": {
-                    "event": {
-                        "service": "freelog",
-                        "name": "RelativeTimeEvent",
-                        "args": [
-                            "30",
-                            "day"
-                        ],
-                        "code": "A103",
-                        "description": "fired when certain amount of time elapsed",
-                        "singleton": false
-                    }
+                    "service": "freelog",
+                    "name": "RelativeTimeEvent",
+                    "args": [
+                        30,
+                        "day"
+                    ],
+                    "code": "A103",
+                    "description": "fired when certain amount of time elapsed",
+                    "singleton": false
                 }
             },
             "serviceStates": [
@@ -156,16 +144,14 @@
         "confiscation": {
             "transition": {
                 "finish": {
-                    "event": {
-                        "service": "freelog",
-                        "name": "ViewCountEvent",
-                        "args": [
-                            "100"
-                        ],
-                        "code": "S301",
-                        "description": "reserve a target number of authorizations, fires when such number reached",
-                        "singleton": true
-                    }
+                    "service": "freelog",
+                    "name": "ViewCountEvent",
+                    "args": [
+                        100
+                    ],
+                    "code": "S301",
+                    "description": "reserve a target number of authorizations, fires when such number reached",
+                    "singleton": true
                 }
             },
             "serviceStates": [
@@ -175,18 +161,16 @@
         "refund": {
             "transition": {
                 "finish": {
-                    "event": {
-                        "service": "freelog",
-                        "name": "EscrowExceedAmount",
-                        "args": [
-                            "18035541373@163.com",
-                            "888",
-                            "feather"
-                        ],
-                        "code": "S210",
-                        "description": "",
-                        "singleton": true
-                    }
+                    "service": "freelog",
+                    "name": "EscrowExceedAmount",
+                    "args": [
+                        "18035541373@163.com",
+                        888,
+                        "feather"
+                    ],
+                    "code": "S210",
+                    "description": "",
+                    "singleton": true
                 }
             },
             "serviceStates": [

@@ -245,9 +245,9 @@ class SMGenerator extends resourcePolicyVisitor {
     visitState_transition(ctx) {
         let transition = this.state_machine["states"][this.current_state]["transition"];
         if (ctx.terminate == null) {
-            transition[ctx.state_name().getText()] = {};
-
             let event = {};
+            transition[ctx.state_name().getText()] = event;
+
             event["service"] = ctx.event().eventService.text;
             if (ctx.event().event_path() != null) {
                 event["path"] = ctx.event().event_path().getText();
@@ -261,7 +261,6 @@ class SMGenerator extends resourcePolicyVisitor {
                 event["args"] = args;
             }
 
-            transition[ctx.state_name().getText()]["event"] = event;
             this.transitionEvents.push(event);
         } else {
             this.state_machine["states"][this.current_state]["transition"] = null;
@@ -449,6 +448,9 @@ class SMGenerator extends resourcePolicyVisitor {
                     let param = params[i];
                     if (!transitionEventArgsMatchUtil.match(param, args[i])) {
                         throw new Error("该事件参数不合法：" + JSON.stringify(event));
+                    }
+                    if (transitionEventArgsMatchUtil.isInt(param)) {
+                        args[i] = parseInt(args[i]);
                     }
                 }
             }

@@ -1,7 +1,10 @@
+class TransitionEventArgsMatchUtil {
 
-class TransitionEventArgsMatchUtil{
+    constructor() {
+        this.intCollection = new Set(["amount", "elapsed"]);
+    }
 
-    match(argName,argValue){
+    match(argName, argValue) {
         if (argName == null || argValue == null) {
             return false;
         }
@@ -22,6 +25,10 @@ class TransitionEventArgsMatchUtil{
 
         return true;
     }
+
+    isInt(argName) {
+        return this.intCollection.has(argName);
+    }
 }
 
-exports.TransitionEventArgsMatchUtil=TransitionEventArgsMatchUtil;
+exports.TransitionEventArgsMatchUtil = TransitionEventArgsMatchUtil;
