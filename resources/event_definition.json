@@ -4,7 +4,10 @@
     "name": "SigningEvent",
     "description": "acknowledge a resource",
     "params": [
-      "resourceName"
+      {
+        "name": "resourceName",
+        "type": "string"
+      }
     ],
     "singleton": true
   },
@@ -13,7 +16,15 @@
     "name": "CycleEndEvent",
     "description": "raise when n cycle ends",
     "params": [
-      "timeUnit"
+      {
+        "name": "cycleCount",
+        "type": "decimal"
+      },
+      {
+        "name": "timeUnit",
+        "type": "timeUnit",
+        "enum": ["year","month","week","day","cycle","hour","minute"]
+      }
     ],
     "singleton": false
   },
@@ -22,8 +33,14 @@
     "name": "TransactionEvent",
     "description": "one time transaction",
     "params": [
-      "amount",
-      "account"
+      {
+        "name": "amount",
+        "type": "decimal"
+      },
+      {
+        "name": "account",
+        "type": "none"
+      }
     ],
     "singleton": true
   },
@@ -32,7 +49,10 @@
     "name": "SettlementEvent",
     "description": "fired when settlement cleared",
     "params": [
-      "account"
+      {
+        "name": "account",
+        "type": "none"
+      }
     ],
     "singleton": true
   },
@@ -41,7 +61,10 @@
     "name": "TimeEvent",
     "description": "fired on a pre-determined time",
     "params": [
-      "dateTime"
+      {
+        "name": "dateTime",
+        "type": "dateTime"
+      }
     ],
     "singleton": false
   },
@@ -50,8 +73,15 @@
     "name": "RelativeTimeEvent",
     "description": "fired when certain amount of time elapsed",
     "params": [
-      "elapsed",
-      "timeUnit"
+      {
+        "name": "elapsed",
+        "type": "decimal"
+      },
+      {
+        "name": "timeUnit",
+        "type": "timeUnit",
+        "enum": ["year","month","week","day","cycle","hour","minute"]
+      }
     ],
     "singleton": false
   },
@@ -60,7 +90,10 @@
     "name": "ViewCountEvent",
     "description": "reserve a target number of authorizations, fires when such number reached",
     "params": [
-      "amount"
+      {
+        "name": "amount",
+        "type": "decimal"
+      }
     ],
     "singleton": true
   },
@@ -69,7 +102,10 @@
     "name": "ReContractCountEvent",
     "description": "",
     "params": [
-      "amount"
+      {
+        "name": "amount",
+        "type": "decimal"
+      }
     ],
     "singleton": true
   },
@@ -78,7 +114,10 @@
     "name": "PresentCountEvent",
     "description": "",
     "params": [
-      "amount"
+      {
+        "name": "amount",
+        "type": "decimal"
+      }
     ],
     "singleton": true
   },
@@ -87,9 +126,19 @@
     "name": "EscrowExceedAmount",
     "description": "",
     "params": [
-      "account",
-      "amount",
-      "currencyUnit"
+      {
+        "name": "account",
+        "type": "none"
+      },
+      {
+        "name": "amount",
+        "type": "decimal"
+      },
+      {
+        "name": "currencyUnit",
+        "type": "string",
+        "enum": ["feather","dollar","yuan","jiao","fen"]
+      }
     ],
     "singleton": true
   },
@@ -98,7 +147,10 @@
     "name": "EscrowConfiscated",
     "description": "",
     "params": [
-      "account"
+      {
+        "name": "account",
+        "type": "none"
+      }
     ],
     "singleton": true
   },
@@ -107,7 +159,10 @@
     "name": "EscrowRefunded",
     "description": "",
     "params": [
-      "account"
+      {
+        "name": "account",
+        "type": "none"
+      }
     ],
     "singleton": true
   }

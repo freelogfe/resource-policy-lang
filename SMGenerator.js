@@ -444,15 +444,18 @@ class SMGenerator extends resourcePolicyVisitor {
                     throw new Error("该事件缺少参数：" + JSON.stringify(event));
                 }
 
+                let argO = {};
                 for (let i = 0; i < params.length; i++) {
                     let param = params[i];
                     if (!transitionEventArgsMatchUtil.match(param, args[i])) {
                         throw new Error("该事件参数不合法：" + JSON.stringify(event));
                     }
-                    if (transitionEventArgsMatchUtil.isInt(param)) {
-                        args[i] = parseInt(args[i]);
+                    if (param["type"] === "decimal") {
+                        args[i] = parseFloat(args[i]);
                     }
+                    argO[param["name"]] = args[i];
                 }
+                event["args"] = argO;
             }
 
             event["code"] = eventDefinition["code"];

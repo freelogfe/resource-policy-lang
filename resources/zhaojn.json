@@ -52,9 +52,9 @@
                 "signed": {
                     "service": "freelog",
                     "name": "SigningEvent",
-                    "args": [
-                        "abc/abc"
-                    ],
+                    "args": {
+                        "resourceName": "abc/abc"
+                    },
                     "code": "S101",
                     "description": "acknowledge a resource",
                     "singleton": true
@@ -70,9 +70,10 @@
                 "auth": {
                     "service": "freelog",
                     "name": "CycleEndEvent",
-                    "args": [
-                        "week"
-                    ],
+                    "args": {
+                        "cycleCount": 2,
+                        "timeUnit": "week"
+                    },
                     "code": "A101",
                     "description": "raise when n cycle ends",
                     "singleton": false
@@ -89,10 +90,10 @@
                     "service": "freelog",
                     "path": "x.y",
                     "name": "TransactionEvent",
-                    "args": [
-                        5,
-                        "Yaoqinsanchi@qq.com"
-                    ],
+                    "args": {
+                        "amount": 5,
+                        "account": "Yaoqinsanchi@qq.com"
+                    },
                     "code": "S201",
                     "description": "one time transaction",
                     "singleton": true
@@ -107,9 +108,9 @@
                 "auth": {
                     "service": "freelog",
                     "name": "SettlementEvent",
-                    "args": [
-                        "1990856408@qq.com"
-                    ],
+                    "args": {
+                        "account": "1990856408@qq.com"
+                    },
                     "code": "S202",
                     "description": "fired when settlement cleared",
                     "singleton": true
@@ -117,9 +118,9 @@
                 "refund": {
                     "service": "freelog",
                     "name": "TimeEvent",
-                    "args": [
-                        "2021-02-06 14:16:00"
-                    ],
+                    "args": {
+                        "dateTime": "2021-02-06 14:16:00"
+                    },
                     "code": "A102",
                     "description": "fired on a pre-determined time",
                     "singleton": false
@@ -127,10 +128,10 @@
                 "confiscation": {
                     "service": "freelog",
                     "name": "RelativeTimeEvent",
-                    "args": [
-                        30,
-                        "day"
-                    ],
+                    "args": {
+                        "elapsed": 30,
+                        "timeUnit": "day"
+                    },
                     "code": "A103",
                     "description": "fired when certain amount of time elapsed",
                     "singleton": false
@@ -146,9 +147,9 @@
                 "finish": {
                     "service": "freelog",
                     "name": "ViewCountEvent",
-                    "args": [
-                        100
-                    ],
+                    "args": {
+                        "amount": 100
+                    },
                     "code": "S301",
                     "description": "reserve a target number of authorizations, fires when such number reached",
                     "singleton": true
@@ -163,11 +164,11 @@
                 "finish": {
                     "service": "freelog",
                     "name": "EscrowExceedAmount",
-                    "args": [
-                        "18035541373@163.com",
-                        888,
-                        "feather"
-                    ],
+                    "args": {
+                        "account": "18035541373@163.com",
+                        "amount": 888,
+                        "currencyUnit": "feather"
+                    },
                     "code": "S210",
                     "description": "",
                     "singleton": true

@@ -9,7 +9,7 @@
     initial:
         ~freelog.SigningEvent("abc/abc") => signed
     signed[active]:
-        ~freelog.CycleEndEvent("week") => auth
+        ~freelog.CycleEndEvent("2","week") => auth
     auth:
         ~freelog.x.y.TransactionEvent("5","Yaoqinsanchi@qq.com") => settlement
     settlement[active]:
