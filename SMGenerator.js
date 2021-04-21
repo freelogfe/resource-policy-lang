@@ -71,6 +71,9 @@ class SMGenerator extends resourcePolicyVisitor {
          */
         this.necessary_states = null;
 
+        // 环境变量集合
+        this.envArgs = new Set();
+
         this.init_keywords();
         this.init_necessary();
     }
@@ -84,7 +87,9 @@ class SMGenerator extends resourcePolicyVisitor {
         declarations["serviceStateConstants"] = []; // 全局色块
         declarations["expressions"] = []; // 表述
 
-        this.state_machine['states'] = {};
+        this.state_machine["states"] = {};
+
+        this.state_machine["description"] = {}; // 简要描述
 
         return super.visitPolicy(ctx);
     }
@@ -192,6 +197,12 @@ class SMGenerator extends resourcePolicyVisitor {
         }
 
         return super.visitVariableArg(ctx);
+    }
+
+    visitVariableEnvironment(ctx) {
+        this.envArgs.add(ctx.getText());
+
+        return super.visitVariableEnvironment(ctx);
     }
 
     visitState_definition_section(ctx) {
@@ -306,6 +317,7 @@ class SMGenerator extends resourcePolicyVisitor {
                 .then(() => this.verifyServiceStates())
                 .then(() => this.verifyExpressions())
                 .then(() => this.verifyEvents())
+                .then(() => this.combine())
                 .then(() => {
                     resolve()
                 })
@@ -450,10 +462,17 @@ class SMGenerator extends resourcePolicyVisitor {
                     if (!transitionEventArgsMatchUtil.match(param, args[i])) {
                         throw new Error("该事件参数不合法：" + JSON.stringify(event));
                     }
+                    // 若参数是数字，则将其字符串转换
                     if (param["type"] === "decimal") {
-                        args[i] = parseFloat(args[i]);
+                        argO[param["name"]] = parseFloat(args[i]);
                     }
-                    argO[param["name"]] = args[i];
+                    // 提取参数信息
+                    let eventArgsDesc = transitionEventArgsMatchUtil.extract(param, args[i]);
+                    switch (eventArgsDesc["symbolType"]) {
+                        case 2:
+                            this.envArgs.add(args[i]);
+                            break;
+                    }
                 }
                 event["args"] = argO;
             }
@@ -462,6 +481,15 @@ class SMGenerator extends resourcePolicyVisitor {
             event["description"] = eventDefinition["description"];
             event["singleton"] = eventDefinition["singleton"];
         }
+    }
+
+    // 整合输出信息
+    combine() {
+        // 标识符参数
+        let symbolArgs = {};
+        symbolArgs["envArgs"] = [...this.envArgs];
+
+        this.state_machine["description"]["symbolArgs"] = symbolArgs;
     }
 
     /**

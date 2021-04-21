@@ -11,14 +11,14 @@
     signed[active]:
         ~freelog.CycleEndEvent("2","week") => auth
     auth:
-        ~freelog.x.y.TransactionEvent("5","Yaoqinsanchi@qq.com") => settlement
+        ~freelog.x.y.TransactionEvent("5","self.account") => settlement
     settlement[active]:
-        ~freelog.SettlementEvent("1990856408@qq.com") => auth
+        ~freelog.SettlementEvent("001") => auth
         ~freelog.TimeEvent("2021-02-06 14:16:00") => refund
         ~freelog.RelativeTimeEvent("30","day") => confiscation
     confiscation:
         ~freelog.ViewCountEvent("100") => finish
     refund:
-        ~freelog.EscrowExceedAmount("18035541373@163.com","888","feather") => finish
+        ~freelog.EscrowExceedAmount("002","888","feather") => finish
     finish[active]:
         terminate
