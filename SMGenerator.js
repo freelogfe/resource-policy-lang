@@ -462,6 +462,7 @@ class SMGenerator extends resourcePolicyVisitor {
                     if (!transitionEventArgsMatchUtil.match(param, args[i])) {
                         throw new Error("该事件参数不合法：" + JSON.stringify(event));
                     }
+                    argO[param["name"]] = args[i];
                     // 若参数是数字，则将其字符串转换
                     if (param["type"] === "decimal") {
                         argO[param["name"]] = parseFloat(args[i]);

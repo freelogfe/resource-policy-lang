@@ -52,7 +52,9 @@
                 "signed": {
                     "service": "freelog",
                     "name": "SigningEvent",
-                    "args": {},
+                    "args": {
+                        "resourceName": "abc/abc"
+                    },
                     "code": "S101",
                     "description": "acknowledge a resource",
                     "singleton": true
@@ -69,7 +71,8 @@
                     "service": "freelog",
                     "name": "CycleEndEvent",
                     "args": {
-                        "cycleCount": 2
+                        "cycleCount": 2,
+                        "timeUnit": "week"
                     },
                     "code": "A101",
                     "description": "raise when n cycle ends",
@@ -88,7 +91,8 @@
                     "path": "x.y",
                     "name": "TransactionEvent",
                     "args": {
-                        "amount": 5
+                        "amount": 5,
+                        "account": "self.account"
                     },
                     "code": "S201",
                     "description": "one time transaction",
@@ -104,7 +108,9 @@
                 "auth": {
                     "service": "freelog",
                     "name": "SettlementEvent",
-                    "args": {},
+                    "args": {
+                        "account": "001"
+                    },
                     "code": "S202",
                     "description": "fired when settlement cleared",
                     "singleton": true
@@ -112,7 +118,9 @@
                 "refund": {
                     "service": "freelog",
                     "name": "TimeEvent",
-                    "args": {},
+                    "args": {
+                        "dateTime": "2021-02-06 14:16:00"
+                    },
                     "code": "A102",
                     "description": "fired on a pre-determined time",
                     "singleton": false
@@ -121,7 +129,8 @@
                     "service": "freelog",
                     "name": "RelativeTimeEvent",
                     "args": {
-                        "elapsed": 30
+                        "elapsed": 30,
+                        "timeUnit": "day"
                     },
                     "code": "A103",
                     "description": "fired when certain amount of time elapsed",
@@ -156,7 +165,9 @@
                     "service": "freelog",
                     "name": "EscrowExceedAmount",
                     "args": {
-                        "amount": 888
+                        "account": "002",
+                        "amount": 888,
+                        "currencyUnit": "feather"
                     },
                     "code": "S210",
                     "description": "",
