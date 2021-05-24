@@ -48,8 +48,9 @@
     },
     "states": {
         "initial": {
-            "transition": {
-                "signed": {
+            "transition": [
+                {
+                    "toState": "signed",
                     "service": "freelog",
                     "name": "SigningEvent",
                     "args": {
@@ -59,15 +60,16 @@
                     "description": "acknowledge a resource",
                     "singleton": true
                 }
-            },
+            ],
             "serviceStates": [
                 "testActive"
             ],
             "isInitial": true
         },
         "signed": {
-            "transition": {
-                "auth": {
+            "transition": [
+                {
+                    "toState": "auth",
                     "service": "freelog",
                     "name": "CycleEndEvent",
                     "args": {
@@ -78,15 +80,16 @@
                     "description": "raise when n cycle ends",
                     "singleton": false
                 }
-            },
+            ],
             "serviceStates": [
                 "testActive",
                 "active"
             ]
         },
         "auth": {
-            "transition": {
-                "settlement": {
+            "transition": [
+                {
+                    "toState": "settlement",
                     "service": "freelog",
                     "path": "x.y",
                     "name": "TransactionEvent",
@@ -98,14 +101,15 @@
                     "description": "one time transaction",
                     "singleton": true
                 }
-            },
+            ],
             "serviceStates": [
                 "testActive"
             ]
         },
         "settlement": {
-            "transition": {
-                "auth": {
+            "transition": [
+                {
+                    "toState": "auth",
                     "service": "freelog",
                     "name": "SettlementEvent",
                     "args": {
@@ -115,7 +119,8 @@
                     "description": "fired when settlement cleared",
                     "singleton": true
                 },
-                "refund": {
+                {
+                    "toState": "refund",
                     "service": "freelog",
                     "name": "TimeEvent",
                     "args": {
@@ -125,7 +130,8 @@
                     "description": "fired on a pre-determined time",
                     "singleton": false
                 },
-                "confiscation": {
+                {
+                    "toState": "confiscation",
                     "service": "freelog",
                     "name": "RelativeTimeEvent",
                     "args": {
@@ -136,15 +142,16 @@
                     "description": "fired when certain amount of time elapsed",
                     "singleton": false
                 }
-            },
+            ],
             "serviceStates": [
                 "testActive",
                 "active"
             ]
         },
         "confiscation": {
-            "transition": {
-                "finish": {
+            "transition": [
+                {
+                    "toState": "finish",
                     "service": "freelog",
                     "name": "ViewCountEvent",
                     "args": {
@@ -154,14 +161,15 @@
                     "description": "reserve a target number of authorizations, fires when such number reached",
                     "singleton": true
                 }
-            },
+            ],
             "serviceStates": [
                 "testActive"
             ]
         },
         "refund": {
-            "transition": {
-                "finish": {
+            "transition": [
+                {
+                    "toState": "finish",
                     "service": "freelog",
                     "name": "EscrowExceedAmount",
                     "args": {
@@ -173,7 +181,7 @@
                     "description": "",
                     "singleton": true
                 }
-            },
+            ],
             "serviceStates": [
                 "testActive"
             ]

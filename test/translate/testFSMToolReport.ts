@@ -1,0 +1,26 @@
+import {FSMTool} from "../../src/translate";
+
+console.log(FSMTool.report([
+    {
+        name: "initial",
+        events: [{
+            name: "TimeEvent",
+            args: {dateTime: "2021-06-01 00:00:00"},
+            state: "finish"
+        }, {
+            name: "TransactionEvent",
+            args: {amount: 5, account: "self.account"},
+            state: "auth"
+        }]
+    }, {
+        name: "auth",
+        serviceStates: ["active"],
+        events: [{
+            name: "RelativeTimeEvent",
+            args: {elapsed: 1, timeUnit: "month"},
+            state: "finish"
+        }]
+    }, {
+        name: "finish"
+    }
+]));

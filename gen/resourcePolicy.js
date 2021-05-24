@@ -8,7 +8,7 @@ var grammarFileName = "resourcePolicy.g4";
 
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u00037\u0149\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
+    "\u00039\u0149\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
     "\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007\u0004",
     "\b\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0004\f\t\f\u0004",
     "\r\t\r\u0004\u000e\t\u000e\u0004\u000f\t\u000f\u0004\u0010\t\u0010\u0004",
@@ -190,20 +190,20 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "L\'\u0002\u0125\u0123\u0003\u0002\u0002\u0002\u0125\u0124\u0003\u0002",
     "\u0002\u0002\u0126K\u0003\u0002\u0002\u0002\u0127\u0128\u0007(\u0002",
     "\u0002\u0128M\u0003\u0002\u0002\u0002\u0129\u012a\u0007\u001e\u0002",
-    "\u0002\u012a\u012b\u00071\u0002\u0002\u012b\u012f\u00074\u0002\u0002",
-    "\u012c\u012d\u0005P)\u0002\u012d\u012e\u00074\u0002\u0002\u012e\u0130",
+    "\u0002\u012a\u012b\u00073\u0002\u0002\u012b\u012f\u00076\u0002\u0002",
+    "\u012c\u012d\u0005P)\u0002\u012d\u012e\u00076\u0002\u0002\u012e\u0130",
     "\u0003\u0002\u0002\u0002\u012f\u012c\u0003\u0002\u0002\u0002\u012f\u0130",
     "\u0003\u0002\u0002\u0002\u0130\u0131\u0003\u0002\u0002\u0002\u0131\u0132",
-    "\u00071\u0002\u0002\u0132\u0134\u00075\u0002\u0002\u0133\u0135\u0005",
+    "\u00073\u0002\u0002\u0132\u0134\u00077\u0002\u0002\u0133\u0135\u0005",
     "R*\u0002\u0134\u0133\u0003\u0002\u0002\u0002\u0134\u0135\u0003\u0002",
-    "\u0002\u0002\u0135\u0136\u0003\u0002\u0002\u0002\u0136\u0137\u00076",
-    "\u0002\u0002\u0137O\u0003\u0002\u0002\u0002\u0138\u013d\u00071\u0002",
-    "\u0002\u0139\u013a\u00074\u0002\u0002\u013a\u013c\u00071\u0002\u0002",
+    "\u0002\u0002\u0135\u0136\u0003\u0002\u0002\u0002\u0136\u0137\u00078",
+    "\u0002\u0002\u0137O\u0003\u0002\u0002\u0002\u0138\u013d\u00073\u0002",
+    "\u0002\u0139\u013a\u00076\u0002\u0002\u013a\u013c\u00073\u0002\u0002",
     "\u013b\u0139\u0003\u0002\u0002\u0002\u013c\u013f\u0003\u0002\u0002\u0002",
     "\u013d\u013b\u0003\u0002\u0002\u0002\u013d\u013e\u0003\u0002\u0002\u0002",
     "\u013eQ\u0003\u0002\u0002\u0002\u013f\u013d\u0003\u0002\u0002\u0002",
-    "\u0140\u0145\u00072\u0002\u0002\u0141\u0142\u00073\u0002\u0002\u0142",
-    "\u0144\u00072\u0002\u0002\u0143\u0141\u0003\u0002\u0002\u0002\u0144",
+    "\u0140\u0145\u00074\u0002\u0002\u0141\u0142\u00075\u0002\u0002\u0142",
+    "\u0144\u00074\u0002\u0002\u0143\u0141\u0003\u0002\u0002\u0002\u0144",
     "\u0147\u0003\u0002\u0002\u0002\u0145\u0143\u0003\u0002\u0002\u0002\u0145",
     "\u0146\u0003\u0002\u0002\u0002\u0146S\u0003\u0002\u0002\u0002\u0147",
     "\u0145\u0003\u0002\u0002\u0002\u001eVftx\u0082\u0086\u008c\u0096\u00a2",
@@ -234,9 +234,9 @@ var symbolicNames = [ null, "FOR", "PUBLIC", "NODES", "USER_GROUP", "REGISTERED_
                       "EMAIL", "ACCOUNT_NUMBER", "SUBJECT_SERVICE_NAME", 
                       "UOID", "SUBJECT_ID", "SCIENTIFIC_NUMBER", "VARIABLE_CONTRACT", 
                       "VARIABLE_CONTRACT_ATTRIBUTE", "INT", "ID", "PERIOD", 
-                      "DATE", "TIME", "MONEY_AMOUNT", "WS", "EVENT_SERVICE_PATH_NAME", 
-                      "EVENT_ARG", "EVENT_COMMA", "EVENT_POINT", "EVENT_LPAREN", 
-                      "EVENT_RPAREN", "EVENT_WS" ];
+                      "DATE", "TIME", "MONEY_AMOUNT", "COMMENT", "COMMENT_LINE", 
+                      "WS", "EVENT_SERVICE_PATH_NAME", "EVENT_ARG", "EVENT_COMMA", 
+                      "EVENT_POINT", "EVENT_LPAREN", "EVENT_RPAREN", "EVENT_WS" ];
 
 var ruleNames =  [ "policy", "audience_strict", "audience_clause", "audience", 
                    "requirement", "contract_with_subject", "declaration_section", 
@@ -315,14 +315,16 @@ resourcePolicy.PERIOD = 42;
 resourcePolicy.DATE = 43;
 resourcePolicy.TIME = 44;
 resourcePolicy.MONEY_AMOUNT = 45;
-resourcePolicy.WS = 46;
-resourcePolicy.EVENT_SERVICE_PATH_NAME = 47;
-resourcePolicy.EVENT_ARG = 48;
-resourcePolicy.EVENT_COMMA = 49;
-resourcePolicy.EVENT_POINT = 50;
-resourcePolicy.EVENT_LPAREN = 51;
-resourcePolicy.EVENT_RPAREN = 52;
-resourcePolicy.EVENT_WS = 53;
+resourcePolicy.COMMENT = 46;
+resourcePolicy.COMMENT_LINE = 47;
+resourcePolicy.WS = 48;
+resourcePolicy.EVENT_SERVICE_PATH_NAME = 49;
+resourcePolicy.EVENT_ARG = 50;
+resourcePolicy.EVENT_COMMA = 51;
+resourcePolicy.EVENT_POINT = 52;
+resourcePolicy.EVENT_LPAREN = 53;
+resourcePolicy.EVENT_RPAREN = 54;
+resourcePolicy.EVENT_WS = 55;
 
 resourcePolicy.RULE_policy = 0;
 resourcePolicy.RULE_audience_strict = 1;

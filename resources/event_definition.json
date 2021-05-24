@@ -23,7 +23,7 @@
       {
         "name": "timeUnit",
         "type": "timeUnit",
-        "enum": ["year","month","week","day","cycle","hour","minute"]
+        "enum": ["year","month","week","day","cycle"]
       }
     ],
     "singleton": false

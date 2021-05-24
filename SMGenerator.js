@@ -227,7 +227,7 @@ class SMGenerator extends resourcePolicyVisitor {
         }
         this.state_machine["states"][this.current_state] = {
             // authorization: [],
-            transition: {},
+            transition: [],
             serviceStates: service_states
         };
         if (this.current_state === "initial") {
@@ -256,9 +256,13 @@ class SMGenerator extends resourcePolicyVisitor {
     visitState_transition(ctx) {
         let transition = this.state_machine["states"][this.current_state]["transition"];
         if (ctx.terminate == null) {
-            let event = {};
-            transition[ctx.state_name().getText()] = event;
+            // 说明存在terminate关键字
+            if (transition == null) {
+                throw new Error("状态terminate不允许定义事件");
+            }
 
+            let event = {};
+            event["toState"] = ctx.state_name().getText();
             event["service"] = ctx.event().eventService.text;
             if (ctx.event().event_path() != null) {
                 event["path"] = ctx.event().event_path().getText();
@@ -271,9 +275,15 @@ class SMGenerator extends resourcePolicyVisitor {
                 }
                 event["args"] = args;
             }
+            transition.push(event);
 
             this.transitionEvents.push(event);
         } else {
+            if (transition == null) {
+                throw new Error("状态terminate不允许定义多个");
+            } else if (transition.length !== 0) {
+                throw new Error("状态terminate不允许定义事件");
+            }
             this.state_machine["states"][this.current_state]["transition"] = null;
         }
 
