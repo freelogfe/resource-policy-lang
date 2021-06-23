@@ -4,5 +4,5 @@ export interface EventTranslateStrategy {
 
     getEventName(): string;
 
-    translate(event:Event): string;
+    translate(event: Event, isSign?: boolean): string;
 }

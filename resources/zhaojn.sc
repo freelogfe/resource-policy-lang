@@ -14,7 +14,7 @@
         ~freelog.x.y.TransactionEvent("5","self.account") => settlement
     settlement[active]:
         ~freelog.SettlementEvent("001") => auth
-        ~freelog.TimeEvent("2021-02-06 14:16:00") => refund
+        ~freelog.TimeEvent("2021-02-06 14:16") => refund
         ~freelog.RelativeTimeEvent("30","day") => confiscation
     confiscation:
         ~freelog.ViewCountEvent("100") => finish

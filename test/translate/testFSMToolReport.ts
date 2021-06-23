@@ -5,7 +5,7 @@ console.log(FSMTool.report([
         name: "initial",
         events: [{
             name: "TimeEvent",
-            args: {dateTime: "2021-06-01 00:00:00"},
+            args: {dateTime: "2021-06-01 00:00"},
             state: "finish"
         }, {
             name: "TransactionEvent",
@@ -21,6 +21,9 @@ console.log(FSMTool.report([
             state: "finish"
         }]
     }, {
-        name: "finish"
+        name: "finish",
+        events: [{
+            name: "terminate"
+        }]
     }
 ]));

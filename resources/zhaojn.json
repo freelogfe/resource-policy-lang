@@ -48,7 +48,7 @@
     },
     "states": {
         "initial": {
-            "transition": [
+            "transitions": [
                 {
                     "toState": "signed",
                     "service": "freelog",
@@ -58,7 +58,7 @@
                     },
                     "code": "S101",
                     "description": "acknowledge a resource",
-                    "singleton": true
+                    "isSingleton": true
                 }
             ],
             "serviceStates": [
@@ -67,7 +67,7 @@
             "isInitial": true
         },
         "signed": {
-            "transition": [
+            "transitions": [
                 {
                     "toState": "auth",
                     "service": "freelog",
@@ -78,7 +78,7 @@
                     },
                     "code": "A101",
                     "description": "raise when n cycle ends",
-                    "singleton": false
+                    "isSingleton": false
                 }
             ],
             "serviceStates": [
@@ -87,7 +87,7 @@
             ]
         },
         "auth": {
-            "transition": [
+            "transitions": [
                 {
                     "toState": "settlement",
                     "service": "freelog",
@@ -99,7 +99,7 @@
                     },
                     "code": "S201",
                     "description": "one time transaction",
-                    "singleton": true
+                    "isSingleton": true
                 }
             ],
             "serviceStates": [
@@ -107,7 +107,7 @@
             ]
         },
         "settlement": {
-            "transition": [
+            "transitions": [
                 {
                     "toState": "auth",
                     "service": "freelog",
@@ -117,18 +117,18 @@
                     },
                     "code": "S202",
                     "description": "fired when settlement cleared",
-                    "singleton": true
+                    "isSingleton": true
                 },
                 {
                     "toState": "refund",
                     "service": "freelog",
                     "name": "TimeEvent",
                     "args": {
-                        "dateTime": "2021-02-06 14:16:00"
+                        "dateTime": "2021-02-06 14:16"
                     },
                     "code": "A102",
                     "description": "fired on a pre-determined time",
-                    "singleton": false
+                    "isSingleton": false
                 },
                 {
                     "toState": "confiscation",
@@ -140,7 +140,7 @@
                     },
                     "code": "A103",
                     "description": "fired when certain amount of time elapsed",
-                    "singleton": false
+                    "isSingleton": false
                 }
             ],
             "serviceStates": [
@@ -149,7 +149,7 @@
             ]
         },
         "confiscation": {
-            "transition": [
+            "transitions": [
                 {
                     "toState": "finish",
                     "service": "freelog",
@@ -159,7 +159,7 @@
                     },
                     "code": "S301",
                     "description": "reserve a target number of authorizations, fires when such number reached",
-                    "singleton": true
+                    "isSingleton": true
                 }
             ],
             "serviceStates": [
@@ -167,7 +167,7 @@
             ]
         },
         "refund": {
-            "transition": [
+            "transitions": [
                 {
                     "toState": "finish",
                     "service": "freelog",
@@ -179,7 +179,7 @@
                     },
                     "code": "S210",
                     "description": "",
-                    "singleton": true
+                    "isSingleton": true
                 }
             ],
             "serviceStates": [
@@ -187,7 +187,7 @@
             ]
         },
         "finish": {
-            "transition": null,
+            "transitions": [],
             "serviceStates": [
                 "testActive",
                 "active"

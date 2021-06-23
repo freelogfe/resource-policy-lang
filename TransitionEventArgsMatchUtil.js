@@ -32,7 +32,7 @@ class TransitionEventArgsMatchUtil {
                 result = argValue.match("^second|minute|hour|cycle|day|week|month|year$");
                 break;
             case "dateTime":
-                result = argValue.match("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$");
+                result = argValue.match("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$");
                 break;
         }
 

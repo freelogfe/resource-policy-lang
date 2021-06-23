@@ -1,6 +1,6 @@
 {
   "name": "@freelog/resource-policy-lang",
-  "version": "1.1.12",
+  "version": "1.1.14",
   "description": "policy language compiler for freelog",
   "main": "index.js",
   "dependencies": {
@@ -14,7 +14,8 @@
     "build": "java -Xmx500M -cp build/antlr-4.7.1-complete.jar org.antlr.v4.Tool -Dlanguage=JavaScript -visitor resourcePolicy.g4 -o gen",
     "test": "node ./test/highlight.test.js",
     "testFSMToolParseRoutes": "ts-node test/translate/testFSMToolParseRoutes.ts",
-    "testFSMToolReport": "ts-node test/translate/testFSMToolReport.ts"
+    "testFSMToolReport": "ts-node test/translate/testFSMToolReport.ts",
+    "testContractToolReport": "ts-node test/translate/testContractToolReport.ts"
   },
   "repository": {
     "type": "git",

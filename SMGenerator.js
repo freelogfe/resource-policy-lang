@@ -227,7 +227,7 @@ class SMGenerator extends resourcePolicyVisitor {
         }
         this.state_machine["states"][this.current_state] = {
             // authorization: [],
-            transition: [],
+            transitions: [],
             serviceStates: service_states
         };
         if (this.current_state === "initial") {
@@ -254,10 +254,10 @@ class SMGenerator extends resourcePolicyVisitor {
     }
 
     visitState_transition(ctx) {
-        let transition = this.state_machine["states"][this.current_state]["transition"];
+        let transitions = this.state_machine["states"][this.current_state]["transitions"];
         if (ctx.terminate == null) {
             // 说明存在terminate关键字
-            if (transition == null) {
+            if (transitions == null) {
                 throw new Error("状态terminate不允许定义事件");
             }
 
@@ -275,16 +275,16 @@ class SMGenerator extends resourcePolicyVisitor {
                 }
                 event["args"] = args;
             }
-            transition.push(event);
+            transitions.push(event);
 
             this.transitionEvents.push(event);
         } else {
-            if (transition == null) {
+            if (transitions == null) {
                 throw new Error("状态terminate不允许定义多个");
-            } else if (transition.length !== 0) {
+            } else if (transitions.length !== 0) {
                 throw new Error("状态terminate不允许定义事件");
             }
-            this.state_machine["states"][this.current_state]["transition"] = null;
+            this.state_machine["states"][this.current_state]["transitions"] = null;
         }
 
         return super.visitState_transition(ctx);
@@ -490,7 +490,7 @@ class SMGenerator extends resourcePolicyVisitor {
 
             event["code"] = eventDefinition["code"];
             event["description"] = eventDefinition["description"];
-            event["singleton"] = eventDefinition["singleton"];
+            event["isSingleton"] = eventDefinition["singleton"];
         }
     }
 
@@ -501,6 +501,14 @@ class SMGenerator extends resourcePolicyVisitor {
         symbolArgs["envArgs"] = [...this.envArgs];
 
         this.state_machine["description"]["symbolArgs"] = symbolArgs;
+
+        // 空事件转换标识修改
+        let states = this.state_machine["states"];
+        for (let stateName in states) {
+            if (states[stateName]["transitions"] == null) {
+                states[stateName]["transitions"] = [];
+            }
+        }
     }
 
     /**
