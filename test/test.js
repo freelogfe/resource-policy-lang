@@ -41,7 +41,7 @@ async function main() {
         .then(() => {
             console.log(JSON.stringify(gen.state_machine, null, 4));
 
-            fs.writeFile("./resources/zhaojn.json", JSON.stringify(gen.state_machine, null, 4), (err) => {
+            fs.writeFile("./resources/zhaojn2.json", JSON.stringify(gen.state_machine, null, 4), (err) => {
                 if (err) throw err;
                 console.log('The file has been saved!');
             });

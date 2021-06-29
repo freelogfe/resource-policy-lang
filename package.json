@@ -15,7 +15,8 @@
     "test": "node ./test/highlight.test.js",
     "testFSMToolParseRoutes": "ts-node test/translate/testFSMToolParseRoutes.ts",
     "testFSMToolReport": "ts-node test/translate/testFSMToolReport.ts",
-    "testContractToolReport": "ts-node test/translate/testContractToolReport.ts"
+    "testContractToolReport": "ts-node test/translate/testContractToolReport.ts",
+    "testFSMToolCompareRoutes": "ts-node test/translate/testFSMToolCompareRoutes.ts"
   },
   "repository": {
     "type": "git",
