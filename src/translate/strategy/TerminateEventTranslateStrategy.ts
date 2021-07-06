@@ -1,5 +1,5 @@
-import {EventTranslateStrategy} from "./EventTranslateStrategy";
-import {Event} from "../index";
+import {EventTranslateInfo, EventTranslateStrategy} from "./EventTranslateStrategy";
+import {EventEntity} from "../tools/EventTool";
 
 export class TerminateEventTranslateStrategy implements EventTranslateStrategy {
 
@@ -7,8 +7,10 @@ export class TerminateEventTranslateStrategy implements EventTranslateStrategy {
         return TerminateEventTranslateStrategy.EVENT_NAME;
     }
 
-    translate(event: Event, isSign?: boolean): string {
-        return "停止接收事件";
+    translate(event: EventEntity, isSign?: boolean): EventTranslateInfo {
+        return {
+            content: "停止接收事件"
+        };
     }
 
     static EVENT_NAME: string = "terminate";

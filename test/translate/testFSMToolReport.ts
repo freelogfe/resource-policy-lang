@@ -1,4 +1,4 @@
-import {FSMTool} from "../../src/translate";
+import {FSMTool} from "../../src/translate/tools/FSMTool";
 
 console.log(FSMTool.report([
     {

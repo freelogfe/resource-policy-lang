@@ -1,5 +1,6 @@
-import {EventTranslateStrategy} from "./EventTranslateStrategy";
-import {Event, FSMTool} from "../index";
+import {EventTranslateInfo, EventTranslateStrategy} from "./EventTranslateStrategy";
+import {EventEntity} from "../tools/EventTool";
+import {StateTool} from "../tools/StateTool";
 
 export class TransactionEventTranslateStrategy implements EventTranslateStrategy {
 
@@ -9,7 +10,7 @@ export class TransactionEventTranslateStrategy implements EventTranslateStrategy
         return TransactionEventTranslateStrategy.EVENT_NAME;
     }
 
-    translate(event: Event, isSign?: boolean): string {
+    translate(event: EventEntity, isSign?: boolean): EventTranslateInfo {
         let account = event.args["account"];
         let regExp = new RegExp(TransactionEventTranslateStrategy.REGEX_ARG_ACCOUNT);
         let symbolType = 0;
@@ -23,7 +24,9 @@ export class TransactionEventTranslateStrategy implements EventTranslateStrategy
         }
 
         let accountStr = symbolType == 2 ? "" : ` 到 ${account}`;
-        return `支付 ${event.args["amount"]}枚 羽币${accountStr}，${FSMTool.parseTransitionInfo(event.state)}`;
+        return {
+            content: `支付 ${event.args["amount"]}枚 羽币${accountStr}，进入 ${StateTool.report(event.state).content}`
+        };
     }
 
     static EVENT_NAME: string = "TransactionEvent";

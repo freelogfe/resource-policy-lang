@@ -1,6 +1,6 @@
-import {ContractTool} from "../../src/translate";
+import {ContractTool} from "../../src/translate/tools/ContractTool";
 
-console.log(ContractTool.report({
+console.log(JSON.stringify(ContractTool.report({
     audiences: [{name: "public", type: "public"}],
     fsmStates: [
         {
@@ -29,4 +29,4 @@ console.log(ContractTool.report({
             }]
         }
     ]
-}));
+}), null, 4));

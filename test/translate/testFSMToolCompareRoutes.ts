@@ -1,6 +1,6 @@
 import * as path from "path";
 import * as fs from "fs";
-import {FSMTool} from "../../src/translate";
+import {FSMTool} from "../../src/translate/tools/FSMTool";
 
 let states = JSON.parse(fs.readFileSync(path.join(__dirname, "../../resources/zhaojn.json")).toString()).states;
 let routes = [];

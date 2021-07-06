@@ -1,5 +1,6 @@
-import {EventTranslateStrategy} from "./EventTranslateStrategy";
-import {Event, FSMTool} from "../index";
+import {EventTranslateInfo, EventTranslateStrategy} from "./EventTranslateStrategy";
+import {EventEntity} from "../tools/EventTool";
+import {StateTool} from "../tools/StateTool";
 
 export class TimeEventTranslateStrategy implements EventTranslateStrategy {
 
@@ -7,8 +8,10 @@ export class TimeEventTranslateStrategy implements EventTranslateStrategy {
         return TimeEventTranslateStrategy.EVENT_NAME;
     }
 
-    translate(event: Event, isSign?: boolean): string {
-        return `于${event.args["dateTime"]}，${FSMTool.parseTransitionInfo(event.state)}`;
+    translate(event: EventEntity, isSign?: boolean): EventTranslateInfo {
+        return {
+            content: `于${event.args["dateTime"]}，进入 ${StateTool.report(event.state).content}`
+        };
     }
 
     static EVENT_NAME: string = "TimeEvent";

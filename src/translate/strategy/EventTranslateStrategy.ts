@@ -1,8 +1,13 @@
-import {Event} from "../index";
+import {EventEntity} from "../tools/EventTool";
 
 export interface EventTranslateStrategy {
 
     getEventName(): string;
 
-    translate(event: Event, isSign?: boolean): string;
+    translate(event: EventEntity, isSign?: boolean): EventTranslateInfo;
+}
+
+export class EventTranslateInfo {
+    args?: object;
+    content: string;
 }

@@ -1,5 +1,6 @@
-import {EventTranslateStrategy} from "./EventTranslateStrategy";
-import {Event, EventTool, FSMTool} from "../index";
+import {EventTranslateInfo, EventTranslateStrategy} from "./EventTranslateStrategy";
+import {EventEntity, EventTool} from "../tools/EventTool";
+import {StateTool} from "../tools/StateTool";
 import moment = require("moment");
 
 export class CycleEndEventTranslateStrategy implements EventTranslateStrategy {
@@ -8,7 +9,7 @@ export class CycleEndEventTranslateStrategy implements EventTranslateStrategy {
         return CycleEndEventTranslateStrategy.EVENT_NAME;
     }
 
-    translate(event: Event, isSign?: boolean): string {
+    translate(event: EventEntity, isSign?: boolean): EventTranslateInfo {
         let cycleCount = event.args["cycleCount"];
         let timeUnit = event.args["timeUnit"];
 
@@ -16,18 +17,24 @@ export class CycleEndEventTranslateStrategy implements EventTranslateStrategy {
             let seconds = cycleCount * EventTool.perSeconds4TimeUnit(timeUnit);
             if (seconds <= 60 * 60 * 24) {
                 let date = new Date(seconds * 1000);
-                return `${moment(date).utc().format("HH:mm")}之后，${FSMTool.parseTransitionInfo(event.state)}`;
+                return {
+                    content: `${moment(date).utc().format("HH:mm")}之后，进入 ${StateTool.report(event.state).content}`
+                };
             } else {
                 let date = new Date();
                 date.setSeconds(date.getSeconds() + seconds);
-                return `于${moment(date).format("YYYY/MM/DD HH:mm")}，${FSMTool.parseTransitionInfo(event.state)}`;
+                return {
+                    content: `于${moment(date).format("YYYY/MM/DD HH:mm")}，进入 ${StateTool.report(event.state).content}`
+                };
             }
         } else {
             if (timeUnit == "cycle") {
                 cycleCount *= 4;
                 timeUnit = "hour";
             }
-            return `于${cycleCount}${EventTool.getName4TimeUnit(timeUnit)}后的第一个周期点，${FSMTool.parseTransitionInfo(event.state)}`;
+            return {
+                content: `于${cycleCount}${EventTool.getName4TimeUnit(timeUnit)}后的第一个周期点，进入 ${StateTool.report(event.state).content}`
+            };
         }
     }
 
