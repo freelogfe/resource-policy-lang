@@ -2,6 +2,7 @@ export class StateTool {
 
     static report(state: string): StateInfo {
         return {
+            origin: state,
             content: `${this.getName4State(state)}`
         };
     }
@@ -22,5 +23,6 @@ export class StateTool {
 }
 
 export class StateInfo {
+    origin: any;
     content: string;
 }

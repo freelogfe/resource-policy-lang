@@ -1,3 +1,5 @@
+import {ContractElementInfo} from "../index";
+
 export class ServiceStateTool {
 
     static report(serviceStates: string[]): ServiceStateInfo[] {
@@ -9,6 +11,7 @@ export class ServiceStateTool {
 
         for (let serviceState of serviceStates) {
             let result = {
+                origin: serviceState,
                 content: this.getName4ServiceState(serviceState)
             };
             results.push(result);
@@ -31,6 +34,5 @@ export class ServiceStateTool {
     }
 }
 
-export class ServiceStateInfo {
-    content: string;
+export class ServiceStateInfo extends ContractElementInfo {
 }

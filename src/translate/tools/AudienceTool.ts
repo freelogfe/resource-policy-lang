@@ -1,3 +1,5 @@
+import {ContractElementInfo} from "../index";
+
 export class AudienceTool {
 
     static report(audiences: AudienceEntity[]): AudienceInfo[] {
@@ -5,6 +7,7 @@ export class AudienceTool {
 
         for (let audience of audiences) {
             let result = {
+                origin: audience,
                 content: this.parseAudienceInfo(audience)
             };
 
@@ -29,6 +32,5 @@ export class AudienceEntity {
     type: string;
 }
 
-export class AudienceInfo {
-    content: string;
+export class AudienceInfo extends ContractElementInfo {
 }

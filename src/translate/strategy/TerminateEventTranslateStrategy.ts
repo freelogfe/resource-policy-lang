@@ -9,6 +9,7 @@ export class TerminateEventTranslateStrategy implements EventTranslateStrategy {
 
     translate(event: EventEntity, isSign?: boolean): EventTranslateInfo {
         return {
+            origin: event,
             content: "停止接收事件"
         };
     }

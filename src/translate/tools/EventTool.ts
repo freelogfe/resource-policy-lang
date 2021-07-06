@@ -68,6 +68,7 @@ export class EventTool {
  * 事件
  */
 export class EventEntity {
+    id?: string;
     name: string;
     args?: {};
     state?: string;

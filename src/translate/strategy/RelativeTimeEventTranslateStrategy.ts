@@ -18,12 +18,14 @@ export class RelativeTimeEventTranslateStrategy implements EventTranslateStrateg
             if (seconds <= 60 * 60 * 24) {
                 let date = new Date(seconds * 1000);
                 return {
+                    origin: event,
                     content: `${moment(date).utc().format("HH:mm")}之后，进入 ${StateTool.report(event.state).content}`
                 };
             } else {
                 let date = new Date();
                 date.setSeconds(date.getSeconds() + seconds);
                 return {
+                    origin: event,
                     content: `于${moment(date).format("YYYY/MM/DD HH:mm")}，进入 ${StateTool.report(event.state).content}`
                 };
             }
@@ -33,6 +35,7 @@ export class RelativeTimeEventTranslateStrategy implements EventTranslateStrateg
                 timeUnit = "hour";
             }
             return {
+                origin: event,
                 content: `${elapsed}${EventTool.getName4TimeUnit(timeUnit)}之后，进入 ${StateTool.report(event.state).content}`
             };
         }

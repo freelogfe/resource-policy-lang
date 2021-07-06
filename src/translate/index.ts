@@ -21,3 +21,8 @@ export class EventTranslateStrategyFactory {
         return this.eventTranslateStrategyMap.get(eventName);
     }
 }
+
+export class ContractElementInfo {
+    origin: any;
+    content: string;
+}

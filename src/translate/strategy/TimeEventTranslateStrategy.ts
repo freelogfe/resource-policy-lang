@@ -10,6 +10,7 @@ export class TimeEventTranslateStrategy implements EventTranslateStrategy {
 
     translate(event: EventEntity, isSign?: boolean): EventTranslateInfo {
         return {
+            origin: event,
             content: `于${event.args["dateTime"]}，进入 ${StateTool.report(event.state).content}`
         };
     }

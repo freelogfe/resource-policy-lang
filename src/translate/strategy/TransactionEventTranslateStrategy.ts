@@ -25,6 +25,7 @@ export class TransactionEventTranslateStrategy implements EventTranslateStrategy
 
         let accountStr = symbolType == 2 ? "" : ` 到 ${account}`;
         return {
+            origin: event,
             content: `支付 ${event.args["amount"]}枚 羽币${accountStr}，进入 ${StateTool.report(event.state).content}`
         };
     }
