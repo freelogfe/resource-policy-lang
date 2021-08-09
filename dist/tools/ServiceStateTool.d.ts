@@ -1,4 +1,3 @@
-import { ContractElementInfo } from "../index";
 export declare class ServiceStateTool {
     static report(serviceStates: string[]): ServiceStateInfo[];
     static serviceStateNameMap: {
@@ -6,5 +5,7 @@ export declare class ServiceStateTool {
     };
     static getName4ServiceState(serviceState: string): string;
 }
-export declare class ServiceStateInfo extends ContractElementInfo {
+export declare class ServiceStateInfo {
+    origin: any;
+    content: string;
 }

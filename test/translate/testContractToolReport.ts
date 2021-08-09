@@ -1,6 +1,6 @@
-import {ContractTool} from "../../src/translate/tools/ContractTool";
+import {report} from "../../src/translate";
 
-console.log(JSON.stringify(ContractTool.report({
+console.log(JSON.stringify(report({
     audiences: [{name: "public", type: "public"}],
     fsmStates: [
         {

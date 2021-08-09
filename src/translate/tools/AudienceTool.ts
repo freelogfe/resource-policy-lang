@@ -1,5 +1,3 @@
-import {ContractElementInfo} from "../index";
-
 export class AudienceTool {
 
     static report(audiences: AudienceEntity[]): AudienceInfo[] {
@@ -32,5 +30,7 @@ export class AudienceEntity {
     type: string;
 }
 
-export class AudienceInfo extends ContractElementInfo {
+export class AudienceInfo {
+    origin: any;
+    content: string;
 }

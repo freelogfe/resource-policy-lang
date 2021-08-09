@@ -1,5 +1,3 @@
-import {ContractElementInfo} from "../index";
-
 export class ServiceStateTool {
 
     static report(serviceStates: string[]): ServiceStateInfo[] {
@@ -34,5 +32,7 @@ export class ServiceStateTool {
     }
 }
 
-export class ServiceStateInfo extends ContractElementInfo {
+export class ServiceStateInfo {
+    origin: any;
+    content: string;
 }
