@@ -10,6 +10,6 @@ export declare class ContractElementInfo {
     origin: any;
     content: string;
 }
-export declare function report(contract: ContractEntity): ContractInfo;
+export declare function report(contract: ContractEntity, isSign?: boolean): ContractInfo;
 export declare function compareRoutes(routes: FSMRouteElement[][], routesB: FSMRouteElement[][], options?: CompareRoutesOptions): void;
 export declare function parseRoutes(states: any, stateName: string, routes: FSMRouteElement[][], route: FSMRouteElement[]): void;

@@ -10,20 +10,19 @@ export class TransactionEventTranslateStrategy implements EventTranslateStrategy
         return TransactionEventTranslateStrategy.EVENT_NAME;
     }
 
-    translate(event: EventEntity, isSign?: boolean): EventTranslateInfo {
+    translate(event: EventEntity): EventTranslateInfo {
         let account = event.args["account"];
         let regExp = new RegExp(TransactionEventTranslateStrategy.REGEX_ARG_ACCOUNT);
         let symbolType = 0;
         if (account.match(regExp)) {
-            if (symbolType === 0) {
-                // 环境变量
-                symbolType = RegExp.$2 ? 2 : 0;
-            }
+            // 环境变量
+            symbolType = RegExp.$2 ? 2 : 0;
         } else {
             throw new Error("参数错误，提取参数信息失败");
         }
 
         let accountStr = symbolType == 2 ? "" : ` 到 ${account}`;
+
         return {
             origin: event,
             content: `支付 ${event.args["amount"]}枚 羽币${accountStr}，进入 ${StateTool.report(event.state).content}`

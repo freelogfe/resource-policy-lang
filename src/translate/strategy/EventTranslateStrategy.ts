@@ -5,7 +5,7 @@ export interface EventTranslateStrategy {
 
     getEventName(): string;
 
-    translate(event: EventEntity, isSign?: boolean): EventTranslateInfo;
+    translate(event: EventEntity): EventTranslateInfo;
 }
 
 export class EventTranslateInfo extends ContractElementInfo {

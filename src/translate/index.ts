@@ -29,8 +29,8 @@ export class ContractElementInfo {
     content: string;
 }
 
-export function report(contract: ContractEntity): ContractInfo {
-    return ContractTool.report(contract);
+export function report(contract: ContractEntity, isSign?: boolean): ContractInfo {
+    return ContractTool.report(contract, isSign);
 }
 
 export function compareRoutes(routes: FSMRouteElement[][], routesB: FSMRouteElement[][], options?: CompareRoutesOptions): void {

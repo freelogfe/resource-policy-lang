@@ -3,20 +3,19 @@ const resourcePolicy = require(`${gen_dir}/resourcePolicy`);
 const resourcePolicyVisitor = require('./gen/resourcePolicyVisitor').resourcePolicyVisitor;
 const TransitionEventArgsMatchUtil = require('./TransitionEventArgsMatchUtil');
 const path = require('path');
-const fs = require("fs");
 const http = require("http");
 
 const transitionEventArgsMatchUtil = new TransitionEventArgsMatchUtil.TransitionEventArgsMatchUtil();
-const serviceStateResourceAddressMap = JSON.parse(fs.readFileSync(path.join(__dirname, "./resources/service_state_resource_addresses.json")));
+const serviceStateResourceAddressMap = require("./resources/service_state_resource_addresses.json");
 const eventDefinitionMap = {};
 {
-    let eventDefinitionArrayTmp = JSON.parse(fs.readFileSync(path.join(__dirname, "./resources/event_definition.json")));
+    let eventDefinitionArrayTmp = require("./resources/event_definition.json");
     for (let eventDefinition of eventDefinitionArrayTmp) {
         eventDefinitionMap[eventDefinition["name"]] = eventDefinition;
     }
 }
 
-class SMGenerator extends resourcePolicyVisitor {
+class UserPolicyCustomVisitor extends resourcePolicyVisitor {
 
     /**
      * @param subjectType 标的物类型
@@ -28,7 +27,7 @@ class SMGenerator extends resourcePolicyVisitor {
         if (subjectType == null || !(subjectType in serviceStateResourceAddressMap)) {
             throw new Error("参数错误${subjectType}");
         }
-        this.subjectType = subjectType.toLowerCase();
+        this.subjectType = subjectType.toString().toLowerCase();
 
         this.targetUrl = targetUrl;
 
@@ -61,12 +60,12 @@ class SMGenerator extends resourcePolicyVisitor {
         // 状态机状态转换过程事件集合
         this.transitionEvents = [];
         /**
-         * @see SMGenerator#init_keywords_state()
+         * @see UserPolicyCustomVisitor#init_keywords_state()
          * 状态机状态名称关键字集合
          */
         this.keywords_state = null;
         /**
-         * @see SMGenerator#init_necessary_states()
+         * @see UserPolicyCustomVisitor#init_necessary_states()
          * 状态机状态名称必要的集合
          */
         this.necessary_states = null;
@@ -549,4 +548,4 @@ class SMGenerator extends resourcePolicyVisitor {
     }
 }
 
-exports.SMGenerator = SMGenerator;
+exports.UserPolicyCustomVisitor = UserPolicyCustomVisitor;

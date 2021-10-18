@@ -1,7 +1,7 @@
 import { AudienceEntity, AudienceInfo } from "./AudienceTool";
 import { FSMEntity, FSMInfo } from "./FSMTool";
 export declare class ContractTool {
-    static report(contract: ContractEntity): ContractInfo;
+    static report(contract: ContractEntity, isSign?: boolean): ContractInfo;
 }
 /**
  * 合约实体

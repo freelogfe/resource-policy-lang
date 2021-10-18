@@ -8,6 +8,11 @@ export class FSMTool {
     static report(fsmEntities: FSMEntity[]): FSMInfo[] {
         let results = [];
 
+        let fsmEntityMap = new Map();
+        for (let fsmEntity of fsmEntities) {
+            fsmEntityMap.set(fsmEntity.name, fsmEntity);
+        }
+
         for (let fsmEntity of fsmEntities) {
             let result = {
                 stateInfo: StateTool.report(fsmEntity.name),
