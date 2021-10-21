@@ -1,6 +1,6 @@
 import {report} from "../../src/translate";
 
-console.log(report({
+let result = report({
     audiences: [{name: "public", type: "public"}],
     fsmStates: [
         {
@@ -32,4 +32,6 @@ console.log(report({
             }]
         }
     ]
-}, true).content);
+}, true);
+
+console.log(JSON.stringify(result, null, 4));
