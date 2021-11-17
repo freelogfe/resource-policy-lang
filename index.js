@@ -36,7 +36,14 @@ exports.compile = async function (policyText, targetType, targetUrl, env) {
     await visitor.verify();
     return {
         state_machine: visitor.state_machine,
-        errors: errorListener.errors,
-        errorObjects: errorListener.errorObjects
+        errors: [...errorListener.errors, ...visitor.errors],
+        errorObjects: [errorListener.errorObjects, ...visitor.errors.map(error => {
+            return {
+                line: -1,
+                charPositionInLine: -1,
+                offendingSymbol: "",
+                msg: error
+            };
+        })]
     };
 }

@@ -266,7 +266,9 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
             if (ctx.event().event_path() != null) {
                 event["path"] = ctx.event().event_path().getText();
             }
-            event["name"] = ctx.event().eventName.text;
+            if (ctx.event().eventName != null) {
+                event["name"] = ctx.event().eventName.text;
+            }
             if (ctx.event().event_args() != null) {
                 let args = [];
                 for (let event_arg of ctx.event().event_args().EVENT_ARG()) {
@@ -321,6 +323,8 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
      * 校验
      */
     verify() {
+        this.errors = [];
+
         return new Promise((resolve, reject) => {
             this.fetchServiceStates()
                 .then(() => this.verifyServiceStates())
@@ -450,26 +454,30 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
     verifyEvents() {
         for (let event of this.transitionEvents) {
             if (event["service"] !== "freelog") {
-                throw new Error("该事件服务不合法：" + JSON.stringify(event));
+                this.errors.push("该事件服务不合法：" + JSON.stringify(event));
+                continue;
             }
 
             let eventDefinition = eventDefinitionMap[event["name"]];
             if (eventDefinition == null) {
-                throw new Error("该事件未定义：" + JSON.stringify(event));
+                this.errors.push("该事件未定义：" + JSON.stringify(event));
+                continue;
             }
 
             let params = eventDefinition["params"];
             if (params != null) {
                 let args = event["args"];
                 if (args == null || args.length !== params.length) {
-                    throw new Error("该事件缺少参数：" + JSON.stringify(event));
+                    this.errors.push("该事件缺少参数：" + JSON.stringify(event));
+                    continue;
                 }
 
                 let argO = {};
                 for (let i = 0; i < params.length; i++) {
                     let param = params[i];
                     if (!transitionEventArgsMatchUtil.match(param, args[i])) {
-                        throw new Error("该事件参数不合法：" + JSON.stringify(event));
+                        this.errors.push("该事件参数不合法：" + JSON.stringify(event));
+                        continue;
                     }
                     argO[param["name"]] = args[i];
                     // 若参数是数字，则将其字符串转换
