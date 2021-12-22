@@ -9,8 +9,7 @@ export class StateTool {
 
     // 状态机状态名称映射表
     static stateNameMap = {
-        initial: "初始状态",
-        finish: "终止状态"
+        initial: "初始状态"
     };
 
     // 取状态名
@@ -24,6 +23,8 @@ export class StateTool {
 }
 
 export class StateInfo {
+    // 原始内容
     origin: any;
+    // 翻译文本
     content: string;
 }

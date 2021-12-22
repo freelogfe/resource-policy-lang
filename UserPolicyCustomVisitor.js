@@ -15,6 +15,7 @@ const eventDefinitionMap = {};
     }
 }
 
+
 class UserPolicyCustomVisitor extends resourcePolicyVisitor {
 
     /**
@@ -49,6 +50,9 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
                     throw new Error("参数错误${env}");
             }
         }
+
+        this.warningObjects = [];
+        this.errorObjects = [];
 
         this.state_machine = {};
         // 当前状态
@@ -95,6 +99,9 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
 
     visitAudience(ctx) {
         let audience = ctx.getChild(0);
+        if (audience == null) {
+            return;
+        }
         let name = audience.getText();
         let type = null;
         switch (audience.getSymbol().type) {
@@ -160,13 +167,23 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
         let func_name = ctx.expression_handle().getText();
         for (let ex of expressions) {
             if (ex["funcName"] === func_name) {
-                throw new Error("存在相同的函数名：" + func_name);
+                this.errorObjects.push({
+                    line: ctx.start.line,
+                    msg: "存在相同的函数名：" + func_name
+                });
+                break;
             }
         }
         let func_args = [];
         for (let func_arg of ctx.ID()) {
             if (func_args.indexOf(func_arg.getText()) > -1) {
-                throw new Error("存在相同的参数名：" + func_arg.getText());
+                console.log(ctx.start.line)
+                console.log(ctx.start.column)
+                this.errorObjects.push({
+                    line: ctx.start.line,
+                    msg: "存在相同的参数名：" + func_arg.getText()
+                });
+                break;
             }
             func_args.push(func_arg.getText());
         }
@@ -192,7 +209,10 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
             }
         }
         if (expression["funcArgs"].indexOf(ctx.ID().getText()) === -1) {
-            throw new Error("无效的参数名：" + ctx.ID().getText());
+            this.errorObjects.push({
+                line: ctx.start.line,
+                msg: "无效的参数名：" + ctx.ID().getText()
+            });
         }
 
         return super.visitVariableArg(ctx);
@@ -255,37 +275,59 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
     visitState_transition(ctx) {
         let transitions = this.state_machine["states"][this.current_state]["transitions"];
         if (ctx.terminate == null) {
-            // 说明存在terminate关键字
-            if (transitions == null) {
-                throw new Error("状态terminate不允许定义事件");
-            }
+            if (transitions.some(event => {
+                return event["name"] === "terminate";
+            })) {
+                this.errorObjects.push({
+                    line: ctx.start.line,
+                    msg: "状态terminate不允许定义事件"
+                });
+            } else {
+                if (ctx.state_name() == null) {
+                    this.warningObjects.push({
+                        line: ctx.start.line,
+                        msg: "事件格式错误"
+                    })
+                } else {
+                    let event = {};
+                    event["toState"] = ctx.state_name().getText();
+                    event["service"] = ctx.event().eventService.text;
+                    if (ctx.event().event_path() != null) {
+                        event["path"] = ctx.event().event_path().getText();
+                    }
+                    if (ctx.event().eventName != null) {
+                        event["name"] = ctx.event().eventName.text;
+                    }
+                    if (ctx.event().event_args() != null) {
+                        let args = [];
+                        for (let event_arg of ctx.event().event_args().EVENT_ARG()) {
+                            args.push(event_arg.getText().substring(1, event_arg.getText().length - 1));
+                        }
+                        event["args"] = args;
+                    }
+                    transitions.push(event);
 
-            let event = {};
-            event["toState"] = ctx.state_name().getText();
-            event["service"] = ctx.event().eventService.text;
-            if (ctx.event().event_path() != null) {
-                event["path"] = ctx.event().event_path().getText();
-            }
-            if (ctx.event().eventName != null) {
-                event["name"] = ctx.event().eventName.text;
-            }
-            if (ctx.event().event_args() != null) {
-                let args = [];
-                for (let event_arg of ctx.event().event_args().EVENT_ARG()) {
-                    args.push(event_arg.getText().substring(1, event_arg.getText().length - 1));
+                    this.transitionEvents.push(event);
                 }
-                event["args"] = args;
             }
-            transitions.push(event);
-
-            this.transitionEvents.push(event);
         } else {
-            if (transitions == null) {
-                throw new Error("状态terminate不允许定义多个");
+            if (transitions.some(event => {
+                return event["name"] === "terminate";
+            })) {
+                this.errorObjects.push({
+                    line: ctx.start.line,
+                    msg: "状态terminate不允许定义多个"
+                });
             } else if (transitions.length !== 0) {
-                throw new Error("状态terminate不允许定义事件");
+                this.errorObjects.push({
+                    line: ctx.start.line,
+                    msg: "状态terminate不允许定义事件"
+                });
+            } else {
+                transitions.push({
+                    name: "terminate"
+                });
             }
-            this.state_machine["states"][this.current_state]["transitions"] = null;
         }
 
         return super.visitState_transition(ctx);
@@ -323,8 +365,6 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
      * 校验
      */
     verify() {
-        this.errors = [];
-
         return new Promise((resolve, reject) => {
             this.fetchServiceStates()
                 .then(() => this.verifyServiceStates())
@@ -400,9 +440,9 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
                 serviceStateRecords.add(service_state);
             }
         }
-        if (serviceStateRecords.size === 0) {
-            throw new Error("状态机状态至少包含一个色块");
-        }
+        // if (serviceStateRecords.size === 0) {
+        //     throw new Error("状态机状态至少包含一个色块");
+        // }
 
         // 验证全局色块定义
         let service_state_constants = this.state_machine["declarations"]["serviceStateConstants"];
@@ -435,8 +475,9 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
                 return;
             }
         }
-
-        throw new Error("不合法的色块：" + state);
+        this.errorObjects.push({
+            msg: "不合法的色块：" + state
+        });
     }
 
     /**
@@ -454,21 +495,19 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
     verifyEvents() {
         for (let event of this.transitionEvents) {
             if (event["service"] !== "freelog") {
-                this.errors.push("该事件服务不合法：" + JSON.stringify(event));
+                this.warningObjects.push({msg: "该事件服务不合法：" + JSON.stringify(event)});
                 continue;
             }
-
             let eventDefinition = eventDefinitionMap[event["name"]];
             if (eventDefinition == null) {
-                this.errors.push("该事件未定义：" + JSON.stringify(event));
+                this.warningObjects.push({msg: "该事件未定义：" + JSON.stringify(event)});
                 continue;
             }
-
             let params = eventDefinition["params"];
             if (params != null) {
                 let args = event["args"];
                 if (args == null || args.length !== params.length) {
-                    this.errors.push("该事件缺少参数：" + JSON.stringify(event));
+                    this.warningObjects.push({msg: "该事件缺少参数：" + JSON.stringify(event)});
                     continue;
                 }
 
@@ -476,7 +515,7 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
                 for (let i = 0; i < params.length; i++) {
                     let param = params[i];
                     if (!transitionEventArgsMatchUtil.match(param, args[i])) {
-                        this.errors.push("该事件参数不合法：" + JSON.stringify(event));
+                        this.warningObjects.push({msg: "该事件参数不合法：" + JSON.stringify(event)});
                         continue;
                     }
                     argO[param["name"]] = args[i];
@@ -493,6 +532,11 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
                     }
                 }
                 event["args"] = argO;
+            }
+
+            if (!(event["toState"] in this.state_machine.states)) {
+                this.warningObjects.push({msg: "该事件指向的状态不存在：" + JSON.stringify(event)});
+                continue;
             }
 
             event["code"] = eventDefinition["code"];
@@ -512,8 +556,12 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
         // 空事件转换标识修改
         let states = this.state_machine["states"];
         for (let stateName in states) {
-            if (states[stateName]["transitions"] == null) {
-                states[stateName]["transitions"] = [];
+            let transitions = states[stateName]["transitions"];
+            for (let transition of transitions) {
+                if (transition["name"] === "terminate") {
+                    states[stateName]["transitions"] = [];
+                    break;
+                }
             }
         }
     }
@@ -531,14 +579,18 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
     // 检查状态机名称是否重复
     checkStateSingle(state) {
         if (state in this.state_machine["states"]) {
-            throw new Error("状态机名称冲突：" + state);
+            this.errorObjects.push({
+                msg: "状态机名称冲突：" + state
+            });
         }
     }
 
     // 检查状态机名称是否与关键字冲突
     checkStateKeyword(state) {
         if (this.keywords_state.has(state)) {
-            throw new Error("关键字冲突：" + state);
+            this.errorObjects.push({
+                msg: "关键字冲突：" + state
+            });
         }
     }
 
@@ -547,7 +599,11 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
      */
     checkStateComplete() {
         for (let necessary_state of this.necessary_states) {
-            if (!necessary_state in this.state_machine["states"]) throw new Error("缺少必要的状态：" + necessary_state);
+            if (!(necessary_state in this.state_machine["states"])) {
+                this.errorObjects.push({
+                    msg: "缺少必要的状态：" + necessary_state
+                });
+            }
         }
     }
 

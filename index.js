@@ -4,9 +4,23 @@ const antlr4 = require("antlr4");
 const gen_dir = "./gen";
 const LexToken = require(`${gen_dir}/LexToken`);
 const resourcePolicy = require(`${gen_dir}/resourcePolicy`);
+const {FSMTool} = require("./dist/src/translate/tools/FSMTool");
+const {ContractTool} = require("./dist/src/translate/tools/ContractTool");
 const {UserPolicyErrorListener} = require("./UserPolicyErrorListener");
 const {UserPolicyErrorLexerListener} = require("./UserPolicyErrorLexerListener");
 const UserPolicyCustomVisitor = require("./UserPolicyCustomVisitor").UserPolicyCustomVisitor;
+
+exports.report = function (contract, isSign) {
+    return ContractTool.report(contract, isSign);
+}
+
+exports.compareRoutes = function (routes, routesB, options) {
+    FSMTool.compareRoutes(routes, routesB, options);
+}
+
+exports.parseRoutes = function (states, stateName, routes, route) {
+    FSMTool.parseRoutes(states, stateName, routes, route);
+}
 
 exports.compile = async function (policyText, targetType, targetUrl, env) {
     let chars = new antlr4.InputStream(policyText);
@@ -36,14 +50,9 @@ exports.compile = async function (policyText, targetType, targetUrl, env) {
     await visitor.verify();
     return {
         state_machine: visitor.state_machine,
-        errors: [...errorListener.errors, ...visitor.errors],
-        errorObjects: [errorListener.errorObjects, ...visitor.errors.map(error => {
-            return {
-                line: -1,
-                charPositionInLine: -1,
-                offendingSymbol: "",
-                msg: error
-            };
-        })]
+        warnings: visitor.warningObjects.map(wo => wo.msg),
+        warningObjects: visitor.warningObjects,
+        errors: [...errorListener.errors, ...visitor.errorObjects.map(eo => eo.msg)],
+        errorObjects: [...errorListener.errorObjects, ...visitor.errorObjects]
     };
 }

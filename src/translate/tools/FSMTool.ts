@@ -8,12 +8,10 @@ export class FSMTool {
     static report(fsmEntities: FSMEntity[]): FSMInfo[] {
         let results = [];
 
-        let fsmEntityMap = new Map();
         for (let fsmEntity of fsmEntities) {
-            fsmEntityMap.set(fsmEntity.name, fsmEntity);
-        }
-
-        for (let fsmEntity of fsmEntities) {
+            if (fsmEntity.events == null || fsmEntity.events.length == 0) {
+                fsmEntity.events = [{name: "terminate"}];
+            }
             let result = {
                 stateInfo: StateTool.report(fsmEntity.name),
                 serviceStateInfos: ServiceStateTool.report(fsmEntity.serviceStates),
@@ -32,10 +30,21 @@ export class FSMTool {
      * @param routes 路由集合（结果）
      * @param route 路由
      */
-    static parseRoutes(states, stateName: string, routes: FSMRouteElement[][], route: FSMRouteElement[]): void {
+    static
+
+    parseRoutes(states, stateName
+        :
+        string, routes
+                    :
+                    FSMRouteElement[][], route
+                    :
+                    FSMRouteElement[]
+    ):
+        void {
         let events = states[stateName].transitions;
         let serviceStates = states[stateName].serviceStates;
-        if (events != null && events.length != 0) {
+        if (events != null && events.length != 0
+        ) {
             for (let event of events) {
                 if (route.some((e) => {
                     return e.state == event.toState
@@ -56,8 +65,17 @@ export class FSMTool {
         }
     }
 
-    static compareRoutes(routes: FSMRouteElement[][], routesB: FSMRouteElement[][], options?: CompareRoutesOptions): void {
-        if (routes == null || routesB == null || routes.length == 0 || routesB.length == 0) {
+    static
+
+    compareRoutes(routes
+                      :
+                      FSMRouteElement[][], routesB
+                      :
+                      FSMRouteElement[][], options ?: CompareRoutesOptions
+    ):
+        void {
+        if (routes == null || routesB == null || routes.length == 0 || routesB.length == 0
+        ) {
             throw new Error("参数错误");
         }
         if (routes.length != routesB.length) {

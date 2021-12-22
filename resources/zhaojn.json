@@ -204,6 +204,8 @@
             }
         }
     },
+    "warnings": [],
+    "warningObjects": [],
     "errors": [],
     "errorObjects": []
 }
