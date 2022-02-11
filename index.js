@@ -10,8 +10,30 @@ const {UserPolicyErrorListener} = require("./UserPolicyErrorListener");
 const {UserPolicyErrorLexerListener} = require("./UserPolicyErrorLexerListener");
 const UserPolicyCustomVisitor = require("./UserPolicyCustomVisitor").UserPolicyCustomVisitor;
 
-exports.report = function (contract, isSign) {
-    return ContractTool.report(contract, isSign);
+exports.report = function (contract) {
+    let fsmStates = [];
+    for (let state in contract.states) {
+        fsmStates.push({
+            name: state,
+            serviceStates: contract.states[state].serviceStates,
+            events: contract.states[state].transitions
+        });
+    }
+
+    return ContractTool.report({audiences: contract.audiences, fsmStates: fsmStates});
+}
+
+exports.transfer = function (states, fsmTransfers) {
+    let fsmEntities = [];
+    for (let state in states) {
+        fsmEntities.push({
+            name: state,
+            serviceStates: states[state]["serviceStates"],
+            events: states[state]["transitions"]
+        });
+    }
+
+    return FSMTool.transfer(fsmEntities, fsmTransfers);
 }
 
 exports.compareRoutes = function (routes, routesB, options) {

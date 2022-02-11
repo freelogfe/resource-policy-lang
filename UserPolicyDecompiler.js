@@ -26,9 +26,11 @@ class UserPolicyDecompiler {
 
     decompileExpressions(expressions) {
         let content = "";
-        expressions.forEach(expression => {
-            content += `\n${this.decompileExpression(expression)}`;
-        });
+        if (expressions != null) {
+            expressions.forEach(expression => {
+                content += `\n${this.decompileExpression(expression)}`;
+            });
+        }
         return content;
     }
 
@@ -38,9 +40,11 @@ class UserPolicyDecompiler {
 
     decompileServiceStateConstants(serviceStateConstants) {
         let content = "";
-        serviceStateConstants.forEach(serviceStateConstant => {
-            content += `\n${serviceStateConstant["scope"]} ${serviceStateConstant["state"]}`;
-        });
+        if (serviceStateConstants != null) {
+            serviceStateConstants.forEach(serviceStateConstant => {
+                content += `\n${serviceStateConstant["scope"]} ${serviceStateConstant["state"]}`;
+            });
+        }
         return content;
     }
 

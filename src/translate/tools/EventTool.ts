@@ -1,10 +1,21 @@
 import {EventTranslateInfo} from "../strategy/EventTranslateStrategy";
 import {EventTranslateStrategyFactory} from "../index";
 
+const templates = require(`${process.cwd()}/resources/translate_templates.json`);
+
 /**
- * 事件工具
+ * 状态机事件工具
  */
 export class EventTool {
+
+    /**
+     * 取翻译模板
+     * @param eventName 事件名
+     * @param status 事件状态（Strategy：策略 Unfinished：未执行 Finished：已执行）
+     */
+    static getTemplate(eventName: string, status: string): string {
+        return templates[eventName][status];
+    }
 
     static report(events: EventEntity[]): EventTranslateInfo[] {
         let results = [];
@@ -19,7 +30,7 @@ export class EventTool {
             if (eventTranslateStrategy == null) {
                 throw new Error(`不支持该事件：${event.name}`);
             }
-            let result = eventTranslateStrategy.translate(event);
+            let result = eventTranslateStrategy.translate4Strategy(event);
             results.push(result);
         }
 
@@ -68,8 +79,10 @@ export class EventTool {
  * 事件
  */
 export class EventEntity {
-    id?: string;
+    code?: string;
+    // 事件名
     name: string;
     args?: {};
-    state?: string;
+    // 事件目标状态
+    toState?: string;
 }

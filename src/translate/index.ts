@@ -4,8 +4,6 @@ import {TransactionEventTranslateStrategy} from "./strategy/TransactionEventTran
 import {TimeEventTranslateStrategy} from "./strategy/TimeEventTranslateStrategy";
 import {RelativeTimeEventTranslateStrategy} from "./strategy/RelativeTimeEventTranslateStrategy";
 import {TerminateEventTranslateStrategy} from "./strategy/TerminateEventTranslateStrategy";
-import {ContractEntity, ContractInfo, ContractTool} from "./tools/ContractTool";
-import {CompareRoutesOptions, FSMRouteElement, FSMTool} from "./tools/FSMTool";
 
 export class EventTranslateStrategyFactory {
 
@@ -25,18 +23,21 @@ export class EventTranslateStrategyFactory {
 }
 
 export class ContractElementInfo {
+    // 源数据
     origin: any;
+    // 翻译信息
     content: string;
 }
 
-export function report(contract: ContractEntity, isSign?: boolean): ContractInfo {
-    return ContractTool.report(contract, isSign);
-}
-
-export function compareRoutes(routes: FSMRouteElement[][], routesB: FSMRouteElement[][], options?: CompareRoutesOptions): void {
-    FSMTool.compareRoutes(routes, routesB, options);
-}
-
-export function parseRoutes(states, stateName: string, routes: FSMRouteElement[][], route: FSMRouteElement[]): void {
-    FSMTool.parseRoutes(states, stateName, routes, route);
-}
+//
+// export function report(contract: ContractEntity): ContractInfo {
+//     return ContractTool.report(contract);
+// }
+//
+// export function compareRoutes(routes: FSMRouteElement[][], routesB: FSMRouteElement[][], options?: CompareRoutesOptions): void {
+//     FSMTool.compareRoutes(routes, routesB, options);
+// }
+//
+// export function parseRoutes(states, stateName: string, routes: FSMRouteElement[][], route: FSMRouteElement[]): void {
+//     FSMTool.parseRoutes(states, stateName, routes, route);
+// }

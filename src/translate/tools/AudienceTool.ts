@@ -18,7 +18,7 @@ export class AudienceTool {
     static parseAudienceInfo(audience: AudienceEntity): string {
         switch (audience.type) {
             case "public":
-                return "公开（所有人可签约）";
+                return "公开（所有缔约方可签约）";
             default:
                 return audience.name;
         }

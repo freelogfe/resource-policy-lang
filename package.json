@@ -14,7 +14,7 @@
     "build": "java -Xmx500M -cp build/antlr-4.7.1-complete.jar org.antlr.v4.Tool -Dlanguage=JavaScript -visitor resourcePolicy.g4 -o gen",
     "test": "node ./test/highlight.test.js",
     "testFSMToolParseRoutes": "ts-node test/translate/testFSMToolParseRoutes.ts",
-    "testFSMToolReport": "ts-node test/translate/testFSMToolReport.ts",
+    "testFSMToolTransfer": "ts-node test/translate/testFSMToolTransfer.ts",
     "testContractToolReport": "ts-node test/translate/testContractToolReport.ts",
     "testFSMToolCompareRoutes": "ts-node test/translate/testFSMToolCompareRoutes.ts"
   },

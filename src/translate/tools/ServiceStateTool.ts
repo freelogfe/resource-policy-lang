@@ -1,3 +1,6 @@
+/**
+ * 状态机色块工具
+ */
 export class ServiceStateTool {
 
     static report(serviceStates: string[]): ServiceStateInfo[] {
@@ -18,16 +21,14 @@ export class ServiceStateTool {
         return results;
     }
 
-    // 状态机色块名称映射表
-    static serviceStateNameMap = {
-        "active": "已授权"
-    };
-
     static getName4ServiceState(serviceState: string): string {
-        if (serviceState in this.serviceStateNameMap) {
-            return this.serviceStateNameMap[serviceState];
-        } else {
-            return serviceState;
+        switch (serviceState) {
+            case "active":
+                return "授权";
+            case "testActive":
+                return "测试授权"
+            default:
+                return serviceState;
         }
     }
 }

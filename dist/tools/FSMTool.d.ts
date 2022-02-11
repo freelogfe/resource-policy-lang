@@ -7,7 +7,7 @@ import { EventTranslateInfo } from "../strategy/EventTranslateStrategy";
  */
 export declare class FSMTool {
     static report(fsmEntities: FSMEntity[]): FSMInfo[];
-    static transfer(fsmEntities: FSMEntity[], fsmTransfers: FsmTransfer[]): any;
+    static transfer(fsmEntities: FSMEntity[], fsmTransfers: FsmTransfer[]): string;
     static generateEventServiceStatesStr(eventStr: string, serviceStates: string[]): string;
     /**
      * 解析路由
@@ -37,13 +37,6 @@ export declare class FsmTransfer {
     state: string;
     time: string;
     event: EventEntity;
-}
-export declare class FsmTransferResult {
-    stateStr: string;
-    stateInfoStr: string;
-    eventStr: string;
-    eventSelectStr: string;
-    eventSectionStrs: string[];
 }
 /**
  * 状态机信息

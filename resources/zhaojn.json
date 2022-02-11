@@ -4,14 +4,6 @@
             {
                 "name": "public",
                 "type": "public"
-            },
-            {
-                "name": "18035541373",
-                "type": "userId"
-            },
-            {
-                "name": "Yaoqinsanchi@qq.com",
-                "type": "userId"
             }
         ],
         "declarations": {
@@ -19,31 +11,6 @@
                 {
                     "name": "active",
                     "type": "authorization"
-                },
-                {
-                    "name": "testActive",
-                    "type": "testAuthorization"
-                }
-            ],
-            "serviceStateConstants": [
-                {
-                    "scope": "always",
-                    "state": "testActive"
-                }
-            ],
-            "expressions": [
-                {
-                    "funcName": "a",
-                    "funcArgs": [],
-                    "funcBody": "1+2*3^4+self.exhibited"
-                },
-                {
-                    "funcName": "ab",
-                    "funcArgs": [
-                        "a",
-                        "c"
-                    ],
-                    "funcBody": "1+2*3^(a-c+e)"
                 }
             ]
         },
@@ -51,51 +18,84 @@
             "initial": {
                 "transitions": [
                     {
-                        "toState": "signed",
-                        "service": "freelog",
-                        "name": "SigningEvent",
-                        "args": {
-                            "resourceName": "abc/abc"
-                        },
-                        "code": "S101",
-                        "description": "acknowledge a resource",
-                        "isSingleton": true
-                    }
-                ],
-                "serviceStates": [
-                    "testActive"
-                ],
-                "isInitial": true
-            },
-            "signed": {
-                "transitions": [
-                    {
                         "toState": "auth",
                         "service": "freelog",
-                        "name": "CycleEndEvent",
+                        "name": "RelativeTimeEvent",
                         "args": {
-                            "cycleCount": 2,
+                            "elapsed": 1,
                             "timeUnit": "week"
                         },
-                        "code": "A101",
-                        "description": "raise when n cycle ends",
+                        "code": "A103",
+                        "description": "fired when certain amount of time elapsed",
                         "isSingleton": false
                     }
                 ],
                 "serviceStates": [
-                    "testActive",
                     "active"
-                ]
+                ],
+                "isInitial": true
             },
             "auth": {
                 "transitions": [
                     {
-                        "toState": "settlement",
+                        "toState": "auth_month",
                         "service": "freelog",
-                        "path": "x.y",
                         "name": "TransactionEvent",
                         "args": {
-                            "amount": 5,
+                            "amount": 10,
+                            "account": "self.account"
+                        },
+                        "code": "S201",
+                        "description": "one time transaction",
+                        "isSingleton": true
+                    },
+                    {
+                        "toState": "auth_year",
+                        "service": "freelog",
+                        "name": "TransactionEvent",
+                        "args": {
+                            "amount": 100,
+                            "account": "self.account"
+                        },
+                        "code": "S201",
+                        "description": "one time transaction",
+                        "isSingleton": true
+                    },
+                    {
+                        "toState": "finish",
+                        "service": "freelog",
+                        "name": "RelativeTimeEvent",
+                        "args": {
+                            "elapsed": 3,
+                            "timeUnit": "day"
+                        },
+                        "code": "A103",
+                        "description": "fired when certain amount of time elapsed",
+                        "isSingleton": false
+                    }
+                ],
+                "serviceStates": []
+            },
+            "auth_month": {
+                "transitions": [
+                    {
+                        "toState": "finish",
+                        "service": "freelog",
+                        "name": "RelativeTimeEvent",
+                        "args": {
+                            "elapsed": 1,
+                            "timeUnit": "month"
+                        },
+                        "code": "A103",
+                        "description": "fired when certain amount of time elapsed",
+                        "isSingleton": false
+                    },
+                    {
+                        "toState": "auth_year",
+                        "service": "freelog",
+                        "name": "TransactionEvent",
+                        "args": {
+                            "amount": 100,
                             "account": "self.account"
                         },
                         "code": "S201",
@@ -104,40 +104,18 @@
                     }
                 ],
                 "serviceStates": [
-                    "testActive"
+                    "active"
                 ]
             },
-            "settlement": {
+            "auth_year": {
                 "transitions": [
                     {
-                        "toState": "auth",
-                        "service": "freelog",
-                        "name": "SettlementEvent",
-                        "args": {
-                            "account": "001"
-                        },
-                        "code": "S202",
-                        "description": "fired when settlement cleared",
-                        "isSingleton": true
-                    },
-                    {
-                        "toState": "refund",
-                        "service": "freelog",
-                        "name": "TimeEvent",
-                        "args": {
-                            "dateTime": "2021-02-06 14:16"
-                        },
-                        "code": "A102",
-                        "description": "fired on a pre-determined time",
-                        "isSingleton": false
-                    },
-                    {
-                        "toState": "confiscation",
+                        "toState": "finish",
                         "service": "freelog",
                         "name": "RelativeTimeEvent",
                         "args": {
-                            "elapsed": 30,
-                            "timeUnit": "day"
+                            "elapsed": 1,
+                            "timeUnit": "year"
                         },
                         "code": "A103",
                         "description": "fired when certain amount of time elapsed",
@@ -145,60 +123,17 @@
                     }
                 ],
                 "serviceStates": [
-                    "testActive",
                     "active"
-                ]
-            },
-            "confiscation": {
-                "transitions": [
-                    {
-                        "toState": "finish",
-                        "service": "freelog",
-                        "name": "ViewCountEvent",
-                        "args": {
-                            "amount": 100
-                        },
-                        "code": "S301",
-                        "description": "reserve a target number of authorizations, fires when such number reached",
-                        "isSingleton": true
-                    }
-                ],
-                "serviceStates": [
-                    "testActive"
-                ]
-            },
-            "refund": {
-                "transitions": [
-                    {
-                        "toState": "finish",
-                        "service": "freelog",
-                        "name": "EscrowExceedAmount",
-                        "args": {
-                            "account": "002",
-                            "amount": 888,
-                            "currencyUnit": "feather"
-                        },
-                        "code": "S210",
-                        "description": "",
-                        "isSingleton": true
-                    }
-                ],
-                "serviceStates": [
-                    "testActive"
                 ]
             },
             "finish": {
                 "transitions": [],
-                "serviceStates": [
-                    "testActive",
-                    "active"
-                ]
+                "serviceStates": []
             }
         },
         "description": {
             "symbolArgs": {
                 "envArgs": [
-                    "self.exhibited",
                     "self.account"
                 ]
             }

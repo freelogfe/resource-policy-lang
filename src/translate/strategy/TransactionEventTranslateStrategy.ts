@@ -1,17 +1,42 @@
 import {EventTranslateInfo, EventTranslateStrategy} from "./EventTranslateStrategy";
-import {EventEntity} from "../tools/EventTool";
+import {EventEntity, EventTool} from "../tools/EventTool";
 import {StateTool} from "../tools/StateTool";
+
+const util = require("util");
 
 export class TransactionEventTranslateStrategy implements EventTranslateStrategy {
 
     static REGEX_ARG_ACCOUNT = "^(\\d+)|((self)\\.[a-zA-Z0-9_]+)$";
 
-    getEventName(): string {
-        return TransactionEventTranslateStrategy.EVENT_NAME;
+    translate4Strategy(event: EventEntity): EventTranslateInfo {
+        let accountStr = this.generateAccountStr(event.args["account"]);
+
+        return {
+            origin: event,
+            content: util.format(EventTool.getTemplate(this.getEventName(), "Strategy"), event.args["amount"], accountStr, StateTool.report(event.toState).content)
+        };
     }
 
-    translate(event: EventEntity): EventTranslateInfo {
-        let account = event.args["account"];
+    translate4UnFinish(event: EventEntity): EventTranslateInfo {
+        let accountStr = this.generateAccountStr(event.args["account"]);
+
+        return {
+            origin: event,
+            content: util.format(EventTool.getTemplate(this.getEventName(), "UnFinish"), event.args["amount"], accountStr, StateTool.report(event.toState).content)
+        };
+    }
+
+    translate4Finished(event: EventEntity): EventTranslateInfo {
+        let accountStr = this.generateAccountStr(event.args["account"]);
+
+        return {
+            origin: event,
+            content: util.format(EventTool.getTemplate(this.getEventName(), "Finished"), event.args["amount"], accountStr, StateTool.report(event.toState).content)
+        };
+    }
+
+    // 取账号翻译字符串
+    generateAccountStr(account): string {
         let regExp = new RegExp(TransactionEventTranslateStrategy.REGEX_ARG_ACCOUNT);
         let symbolType = 0;
         if (account.match(regExp)) {
@@ -21,12 +46,11 @@ export class TransactionEventTranslateStrategy implements EventTranslateStrategy
             throw new Error("参数错误，提取参数信息失败");
         }
 
-        let accountStr = symbolType == 2 ? "" : ` 到 ${account}`;
+        return symbolType == 2 ? "" : ` 到 ${account}`;
+    }
 
-        return {
-            origin: event,
-            content: `支付 ${event.args["amount"]}枚 羽币${accountStr}，进入 ${StateTool.report(event.state).content}`
-        };
+    getEventName(): string {
+        return TransactionEventTranslateStrategy.EVENT_NAME;
     }
 
     static EVENT_NAME: string = "TransactionEvent";
