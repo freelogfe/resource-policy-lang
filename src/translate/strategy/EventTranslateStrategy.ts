@@ -6,7 +6,7 @@ export interface EventTranslateStrategy {
     // 取事件名称
     getEventName(): string;
 
-    translate4Strategy(event: EventEntity): EventTranslateInfo;
+    translate4Strategy(event: EventEntity, serviceStates?: string[]): EventTranslateInfo;
 
     translate4UnFinish(event: EventEntity): EventTranslateInfo;
 

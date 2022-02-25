@@ -7,7 +7,7 @@ const util = require("util");
 
 export class CycleEndEventTranslateStrategy implements EventTranslateStrategy {
 
-    translate4Strategy(event: EventEntity): EventTranslateInfo {
+    translate4Strategy(event: EventEntity, serviceStates?: string[]): EventTranslateInfo {
         let cycleCount = event.args["cycleCount"];
         let timeUnit = event.args["timeUnit"];
         // 如果timeUnit是cycle，则将其转化成hour

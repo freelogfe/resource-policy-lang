@@ -17,7 +17,7 @@ export class EventTool {
         return templates[eventName][status];
     }
 
-    static report(events: EventEntity[]): EventTranslateInfo[] {
+    static report(events: EventEntity[], serviceStates: string[]): EventTranslateInfo[] {
         let results = [];
 
         if (events == null || events.length == 0) {
@@ -30,7 +30,7 @@ export class EventTool {
             if (eventTranslateStrategy == null) {
                 throw new Error(`不支持该事件：${event.name}`);
             }
-            let result = eventTranslateStrategy.translate4Strategy(event);
+            let result = eventTranslateStrategy.translate4Strategy(event, serviceStates);
             results.push(result);
         }
 

@@ -20,7 +20,7 @@ export class FSMTool {
             let result = {
                 stateInfo: StateTool.report(fsmEntity.name),
                 serviceStateInfos: ServiceStateTool.report(fsmEntity.serviceStates),
-                eventTranslateInfos: EventTool.report(fsmEntity.events)
+                eventTranslateInfos: EventTool.report(fsmEntity.events, fsmEntity.serviceStates)
             };
 
             results.push(result);
@@ -57,7 +57,11 @@ export class FSMTool {
             let stateInfoStr = "";
             if (fsmEntity.name == "initial") {
                 if (fsmEntity.serviceStates != null && fsmEntity.serviceStates.indexOf("active") != -1) {
-                    stateInfoStr = "签约成功，已获得授权";
+                    if (fsmEntity.events.length != 0) {
+                        stateInfoStr = "签约成功，已获得授权";
+                    }else{
+                        stateInfoStr = "签约成功，已获得永久授权";
+                    }
                 }
             } else {
                 let preTransfer = fsmTransfers[i - 1];

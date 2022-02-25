@@ -3,11 +3,18 @@ import {EventEntity} from "../tools/EventTool";
 
 export class TerminateEventTranslateStrategy implements EventTranslateStrategy {
 
-    translate4Strategy(event: EventEntity): EventTranslateInfo {
-        return {
-            origin: event,
-            content: "停止接收事件"
-        };
+    translate4Strategy(event: EventEntity, serviceStates?: string[]): EventTranslateInfo {
+        if (serviceStates != null && serviceStates.indexOf("active") != -1) {
+            return {
+                origin: event,
+                content: "已获得永久授权"
+            };
+        } else {
+            return {
+                origin: event,
+                content: "停止接收事件"
+            };
+        }
     }
 
     translate4UnFinish(event: EventEntity): EventTranslateInfo {

@@ -8,7 +8,7 @@ export class TransactionEventTranslateStrategy implements EventTranslateStrategy
 
     static REGEX_ARG_ACCOUNT = "^(\\d+)|((self)\\.[a-zA-Z0-9_]+)$";
 
-    translate4Strategy(event: EventEntity): EventTranslateInfo {
+    translate4Strategy(event: EventEntity, serviceStates?: string[]): EventTranslateInfo {
         let accountStr = this.generateAccountStr(event.args["account"]);
 
         return {

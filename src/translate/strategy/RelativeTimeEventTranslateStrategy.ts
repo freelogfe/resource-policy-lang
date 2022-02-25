@@ -7,7 +7,7 @@ const util = require("util");
 
 export class RelativeTimeEventTranslateStrategy implements EventTranslateStrategy {
 
-    translate4Strategy(event: EventEntity): EventTranslateInfo {
+    translate4Strategy(event: EventEntity, serviceStates?: string[]): EventTranslateInfo {
         let elapsed = event.args["elapsed"];
         let timeUnit = event.args["timeUnit"];
         // 如果timeUnit是cycle，则将其转化成hour

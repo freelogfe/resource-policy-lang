@@ -6,7 +6,7 @@ const util = require("util");
 
 export class TimeEventTranslateStrategy implements EventTranslateStrategy {
 
-    translate4Strategy(event: EventEntity): EventTranslateInfo {
+    translate4Strategy(event: EventEntity, serviceStates?: string[]): EventTranslateInfo {
         return {
             origin: event,
             content: util.format(EventTool.getTemplate(this.getEventName(), "Strategy"), event.args["dateTime"], StateTool.report(event.toState).content)

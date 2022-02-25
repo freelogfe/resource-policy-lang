@@ -9,7 +9,7 @@ export declare class EventTool {
      * @param status 事件状态（Strategy：策略 Unfinished：未执行 Finished：已执行）
      */
     static getTemplate(eventName: string, status: string): string;
-    static report(events: EventEntity[]): EventTranslateInfo[];
+    static report(events: EventEntity[], serviceStates: string[]): EventTranslateInfo[];
     static timeUnitNameMap: {
         year: string;
         month: string;
