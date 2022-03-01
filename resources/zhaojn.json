@@ -16,16 +16,126 @@
         },
         "states": {
             "initial": {
-                "transitions": [],
+                "transitions": [
+                    {
+                        "toState": "auth",
+                        "service": "freelog",
+                        "name": "RelativeTimeEvent",
+                        "args": {
+                            "elapsed": 1,
+                            "timeUnit": "week"
+                        },
+                        "code": "A103",
+                        "description": "fired when certain amount of time elapsed",
+                        "isSingleton": false
+                    }
+                ],
                 "serviceStates": [
                     "active"
                 ],
                 "isInitial": true
+            },
+            "auth": {
+                "transitions": [
+                    {
+                        "toState": "auth_month",
+                        "service": "freelog",
+                        "name": "TransactionEvent",
+                        "args": {
+                            "amount": 10,
+                            "account": "self.account"
+                        },
+                        "code": "S201",
+                        "description": "one time transaction",
+                        "isSingleton": true
+                    },
+                    {
+                        "toState": "auth_year",
+                        "service": "freelog",
+                        "name": "TransactionEvent",
+                        "args": {
+                            "amount": 100,
+                            "account": "self.account"
+                        },
+                        "code": "S201",
+                        "description": "one time transaction",
+                        "isSingleton": true
+                    },
+                    {
+                        "toState": "finish",
+                        "service": "freelog",
+                        "name": "RelativeTimeEvent",
+                        "args": {
+                            "elapsed": 3,
+                            "timeUnit": "day"
+                        },
+                        "code": "A103",
+                        "description": "fired when certain amount of time elapsed",
+                        "isSingleton": false
+                    }
+                ],
+                "serviceStates": []
+            },
+            "auth_month": {
+                "transitions": [
+                    {
+                        "toState": "finish",
+                        "service": "freelog",
+                        "name": "RelativeTimeEvent",
+                        "args": {
+                            "elapsed": 1,
+                            "timeUnit": "month"
+                        },
+                        "code": "A103",
+                        "description": "fired when certain amount of time elapsed",
+                        "isSingleton": false
+                    },
+                    {
+                        "toState": "auth_year",
+                        "service": "freelog",
+                        "name": "TransactionEvent",
+                        "args": {
+                            "amount": 100,
+                            "account": "self.account"
+                        },
+                        "code": "S201",
+                        "description": "one time transaction",
+                        "isSingleton": true
+                    }
+                ],
+                "serviceStates": [
+                    "active"
+                ]
+            },
+            "auth_year": {
+                "transitions": [
+                    {
+                        "toState": "finish",
+                        "service": "freelog",
+                        "name": "RelativeTimeEvent",
+                        "args": {
+                            "elapsed": 1,
+                            "timeUnit": "year"
+                        },
+                        "code": "A103",
+                        "description": "fired when certain amount of time elapsed",
+                        "isSingleton": false
+                    }
+                ],
+                "serviceStates": [
+                    "active"
+                ]
+            },
+            "finish": {
+                "transitions": [],
+                "serviceStates": []
             }
         },
         "description": {
             "symbolArgs": {
-                "envArgs": []
+                "envArgs": [
+                    "self.account"
+                ]
             }
         }
     },

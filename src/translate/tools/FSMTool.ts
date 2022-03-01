@@ -41,7 +41,7 @@ export class FSMTool {
         let eventTranslateStrategyFactory = new EventTranslateStrategyFactory();
         for (let i = 0; i < fsmTransfers.length; i++) {
             let fsmTransfer = fsmTransfers[i];
-            let fsmEntity = fsmEntityMap[fsmTransfer["state"]];
+            let fsmEntity = fsmEntityMap[fsmTransfer.state];
 
             let serviceStatesStr = "未授权";
             if (fsmEntity.serviceStates != null && fsmEntity.serviceStates.length != 0) {
@@ -55,26 +55,30 @@ export class FSMTool {
             let stateStr = `${serviceStatesStr} ${fsmTransfer.time}`;
             // 状态信息翻译
             let stateInfoStr = "";
-            if (fsmEntity.name == "initial") {
+            // 是否起始状态
+            if (fsmTransfer.fromState == null) {
                 if (fsmEntity.serviceStates != null && fsmEntity.serviceStates.indexOf("active") != -1) {
                     if (fsmEntity.events.length != 0) {
                         stateInfoStr = "签约成功，已获得授权";
-                    }else{
+                    } else {
+                        // 起始状态且没有事件可跳转到其他状态
                         stateInfoStr = "签约成功，已获得永久授权";
                     }
                 }
             } else {
-                let preTransfer = fsmTransfers[i - 1];
-                let eventTranslateStrategy = eventTranslateStrategyFactory.getEventTranslateStrategy(preTransfer.event.name);
-                let eventTranslateInfo = eventTranslateStrategy.translate4Finished(preTransfer.event);
-                stateInfoStr = eventTranslateInfo.content;
-                if (fsmEntity.events.length != 0) {
-                    stateInfoStr = this.generateEventServiceStatesStr(stateInfoStr, fsmEntity.serviceStates);
-                } else {
-                    if (fsmEntityMap[preTransfer.state].events.length > 1) {
-                        stateInfoStr = `${stateInfoStr}，未执行其它事件，合约已自动终止`;
+                if (i != 0) {
+                    let preTransfer = fsmTransfers[i - 1];
+                    let eventTranslateStrategy = eventTranslateStrategyFactory.getEventTranslateStrategy(preTransfer.event.name);
+                    let eventTranslateInfo = eventTranslateStrategy.translate4Finished(preTransfer.event);
+                    stateInfoStr = eventTranslateInfo.content;
+                    if (fsmEntity.events.length != 0) {
+                        stateInfoStr = this.generateEventServiceStatesStr(stateInfoStr, fsmEntity.serviceStates);
                     } else {
-                        stateInfoStr = `${stateInfoStr}，合约已自动终止`;
+                        if (fsmEntityMap[preTransfer.state].events.length > 1) {
+                            stateInfoStr = `${stateInfoStr}，未执行其它事件，合约已自动终止`;
+                        } else {
+                            stateInfoStr = `${stateInfoStr}，合约已自动终止`;
+                        }
                     }
                 }
             }
@@ -87,7 +91,7 @@ export class FSMTool {
             let eventSectionStrs = [];
 
             // 最终流转状态
-            if (i == fsmTransfers.length - 1) {
+            if (fsmTransfer.toState == null) {
                 let eventSection = [];
                 if (fsmTransfer.event != null) {
                     let eventTranslateStrategy = eventTranslateStrategyFactory.getEventTranslateStrategy(fsmTransfer.event.name);
@@ -296,7 +300,9 @@ export class FSMEntity {
 }
 
 export class FsmTransfer {
+    fromState: string;
     state: string;
+    toState: string;
     time: string;
     event: EventEntity;
 }

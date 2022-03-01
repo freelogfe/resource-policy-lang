@@ -1,7 +1,26 @@
 import {EventTranslateInfo} from "../strategy/EventTranslateStrategy";
 import {EventTranslateStrategyFactory} from "../index";
 
-const templates = require(`${process.cwd()}/resources/translate_templates.json`);
+const templates = {
+    "CycleEndEvent": {
+        "Strategy": "于%s%s后的第一个周期点，进入 %s",
+        "UnFinish": "%s之后，将进入 %s",
+        "Finished": "%s结束，已进入 %s"
+    },
+    "RelativeTimeEvent": {
+        "Strategy": "于%s%s后的第一个周期点，进入 %s",
+        "UnFinish": "%s%s之后，将进入 %s",
+        "Finished": "%s%s结束，已进入 %s"
+    },
+    "TimeEvent": {
+        "Strategy": "于%s，进入 %s"
+    },
+    "TransactionEvent": {
+        "Strategy": "支付 %s枚 羽币%s，进入 %s",
+        "UnFinish": "支付 %s枚 羽币%s，可进入 %s",
+        "Finished": "已支付 %s枚 羽币%s，进入 %s"
+    }
+};
 
 /**
  * 状态机事件工具

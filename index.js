@@ -33,6 +33,17 @@ exports.transfer = function (states, fsmTransfers) {
         });
     }
 
+    // 排序扭转记录
+    fsmTransfers.sort(((a, b) => {
+        if (a.time < b.time) {
+            return -1;
+        } else if (a.time > b.time) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }));
+
     return FSMTool.transfer(fsmEntities, fsmTransfers);
 }
 
