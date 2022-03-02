@@ -1,58 +1,44 @@
 const policy_lang = require("../../index");
 
 let states = require("../../resources/zhaojn.json").state_machine.states;
-let result = policy_lang.transfer(states, [
-    {
-        state: "auth",
-        fromState: "initial",
-        toState: "auth_month",
-        time: "2022-03-02 00:00:00",
-        event: {
-            "toState": "auth_month",
-            "service": "freelog",
-            "name": "TransactionEvent",
-            "args": {
-                "amount": 10,
-                "account": "self.account"
-            },
-            "code": "S201",
-            "description": "one time transaction",
-            "isSingleton": true
-        }
-    }, {
-        state: "auth_month",
-        fromState: "auth",
-        toState: "auth_year",
-        time: "2022-03-03 00:00:00",
-        event: {
-            "toState": "auth_year",
-            "service": "freelog",
-            "name": "TransactionEvent",
-            "args": {
-                "amount": 100,
-                "account": "self.account"
-            },
-            "code": "S201",
-            "description": "one time transaction",
-            "isSingleton": true
-        }
-    }, {
-        state: "auth_year",
-        fromState: "auth_month",
-        toState: null,
-        time: "2022-03-03 00:00:00",
-        event: {
-            "toState": "finish",
-            "service": "freelog",
-            "name": "RelativeTimeEvent",
-            "args": {
-                "elapsed": 1,
-                "timeUnit": "year"
-            },
-            "code": "A103",
-            "description": "fired when certain amount of time elapsed",
-            "isSingleton": false
-        }
+let result = policy_lang.transfer(states, [{
+    "fromState": null,
+    "toState": "initial",
+    "time": "2022-03-0116:27:30",
+    "event": null,
+    "isFirst": true
+}, {
+    "fromState": "initial",
+    "toState": "auth",
+    "time": "2022-03-0116:27:30",
+    "event": {
+        "toState": "auth",
+        "service": "freelog",
+        "name": "TransactionEvent",
+        "args": {
+            "amount": 10,
+            "account": "self.account"
+        },
+        "code": "S201",
+        "isSingleton": true,
+        "eventId": "96a4ce342afe4f87a642c818e24535c6"
     }
-]);
+}, {
+    "fromState": "auth",
+    "toState": "finish",
+    "time": "2022-03-0116:27:30",
+    "event": {
+        "toState": "finish",
+        "service": "freelog",
+        "name": "TransactionEvent",
+        "args": {
+            "amount": 10,
+            "account": "self.account"
+        },
+        "code": "S201",
+        "isSingleton": true,
+        "eventId": "658669ede0394758b4713094dd153f14"
+    },
+    "isLast": true
+}]);
 console.log(result.content);

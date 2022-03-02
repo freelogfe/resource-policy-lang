@@ -33,6 +33,9 @@ exports.transfer = function (states, fsmTransfers) {
         });
     }
 
+    fsmTransfers.forEach(fsmTransfer => {
+        fsmTransfer.state = fsmTransfer.toState;
+    });
     // 排序扭转记录
     fsmTransfers.sort(((a, b) => {
         if (a.time < b.time) {

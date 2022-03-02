@@ -34,9 +34,10 @@ export declare class FSMEntity {
     events?: EventEntity[];
 }
 export declare class FsmTransfer {
-    fromState: string;
     state: string;
+    fromState: string;
     toState: string;
+    isLast?: boolean;
     time: string;
     event: EventEntity;
 }
