@@ -41,4 +41,4 @@ let result = policy_lang.transfer(states, [{
     },
     "isLast": true
 }]);
-console.log(result.content);
+console.log(result);
