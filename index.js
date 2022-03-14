@@ -58,6 +58,10 @@ exports.parseRoutes = function (states, stateName, routes, route) {
     FSMTool.parseRoutes(states, stateName, routes, route);
 }
 
+exports.cleanUpRoutes = function (routes) {
+    return FSMTool.cleanUpRoutes(routes);
+}
+
 exports.compile = async function (policyText, targetType, targetUrl, env) {
     let chars = new antlr4.InputStream(policyText);
 

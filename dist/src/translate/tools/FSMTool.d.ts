@@ -8,6 +8,7 @@ import { EventTranslateInfo } from "../strategy/EventTranslateStrategy";
 export declare class FSMTool {
     static report(fsmEntities: FSMEntity[]): FSMInfo[];
     static transfer(fsmEntities: FSMEntity[], fsmTransfers: FsmTransfer[]): any;
+    static generateServiceStatesCode(serviceStates: string[]): number;
     static generateEventServiceStatesStr(eventStr: string, serviceStates: string[]): string;
     /**
      * 解析路由
@@ -17,6 +18,7 @@ export declare class FSMTool {
      * @param route 路由
      */
     static parseRoutes(states: any, stateName: string, routes: FSMRouteElement[][], route: FSMRouteElement[]): void;
+    static cleanUpRoutes(routes: FSMRouteElement[][]): Map<string, string>;
     /**
      * 比较路由
      * @param routes
@@ -34,6 +36,7 @@ export declare class FSMEntity {
     events?: EventEntity[];
 }
 export declare class FsmTransfer {
+    id: any;
     state: string;
     fromState: string;
     toState: string;

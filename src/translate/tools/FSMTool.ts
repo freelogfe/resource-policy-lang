@@ -68,6 +68,8 @@ export class FSMTool {
                         // 起始状态且没有事件可跳转到其他状态
                         stateInfoStr = "签约成功，已获得永久授权";
                     }
+                } else {
+                    stateInfoStr = "签约成功";
                 }
             } else {
                 let eventTranslateStrategy = eventTranslateStrategyFactory.getEventTranslateStrategy(fsmTransfer.event.name);
@@ -109,6 +111,9 @@ export class FSMTool {
             }
 
             fsmTransferResults.push({
+                id: fsmTransfer.id,
+                serviceStates: this.generateServiceStatesCode(fsmEntity.serviceStates),
+                time: fsmTransfer.time,
                 stateStr: stateStr,
                 stateInfoStr: stateInfoStr,
                 eventStr: eventStr,
@@ -137,7 +142,23 @@ export class FSMTool {
         };
     }
 
-    static generateEventServiceStatesStr(eventStr: string, serviceStates: string[]) {
+    static generateServiceStatesCode(serviceStates: string[]): number {
+        if (serviceStates == null || serviceStates.length == 0) {
+            return 128;
+        }
+        if (serviceStates.indexOf("active") != -1 && serviceStates.indexOf("testActive") != -1) {
+            return 3;
+        }
+        if (serviceStates.indexOf("active") != -1) {
+            return 1;
+        }
+        if (serviceStates.indexOf("testActive") != -1) {
+            return 2;
+        }
+        return 128;
+    }
+
+    static generateEventServiceStatesStr(eventStr: string, serviceStates: string[]): string {
         let serviceStatesStr = "授权结束";
         if (serviceStates != null && serviceStates.length != 0) {
             let nextServiceStatesStrArray = ServiceStateTool.report(serviceStates).map(serviceStateInfo => serviceStateInfo.content).join("，");
@@ -154,13 +175,18 @@ export class FSMTool {
      * @param route 路由
      */
     static parseRoutes(states, stateName: string, routes: FSMRouteElement[][], route: FSMRouteElement[]): void {
+        // 当前状态可执行事件
         let events = states[stateName].transitions;
+        // 当前状态包含的色块
         let serviceStates = states[stateName].serviceStates;
+        // 说明是否finish状态
         if (events != null && events.length != 0) {
             for (let event of events) {
+                // 是否与当前的路径形成环状
                 if (route.some((e) => {
-                    return e.state == event.toState
+                    return e.state == event.toState;
                 })) {
+                    // 一旦形成环状路径，则不再继续往下寻找
                     let routeTmp = [...route];
                     routeTmp.push({state: stateName, serviceStates: serviceStates, event: event});
                     routes.push(routeTmp);
@@ -171,10 +197,42 @@ export class FSMTool {
                 }
             }
         } else {
+            // 如果到了finish状态，则不再继续往下寻找
             let routeTmp = [...route];
             routeTmp.push({state: stateName, serviceStates: serviceStates, event: null});
             routes.push(routeTmp);
         }
+    }
+
+    static cleanUpRoutes(routes: FSMRouteElement[][]): Map<string, string> {
+        let stateNameMap = new Map<string, string>();
+        let index = 0;
+        for (let route of routes) {
+            for (let element of route) {
+                let stateName = element.state;
+                if (!stateNameMap.has(stateName)) {
+                    stateNameMap.set(stateName, `s${index++}`);
+                }
+            }
+        }
+        for (let route of routes) {
+            for (let element of route) {
+                if (stateNameMap.has(element.state)) {
+                    element.state = stateNameMap.get(element.state);
+                }
+                // 对色块做排序
+                element.serviceStates.sort();
+                if (element.event != null && stateNameMap.has(element.event.toState)) {
+                    // 处理事件字段
+                    element.event = {
+                        name: element.event.name,
+                        toState: stateNameMap.get(element.event.toState)
+                    };
+                }
+            }
+        }
+
+        return stateNameMap;
     }
 
     /**
@@ -281,6 +339,7 @@ export class FSMEntity {
 }
 
 export class FsmTransfer {
+    id: any;
     state: string;
     fromState: string;
     toState: string;

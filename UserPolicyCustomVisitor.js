@@ -521,6 +521,11 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
                     argO[param["name"]] = args[i];
                     // 若参数是数字，则将其字符串转换
                     if (param["type"] === "decimal") {
+                        if (event.name === "TransactionEvent" && param["name"] === "amount") {
+                            if (parseFloat(args[i]) <= 0) {
+                                this.warningObjects.push({msg: "支付事件的支付金额必须大于0" + JSON.stringify(event)});
+                            }
+                        }
                         argO[param["name"]] = parseFloat(args[i]);
                     }
                     // 提取参数信息

@@ -42,3 +42,7 @@ export function compareRoutes(routes: FSMRouteElement[][], routesB: FSMRouteElem
 export function parseRoutes(states, stateName: string, routes: FSMRouteElement[][], route: FSMRouteElement[]): void {
     FSMTool.parseRoutes(states, stateName, routes, route);
 }
+
+export function cleanUpRoutes(routes: FSMRouteElement[][]) {
+    FSMTool.cleanUpRoutes(routes);
+}

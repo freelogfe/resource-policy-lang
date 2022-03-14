@@ -1,79 +1,166 @@
 {
-  "state_machine": {
-    "audiences": [
-      {
-        "name": "public",
-        "type": "public"
-      }
-    ],
-    "declarations": {
-      "serviceStates": [
-        {
-          "name": "active",
-          "type": "authorization"
+    "state_machine": {
+        "audiences": [
+            {
+                "name": "public",
+                "type": "public"
+            }
+        ],
+        "declarations": {
+            "serviceStates": [
+                {
+                    "name": "active",
+                    "type": "authorization"
+                }
+            ]
+        },
+        "states": {
+            "initial": {
+                "transitions": [
+                    {
+                        "toState": "auth",
+                        "service": "freelog",
+                        "name": "RelativeTimeEvent",
+                        "args": {
+                            "elapsed": 1,
+                            "timeUnit": "week"
+                        },
+                        "code": "A103",
+                        "description": "fired when certain amount of time elapsed",
+                        "isSingleton": false
+                    }
+                ],
+                "serviceStates": [
+                    "active"
+                ],
+                "isInitial": true
+            },
+            "auth": {
+                "transitions": [
+                    {
+                        "toState": "auth_month",
+                        "service": "freelog",
+                        "name": "TransactionEvent",
+                        "args": {
+                            "amount": 10,
+                            "account": "self.account"
+                        },
+                        "code": "S201",
+                        "description": "one time transaction",
+                        "isSingleton": true
+                    },
+                    {
+                        "toState": "auth_year",
+                        "service": "freelog",
+                        "name": "TransactionEvent",
+                        "args": {
+                            "amount": 100,
+                            "account": "self.account"
+                        },
+                        "code": "S201",
+                        "description": "one time transaction",
+                        "isSingleton": true
+                    },
+                    {
+                        "toState": "finish",
+                        "service": "freelog",
+                        "name": "RelativeTimeEvent",
+                        "args": {
+                            "elapsed": 3,
+                            "timeUnit": "day"
+                        },
+                        "code": "A103",
+                        "description": "fired when certain amount of time elapsed",
+                        "isSingleton": false
+                    }
+                ],
+                "serviceStates": []
+            },
+            "auth_month": {
+                "transitions": [
+                    {
+                        "toState": "finish",
+                        "service": "freelog",
+                        "name": "RelativeTimeEvent",
+                        "args": {
+                            "elapsed": 1,
+                            "timeUnit": "month"
+                        },
+                        "code": "A103",
+                        "description": "fired when certain amount of time elapsed",
+                        "isSingleton": false
+                    },
+                    {
+                        "toState": "auth_year",
+                        "service": "freelog",
+                        "name": "TransactionEvent",
+                        "args": {
+                            "amount": 100,
+                            "account": "self.account"
+                        },
+                        "code": "S201",
+                        "description": "one time transaction",
+                        "isSingleton": true
+                    }
+                ],
+                "serviceStates": [
+                    "active"
+                ]
+            },
+            "auth_year": {
+                "transitions": [
+                    {
+                        "toState": "finish",
+                        "service": "freelog",
+                        "name": "RelativeTimeEvent",
+                        "args": {
+                            "elapsed": 1,
+                            "timeUnit": "year"
+                        },
+                        "code": "A103",
+                        "description": "fired when certain amount of time elapsed",
+                        "isSingleton": false
+                    }
+                ],
+                "serviceStates": [
+                    "active"
+                ]
+            },
+            "finish": {
+                "transitions": [],
+                "serviceStates": []
+            },
+            "terminat": {
+                "transitions": [],
+                "serviceStates": []
+            }
+        },
+        "description": {
+            "symbolArgs": {
+                "envArgs": [
+                    "self.account"
+                ]
+            }
         }
-      ]
     },
-    "states": {
-      "initial": {
-        "transitions": [
-          {
-            "toState": "auth",
-            "service": "freelog",
-            "name": "TransactionEvent",
-            "args": {
-              "amount": 10,
-              "account": "self.account"
-            },
-            "code": "S201",
-            "isSingleton": true,
-            "eventId": "96a4ce342afe4f87a642c818e24535c6"
-          }
-        ],
-        "serviceStates": [],
-        "isInitial": true,
-        "isAuth": false,
-        "isTestAuth": false
-      },
-      "auth": {
-        "transitions": [
-          {
-            "toState": "finish",
-            "service": "freelog",
-            "name": "TransactionEvent",
-            "args": {
-              "amount": 10,
-              "account": "self.account"
-            },
-            "code": "S201",
-            "isSingleton": true,
-            "eventId": "658669ede0394758b4713094dd153f14"
-          }
-        ],
-        "serviceStates": [
-          "active"
-        ],
-        "isAuth": true,
-        "isTestAuth": false
-      },
-      "finish": {
-        "transitions": [],
-        "serviceStates": [],
-        "isAuth": false,
-        "isTestAuth": false,
-        "isTerminate": true
-      }
-    },
-    "description": {
-      "symbolArgs": {
-        "envArgs": [
-          "self.account"
-        ]
-      }
-    }
-  },
-  "warnings": [],
-  "warningObjects": [],
-  "errors": [],
-  "errorObjects": []
+    "warnings": [],
+    "warningObjects": [],
+    "errors": [
+        "line 15:0 mismatched input 'terminat' expecting {'terminate', '~'}",
+        "line 16:0 mismatched input '<EOF>' expecting {':', '['}"
+    ],
+    "errorObjects": [
+        {
+            "line": 15,
+            "charPositionInLine": 0,
+            "offendingSymbol": "terminat",
+            "msg": "mismatched input 'terminat' expecting {'terminate', '~'}"
+        },
+        {
+            "line": 16,
+            "charPositionInLine": 0,
+            "offendingSymbol": "<EOF>",
+            "msg": "mismatched input '<EOF>' expecting {':', '['}"
+        }
+    ]
 }
