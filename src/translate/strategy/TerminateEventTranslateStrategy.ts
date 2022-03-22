@@ -3,6 +3,10 @@ import {EventEntity} from "../tools/EventTool";
 
 export class TerminateEventTranslateStrategy implements EventTranslateStrategy {
 
+    translate4EventArg(argName: string, argValue: string): string {
+        return "";
+    }
+
     translate4Strategy(event: EventEntity, serviceStates?: string[]): EventTranslateInfo {
         if (serviceStates != null && serviceStates.indexOf("active") != -1) {
             return {

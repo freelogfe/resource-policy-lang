@@ -6,6 +6,13 @@ const util = require("util");
 
 export class TimeEventTranslateStrategy implements EventTranslateStrategy {
 
+    translate4EventArg(argName: string, argValue: string): string {
+        if (argName == "dateTime") {
+            return argValue;
+        }
+        return "";
+    }
+
     translate4Strategy(event: EventEntity, serviceStates?: string[]): EventTranslateInfo {
         return {
             origin: event,

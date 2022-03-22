@@ -5,6 +5,7 @@ export interface EventTranslateStrategy {
     translate4Strategy(event: EventEntity, serviceStates?: string[]): EventTranslateInfo;
     translate4UnFinish(event: EventEntity): EventTranslateInfo;
     translate4Finished(event: EventEntity): EventTranslateInfo;
+    translate4EventArg(argName: string, argValue: string): string;
 }
 export declare class EventTranslateInfo extends ContractElementInfo {
     args?: object;

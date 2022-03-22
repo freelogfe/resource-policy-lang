@@ -9,6 +9,7 @@ export declare class EventTool {
      * @param status 事件状态（Strategy：策略 Unfinished：未执行 Finished：已执行）
      */
     static getTemplate(eventName: string, status: string): string;
+    static translateEventArg(eventName: string, argName: string, argValue: string): string;
     static report(events: EventEntity[], serviceStates: string[]): EventTranslateInfo[];
     static timeUnitNameMap: {
         year: string;
@@ -17,6 +18,7 @@ export declare class EventTool {
         day: string;
         hour: string;
         minute: string;
+        cycle: string;
     };
     static getName4TimeUnit(timeUnit: string): string;
     static perSeconds4TimeUnit(timeUnit: string): number;

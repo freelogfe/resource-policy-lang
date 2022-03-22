@@ -8,7 +8,17 @@ const {FSMTool} = require("./dist/src/translate/tools/FSMTool");
 const {ContractTool} = require("./dist/src/translate/tools/ContractTool");
 const {UserPolicyErrorListener} = require("./UserPolicyErrorListener");
 const {UserPolicyErrorLexerListener} = require("./UserPolicyErrorLexerListener");
+const {EventTool} = require("./dist/src/translate/tools/EventTool");
+const {StateTool} = require("./dist/src/translate/tools/StateTool");
 const UserPolicyCustomVisitor = require("./UserPolicyCustomVisitor").UserPolicyCustomVisitor;
+
+exports.translateState = function (stateName) {
+    return StateTool.getName4State(stateName);
+}
+
+exports.translateEventArg = function (eventName, argName, argValue) {
+    return EventTool.translateEventArg(eventName, argName, argValue);
+}
 
 exports.report = function (contract) {
     let fsmStates = [];

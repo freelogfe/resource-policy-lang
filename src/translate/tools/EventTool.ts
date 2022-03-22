@@ -4,8 +4,8 @@ import {EventTranslateStrategyFactory} from "../index";
 const templates = {
     "CycleEndEvent": {
         "Strategy": "于%s%s后的第一个周期点，进入 %s",
-        "UnFinish": "%s之后，将进入 %s",
-        "Finished": "%s结束，已进入 %s"
+        "UnFinish": "%s%s之后，将进入 %s",
+        "Finished": "%s%s结束，已进入 %s"
     },
     "RelativeTimeEvent": {
         "Strategy": "于%s%s后的第一个周期点，进入 %s",
@@ -36,6 +36,16 @@ export class EventTool {
         return templates[eventName][status];
     }
 
+    static translateEventArg(eventName: string, argName: string, argValue: string): string {
+        let factory = new EventTranslateStrategyFactory();
+        let strategy = factory.getEventTranslateStrategy(eventName);
+        if (strategy != null) {
+            return strategy.translate4EventArg(argName, argValue);
+        }
+
+        return "";
+    }
+
     static report(events: EventEntity[], serviceStates: string[]): EventTranslateInfo[] {
         let results = [];
 
@@ -63,7 +73,8 @@ export class EventTool {
         "week": "个星期",
         "day": "天",
         "hour": "小时",
-        "minute": "分钟"
+        "minute": "分钟",
+        "cycle": "个周期"
     };
 
     // 取时间单位的名称

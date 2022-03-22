@@ -1,8 +1,8 @@
 {
   "CycleEndEvent": {
     "Strategy": "于%s%s后的第一个周期点，进入 %s",
-    "UnFinish": "%s之后，将进入 %s",
-    "Finished": "%s结束，已进入 %s"
+    "UnFinish": "%s%s之后，将进入 %s",
+    "Finished": "%s%s结束，已进入 %s"
   },
   "RelativeTimeEvent": {
     "Strategy": "于%s%s后的第一个周期点，进入 %s",

@@ -6,6 +6,23 @@ const util = require("util");
 
 export class TransactionEventTranslateStrategy implements EventTranslateStrategy {
 
+    translate4EventArg(argName: string, argValue: string): string {
+        if (argName == "amount") {
+            return argValue;
+        }
+        if (argName == "account") {
+            let reg = new RegExp(TransactionEventTranslateStrategy.REGEX_ARG_ACCOUNT);
+            let rst = argValue.match(reg);
+            if (rst[1] != null) {
+                return argValue;
+            } else {
+                return "自己";
+            }
+        }
+
+        return "";
+    }
+
     static REGEX_ARG_ACCOUNT = "^(\\d+)|((self)\\.[a-zA-Z0-9_]+)$";
 
     translate4Strategy(event: EventEntity, serviceStates?: string[]): EventTranslateInfo {

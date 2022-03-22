@@ -7,6 +7,16 @@ const util = require("util");
 
 export class RelativeTimeEventTranslateStrategy implements EventTranslateStrategy {
 
+    translate4EventArg(argName: string, argValue: string): string {
+        if (argName == "elapsed") {
+            return argValue;
+        }
+        if (argName == "timeUnit") {
+            return EventTool.getName4TimeUnit(argValue);
+        }
+        return "";
+    }
+
     translate4Strategy(event: EventEntity, serviceStates?: string[]): EventTranslateInfo {
         let elapsed = event.args["elapsed"];
         let timeUnit = event.args["timeUnit"];

@@ -8,8 +8,8 @@ main2();
 
 async function main2() {
     let ID = "[a-zA-z]\\w+"
-    let reg = new RegExp(`\\$\\{(${ID}(\\.${ID}\\[\\d+]?\\.${ID})?)}`, "g");
-    let str = "hello ${name},${name} 今天的心情是${color.green[2].str}的";
+    let reg = new RegExp(`\\$\\{(${ID}(\\.${ID}(\\[\\d+])?\\.${ID})?)}`, "g");
+    let str = "hello ${name},${name} 今天的心情是${color.green.str}的";
     let rst = null;
     while (rst = reg.exec(str)) {
         console.log(rst);

@@ -7,6 +7,16 @@ const util = require("util");
 
 export class CycleEndEventTranslateStrategy implements EventTranslateStrategy {
 
+    translate4EventArg(argName: string, argValue: string): string {
+        if (argName == "cycleCount") {
+            return argValue;
+        }
+        if (argName == "timeUnit") {
+            return EventTool.getName4TimeUnit(argValue);
+        }
+        return "";
+    }
+
     translate4Strategy(event: EventEntity, serviceStates?: string[]): EventTranslateInfo {
         let cycleCount = event.args["cycleCount"];
         let timeUnit = event.args["timeUnit"];
