@@ -2,9 +2,8 @@ const fs = require("fs");
 const policy_lang = require("../index");
 const {UserPolicyDecompiler} = require("../UserPolicyDecompiler");
 
-// main();
-
-main2();
+main();
+// main2();
 
 async function main2() {
     let ID = "[a-zA-z]\\w+"

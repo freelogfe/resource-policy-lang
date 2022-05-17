@@ -9,7 +9,7 @@ class TerminateEventTranslateStrategy {
         if (serviceStates != null && serviceStates.indexOf("active") != -1) {
             return {
                 origin: event,
-                content: "已获得永久授权"
+                content: "可获得永久授权"
             };
         }
         else {

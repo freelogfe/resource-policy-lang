@@ -129,10 +129,6 @@
             "finish": {
                 "transitions": [],
                 "serviceStates": []
-            },
-            "terminat": {
-                "transitions": [],
-                "serviceStates": []
             }
         },
         "description": {
@@ -145,22 +141,6 @@
     },
     "warnings": [],
     "warningObjects": [],
-    "errors": [
-        "line 15:0 mismatched input 'terminat' expecting {'terminate', '~'}",
-        "line 16:0 mismatched input '<EOF>' expecting {':', '['}"
-    ],
-    "errorObjects": [
-        {
-            "line": 15,
-            "charPositionInLine": 0,
-            "offendingSymbol": "terminat",
-            "msg": "mismatched input 'terminat' expecting {'terminate', '~'}"
-        },
-        {
-            "line": 16,
-            "charPositionInLine": 0,
-            "offendingSymbol": "<EOF>",
-            "msg": "mismatched input '<EOF>' expecting {':', '['}"
-        }
-    ]
+    "errors": [],
+    "errorObjects": []
 }

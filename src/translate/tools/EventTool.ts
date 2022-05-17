@@ -55,6 +55,7 @@ export class EventTool {
 
         let factory = new EventTranslateStrategyFactory();
         for (let event of events) {
+
             let eventTranslateStrategy = factory.getEventTranslateStrategy(event.name);
             if (eventTranslateStrategy == null) {
                 throw new Error(`不支持该事件：${event.name}`);

@@ -19,7 +19,7 @@ export class CycleEndEventTranslateStrategy implements EventTranslateStrategy {
 
     translate4Strategy(event: EventEntity, serviceStates?: string[]): EventTranslateInfo {
         let cycleCount = event.args["cycleCount"];
-        let timeUnit = event.args["timeUnit"];
+        let timeUnit = event.args["timeUnit"] ?? 'cycle';
         // 如果timeUnit是cycle，则将其转化成hour
         if (timeUnit == "cycle") {
             cycleCount *= 4;

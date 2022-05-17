@@ -10,7 +10,16 @@ const {UserPolicyErrorListener} = require("./UserPolicyErrorListener");
 const {UserPolicyErrorLexerListener} = require("./UserPolicyErrorLexerListener");
 const {EventTool} = require("./dist/src/translate/tools/EventTool");
 const {StateTool} = require("./dist/src/translate/tools/StateTool");
+const {AudienceTool} = require("./dist/src/translate/tools/AudienceTool")
 const UserPolicyCustomVisitor = require("./UserPolicyCustomVisitor").UserPolicyCustomVisitor;
+
+const eventDefinitionMap = {};
+{
+    let eventDefinitionArrayTmp = require("./resources/event_definition.json");
+    for (let eventDefinition of eventDefinitionArrayTmp) {
+        eventDefinitionMap[eventDefinition["code"]] = eventDefinition;
+    }
+}
 
 exports.translateState = function (stateName) {
     return StateTool.getName4State(stateName);
@@ -18,6 +27,14 @@ exports.translateState = function (stateName) {
 
 exports.translateEventArg = function (eventName, argName, argValue) {
     return EventTool.translateEventArg(eventName, argName, argValue);
+}
+
+exports.reportAudiences = function (audiences) {
+    let audienceInfos = AudienceTool.report(audiences);
+    // 标的物翻译
+    let audienceStr = audienceInfos.map(e => e.content).join("，");
+
+    return audienceStr;
 }
 
 exports.report = function (contract) {
@@ -28,6 +45,13 @@ exports.report = function (contract) {
             serviceStates: contract.states[state].serviceStates,
             events: contract.states[state].transitions
         });
+    }
+    for (let fsmState of fsmStates) {
+        for (let event of fsmState.events) {
+            if (event.name == null && event.code != null && eventDefinitionMap[event.code] != null) {
+                event.name = eventDefinitionMap[event.code].name;
+            }
+        }
     }
 
     return ContractTool.report({audiences: contract.audiences, fsmStates: fsmStates});
