@@ -47,21 +47,12 @@ resourcePolicyListener.prototype.exitAudience = function(ctx) {
 };
 
 
-// Enter a parse tree produced by resourcePolicy#requirement.
-resourcePolicyListener.prototype.enterRequirement = function(ctx) {
+// Enter a parse tree produced by resourcePolicy#subject_icon_strict.
+resourcePolicyListener.prototype.enterSubject_icon_strict = function(ctx) {
 };
 
-// Exit a parse tree produced by resourcePolicy#requirement.
-resourcePolicyListener.prototype.exitRequirement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by resourcePolicy#contract_with_subject.
-resourcePolicyListener.prototype.enterContract_with_subject = function(ctx) {
-};
-
-// Exit a parse tree produced by resourcePolicy#contract_with_subject.
-resourcePolicyListener.prototype.exitContract_with_subject = function(ctx) {
+// Exit a parse tree produced by resourcePolicy#subject_icon_strict.
+resourcePolicyListener.prototype.exitSubject_icon_strict = function(ctx) {
 };
 
 
@@ -155,57 +146,21 @@ resourcePolicyListener.prototype.exitState_transition = function(ctx) {
 };
 
 
-// Enter a parse tree produced by resourcePolicy#subject_id.
-resourcePolicyListener.prototype.enterSubject_id = function(ctx) {
+// Enter a parse tree produced by resourcePolicy#subject_icon.
+resourcePolicyListener.prototype.enterSubject_icon = function(ctx) {
 };
 
-// Exit a parse tree produced by resourcePolicy#subject_id.
-resourcePolicyListener.prototype.exitSubject_id = function(ctx) {
-};
-
-
-// Enter a parse tree produced by resourcePolicy#entity_bracket.
-resourcePolicyListener.prototype.enterEntity_bracket = function(ctx) {
-};
-
-// Exit a parse tree produced by resourcePolicy#entity_bracket.
-resourcePolicyListener.prototype.exitEntity_bracket = function(ctx) {
+// Exit a parse tree produced by resourcePolicy#subject_icon.
+resourcePolicyListener.prototype.exitSubject_icon = function(ctx) {
 };
 
 
-// Enter a parse tree produced by resourcePolicy#account.
-resourcePolicyListener.prototype.enterAccount = function(ctx) {
+// Enter a parse tree produced by resourcePolicy#subject_icon_lv.
+resourcePolicyListener.prototype.enterSubject_icon_lv = function(ctx) {
 };
 
-// Exit a parse tree produced by resourcePolicy#account.
-resourcePolicyListener.prototype.exitAccount = function(ctx) {
-};
-
-
-// Enter a parse tree produced by resourcePolicy#subject.
-resourcePolicyListener.prototype.enterSubject = function(ctx) {
-};
-
-// Exit a parse tree produced by resourcePolicy#subject.
-resourcePolicyListener.prototype.exitSubject = function(ctx) {
-};
-
-
-// Enter a parse tree produced by resourcePolicy#subject_service.
-resourcePolicyListener.prototype.enterSubject_service = function(ctx) {
-};
-
-// Exit a parse tree produced by resourcePolicy#subject_service.
-resourcePolicyListener.prototype.exitSubject_service = function(ctx) {
-};
-
-
-// Enter a parse tree produced by resourcePolicy#user_organization_name.
-resourcePolicyListener.prototype.enterUser_organization_name = function(ctx) {
-};
-
-// Exit a parse tree produced by resourcePolicy#user_organization_name.
-resourcePolicyListener.prototype.exitUser_organization_name = function(ctx) {
+// Exit a parse tree produced by resourcePolicy#subject_icon_lv.
+resourcePolicyListener.prototype.exitSubject_icon_lv = function(ctx) {
 };
 
 

@@ -8,7 +8,7 @@ var grammarFileName = "resourcePolicy.g4";
 
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u00039\u014a\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
+    "\u00036\u012e\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
     "\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007\u0004",
     "\b\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0004\f\t\f\u0004",
     "\r\t\r\u0004\u000e\t\u000e\u0004\u000f\t\u000f\u0004\u0010\t\u0010\u0004",
@@ -17,199 +17,183 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0018\t\u0018\u0004\u0019\t\u0019\u0004\u001a\t\u001a\u0004\u001b\t",
     "\u001b\u0004\u001c\t\u001c\u0004\u001d\t\u001d\u0004\u001e\t\u001e\u0004",
     "\u001f\t\u001f\u0004 \t \u0004!\t!\u0004\"\t\"\u0004#\t#\u0004$\t$\u0004",
-    "%\t%\u0004&\t&\u0004\'\t\'\u0004(\t(\u0004)\t)\u0004*\t*\u0003\u0002",
-    "\u0003\u0002\u0005\u0002W\n\u0002\u0003\u0002\u0003\u0002\u0005\u0002",
-    "[\n\u0002\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0004\u0003\u0004",
-    "\u0003\u0004\u0003\u0004\u0003\u0004\u0003\u0004\u0007\u0004f\n\u0004",
-    "\f\u0004\u000e\u0004i\u000b\u0004\u0003\u0005\u0003\u0005\u0003\u0006",
-    "\u0003\u0006\u0003\u0006\u0003\u0007\u0003\u0007\u0003\u0007\u0003\b",
-    "\u0006\bt\n\b\r\b\u000e\bu\u0003\t\u0003\t\u0005\tz\n\t\u0003\n\u0003",
-    "\n\u0003\n\u0003\u000b\u0003\u000b\u0003\f\u0006\f\u0082\n\f\r\f\u000e",
-    "\f\u0083\u0003\r\u0003\r\u0005\r\u0088\n\r\u0003\r\u0003\r\u0006\r\u008c",
-    "\n\r\r\r\u000e\r\u008d\u0003\u000e\u0003\u000e\u0003\u000f\u0003\u000f",
-    "\u0003\u000f\u0003\u000f\u0007\u000f\u0096\n\u000f\f\u000f\u000e\u000f",
-    "\u0099\u000b\u000f\u0003\u000f\u0003\u000f\u0003\u0010\u0003\u0010\u0003",
-    "\u0011\u0003\u0011\u0003\u0011\u0003\u0011\u0003\u0011\u0005\u0011\u00a4",
-    "\n\u0011\u0003\u0012\u0003\u0012\u0003\u0012\u0003\u0013\u0003\u0013",
-    "\u0003\u0013\u0003\u0013\u0007\u0013\u00ad\n\u0013\f\u0013\u000e\u0013",
-    "\u00b0\u000b\u0013\u0003\u0014\u0003\u0014\u0003\u0015\u0003\u0015\u0003",
-    "\u0015\u0003\u0015\u0003\u0015\u0003\u0015\u0003\u0016\u0003\u0016\u0003",
-    "\u0017\u0003\u0017\u0003\u0018\u0003\u0018\u0003\u0018\u0003\u0018\u0003",
-    "\u0018\u0007\u0018\u00c3\n\u0018\f\u0018\u000e\u0018\u00c6\u000b\u0018",
-    "\u0005\u0018\u00c8\n\u0018\u0003\u0018\u0003\u0018\u0003\u0018\u0003",
-    "\u0018\u0003\u0019\u0003\u0019\u0003\u001a\u0003\u001a\u0003\u001a\u0007",
-    "\u001a\u00d3\n\u001a\f\u001a\u000e\u001a\u00d6\u000b\u001a\u0003\u001b",
-    "\u0003\u001b\u0003\u001b\u0007\u001b\u00db\n\u001b\f\u001b\u000e\u001b",
-    "\u00de\u000b\u001b\u0003\u001c\u0003\u001c\u0003\u001c\u0007\u001c\u00e3",
-    "\n\u001c\f\u001c\u000e\u001c\u00e6\u000b\u001c\u0003\u001d\u0003\u001d",
-    "\u0003\u001d\u0003\u001d\u0003\u001d\u0003\u001d\u0005\u001d\u00ee\n",
-    "\u001d\u0003\u001e\u0003\u001e\u0003\u001e\u0003\u001e\u0003\u001e\u0007",
-    "\u001e\u00f5\n\u001e\f\u001e\u000e\u001e\u00f8\u000b\u001e\u0003\u001e",
-    "\u0003\u001e\u0003\u001f\u0003\u001f\u0003 \u0003 \u0003 \u0003 \u0003",
-    " \u0003 \u0003 \u0003 \u0005 \u0106\n \u0003!\u0003!\u0003\"\u0003\"",
-    "\u0003#\u0003#\u0005#\u010e\n#\u0003$\u0003$\u0005$\u0112\n$\u0003%",
-    "\u0003%\u0003%\u0003%\u0003%\u0007%\u0119\n%\f%\u000e%\u011c\u000b%",
-    "\u0007%\u011e\n%\f%\u000e%\u0121\u000b%\u0003%\u0003%\u0003&\u0003&",
-    "\u0005&\u0127\n&\u0003\'\u0003\'\u0003(\u0003(\u0003(\u0003(\u0003(",
-    "\u0003(\u0005(\u0131\n(\u0003(\u0003(\u0003(\u0005(\u0136\n(\u0003(",
-    "\u0003(\u0003)\u0003)\u0003)\u0007)\u013d\n)\f)\u000e)\u0140\u000b)",
-    "\u0003*\u0003*\u0003*\u0007*\u0145\n*\f*\u000e*\u0148\u000b*\u0003*",
-    "\u0002\u0003\u0006+\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014",
-    "\u0016\u0018\u001a\u001c\u001e \"$&(*,.02468:<>@BDFHJLNPR\u0002\u0006",
-    "\u0004\u0002\u0004\u0007  \u0003\u0002\u0018\u0019\u0003\u0002\u001a",
-    "\u001b\u0003\u0002\r\u000e\u0002\u0144\u0002T\u0003\u0002\u0002\u0002",
-    "\u0004\\\u0003\u0002\u0002\u0002\u0006_\u0003\u0002\u0002\u0002\bj\u0003",
-    "\u0002\u0002\u0002\nl\u0003\u0002\u0002\u0002\fo\u0003\u0002\u0002\u0002",
-    "\u000es\u0003\u0002\u0002\u0002\u0010y\u0003\u0002\u0002\u0002\u0012",
-    "{\u0003\u0002\u0002\u0002\u0014~\u0003\u0002\u0002\u0002\u0016\u0081",
-    "\u0003\u0002\u0002\u0002\u0018\u0085\u0003\u0002\u0002\u0002\u001a\u008f",
-    "\u0003\u0002\u0002\u0002\u001c\u0091\u0003\u0002\u0002\u0002\u001e\u009c",
-    "\u0003\u0002\u0002\u0002 \u00a3\u0003\u0002\u0002\u0002\"\u00a5\u0003",
-    "\u0002\u0002\u0002$\u00ae\u0003\u0002\u0002\u0002&\u00b1\u0003\u0002",
-    "\u0002\u0002(\u00b3\u0003\u0002\u0002\u0002*\u00b9\u0003\u0002\u0002",
-    "\u0002,\u00bb\u0003\u0002\u0002\u0002.\u00bd\u0003\u0002\u0002\u0002",
-    "0\u00cd\u0003\u0002\u0002\u00022\u00cf\u0003\u0002\u0002\u00024\u00d7",
-    "\u0003\u0002\u0002\u00026\u00df\u0003\u0002\u0002\u00028\u00ed\u0003",
-    "\u0002\u0002\u0002:\u00ef\u0003\u0002\u0002\u0002<\u00fb\u0003\u0002",
-    "\u0002\u0002>\u0105\u0003\u0002\u0002\u0002@\u0107\u0003\u0002\u0002",
-    "\u0002B\u0109\u0003\u0002\u0002\u0002D\u010d\u0003\u0002\u0002\u0002",
-    "F\u0111\u0003\u0002\u0002\u0002H\u0113\u0003\u0002\u0002\u0002J\u0126",
-    "\u0003\u0002\u0002\u0002L\u0128\u0003\u0002\u0002\u0002N\u012a\u0003",
-    "\u0002\u0002\u0002P\u0139\u0003\u0002\u0002\u0002R\u0141\u0003\u0002",
-    "\u0002\u0002TV\u0005\u0004\u0003\u0002UW\u0005\u000e\b\u0002VU\u0003",
-    "\u0002\u0002\u0002VW\u0003\u0002\u0002\u0002WX\u0003\u0002\u0002\u0002",
-    "XZ\u0005\u0016\f\u0002Y[\u0007\u0002\u0002\u0003ZY\u0003\u0002\u0002",
-    "\u0002Z[\u0003\u0002\u0002\u0002[\u0003\u0003\u0002\u0002\u0002\\]\u0007",
-    "\u0003\u0002\u0002]^\u0005\u0006\u0004\u0002^\u0005\u0003\u0002\u0002",
-    "\u0002_`\b\u0004\u0001\u0002`a\u0005\b\u0005\u0002ag\u0003\u0002\u0002",
-    "\u0002bc\f\u0003\u0002\u0002cd\u0007\u000f\u0002\u0002df\u0005\u0006",
-    "\u0004\u0004eb\u0003\u0002\u0002\u0002fi\u0003\u0002\u0002\u0002ge\u0003",
-    "\u0002\u0002\u0002gh\u0003\u0002\u0002\u0002h\u0007\u0003\u0002\u0002",
-    "\u0002ig\u0003\u0002\u0002\u0002jk\t\u0002\u0002\u0002k\t\u0003\u0002",
-    "\u0002\u0002lm\u0007\b\u0002\u0002mn\u0005\f\u0007\u0002n\u000b\u0003",
-    "\u0002\u0002\u0002op\u0007\t\u0002\u0002pq\u0005(\u0015\u0002q\r\u0003",
-    "\u0002\u0002\u0002rt\u0005\u0010\t\u0002sr\u0003\u0002\u0002\u0002t",
-    "u\u0003\u0002\u0002\u0002us\u0003\u0002\u0002\u0002uv\u0003\u0002\u0002",
-    "\u0002v\u000f\u0003\u0002\u0002\u0002wz\u0005\u0012\n\u0002xz\u0005",
-    ".\u0018\u0002yw\u0003\u0002\u0002\u0002yx\u0003\u0002\u0002\u0002z\u0011",
-    "\u0003\u0002\u0002\u0002{|\u0005\u0014\u000b\u0002|}\u0005\u001e\u0010",
-    "\u0002}\u0013\u0003\u0002\u0002\u0002~\u007f\u0007\n\u0002\u0002\u007f",
-    "\u0015\u0003\u0002\u0002\u0002\u0080\u0082\u0005\u0018\r\u0002\u0081",
-    "\u0080\u0003\u0002\u0002\u0002\u0082\u0083\u0003\u0002\u0002\u0002\u0083",
-    "\u0081\u0003\u0002\u0002\u0002\u0083\u0084\u0003\u0002\u0002\u0002\u0084",
-    "\u0017\u0003\u0002\u0002\u0002\u0085\u0087\u0005\u001a\u000e\u0002\u0086",
-    "\u0088\u0005\u001c\u000f\u0002\u0087\u0086\u0003\u0002\u0002\u0002\u0087",
-    "\u0088\u0003\u0002\u0002\u0002\u0088\u0089\u0003\u0002\u0002\u0002\u0089",
-    "\u008b\u0007\u0011\u0002\u0002\u008a\u008c\u0005 \u0011\u0002\u008b",
-    "\u008a\u0003\u0002\u0002\u0002\u008c\u008d\u0003\u0002\u0002\u0002\u008d",
-    "\u008b\u0003\u0002\u0002\u0002\u008d\u008e\u0003\u0002\u0002\u0002\u008e",
-    "\u0019\u0003\u0002\u0002\u0002\u008f\u0090\u0007+\u0002\u0002\u0090",
-    "\u001b\u0003\u0002\u0002\u0002\u0091\u0092\u0007\u0016\u0002\u0002\u0092",
-    "\u0097\u0005\u001e\u0010\u0002\u0093\u0094\u0007\u000f\u0002\u0002\u0094",
-    "\u0096\u0005\u001e\u0010\u0002\u0095\u0093\u0003\u0002\u0002\u0002\u0096",
-    "\u0099\u0003\u0002\u0002\u0002\u0097\u0095\u0003\u0002\u0002\u0002\u0097",
-    "\u0098\u0003\u0002\u0002\u0002\u0098\u009a\u0003\u0002\u0002\u0002\u0099",
-    "\u0097\u0003\u0002\u0002\u0002\u009a\u009b\u0007\u0017\u0002\u0002\u009b",
-    "\u001d\u0003\u0002\u0002\u0002\u009c\u009d\u0007+\u0002\u0002\u009d",
-    "\u001f\u0003\u0002\u0002\u0002\u009e\u009f\u0005N(\u0002\u009f\u00a0",
-    "\u0007\u001f\u0002\u0002\u00a0\u00a1\u0005\u001a\u000e\u0002\u00a1\u00a4",
-    "\u0003\u0002\u0002\u0002\u00a2\u00a4\u0007\u000b\u0002\u0002\u00a3\u009e",
-    "\u0003\u0002\u0002\u0002\u00a3\u00a2\u0003\u0002\u0002\u0002\u00a4!",
-    "\u0003\u0002\u0002\u0002\u00a5\u00a6\u0005(\u0015\u0002\u00a6\u00a7",
-    "\b\u0012\u0001\u0002\u00a7#\u0003\u0002\u0002\u0002\u00a8\u00ad\u0005",
-    "&\u0014\u0002\u00a9\u00ad\u0005(\u0015\u0002\u00aa\u00ad\u0005*\u0016",
-    "\u0002\u00ab\u00ad\u0005,\u0017\u0002\u00ac\u00a8\u0003\u0002\u0002",
-    "\u0002\u00ac\u00a9\u0003\u0002\u0002\u0002\u00ac\u00aa\u0003\u0002\u0002",
-    "\u0002\u00ac\u00ab\u0003\u0002\u0002\u0002\u00ad\u00b0\u0003\u0002\u0002",
-    "\u0002\u00ae\u00ac\u0003\u0002\u0002\u0002\u00ae\u00af\u0003\u0002\u0002",
-    "\u0002\u00af%\u0003\u0002\u0002\u0002\u00b0\u00ae\u0003\u0002\u0002",
-    "\u0002\u00b1\u00b2\u0007#\u0002\u0002\u00b2\'\u0003\u0002\u0002\u0002",
-    "\u00b3\u00b4\u0005*\u0016\u0002\u00b4\u00b5\u0007\u0010\u0002\u0002",
-    "\u00b5\u00b6\u0005,\u0017\u0002\u00b6\u00b7\u0007\u0010\u0002\u0002",
-    "\u00b7\u00b8\u0007&\u0002\u0002\u00b8)\u0003\u0002\u0002\u0002\u00b9",
-    "\u00ba\u0007$\u0002\u0002\u00ba+\u0003\u0002\u0002\u0002\u00bb\u00bc",
-    "\u0007%\u0002\u0002\u00bc-\u0003\u0002\u0002\u0002\u00bd\u00be\u0005",
-    "0\u0019\u0002\u00be\u00c7\u0007\u0014\u0002\u0002\u00bf\u00c4\u0007",
-    "+\u0002\u0002\u00c0\u00c1\u0007\u000f\u0002\u0002\u00c1\u00c3\u0007",
-    "+\u0002\u0002\u00c2\u00c0\u0003\u0002\u0002\u0002\u00c3\u00c6\u0003",
-    "\u0002\u0002\u0002\u00c4\u00c2\u0003\u0002\u0002\u0002\u00c4\u00c5\u0003",
-    "\u0002\u0002\u0002\u00c5\u00c8\u0003\u0002\u0002\u0002\u00c6\u00c4\u0003",
-    "\u0002\u0002\u0002\u00c7\u00bf\u0003\u0002\u0002\u0002\u00c7\u00c8\u0003",
-    "\u0002\u0002\u0002\u00c8\u00c9\u0003\u0002\u0002\u0002\u00c9\u00ca\u0007",
-    "\u0015\u0002\u0002\u00ca\u00cb\u0007\u001d\u0002\u0002\u00cb\u00cc\u0005",
-    "2\u001a\u0002\u00cc/\u0003\u0002\u0002\u0002\u00cd\u00ce\u0007+\u0002",
-    "\u0002\u00ce1\u0003\u0002\u0002\u0002\u00cf\u00d4\u00054\u001b\u0002",
-    "\u00d0\u00d1\t\u0003\u0002\u0002\u00d1\u00d3\u00054\u001b\u0002\u00d2",
-    "\u00d0\u0003\u0002\u0002\u0002\u00d3\u00d6\u0003\u0002\u0002\u0002\u00d4",
-    "\u00d2\u0003\u0002\u0002\u0002\u00d4\u00d5\u0003\u0002\u0002\u0002\u00d5",
-    "3\u0003\u0002\u0002\u0002\u00d6\u00d4\u0003\u0002\u0002\u0002\u00d7",
-    "\u00dc\u00056\u001c\u0002\u00d8\u00d9\t\u0004\u0002\u0002\u00d9\u00db",
-    "\u00056\u001c\u0002\u00da\u00d8\u0003\u0002\u0002\u0002\u00db\u00de",
-    "\u0003\u0002\u0002\u0002\u00dc\u00da\u0003\u0002\u0002\u0002\u00dc\u00dd",
-    "\u0003\u0002\u0002\u0002\u00dd5\u0003\u0002\u0002\u0002\u00de\u00dc",
-    "\u0003\u0002\u0002\u0002\u00df\u00e4\u00058\u001d\u0002\u00e0\u00e1",
-    "\u0007\u001c\u0002\u0002\u00e1\u00e3\u00058\u001d\u0002\u00e2\u00e0",
-    "\u0003\u0002\u0002\u0002\u00e3\u00e6\u0003\u0002\u0002\u0002\u00e4\u00e2",
-    "\u0003\u0002\u0002\u0002\u00e4\u00e5\u0003\u0002\u0002\u0002\u00e57",
-    "\u0003\u0002\u0002\u0002\u00e6\u00e4\u0003\u0002\u0002\u0002\u00e7\u00e8",
-    "\u0007\u0018\u0002\u0002\u00e8\u00ee\u00058\u001d\u0002\u00e9\u00ea",
-    "\u0007\u0019\u0002\u0002\u00ea\u00ee\u00058\u001d\u0002\u00eb\u00ee",
-    "\u0005:\u001e\u0002\u00ec\u00ee\u0005> \u0002\u00ed\u00e7\u0003\u0002",
-    "\u0002\u0002\u00ed\u00e9\u0003\u0002\u0002\u0002\u00ed\u00eb\u0003\u0002",
-    "\u0002\u0002\u00ed\u00ec\u0003\u0002\u0002\u0002\u00ee9\u0003\u0002",
-    "\u0002\u0002\u00ef\u00f0\u0005<\u001f\u0002\u00f0\u00f1\u0007\u0014",
-    "\u0002\u0002\u00f1\u00f6\u00052\u001a\u0002\u00f2\u00f3\u0007\u000f",
-    "\u0002\u0002\u00f3\u00f5\u00052\u001a\u0002\u00f4\u00f2\u0003\u0002",
-    "\u0002\u0002\u00f5\u00f8\u0003\u0002\u0002\u0002\u00f6\u00f4\u0003\u0002",
-    "\u0002\u0002\u00f6\u00f7\u0003\u0002\u0002\u0002\u00f7\u00f9\u0003\u0002",
-    "\u0002\u0002\u00f8\u00f6\u0003\u0002\u0002\u0002\u00f9\u00fa\u0007\u0015",
-    "\u0002\u0002\u00fa;\u0003\u0002\u0002\u0002\u00fb\u00fc\u0007\f\u0002",
-    "\u0002\u00fc=\u0003\u0002\u0002\u0002\u00fd\u0106\u0005@!\u0002\u00fe",
-    "\u0106\u0005B\"\u0002\u00ff\u0100\u0007\u0014\u0002\u0002\u0100\u0101",
-    "\u00052\u001a\u0002\u0101\u0102\u0007\u0015\u0002\u0002\u0102\u0106",
-    "\u0003\u0002\u0002\u0002\u0103\u0106\u0007*\u0002\u0002\u0104\u0106",
-    "\u0005D#\u0002\u0105\u00fd\u0003\u0002\u0002\u0002\u0105\u00fe\u0003",
-    "\u0002\u0002\u0002\u0105\u00ff\u0003\u0002\u0002\u0002\u0105\u0103\u0003",
-    "\u0002\u0002\u0002\u0105\u0104\u0003\u0002\u0002\u0002\u0106?\u0003",
-    "\u0002\u0002\u0002\u0107\u0108\u0007\'\u0002\u0002\u0108A\u0003\u0002",
-    "\u0002\u0002\u0109\u010a\t\u0005\u0002\u0002\u010aC\u0003\u0002\u0002",
-    "\u0002\u010b\u010e\u0005L\'\u0002\u010c\u010e\u0007+\u0002\u0002\u010d",
-    "\u010b\u0003\u0002\u0002\u0002\u010d\u010c\u0003\u0002\u0002\u0002\u010e",
-    "E\u0003\u0002\u0002\u0002\u010f\u0112\u0005H%\u0002\u0110\u0112\u0005",
-    "2\u001a\u0002\u0111\u010f\u0003\u0002\u0002\u0002\u0111\u0110\u0003",
-    "\u0002\u0002\u0002\u0112G\u0003\u0002\u0002\u0002\u0113\u0114\u0005",
-    "0\u0019\u0002\u0114\u011f\u0007\u0014\u0002\u0002\u0115\u011a\u0005",
-    "J&\u0002\u0116\u0117\u0007\u000f\u0002\u0002\u0117\u0119\u0005J&\u0002",
-    "\u0118\u0116\u0003\u0002\u0002\u0002\u0119\u011c\u0003\u0002\u0002\u0002",
-    "\u011a\u0118\u0003\u0002\u0002\u0002\u011a\u011b\u0003\u0002\u0002\u0002",
-    "\u011b\u011e\u0003\u0002\u0002\u0002\u011c\u011a\u0003\u0002\u0002\u0002",
-    "\u011d\u0115\u0003\u0002\u0002\u0002\u011e\u0121\u0003\u0002\u0002\u0002",
-    "\u011f\u011d\u0003\u0002\u0002\u0002\u011f\u0120\u0003\u0002\u0002\u0002",
-    "\u0120\u0122\u0003\u0002\u0002\u0002\u0121\u011f\u0003\u0002\u0002\u0002",
-    "\u0122\u0123\u0007\u0015\u0002\u0002\u0123I\u0003\u0002\u0002\u0002",
-    "\u0124\u0127\u0007*\u0002\u0002\u0125\u0127\u0005L\'\u0002\u0126\u0124",
-    "\u0003\u0002\u0002\u0002\u0126\u0125\u0003\u0002\u0002\u0002\u0127K",
-    "\u0003\u0002\u0002\u0002\u0128\u0129\u0007(\u0002\u0002\u0129M\u0003",
-    "\u0002\u0002\u0002\u012a\u012b\u0007\u001e\u0002\u0002\u012b\u012c\u0007",
-    "3\u0002\u0002\u012c\u0130\u00076\u0002\u0002\u012d\u012e\u0005P)\u0002",
-    "\u012e\u012f\u00076\u0002\u0002\u012f\u0131\u0003\u0002\u0002\u0002",
-    "\u0130\u012d\u0003\u0002\u0002\u0002\u0130\u0131\u0003\u0002\u0002\u0002",
-    "\u0131\u0132\u0003\u0002\u0002\u0002\u0132\u0133\u00073\u0002\u0002",
-    "\u0133\u0135\u00077\u0002\u0002\u0134\u0136\u0005R*\u0002\u0135\u0134",
-    "\u0003\u0002\u0002\u0002\u0135\u0136\u0003\u0002\u0002\u0002\u0136\u0137",
-    "\u0003\u0002\u0002\u0002\u0137\u0138\u00078\u0002\u0002\u0138O\u0003",
-    "\u0002\u0002\u0002\u0139\u013e\u00073\u0002\u0002\u013a\u013b\u0007",
-    "6\u0002\u0002\u013b\u013d\u00073\u0002\u0002\u013c\u013a\u0003\u0002",
-    "\u0002\u0002\u013d\u0140\u0003\u0002\u0002\u0002\u013e\u013c\u0003\u0002",
-    "\u0002\u0002\u013e\u013f\u0003\u0002\u0002\u0002\u013fQ\u0003\u0002",
-    "\u0002\u0002\u0140\u013e\u0003\u0002\u0002\u0002\u0141\u0146\u00074",
-    "\u0002\u0002\u0142\u0143\u00075\u0002\u0002\u0143\u0145\u00074\u0002",
-    "\u0002\u0144\u0142\u0003\u0002\u0002\u0002\u0145\u0148\u0003\u0002\u0002",
-    "\u0002\u0146\u0144\u0003\u0002\u0002\u0002\u0146\u0147\u0003\u0002\u0002",
-    "\u0002\u0147S\u0003\u0002\u0002\u0002\u0148\u0146\u0003\u0002\u0002",
-    "\u0002\u001fVZguy\u0083\u0087\u008d\u0097\u00a3\u00ac\u00ae\u00c4\u00c7",
-    "\u00d4\u00dc\u00e4\u00ed\u00f6\u0105\u010d\u0111\u011a\u011f\u0126\u0130",
-    "\u0135\u013e\u0146"].join("");
+    "%\t%\u0003\u0002\u0003\u0002\u0005\u0002M\n\u0002\u0003\u0002\u0005",
+    "\u0002P\n\u0002\u0003\u0002\u0003\u0002\u0005\u0002T\n\u0002\u0003\u0003",
+    "\u0003\u0003\u0003\u0003\u0003\u0004\u0003\u0004\u0003\u0004\u0003\u0004",
+    "\u0003\u0004\u0003\u0004\u0007\u0004_\n\u0004\f\u0004\u000e\u0004b\u000b",
+    "\u0004\u0003\u0005\u0003\u0005\u0003\u0006\u0003\u0006\u0003\u0006\u0003",
+    "\u0006\u0003\u0006\u0003\u0007\u0006\u0007l\n\u0007\r\u0007\u000e\u0007",
+    "m\u0003\b\u0003\b\u0005\br\n\b\u0003\t\u0003\t\u0003\t\u0003\n\u0003",
+    "\n\u0003\u000b\u0006\u000bz\n\u000b\r\u000b\u000e\u000b{\u0003\f\u0003",
+    "\f\u0005\f\u0080\n\f\u0003\f\u0003\f\u0006\f\u0084\n\f\r\f\u000e\f\u0085",
+    "\u0003\r\u0003\r\u0003\u000e\u0003\u000e\u0003\u000e\u0003\u000e\u0007",
+    "\u000e\u008e\n\u000e\f\u000e\u000e\u000e\u0091\u000b\u000e\u0003\u000e",
+    "\u0003\u000e\u0003\u000f\u0003\u000f\u0003\u0010\u0003\u0010\u0003\u0010",
+    "\u0003\u0010\u0003\u0010\u0005\u0010\u009c\n\u0010\u0003\u0011\u0003",
+    "\u0011\u0003\u0012\u0003\u0012\u0003\u0013\u0003\u0013\u0003\u0013\u0003",
+    "\u0013\u0003\u0013\u0007\u0013\u00a7\n\u0013\f\u0013\u000e\u0013\u00aa",
+    "\u000b\u0013\u0005\u0013\u00ac\n\u0013\u0003\u0013\u0003\u0013\u0003",
+    "\u0013\u0003\u0013\u0003\u0014\u0003\u0014\u0003\u0015\u0003\u0015\u0003",
+    "\u0015\u0007\u0015\u00b7\n\u0015\f\u0015\u000e\u0015\u00ba\u000b\u0015",
+    "\u0003\u0016\u0003\u0016\u0003\u0016\u0007\u0016\u00bf\n\u0016\f\u0016",
+    "\u000e\u0016\u00c2\u000b\u0016\u0003\u0017\u0003\u0017\u0003\u0017\u0007",
+    "\u0017\u00c7\n\u0017\f\u0017\u000e\u0017\u00ca\u000b\u0017\u0003\u0018",
+    "\u0003\u0018\u0003\u0018\u0003\u0018\u0003\u0018\u0003\u0018\u0005\u0018",
+    "\u00d2\n\u0018\u0003\u0019\u0003\u0019\u0003\u0019\u0003\u0019\u0003",
+    "\u0019\u0007\u0019\u00d9\n\u0019\f\u0019\u000e\u0019\u00dc\u000b\u0019",
+    "\u0003\u0019\u0003\u0019\u0003\u001a\u0003\u001a\u0003\u001b\u0003\u001b",
+    "\u0003\u001b\u0003\u001b\u0003\u001b\u0003\u001b\u0003\u001b\u0003\u001b",
+    "\u0005\u001b\u00ea\n\u001b\u0003\u001c\u0003\u001c\u0003\u001d\u0003",
+    "\u001d\u0003\u001e\u0003\u001e\u0005\u001e\u00f2\n\u001e\u0003\u001f",
+    "\u0003\u001f\u0005\u001f\u00f6\n\u001f\u0003 \u0003 \u0003 \u0003 \u0003",
+    " \u0007 \u00fd\n \f \u000e \u0100\u000b \u0007 \u0102\n \f \u000e \u0105",
+    "\u000b \u0003 \u0003 \u0003!\u0003!\u0005!\u010b\n!\u0003\"\u0003\"",
+    "\u0003#\u0003#\u0003#\u0003#\u0003#\u0003#\u0005#\u0115\n#\u0003#\u0003",
+    "#\u0003#\u0005#\u011a\n#\u0003#\u0003#\u0003$\u0003$\u0003$\u0007$\u0121",
+    "\n$\f$\u000e$\u0124\u000b$\u0003%\u0003%\u0003%\u0007%\u0129\n%\f%\u000e",
+    "%\u012c\u000b%\u0003%\u0002\u0003\u0006&\u0002\u0004\u0006\b\n\f\u000e",
+    "\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e \"$&(*,.02468:<>@B",
+    "DFH\u0002\u0006\u0004\u0002\u0004\u0007!!\u0003\u0002\u0019\u001a\u0003",
+    "\u0002\u001b\u001c\u0003\u0002\u000e\u000f\u0002\u012a\u0002J\u0003",
+    "\u0002\u0002\u0002\u0004U\u0003\u0002\u0002\u0002\u0006X\u0003\u0002",
+    "\u0002\u0002\bc\u0003\u0002\u0002\u0002\ne\u0003\u0002\u0002\u0002\f",
+    "k\u0003\u0002\u0002\u0002\u000eq\u0003\u0002\u0002\u0002\u0010s\u0003",
+    "\u0002\u0002\u0002\u0012v\u0003\u0002\u0002\u0002\u0014y\u0003\u0002",
+    "\u0002\u0002\u0016}\u0003\u0002\u0002\u0002\u0018\u0087\u0003\u0002",
+    "\u0002\u0002\u001a\u0089\u0003\u0002\u0002\u0002\u001c\u0094\u0003\u0002",
+    "\u0002\u0002\u001e\u009b\u0003\u0002\u0002\u0002 \u009d\u0003\u0002",
+    "\u0002\u0002\"\u009f\u0003\u0002\u0002\u0002$\u00a1\u0003\u0002\u0002",
+    "\u0002&\u00b1\u0003\u0002\u0002\u0002(\u00b3\u0003\u0002\u0002\u0002",
+    "*\u00bb\u0003\u0002\u0002\u0002,\u00c3\u0003\u0002\u0002\u0002.\u00d1",
+    "\u0003\u0002\u0002\u00020\u00d3\u0003\u0002\u0002\u00022\u00df\u0003",
+    "\u0002\u0002\u00024\u00e9\u0003\u0002\u0002\u00026\u00eb\u0003\u0002",
+    "\u0002\u00028\u00ed\u0003\u0002\u0002\u0002:\u00f1\u0003\u0002\u0002",
+    "\u0002<\u00f5\u0003\u0002\u0002\u0002>\u00f7\u0003\u0002\u0002\u0002",
+    "@\u010a\u0003\u0002\u0002\u0002B\u010c\u0003\u0002\u0002\u0002D\u010e",
+    "\u0003\u0002\u0002\u0002F\u011d\u0003\u0002\u0002\u0002H\u0125\u0003",
+    "\u0002\u0002\u0002JL\u0005\u0004\u0003\u0002KM\u0005\n\u0006\u0002L",
+    "K\u0003\u0002\u0002\u0002LM\u0003\u0002\u0002\u0002MO\u0003\u0002\u0002",
+    "\u0002NP\u0005\f\u0007\u0002ON\u0003\u0002\u0002\u0002OP\u0003\u0002",
+    "\u0002\u0002PQ\u0003\u0002\u0002\u0002QS\u0005\u0014\u000b\u0002RT\u0007",
+    "\u0002\u0002\u0003SR\u0003\u0002\u0002\u0002ST\u0003\u0002\u0002\u0002",
+    "T\u0003\u0003\u0002\u0002\u0002UV\u0007\u0003\u0002\u0002VW\u0005\u0006",
+    "\u0004\u0002W\u0005\u0003\u0002\u0002\u0002XY\b\u0004\u0001\u0002YZ",
+    "\u0005\b\u0005\u0002Z`\u0003\u0002\u0002\u0002[\\\f\u0003\u0002\u0002",
+    "\\]\u0007\u0010\u0002\u0002]_\u0005\u0006\u0004\u0004^[\u0003\u0002",
+    "\u0002\u0002_b\u0003\u0002\u0002\u0002`^\u0003\u0002\u0002\u0002`a\u0003",
+    "\u0002\u0002\u0002a\u0007\u0003\u0002\u0002\u0002b`\u0003\u0002\u0002",
+    "\u0002cd\t\u0002\u0002\u0002d\t\u0003\u0002\u0002\u0002ef\u0007\b\u0002",
+    "\u0002fg\u0005 \u0011\u0002gh\u0007\t\u0002\u0002hi\u0005\"\u0012\u0002",
+    "i\u000b\u0003\u0002\u0002\u0002jl\u0005\u000e\b\u0002kj\u0003\u0002",
+    "\u0002\u0002lm\u0003\u0002\u0002\u0002mk\u0003\u0002\u0002\u0002mn\u0003",
+    "\u0002\u0002\u0002n\r\u0003\u0002\u0002\u0002or\u0005\u0010\t\u0002",
+    "pr\u0005$\u0013\u0002qo\u0003\u0002\u0002\u0002qp\u0003\u0002\u0002",
+    "\u0002r\u000f\u0003\u0002\u0002\u0002st\u0005\u0012\n\u0002tu\u0005",
+    "\u001c\u000f\u0002u\u0011\u0003\u0002\u0002\u0002vw\u0007\u000b\u0002",
+    "\u0002w\u0013\u0003\u0002\u0002\u0002xz\u0005\u0016\f\u0002yx\u0003",
+    "\u0002\u0002\u0002z{\u0003\u0002\u0002\u0002{y\u0003\u0002\u0002\u0002",
+    "{|\u0003\u0002\u0002\u0002|\u0015\u0003\u0002\u0002\u0002}\u007f\u0005",
+    "\u0018\r\u0002~\u0080\u0005\u001a\u000e\u0002\u007f~\u0003\u0002\u0002",
+    "\u0002\u007f\u0080\u0003\u0002\u0002\u0002\u0080\u0081\u0003\u0002\u0002",
+    "\u0002\u0081\u0083\u0007\u0012\u0002\u0002\u0082\u0084\u0005\u001e\u0010",
+    "\u0002\u0083\u0082\u0003\u0002\u0002\u0002\u0084\u0085\u0003\u0002\u0002",
+    "\u0002\u0085\u0083\u0003\u0002\u0002\u0002\u0085\u0086\u0003\u0002\u0002",
+    "\u0002\u0086\u0017\u0003\u0002\u0002\u0002\u0087\u0088\u0007(\u0002",
+    "\u0002\u0088\u0019\u0003\u0002\u0002\u0002\u0089\u008a\u0007\u0017\u0002",
+    "\u0002\u008a\u008f\u0005\u001c\u000f\u0002\u008b\u008c\u0007\u0010\u0002",
+    "\u0002\u008c\u008e\u0005\u001c\u000f\u0002\u008d\u008b\u0003\u0002\u0002",
+    "\u0002\u008e\u0091\u0003\u0002\u0002\u0002\u008f\u008d\u0003\u0002\u0002",
+    "\u0002\u008f\u0090\u0003\u0002\u0002\u0002\u0090\u0092\u0003\u0002\u0002",
+    "\u0002\u0091\u008f\u0003\u0002\u0002\u0002\u0092\u0093\u0007\u0018\u0002",
+    "\u0002\u0093\u001b\u0003\u0002\u0002\u0002\u0094\u0095\u0007(\u0002",
+    "\u0002\u0095\u001d\u0003\u0002\u0002\u0002\u0096\u0097\u0005D#\u0002",
+    "\u0097\u0098\u0007 \u0002\u0002\u0098\u0099\u0005\u0018\r\u0002\u0099",
+    "\u009c\u0003\u0002\u0002\u0002\u009a\u009c\u0007\f\u0002\u0002\u009b",
+    "\u0096\u0003\u0002\u0002\u0002\u009b\u009a\u0003\u0002\u0002\u0002\u009c",
+    "\u001f\u0003\u0002\u0002\u0002\u009d\u009e\u0007(\u0002\u0002\u009e",
+    "!\u0003\u0002\u0002\u0002\u009f\u00a0\u0007(\u0002\u0002\u00a0#\u0003",
+    "\u0002\u0002\u0002\u00a1\u00a2\u0005&\u0014\u0002\u00a2\u00ab\u0007",
+    "\u0015\u0002\u0002\u00a3\u00a8\u0007(\u0002\u0002\u00a4\u00a5\u0007",
+    "\u0010\u0002\u0002\u00a5\u00a7\u0007(\u0002\u0002\u00a6\u00a4\u0003",
+    "\u0002\u0002\u0002\u00a7\u00aa\u0003\u0002\u0002\u0002\u00a8\u00a6\u0003",
+    "\u0002\u0002\u0002\u00a8\u00a9\u0003\u0002\u0002\u0002\u00a9\u00ac\u0003",
+    "\u0002\u0002\u0002\u00aa\u00a8\u0003\u0002\u0002\u0002\u00ab\u00a3\u0003",
+    "\u0002\u0002\u0002\u00ab\u00ac\u0003\u0002\u0002\u0002\u00ac\u00ad\u0003",
+    "\u0002\u0002\u0002\u00ad\u00ae\u0007\u0016\u0002\u0002\u00ae\u00af\u0007",
+    "\u001e\u0002\u0002\u00af\u00b0\u0005(\u0015\u0002\u00b0%\u0003\u0002",
+    "\u0002\u0002\u00b1\u00b2\u0007(\u0002\u0002\u00b2\'\u0003\u0002\u0002",
+    "\u0002\u00b3\u00b8\u0005*\u0016\u0002\u00b4\u00b5\t\u0003\u0002\u0002",
+    "\u00b5\u00b7\u0005*\u0016\u0002\u00b6\u00b4\u0003\u0002\u0002\u0002",
+    "\u00b7\u00ba\u0003\u0002\u0002\u0002\u00b8\u00b6\u0003\u0002\u0002\u0002",
+    "\u00b8\u00b9\u0003\u0002\u0002\u0002\u00b9)\u0003\u0002\u0002\u0002",
+    "\u00ba\u00b8\u0003\u0002\u0002\u0002\u00bb\u00c0\u0005,\u0017\u0002",
+    "\u00bc\u00bd\t\u0004\u0002\u0002\u00bd\u00bf\u0005,\u0017\u0002\u00be",
+    "\u00bc\u0003\u0002\u0002\u0002\u00bf\u00c2\u0003\u0002\u0002\u0002\u00c0",
+    "\u00be\u0003\u0002\u0002\u0002\u00c0\u00c1\u0003\u0002\u0002\u0002\u00c1",
+    "+\u0003\u0002\u0002\u0002\u00c2\u00c0\u0003\u0002\u0002\u0002\u00c3",
+    "\u00c8\u0005.\u0018\u0002\u00c4\u00c5\u0007\u001d\u0002\u0002\u00c5",
+    "\u00c7\u0005.\u0018\u0002\u00c6\u00c4\u0003\u0002\u0002\u0002\u00c7",
+    "\u00ca\u0003\u0002\u0002\u0002\u00c8\u00c6\u0003\u0002\u0002\u0002\u00c8",
+    "\u00c9\u0003\u0002\u0002\u0002\u00c9-\u0003\u0002\u0002\u0002\u00ca",
+    "\u00c8\u0003\u0002\u0002\u0002\u00cb\u00cc\u0007\u0019\u0002\u0002\u00cc",
+    "\u00d2\u0005.\u0018\u0002\u00cd\u00ce\u0007\u001a\u0002\u0002\u00ce",
+    "\u00d2\u0005.\u0018\u0002\u00cf\u00d2\u00050\u0019\u0002\u00d0\u00d2",
+    "\u00054\u001b\u0002\u00d1\u00cb\u0003\u0002\u0002\u0002\u00d1\u00cd",
+    "\u0003\u0002\u0002\u0002\u00d1\u00cf\u0003\u0002\u0002\u0002\u00d1\u00d0",
+    "\u0003\u0002\u0002\u0002\u00d2/\u0003\u0002\u0002\u0002\u00d3\u00d4",
+    "\u00052\u001a\u0002\u00d4\u00d5\u0007\u0015\u0002\u0002\u00d5\u00da",
+    "\u0005(\u0015\u0002\u00d6\u00d7\u0007\u0010\u0002\u0002\u00d7\u00d9",
+    "\u0005(\u0015\u0002\u00d8\u00d6\u0003\u0002\u0002\u0002\u00d9\u00dc",
+    "\u0003\u0002\u0002\u0002\u00da\u00d8\u0003\u0002\u0002\u0002\u00da\u00db",
+    "\u0003\u0002\u0002\u0002\u00db\u00dd\u0003\u0002\u0002\u0002\u00dc\u00da",
+    "\u0003\u0002\u0002\u0002\u00dd\u00de\u0007\u0016\u0002\u0002\u00de1",
+    "\u0003\u0002\u0002\u0002\u00df\u00e0\u0007\r\u0002\u0002\u00e03\u0003",
+    "\u0002\u0002\u0002\u00e1\u00ea\u00056\u001c\u0002\u00e2\u00ea\u0005",
+    "8\u001d\u0002\u00e3\u00e4\u0007\u0015\u0002\u0002\u00e4\u00e5\u0005",
+    "(\u0015\u0002\u00e5\u00e6\u0007\u0016\u0002\u0002\u00e6\u00ea\u0003",
+    "\u0002\u0002\u0002\u00e7\u00ea\u0007\'\u0002\u0002\u00e8\u00ea\u0005",
+    ":\u001e\u0002\u00e9\u00e1\u0003\u0002\u0002\u0002\u00e9\u00e2\u0003",
+    "\u0002\u0002\u0002\u00e9\u00e3\u0003\u0002\u0002\u0002\u00e9\u00e7\u0003",
+    "\u0002\u0002\u0002\u00e9\u00e8\u0003\u0002\u0002\u0002\u00ea5\u0003",
+    "\u0002\u0002\u0002\u00eb\u00ec\u0007$\u0002\u0002\u00ec7\u0003\u0002",
+    "\u0002\u0002\u00ed\u00ee\t\u0005\u0002\u0002\u00ee9\u0003\u0002\u0002",
+    "\u0002\u00ef\u00f2\u0005B\"\u0002\u00f0\u00f2\u0007(\u0002\u0002\u00f1",
+    "\u00ef\u0003\u0002\u0002\u0002\u00f1\u00f0\u0003\u0002\u0002\u0002\u00f2",
+    ";\u0003\u0002\u0002\u0002\u00f3\u00f6\u0005> \u0002\u00f4\u00f6\u0005",
+    "(\u0015\u0002\u00f5\u00f3\u0003\u0002\u0002\u0002\u00f5\u00f4\u0003",
+    "\u0002\u0002\u0002\u00f6=\u0003\u0002\u0002\u0002\u00f7\u00f8\u0005",
+    "&\u0014\u0002\u00f8\u0103\u0007\u0015\u0002\u0002\u00f9\u00fe\u0005",
+    "@!\u0002\u00fa\u00fb\u0007\u0010\u0002\u0002\u00fb\u00fd\u0005@!\u0002",
+    "\u00fc\u00fa\u0003\u0002\u0002\u0002\u00fd\u0100\u0003\u0002\u0002\u0002",
+    "\u00fe\u00fc\u0003\u0002\u0002\u0002\u00fe\u00ff\u0003\u0002\u0002\u0002",
+    "\u00ff\u0102\u0003\u0002\u0002\u0002\u0100\u00fe\u0003\u0002\u0002\u0002",
+    "\u0101\u00f9\u0003\u0002\u0002\u0002\u0102\u0105\u0003\u0002\u0002\u0002",
+    "\u0103\u0101\u0003\u0002\u0002\u0002\u0103\u0104\u0003\u0002\u0002\u0002",
+    "\u0104\u0106\u0003\u0002\u0002\u0002\u0105\u0103\u0003\u0002\u0002\u0002",
+    "\u0106\u0107\u0007\u0016\u0002\u0002\u0107?\u0003\u0002\u0002\u0002",
+    "\u0108\u010b\u0007\'\u0002\u0002\u0109\u010b\u0005B\"\u0002\u010a\u0108",
+    "\u0003\u0002\u0002\u0002\u010a\u0109\u0003\u0002\u0002\u0002\u010bA",
+    "\u0003\u0002\u0002\u0002\u010c\u010d\u0007%\u0002\u0002\u010dC\u0003",
+    "\u0002\u0002\u0002\u010e\u010f\u0007\u001f\u0002\u0002\u010f\u0110\u0007",
+    "0\u0002\u0002\u0110\u0114\u00073\u0002\u0002\u0111\u0112\u0005F$\u0002",
+    "\u0112\u0113\u00073\u0002\u0002\u0113\u0115\u0003\u0002\u0002\u0002",
+    "\u0114\u0111\u0003\u0002\u0002\u0002\u0114\u0115\u0003\u0002\u0002\u0002",
+    "\u0115\u0116\u0003\u0002\u0002\u0002\u0116\u0117\u00070\u0002\u0002",
+    "\u0117\u0119\u00074\u0002\u0002\u0118\u011a\u0005H%\u0002\u0119\u0118",
+    "\u0003\u0002\u0002\u0002\u0119\u011a\u0003\u0002\u0002\u0002\u011a\u011b",
+    "\u0003\u0002\u0002\u0002\u011b\u011c\u00075\u0002\u0002\u011cE\u0003",
+    "\u0002\u0002\u0002\u011d\u0122\u00070\u0002\u0002\u011e\u011f\u0007",
+    "3\u0002\u0002\u011f\u0121\u00070\u0002\u0002\u0120\u011e\u0003\u0002",
+    "\u0002\u0002\u0121\u0124\u0003\u0002\u0002\u0002\u0122\u0120\u0003\u0002",
+    "\u0002\u0002\u0122\u0123\u0003\u0002\u0002\u0002\u0123G\u0003\u0002",
+    "\u0002\u0002\u0124\u0122\u0003\u0002\u0002\u0002\u0125\u012a\u00071",
+    "\u0002\u0002\u0126\u0127\u00072\u0002\u0002\u0127\u0129\u00071\u0002",
+    "\u0002\u0128\u0126\u0003\u0002\u0002\u0002\u0129\u012c\u0003\u0002\u0002",
+    "\u0002\u012a\u0128\u0003\u0002\u0002\u0002\u012a\u012b\u0003\u0002\u0002",
+    "\u0002\u012bI\u0003\u0002\u0002\u0002\u012c\u012a\u0003\u0002\u0002",
+    "\u0002\u001eLOS`mq{\u007f\u0085\u008f\u009b\u00a8\u00ab\u00b8\u00c0",
+    "\u00c8\u00d1\u00da\u00e9\u00f1\u00f5\u00fe\u0103\u010a\u0114\u0119\u0122",
+    "\u012a"].join("");
 
 
 var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -219,36 +203,33 @@ var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new a
 var sharedContextCache = new antlr4.PredictionContextCache();
 
 var literalNames = [ null, "'for'", "'public'", "'nodes'", "'userGroup'", 
-                     "'registeredUsers'", "'require'", "'contract with'", 
+                     "'registeredUsers'", "'include'", "'require'", "'contract with'", 
                      "'always'", "'terminate'", "'sum'", "'pi'", "'e'", 
                      null, null, "':'", "'<'", "'>'", null, null, "'['", 
                      "']'", "'+'", "'-'", "'*'", "'/'", "'^'", "'='", "'~'", 
-                     "'=>'", null, null, null, null, null, null, null, null, 
-                     null, "'exhibited'" ];
+                     "'=>'", null, null, null, null, null, "'exhibited'" ];
 
 var symbolicNames = [ null, "FOR", "PUBLIC", "NODES", "USER_GROUP", "REGISTERED_USERS", 
-                      "REQUIRE", "CONTRACT_WITH", "SERVICE_STATE_SCOPE", 
+                      "INCLUDE", "REQUIRE", "CONTRACT_WITH", "SERVICE_STATE_SCOPE", 
                       "TERMINATE", "SUM", "PI", "EULER", "COMMA", "POINT", 
                       "COLON", "LT", "GT", "LPAREN", "RPAREN", "LBRACKET", 
                       "RBRACKET", "PLUS", "MINUS", "TIMES", "DIV", "POW", 
                       "EQ", "TILDE", "EQUANDGT", "USER_ID", "PHONE_NUMBER_CN_MOBILE", 
-                      "EMAIL", "ACCOUNT_NUMBER", "SUBJECT_SERVICE_NAME", 
-                      "UOID", "SUBJECT_ID", "SCIENTIFIC_NUMBER", "VARIABLE_CONTRACT", 
+                      "EMAIL", "SCIENTIFIC_NUMBER", "VARIABLE_CONTRACT", 
                       "VARIABLE_CONTRACT_ATTRIBUTE", "INT", "ID", "PERIOD", 
                       "DATE", "TIME", "MONEY_AMOUNT", "COMMENT", "COMMENT_LINE", 
                       "WS", "EVENT_SERVICE_PATH_NAME", "EVENT_ARG", "EVENT_COMMA", 
                       "EVENT_POINT", "EVENT_LPAREN", "EVENT_RPAREN", "EVENT_WS" ];
 
 var ruleNames =  [ "policy", "audience_strict", "audience_clause", "audience", 
-                   "requirement", "contract_with_subject", "declaration_section", 
-                   "declaration_statement", "service_state_constant", "service_state_scope", 
-                   "state_definition_section", "state_definition", "state_name", 
-                   "service_state_definition", "service_state", "state_transition", 
-                   "subject_id", "entity_bracket", "account", "subject", 
-                   "subject_service", "user_organization_name", "expression_assignment", 
-                   "expression_handle", "expression", "multiplyingExpression", 
-                   "powExpression", "signedAtom", "built_in_function", "funcname", 
-                   "atom", "scientific", "constant", "variable", "expression_call_or_literal", 
+                   "subject_icon_strict", "declaration_section", "declaration_statement", 
+                   "service_state_constant", "service_state_scope", "state_definition_section", 
+                   "state_definition", "state_name", "service_state_definition", 
+                   "service_state", "state_transition", "subject_icon", 
+                   "subject_icon_lv", "expression_assignment", "expression_handle", 
+                   "expression", "multiplyingExpression", "powExpression", 
+                   "signedAtom", "built_in_function", "funcname", "atom", 
+                   "scientific", "constant", "variable", "expression_call_or_literal", 
                    "expression_call", "expression_call_argument", "environment_variable", 
                    "event", "event_path", "event_args" ];
 
@@ -276,98 +257,90 @@ resourcePolicy.PUBLIC = 2;
 resourcePolicy.NODES = 3;
 resourcePolicy.USER_GROUP = 4;
 resourcePolicy.REGISTERED_USERS = 5;
-resourcePolicy.REQUIRE = 6;
-resourcePolicy.CONTRACT_WITH = 7;
-resourcePolicy.SERVICE_STATE_SCOPE = 8;
-resourcePolicy.TERMINATE = 9;
-resourcePolicy.SUM = 10;
-resourcePolicy.PI = 11;
-resourcePolicy.EULER = 12;
-resourcePolicy.COMMA = 13;
-resourcePolicy.POINT = 14;
-resourcePolicy.COLON = 15;
-resourcePolicy.LT = 16;
-resourcePolicy.GT = 17;
-resourcePolicy.LPAREN = 18;
-resourcePolicy.RPAREN = 19;
-resourcePolicy.LBRACKET = 20;
-resourcePolicy.RBRACKET = 21;
-resourcePolicy.PLUS = 22;
-resourcePolicy.MINUS = 23;
-resourcePolicy.TIMES = 24;
-resourcePolicy.DIV = 25;
-resourcePolicy.POW = 26;
-resourcePolicy.EQ = 27;
-resourcePolicy.TILDE = 28;
-resourcePolicy.EQUANDGT = 29;
-resourcePolicy.USER_ID = 30;
-resourcePolicy.PHONE_NUMBER_CN_MOBILE = 31;
-resourcePolicy.EMAIL = 32;
-resourcePolicy.ACCOUNT_NUMBER = 33;
-resourcePolicy.SUBJECT_SERVICE_NAME = 34;
-resourcePolicy.UOID = 35;
-resourcePolicy.SUBJECT_ID = 36;
-resourcePolicy.SCIENTIFIC_NUMBER = 37;
-resourcePolicy.VARIABLE_CONTRACT = 38;
-resourcePolicy.VARIABLE_CONTRACT_ATTRIBUTE = 39;
-resourcePolicy.INT = 40;
-resourcePolicy.ID = 41;
-resourcePolicy.PERIOD = 42;
-resourcePolicy.DATE = 43;
-resourcePolicy.TIME = 44;
-resourcePolicy.MONEY_AMOUNT = 45;
-resourcePolicy.COMMENT = 46;
-resourcePolicy.COMMENT_LINE = 47;
-resourcePolicy.WS = 48;
-resourcePolicy.EVENT_SERVICE_PATH_NAME = 49;
-resourcePolicy.EVENT_ARG = 50;
-resourcePolicy.EVENT_COMMA = 51;
-resourcePolicy.EVENT_POINT = 52;
-resourcePolicy.EVENT_LPAREN = 53;
-resourcePolicy.EVENT_RPAREN = 54;
-resourcePolicy.EVENT_WS = 55;
+resourcePolicy.INCLUDE = 6;
+resourcePolicy.REQUIRE = 7;
+resourcePolicy.CONTRACT_WITH = 8;
+resourcePolicy.SERVICE_STATE_SCOPE = 9;
+resourcePolicy.TERMINATE = 10;
+resourcePolicy.SUM = 11;
+resourcePolicy.PI = 12;
+resourcePolicy.EULER = 13;
+resourcePolicy.COMMA = 14;
+resourcePolicy.POINT = 15;
+resourcePolicy.COLON = 16;
+resourcePolicy.LT = 17;
+resourcePolicy.GT = 18;
+resourcePolicy.LPAREN = 19;
+resourcePolicy.RPAREN = 20;
+resourcePolicy.LBRACKET = 21;
+resourcePolicy.RBRACKET = 22;
+resourcePolicy.PLUS = 23;
+resourcePolicy.MINUS = 24;
+resourcePolicy.TIMES = 25;
+resourcePolicy.DIV = 26;
+resourcePolicy.POW = 27;
+resourcePolicy.EQ = 28;
+resourcePolicy.TILDE = 29;
+resourcePolicy.EQUANDGT = 30;
+resourcePolicy.USER_ID = 31;
+resourcePolicy.PHONE_NUMBER_CN_MOBILE = 32;
+resourcePolicy.EMAIL = 33;
+resourcePolicy.SCIENTIFIC_NUMBER = 34;
+resourcePolicy.VARIABLE_CONTRACT = 35;
+resourcePolicy.VARIABLE_CONTRACT_ATTRIBUTE = 36;
+resourcePolicy.INT = 37;
+resourcePolicy.ID = 38;
+resourcePolicy.PERIOD = 39;
+resourcePolicy.DATE = 40;
+resourcePolicy.TIME = 41;
+resourcePolicy.MONEY_AMOUNT = 42;
+resourcePolicy.COMMENT = 43;
+resourcePolicy.COMMENT_LINE = 44;
+resourcePolicy.WS = 45;
+resourcePolicy.EVENT_SERVICE_PATH_NAME = 46;
+resourcePolicy.EVENT_ARG = 47;
+resourcePolicy.EVENT_COMMA = 48;
+resourcePolicy.EVENT_POINT = 49;
+resourcePolicy.EVENT_LPAREN = 50;
+resourcePolicy.EVENT_RPAREN = 51;
+resourcePolicy.EVENT_WS = 52;
 
 resourcePolicy.RULE_policy = 0;
 resourcePolicy.RULE_audience_strict = 1;
 resourcePolicy.RULE_audience_clause = 2;
 resourcePolicy.RULE_audience = 3;
-resourcePolicy.RULE_requirement = 4;
-resourcePolicy.RULE_contract_with_subject = 5;
-resourcePolicy.RULE_declaration_section = 6;
-resourcePolicy.RULE_declaration_statement = 7;
-resourcePolicy.RULE_service_state_constant = 8;
-resourcePolicy.RULE_service_state_scope = 9;
-resourcePolicy.RULE_state_definition_section = 10;
-resourcePolicy.RULE_state_definition = 11;
-resourcePolicy.RULE_state_name = 12;
-resourcePolicy.RULE_service_state_definition = 13;
-resourcePolicy.RULE_service_state = 14;
-resourcePolicy.RULE_state_transition = 15;
-resourcePolicy.RULE_subject_id = 16;
-resourcePolicy.RULE_entity_bracket = 17;
-resourcePolicy.RULE_account = 18;
-resourcePolicy.RULE_subject = 19;
-resourcePolicy.RULE_subject_service = 20;
-resourcePolicy.RULE_user_organization_name = 21;
-resourcePolicy.RULE_expression_assignment = 22;
-resourcePolicy.RULE_expression_handle = 23;
-resourcePolicy.RULE_expression = 24;
-resourcePolicy.RULE_multiplyingExpression = 25;
-resourcePolicy.RULE_powExpression = 26;
-resourcePolicy.RULE_signedAtom = 27;
-resourcePolicy.RULE_built_in_function = 28;
-resourcePolicy.RULE_funcname = 29;
-resourcePolicy.RULE_atom = 30;
-resourcePolicy.RULE_scientific = 31;
-resourcePolicy.RULE_constant = 32;
-resourcePolicy.RULE_variable = 33;
-resourcePolicy.RULE_expression_call_or_literal = 34;
-resourcePolicy.RULE_expression_call = 35;
-resourcePolicy.RULE_expression_call_argument = 36;
-resourcePolicy.RULE_environment_variable = 37;
-resourcePolicy.RULE_event = 38;
-resourcePolicy.RULE_event_path = 39;
-resourcePolicy.RULE_event_args = 40;
+resourcePolicy.RULE_subject_icon_strict = 4;
+resourcePolicy.RULE_declaration_section = 5;
+resourcePolicy.RULE_declaration_statement = 6;
+resourcePolicy.RULE_service_state_constant = 7;
+resourcePolicy.RULE_service_state_scope = 8;
+resourcePolicy.RULE_state_definition_section = 9;
+resourcePolicy.RULE_state_definition = 10;
+resourcePolicy.RULE_state_name = 11;
+resourcePolicy.RULE_service_state_definition = 12;
+resourcePolicy.RULE_service_state = 13;
+resourcePolicy.RULE_state_transition = 14;
+resourcePolicy.RULE_subject_icon = 15;
+resourcePolicy.RULE_subject_icon_lv = 16;
+resourcePolicy.RULE_expression_assignment = 17;
+resourcePolicy.RULE_expression_handle = 18;
+resourcePolicy.RULE_expression = 19;
+resourcePolicy.RULE_multiplyingExpression = 20;
+resourcePolicy.RULE_powExpression = 21;
+resourcePolicy.RULE_signedAtom = 22;
+resourcePolicy.RULE_built_in_function = 23;
+resourcePolicy.RULE_funcname = 24;
+resourcePolicy.RULE_atom = 25;
+resourcePolicy.RULE_scientific = 26;
+resourcePolicy.RULE_constant = 27;
+resourcePolicy.RULE_variable = 28;
+resourcePolicy.RULE_expression_call_or_literal = 29;
+resourcePolicy.RULE_expression_call = 30;
+resourcePolicy.RULE_expression_call_argument = 31;
+resourcePolicy.RULE_environment_variable = 32;
+resourcePolicy.RULE_event = 33;
+resourcePolicy.RULE_event_path = 34;
+resourcePolicy.RULE_event_args = 35;
 
 
 function PolicyContext(parser, parent, invokingState) {
@@ -392,6 +365,10 @@ PolicyContext.prototype.audience_strict = function() {
 
 PolicyContext.prototype.state_definition_section = function() {
     return this.getTypedRuleContext(State_definition_sectionContext,0);
+};
+
+PolicyContext.prototype.subject_icon_strict = function() {
+    return this.getTypedRuleContext(Subject_icon_strictContext,0);
 };
 
 PolicyContext.prototype.declaration_section = function() {
@@ -431,25 +408,34 @@ resourcePolicy.prototype.policy = function() {
 
     var localctx = new PolicyContext(this, this._ctx, this.state);
     this.enterRule(localctx, 0, resourcePolicy.RULE_policy);
+    var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 82;
+        this.state = 72;
         this.audience_strict();
-        this.state = 84;
+        this.state = 74;
         this._errHandler.sync(this);
-        var la_ = this._interp.adaptivePredict(this._input,0,this._ctx);
-        if(la_===1) {
-            this.state = 83;
-            this.declaration_section();
-
+        _la = this._input.LA(1);
+        if(_la===resourcePolicy.INCLUDE) {
+            this.state = 73;
+            this.subject_icon_strict();
         }
-        this.state = 86;
-        this.state_definition_section();
-        this.state = 88;
+
+        this.state = 77;
         this._errHandler.sync(this);
         var la_ = this._interp.adaptivePredict(this._input,1,this._ctx);
         if(la_===1) {
-            this.state = 87;
+            this.state = 76;
+            this.declaration_section();
+
+        }
+        this.state = 79;
+        this.state_definition_section();
+        this.state = 81;
+        this._errHandler.sync(this);
+        var la_ = this._interp.adaptivePredict(this._input,2,this._ctx);
+        if(la_===1) {
+            this.state = 80;
             this.match(resourcePolicy.EOF);
 
         }
@@ -523,9 +509,9 @@ resourcePolicy.prototype.audience_strict = function() {
     this.enterRule(localctx, 2, resourcePolicy.RULE_audience_strict);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 90;
+        this.state = 83;
         this.match(resourcePolicy.FOR);
-        this.state = 91;
+        this.state = 84;
         this.audience_clause(0);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -611,12 +597,12 @@ resourcePolicy.prototype.audience_clause = function(_p) {
     this.enterRecursionRule(localctx, 4, resourcePolicy.RULE_audience_clause, _p);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 94;
+        this.state = 87;
         this.audience();
         this._ctx.stop = this._input.LT(-1);
-        this.state = 101;
+        this.state = 94;
         this._errHandler.sync(this);
-        var _alt = this._interp.adaptivePredict(this._input,2,this._ctx)
+        var _alt = this._interp.adaptivePredict(this._input,3,this._ctx)
         while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
             if(_alt===1) {
                 if(this._parseListeners!==null) {
@@ -625,18 +611,18 @@ resourcePolicy.prototype.audience_clause = function(_p) {
                 _prevctx = localctx;
                 localctx = new Audience_clauseContext(this, _parentctx, _parentState);
                 this.pushNewRecursionContext(localctx, _startState, resourcePolicy.RULE_audience_clause);
-                this.state = 96;
+                this.state = 89;
                 if (!( this.precpred(this._ctx, 1))) {
                     throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 1)");
                 }
-                this.state = 97;
+                this.state = 90;
                 this.match(resourcePolicy.COMMA);
-                this.state = 98;
+                this.state = 91;
                 this.audience_clause(2); 
             }
-            this.state = 103;
+            this.state = 96;
             this._errHandler.sync(this);
-            _alt = this._interp.adaptivePredict(this._input,2,this._ctx);
+            _alt = this._interp.adaptivePredict(this._input,3,this._ctx);
         }
 
     } catch( error) {
@@ -722,7 +708,7 @@ resourcePolicy.prototype.audience = function() {
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 104;
+        this.state = 97;
         _la = this._input.LA(1);
         if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << resourcePolicy.PUBLIC) | (1 << resourcePolicy.NODES) | (1 << resourcePolicy.USER_GROUP) | (1 << resourcePolicy.REGISTERED_USERS) | (1 << resourcePolicy.USER_ID))) !== 0))) {
         this._errHandler.recoverInline(this);
@@ -746,7 +732,7 @@ resourcePolicy.prototype.audience = function() {
 };
 
 
-function RequirementContext(parser, parent, invokingState) {
+function Subject_icon_strictContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
 	}
@@ -755,36 +741,44 @@ function RequirementContext(parser, parent, invokingState) {
 	}
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
-    this.ruleIndex = resourcePolicy.RULE_requirement;
+    this.ruleIndex = resourcePolicy.RULE_subject_icon_strict;
     return this;
 }
 
-RequirementContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-RequirementContext.prototype.constructor = RequirementContext;
+Subject_icon_strictContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Subject_icon_strictContext.prototype.constructor = Subject_icon_strictContext;
 
-RequirementContext.prototype.REQUIRE = function() {
+Subject_icon_strictContext.prototype.INCLUDE = function() {
+    return this.getToken(resourcePolicy.INCLUDE, 0);
+};
+
+Subject_icon_strictContext.prototype.subject_icon = function() {
+    return this.getTypedRuleContext(Subject_iconContext,0);
+};
+
+Subject_icon_strictContext.prototype.REQUIRE = function() {
     return this.getToken(resourcePolicy.REQUIRE, 0);
 };
 
-RequirementContext.prototype.contract_with_subject = function() {
-    return this.getTypedRuleContext(Contract_with_subjectContext,0);
+Subject_icon_strictContext.prototype.subject_icon_lv = function() {
+    return this.getTypedRuleContext(Subject_icon_lvContext,0);
 };
 
-RequirementContext.prototype.enterRule = function(listener) {
+Subject_icon_strictContext.prototype.enterRule = function(listener) {
     if(listener instanceof resourcePolicyListener ) {
-        listener.enterRequirement(this);
+        listener.enterSubject_icon_strict(this);
 	}
 };
 
-RequirementContext.prototype.exitRule = function(listener) {
+Subject_icon_strictContext.prototype.exitRule = function(listener) {
     if(listener instanceof resourcePolicyListener ) {
-        listener.exitRequirement(this);
+        listener.exitSubject_icon_strict(this);
 	}
 };
 
-RequirementContext.prototype.accept = function(visitor) {
+Subject_icon_strictContext.prototype.accept = function(visitor) {
     if ( visitor instanceof resourcePolicyVisitor ) {
-        return visitor.visitRequirement(this);
+        return visitor.visitSubject_icon_strict(this);
     } else {
         return visitor.visitChildren(this);
     }
@@ -793,93 +787,22 @@ RequirementContext.prototype.accept = function(visitor) {
 
 
 
-resourcePolicy.RequirementContext = RequirementContext;
+resourcePolicy.Subject_icon_strictContext = Subject_icon_strictContext;
 
-resourcePolicy.prototype.requirement = function() {
+resourcePolicy.prototype.subject_icon_strict = function() {
 
-    var localctx = new RequirementContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 8, resourcePolicy.RULE_requirement);
+    var localctx = new Subject_icon_strictContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 8, resourcePolicy.RULE_subject_icon_strict);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 106;
+        this.state = 99;
+        this.match(resourcePolicy.INCLUDE);
+        this.state = 100;
+        this.subject_icon();
+        this.state = 101;
         this.match(resourcePolicy.REQUIRE);
-
-        this.state = 107;
-        this.contract_with_subject();
-    } catch (re) {
-    	if(re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
-    } finally {
-        this.exitRule();
-    }
-    return localctx;
-};
-
-
-function Contract_with_subjectContext(parser, parent, invokingState) {
-	if(parent===undefined) {
-	    parent = null;
-	}
-	if(invokingState===undefined || invokingState===null) {
-		invokingState = -1;
-	}
-	antlr4.ParserRuleContext.call(this, parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = resourcePolicy.RULE_contract_with_subject;
-    return this;
-}
-
-Contract_with_subjectContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-Contract_with_subjectContext.prototype.constructor = Contract_with_subjectContext;
-
-Contract_with_subjectContext.prototype.CONTRACT_WITH = function() {
-    return this.getToken(resourcePolicy.CONTRACT_WITH, 0);
-};
-
-Contract_with_subjectContext.prototype.subject = function() {
-    return this.getTypedRuleContext(SubjectContext,0);
-};
-
-Contract_with_subjectContext.prototype.enterRule = function(listener) {
-    if(listener instanceof resourcePolicyListener ) {
-        listener.enterContract_with_subject(this);
-	}
-};
-
-Contract_with_subjectContext.prototype.exitRule = function(listener) {
-    if(listener instanceof resourcePolicyListener ) {
-        listener.exitContract_with_subject(this);
-	}
-};
-
-Contract_with_subjectContext.prototype.accept = function(visitor) {
-    if ( visitor instanceof resourcePolicyVisitor ) {
-        return visitor.visitContract_with_subject(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-
-
-
-resourcePolicy.Contract_with_subjectContext = Contract_with_subjectContext;
-
-resourcePolicy.prototype.contract_with_subject = function() {
-
-    var localctx = new Contract_with_subjectContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 10, resourcePolicy.RULE_contract_with_subject);
-    try {
-        this.enterOuterAlt(localctx, 1);
-        this.state = 109;
-        this.match(resourcePolicy.CONTRACT_WITH);
-        this.state = 110;
-        this.subject();
+        this.state = 102;
+        this.subject_icon_lv();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -950,24 +873,24 @@ resourcePolicy.Declaration_sectionContext = Declaration_sectionContext;
 resourcePolicy.prototype.declaration_section = function() {
 
     var localctx = new Declaration_sectionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 12, resourcePolicy.RULE_declaration_section);
+    this.enterRule(localctx, 10, resourcePolicy.RULE_declaration_section);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 113; 
+        this.state = 105; 
         this._errHandler.sync(this);
         var _alt = 1;
         do {
         	switch (_alt) {
         	case 1:
-        		this.state = 112;
+        		this.state = 104;
         		this.declaration_statement();
         		break;
         	default:
         		throw new antlr4.error.NoViableAltException(this);
         	}
-        	this.state = 115; 
+        	this.state = 107; 
         	this._errHandler.sync(this);
-        	_alt = this._interp.adaptivePredict(this._input,3, this._ctx);
+        	_alt = this._interp.adaptivePredict(this._input,4, this._ctx);
         } while ( _alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER );
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1036,19 +959,19 @@ resourcePolicy.Declaration_statementContext = Declaration_statementContext;
 resourcePolicy.prototype.declaration_statement = function() {
 
     var localctx = new Declaration_statementContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 14, resourcePolicy.RULE_declaration_statement);
+    this.enterRule(localctx, 12, resourcePolicy.RULE_declaration_statement);
     try {
-        this.state = 119;
+        this.state = 111;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case resourcePolicy.SERVICE_STATE_SCOPE:
             this.enterOuterAlt(localctx, 1);
-            this.state = 117;
+            this.state = 109;
             this.service_state_constant();
             break;
         case resourcePolicy.ID:
             this.enterOuterAlt(localctx, 2);
-            this.state = 118;
+            this.state = 110;
             this.expression_assignment();
             break;
         default:
@@ -1121,12 +1044,12 @@ resourcePolicy.Service_state_constantContext = Service_state_constantContext;
 resourcePolicy.prototype.service_state_constant = function() {
 
     var localctx = new Service_state_constantContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 16, resourcePolicy.RULE_service_state_constant);
+    this.enterRule(localctx, 14, resourcePolicy.RULE_service_state_constant);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 121;
+        this.state = 113;
         this.service_state_scope();
-        this.state = 122;
+        this.state = 114;
         this.service_state();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1191,10 +1114,10 @@ resourcePolicy.Service_state_scopeContext = Service_state_scopeContext;
 resourcePolicy.prototype.service_state_scope = function() {
 
     var localctx = new Service_state_scopeContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 18, resourcePolicy.RULE_service_state_scope);
+    this.enterRule(localctx, 16, resourcePolicy.RULE_service_state_scope);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 124;
+        this.state = 116;
         this.match(resourcePolicy.SERVICE_STATE_SCOPE);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1266,17 +1189,17 @@ resourcePolicy.State_definition_sectionContext = State_definition_sectionContext
 resourcePolicy.prototype.state_definition_section = function() {
 
     var localctx = new State_definition_sectionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 20, resourcePolicy.RULE_state_definition_section);
+    this.enterRule(localctx, 18, resourcePolicy.RULE_state_definition_section);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 127; 
+        this.state = 119; 
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         do {
-            this.state = 126;
+            this.state = 118;
             this.state_definition();
-            this.state = 129; 
+            this.state = 121; 
             this._errHandler.sync(this);
             _la = this._input.LA(1);
         } while(_la===resourcePolicy.ID);
@@ -1362,29 +1285,29 @@ resourcePolicy.State_definitionContext = State_definitionContext;
 resourcePolicy.prototype.state_definition = function() {
 
     var localctx = new State_definitionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 22, resourcePolicy.RULE_state_definition);
+    this.enterRule(localctx, 20, resourcePolicy.RULE_state_definition);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 131;
+        this.state = 123;
         this.state_name();
-        this.state = 133;
+        this.state = 125;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         if(_la===resourcePolicy.LBRACKET) {
-            this.state = 132;
+            this.state = 124;
             this.service_state_definition();
         }
 
-        this.state = 135;
+        this.state = 127;
         this.match(resourcePolicy.COLON);
-        this.state = 137; 
+        this.state = 129; 
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         do {
-            this.state = 136;
+            this.state = 128;
             this.state_transition();
-            this.state = 139; 
+            this.state = 131; 
             this._errHandler.sync(this);
             _la = this._input.LA(1);
         } while(_la===resourcePolicy.TERMINATE || _la===resourcePolicy.TILDE);
@@ -1451,10 +1374,10 @@ resourcePolicy.State_nameContext = State_nameContext;
 resourcePolicy.prototype.state_name = function() {
 
     var localctx = new State_nameContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 24, resourcePolicy.RULE_state_name);
+    this.enterRule(localctx, 22, resourcePolicy.RULE_state_name);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 141;
+        this.state = 133;
         this.match(resourcePolicy.ID);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1546,27 +1469,27 @@ resourcePolicy.Service_state_definitionContext = Service_state_definitionContext
 resourcePolicy.prototype.service_state_definition = function() {
 
     var localctx = new Service_state_definitionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 26, resourcePolicy.RULE_service_state_definition);
+    this.enterRule(localctx, 24, resourcePolicy.RULE_service_state_definition);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 143;
+        this.state = 135;
         this.match(resourcePolicy.LBRACKET);
-        this.state = 144;
+        this.state = 136;
         this.service_state();
-        this.state = 149;
+        this.state = 141;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         while(_la===resourcePolicy.COMMA) {
-            this.state = 145;
+            this.state = 137;
             this.match(resourcePolicy.COMMA);
-            this.state = 146;
+            this.state = 138;
             this.service_state();
-            this.state = 151;
+            this.state = 143;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
         }
-        this.state = 152;
+        this.state = 144;
         this.match(resourcePolicy.RBRACKET);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1631,10 +1554,10 @@ resourcePolicy.Service_stateContext = Service_stateContext;
 resourcePolicy.prototype.service_state = function() {
 
     var localctx = new Service_stateContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 28, resourcePolicy.RULE_service_state);
+    this.enterRule(localctx, 26, resourcePolicy.RULE_service_state);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 154;
+        this.state = 146;
         this.match(resourcePolicy.ID);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -1712,23 +1635,23 @@ resourcePolicy.State_transitionContext = State_transitionContext;
 resourcePolicy.prototype.state_transition = function() {
 
     var localctx = new State_transitionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 30, resourcePolicy.RULE_state_transition);
+    this.enterRule(localctx, 28, resourcePolicy.RULE_state_transition);
     try {
-        this.state = 161;
+        this.state = 153;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case resourcePolicy.TILDE:
             this.enterOuterAlt(localctx, 1);
-            this.state = 156;
+            this.state = 148;
             this.event();
-            this.state = 157;
+            this.state = 149;
             this.match(resourcePolicy.EQUANDGT);
-            this.state = 158;
+            this.state = 150;
             this.state_name();
             break;
         case resourcePolicy.TERMINATE:
             this.enterOuterAlt(localctx, 2);
-            this.state = 160;
+            this.state = 152;
             localctx.terminate = this.match(resourcePolicy.TERMINATE);
             break;
         default:
@@ -1749,7 +1672,7 @@ resourcePolicy.prototype.state_transition = function() {
 };
 
 
-function Subject_idContext(parser, parent, invokingState) {
+function Subject_iconContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
 	}
@@ -1758,32 +1681,32 @@ function Subject_idContext(parser, parent, invokingState) {
 	}
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
-    this.ruleIndex = resourcePolicy.RULE_subject_id;
+    this.ruleIndex = resourcePolicy.RULE_subject_icon;
     return this;
 }
 
-Subject_idContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-Subject_idContext.prototype.constructor = Subject_idContext;
+Subject_iconContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Subject_iconContext.prototype.constructor = Subject_iconContext;
 
-Subject_idContext.prototype.subject = function() {
-    return this.getTypedRuleContext(SubjectContext,0);
+Subject_iconContext.prototype.ID = function() {
+    return this.getToken(resourcePolicy.ID, 0);
 };
 
-Subject_idContext.prototype.enterRule = function(listener) {
+Subject_iconContext.prototype.enterRule = function(listener) {
     if(listener instanceof resourcePolicyListener ) {
-        listener.enterSubject_id(this);
+        listener.enterSubject_icon(this);
 	}
 };
 
-Subject_idContext.prototype.exitRule = function(listener) {
+Subject_iconContext.prototype.exitRule = function(listener) {
     if(listener instanceof resourcePolicyListener ) {
-        listener.exitSubject_id(this);
+        listener.exitSubject_icon(this);
 	}
 };
 
-Subject_idContext.prototype.accept = function(visitor) {
+Subject_iconContext.prototype.accept = function(visitor) {
     if ( visitor instanceof resourcePolicyVisitor ) {
-        return visitor.visitSubject_id(this);
+        return visitor.visitSubject_icon(this);
     } else {
         return visitor.visitChildren(this);
     }
@@ -1792,17 +1715,16 @@ Subject_idContext.prototype.accept = function(visitor) {
 
 
 
-resourcePolicy.Subject_idContext = Subject_idContext;
+resourcePolicy.Subject_iconContext = Subject_iconContext;
 
-resourcePolicy.prototype.subject_id = function() {
+resourcePolicy.prototype.subject_icon = function() {
 
-    var localctx = new Subject_idContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 32, resourcePolicy.RULE_subject_id);
+    var localctx = new Subject_iconContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 30, resourcePolicy.RULE_subject_icon);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 163;
-        this.subject();
-         this._ctx.start._text = this._ctx.getText().substr(1) 
+        this.state = 155;
+        this.match(resourcePolicy.ID);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -1818,7 +1740,7 @@ resourcePolicy.prototype.subject_id = function() {
 };
 
 
-function Entity_bracketContext(parser, parent, invokingState) {
+function Subject_icon_lvContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
 	}
@@ -1827,72 +1749,32 @@ function Entity_bracketContext(parser, parent, invokingState) {
 	}
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
-    this.ruleIndex = resourcePolicy.RULE_entity_bracket;
+    this.ruleIndex = resourcePolicy.RULE_subject_icon_lv;
     return this;
 }
 
-Entity_bracketContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-Entity_bracketContext.prototype.constructor = Entity_bracketContext;
+Subject_icon_lvContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Subject_icon_lvContext.prototype.constructor = Subject_icon_lvContext;
 
-Entity_bracketContext.prototype.account = function(i) {
-    if(i===undefined) {
-        i = null;
-    }
-    if(i===null) {
-        return this.getTypedRuleContexts(AccountContext);
-    } else {
-        return this.getTypedRuleContext(AccountContext,i);
-    }
+Subject_icon_lvContext.prototype.ID = function() {
+    return this.getToken(resourcePolicy.ID, 0);
 };
 
-Entity_bracketContext.prototype.subject = function(i) {
-    if(i===undefined) {
-        i = null;
-    }
-    if(i===null) {
-        return this.getTypedRuleContexts(SubjectContext);
-    } else {
-        return this.getTypedRuleContext(SubjectContext,i);
-    }
-};
-
-Entity_bracketContext.prototype.subject_service = function(i) {
-    if(i===undefined) {
-        i = null;
-    }
-    if(i===null) {
-        return this.getTypedRuleContexts(Subject_serviceContext);
-    } else {
-        return this.getTypedRuleContext(Subject_serviceContext,i);
-    }
-};
-
-Entity_bracketContext.prototype.user_organization_name = function(i) {
-    if(i===undefined) {
-        i = null;
-    }
-    if(i===null) {
-        return this.getTypedRuleContexts(User_organization_nameContext);
-    } else {
-        return this.getTypedRuleContext(User_organization_nameContext,i);
-    }
-};
-
-Entity_bracketContext.prototype.enterRule = function(listener) {
+Subject_icon_lvContext.prototype.enterRule = function(listener) {
     if(listener instanceof resourcePolicyListener ) {
-        listener.enterEntity_bracket(this);
+        listener.enterSubject_icon_lv(this);
 	}
 };
 
-Entity_bracketContext.prototype.exitRule = function(listener) {
+Subject_icon_lvContext.prototype.exitRule = function(listener) {
     if(listener instanceof resourcePolicyListener ) {
-        listener.exitEntity_bracket(this);
+        listener.exitSubject_icon_lv(this);
 	}
 };
 
-Entity_bracketContext.prototype.accept = function(visitor) {
+Subject_icon_lvContext.prototype.accept = function(visitor) {
     if ( visitor instanceof resourcePolicyVisitor ) {
-        return visitor.visitEntity_bracket(this);
+        return visitor.visitSubject_icon_lv(this);
     } else {
         return visitor.visitChildren(this);
     }
@@ -1901,348 +1783,16 @@ Entity_bracketContext.prototype.accept = function(visitor) {
 
 
 
-resourcePolicy.Entity_bracketContext = Entity_bracketContext;
+resourcePolicy.Subject_icon_lvContext = Subject_icon_lvContext;
 
-resourcePolicy.prototype.entity_bracket = function() {
+resourcePolicy.prototype.subject_icon_lv = function() {
 
-    var localctx = new Entity_bracketContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 34, resourcePolicy.RULE_entity_bracket);
-    var _la = 0; // Token type
+    var localctx = new Subject_icon_lvContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 32, resourcePolicy.RULE_subject_icon_lv);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 172;
-        this._errHandler.sync(this);
-        _la = this._input.LA(1);
-        while(((((_la - 33)) & ~0x1f) == 0 && ((1 << (_la - 33)) & ((1 << (resourcePolicy.ACCOUNT_NUMBER - 33)) | (1 << (resourcePolicy.SUBJECT_SERVICE_NAME - 33)) | (1 << (resourcePolicy.UOID - 33)))) !== 0)) {
-            this.state = 170;
-            this._errHandler.sync(this);
-            var la_ = this._interp.adaptivePredict(this._input,10,this._ctx);
-            switch(la_) {
-            case 1:
-                this.state = 166;
-                this.account();
-                break;
-
-            case 2:
-                this.state = 167;
-                this.subject();
-                break;
-
-            case 3:
-                this.state = 168;
-                this.subject_service();
-                break;
-
-            case 4:
-                this.state = 169;
-                this.user_organization_name();
-                break;
-
-            }
-            this.state = 174;
-            this._errHandler.sync(this);
-            _la = this._input.LA(1);
-        }
-    } catch (re) {
-    	if(re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
-    } finally {
-        this.exitRule();
-    }
-    return localctx;
-};
-
-
-function AccountContext(parser, parent, invokingState) {
-	if(parent===undefined) {
-	    parent = null;
-	}
-	if(invokingState===undefined || invokingState===null) {
-		invokingState = -1;
-	}
-	antlr4.ParserRuleContext.call(this, parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = resourcePolicy.RULE_account;
-    return this;
-}
-
-AccountContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-AccountContext.prototype.constructor = AccountContext;
-
-AccountContext.prototype.ACCOUNT_NUMBER = function() {
-    return this.getToken(resourcePolicy.ACCOUNT_NUMBER, 0);
-};
-
-AccountContext.prototype.enterRule = function(listener) {
-    if(listener instanceof resourcePolicyListener ) {
-        listener.enterAccount(this);
-	}
-};
-
-AccountContext.prototype.exitRule = function(listener) {
-    if(listener instanceof resourcePolicyListener ) {
-        listener.exitAccount(this);
-	}
-};
-
-AccountContext.prototype.accept = function(visitor) {
-    if ( visitor instanceof resourcePolicyVisitor ) {
-        return visitor.visitAccount(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-
-
-
-resourcePolicy.AccountContext = AccountContext;
-
-resourcePolicy.prototype.account = function() {
-
-    var localctx = new AccountContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 36, resourcePolicy.RULE_account);
-    try {
-        this.enterOuterAlt(localctx, 1);
-        this.state = 175;
-        this.match(resourcePolicy.ACCOUNT_NUMBER);
-    } catch (re) {
-    	if(re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
-    } finally {
-        this.exitRule();
-    }
-    return localctx;
-};
-
-
-function SubjectContext(parser, parent, invokingState) {
-	if(parent===undefined) {
-	    parent = null;
-	}
-	if(invokingState===undefined || invokingState===null) {
-		invokingState = -1;
-	}
-	antlr4.ParserRuleContext.call(this, parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = resourcePolicy.RULE_subject;
-    return this;
-}
-
-SubjectContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-SubjectContext.prototype.constructor = SubjectContext;
-
-SubjectContext.prototype.subject_service = function() {
-    return this.getTypedRuleContext(Subject_serviceContext,0);
-};
-
-SubjectContext.prototype.POINT = function(i) {
-	if(i===undefined) {
-		i = null;
-	}
-    if(i===null) {
-        return this.getTokens(resourcePolicy.POINT);
-    } else {
-        return this.getToken(resourcePolicy.POINT, i);
-    }
-};
-
-
-SubjectContext.prototype.user_organization_name = function() {
-    return this.getTypedRuleContext(User_organization_nameContext,0);
-};
-
-SubjectContext.prototype.SUBJECT_ID = function() {
-    return this.getToken(resourcePolicy.SUBJECT_ID, 0);
-};
-
-SubjectContext.prototype.enterRule = function(listener) {
-    if(listener instanceof resourcePolicyListener ) {
-        listener.enterSubject(this);
-	}
-};
-
-SubjectContext.prototype.exitRule = function(listener) {
-    if(listener instanceof resourcePolicyListener ) {
-        listener.exitSubject(this);
-	}
-};
-
-SubjectContext.prototype.accept = function(visitor) {
-    if ( visitor instanceof resourcePolicyVisitor ) {
-        return visitor.visitSubject(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-
-
-
-resourcePolicy.SubjectContext = SubjectContext;
-
-resourcePolicy.prototype.subject = function() {
-
-    var localctx = new SubjectContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 38, resourcePolicy.RULE_subject);
-    try {
-        this.enterOuterAlt(localctx, 1);
-        this.state = 177;
-        this.subject_service();
-        this.state = 178;
-        this.match(resourcePolicy.POINT);
-        this.state = 179;
-        this.user_organization_name();
-        this.state = 180;
-        this.match(resourcePolicy.POINT);
-        this.state = 181;
-        this.match(resourcePolicy.SUBJECT_ID);
-    } catch (re) {
-    	if(re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
-    } finally {
-        this.exitRule();
-    }
-    return localctx;
-};
-
-
-function Subject_serviceContext(parser, parent, invokingState) {
-	if(parent===undefined) {
-	    parent = null;
-	}
-	if(invokingState===undefined || invokingState===null) {
-		invokingState = -1;
-	}
-	antlr4.ParserRuleContext.call(this, parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = resourcePolicy.RULE_subject_service;
-    return this;
-}
-
-Subject_serviceContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-Subject_serviceContext.prototype.constructor = Subject_serviceContext;
-
-Subject_serviceContext.prototype.SUBJECT_SERVICE_NAME = function() {
-    return this.getToken(resourcePolicy.SUBJECT_SERVICE_NAME, 0);
-};
-
-Subject_serviceContext.prototype.enterRule = function(listener) {
-    if(listener instanceof resourcePolicyListener ) {
-        listener.enterSubject_service(this);
-	}
-};
-
-Subject_serviceContext.prototype.exitRule = function(listener) {
-    if(listener instanceof resourcePolicyListener ) {
-        listener.exitSubject_service(this);
-	}
-};
-
-Subject_serviceContext.prototype.accept = function(visitor) {
-    if ( visitor instanceof resourcePolicyVisitor ) {
-        return visitor.visitSubject_service(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-
-
-
-resourcePolicy.Subject_serviceContext = Subject_serviceContext;
-
-resourcePolicy.prototype.subject_service = function() {
-
-    var localctx = new Subject_serviceContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 40, resourcePolicy.RULE_subject_service);
-    try {
-        this.enterOuterAlt(localctx, 1);
-        this.state = 183;
-        this.match(resourcePolicy.SUBJECT_SERVICE_NAME);
-    } catch (re) {
-    	if(re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
-    } finally {
-        this.exitRule();
-    }
-    return localctx;
-};
-
-
-function User_organization_nameContext(parser, parent, invokingState) {
-	if(parent===undefined) {
-	    parent = null;
-	}
-	if(invokingState===undefined || invokingState===null) {
-		invokingState = -1;
-	}
-	antlr4.ParserRuleContext.call(this, parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = resourcePolicy.RULE_user_organization_name;
-    return this;
-}
-
-User_organization_nameContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-User_organization_nameContext.prototype.constructor = User_organization_nameContext;
-
-User_organization_nameContext.prototype.UOID = function() {
-    return this.getToken(resourcePolicy.UOID, 0);
-};
-
-User_organization_nameContext.prototype.enterRule = function(listener) {
-    if(listener instanceof resourcePolicyListener ) {
-        listener.enterUser_organization_name(this);
-	}
-};
-
-User_organization_nameContext.prototype.exitRule = function(listener) {
-    if(listener instanceof resourcePolicyListener ) {
-        listener.exitUser_organization_name(this);
-	}
-};
-
-User_organization_nameContext.prototype.accept = function(visitor) {
-    if ( visitor instanceof resourcePolicyVisitor ) {
-        return visitor.visitUser_organization_name(this);
-    } else {
-        return visitor.visitChildren(this);
-    }
-};
-
-
-
-
-resourcePolicy.User_organization_nameContext = User_organization_nameContext;
-
-resourcePolicy.prototype.user_organization_name = function() {
-
-    var localctx = new User_organization_nameContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 42, resourcePolicy.RULE_user_organization_name);
-    try {
-        this.enterOuterAlt(localctx, 1);
-        this.state = 185;
-        this.match(resourcePolicy.UOID);
+        this.state = 157;
+        this.match(resourcePolicy.ID);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -2346,39 +1896,39 @@ resourcePolicy.Expression_assignmentContext = Expression_assignmentContext;
 resourcePolicy.prototype.expression_assignment = function() {
 
     var localctx = new Expression_assignmentContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 44, resourcePolicy.RULE_expression_assignment);
+    this.enterRule(localctx, 34, resourcePolicy.RULE_expression_assignment);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 187;
+        this.state = 159;
         this.expression_handle();
-        this.state = 188;
+        this.state = 160;
         this.match(resourcePolicy.LPAREN);
-        this.state = 197;
+        this.state = 169;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         if(_la===resourcePolicy.ID) {
-            this.state = 189;
+            this.state = 161;
             this.match(resourcePolicy.ID);
-            this.state = 194;
+            this.state = 166;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
             while(_la===resourcePolicy.COMMA) {
-                this.state = 190;
+                this.state = 162;
                 this.match(resourcePolicy.COMMA);
-                this.state = 191;
+                this.state = 163;
                 this.match(resourcePolicy.ID);
-                this.state = 196;
+                this.state = 168;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
             }
         }
 
-        this.state = 199;
+        this.state = 171;
         this.match(resourcePolicy.RPAREN);
-        this.state = 200;
+        this.state = 172;
         this.match(resourcePolicy.EQ);
-        this.state = 201;
+        this.state = 173;
         this.expression();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -2443,10 +1993,10 @@ resourcePolicy.Expression_handleContext = Expression_handleContext;
 resourcePolicy.prototype.expression_handle = function() {
 
     var localctx = new Expression_handleContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 46, resourcePolicy.RULE_expression_handle);
+    this.enterRule(localctx, 36, resourcePolicy.RULE_expression_handle);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 203;
+        this.state = 175;
         this.match(resourcePolicy.ID);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -2542,17 +2092,17 @@ resourcePolicy.ExpressionContext = ExpressionContext;
 resourcePolicy.prototype.expression = function() {
 
     var localctx = new ExpressionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 48, resourcePolicy.RULE_expression);
+    this.enterRule(localctx, 38, resourcePolicy.RULE_expression);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 205;
+        this.state = 177;
         this.multiplyingExpression();
-        this.state = 210;
+        this.state = 182;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         while(_la===resourcePolicy.PLUS || _la===resourcePolicy.MINUS) {
-            this.state = 206;
+            this.state = 178;
             _la = this._input.LA(1);
             if(!(_la===resourcePolicy.PLUS || _la===resourcePolicy.MINUS)) {
             this._errHandler.recoverInline(this);
@@ -2561,9 +2111,9 @@ resourcePolicy.prototype.expression = function() {
             	this._errHandler.reportMatch(this);
                 this.consume();
             }
-            this.state = 207;
+            this.state = 179;
             this.multiplyingExpression();
-            this.state = 212;
+            this.state = 184;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
         }
@@ -2661,17 +2211,17 @@ resourcePolicy.MultiplyingExpressionContext = MultiplyingExpressionContext;
 resourcePolicy.prototype.multiplyingExpression = function() {
 
     var localctx = new MultiplyingExpressionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 50, resourcePolicy.RULE_multiplyingExpression);
+    this.enterRule(localctx, 40, resourcePolicy.RULE_multiplyingExpression);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 213;
+        this.state = 185;
         this.powExpression();
-        this.state = 218;
+        this.state = 190;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         while(_la===resourcePolicy.TIMES || _la===resourcePolicy.DIV) {
-            this.state = 214;
+            this.state = 186;
             _la = this._input.LA(1);
             if(!(_la===resourcePolicy.TIMES || _la===resourcePolicy.DIV)) {
             this._errHandler.recoverInline(this);
@@ -2680,9 +2230,9 @@ resourcePolicy.prototype.multiplyingExpression = function() {
             	this._errHandler.reportMatch(this);
                 this.consume();
             }
-            this.state = 215;
+            this.state = 187;
             this.powExpression();
-            this.state = 220;
+            this.state = 192;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
         }
@@ -2768,21 +2318,21 @@ resourcePolicy.PowExpressionContext = PowExpressionContext;
 resourcePolicy.prototype.powExpression = function() {
 
     var localctx = new PowExpressionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 52, resourcePolicy.RULE_powExpression);
+    this.enterRule(localctx, 42, resourcePolicy.RULE_powExpression);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 221;
+        this.state = 193;
         this.signedAtom();
-        this.state = 226;
+        this.state = 198;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         while(_la===resourcePolicy.POW) {
-            this.state = 222;
+            this.state = 194;
             this.match(resourcePolicy.POW);
-            this.state = 223;
+            this.state = 195;
             this.signedAtom();
-            this.state = 228;
+            this.state = 200;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
         }
@@ -2865,28 +2415,28 @@ resourcePolicy.SignedAtomContext = SignedAtomContext;
 resourcePolicy.prototype.signedAtom = function() {
 
     var localctx = new SignedAtomContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 54, resourcePolicy.RULE_signedAtom);
+    this.enterRule(localctx, 44, resourcePolicy.RULE_signedAtom);
     try {
-        this.state = 235;
+        this.state = 207;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case resourcePolicy.PLUS:
             this.enterOuterAlt(localctx, 1);
-            this.state = 229;
+            this.state = 201;
             this.match(resourcePolicy.PLUS);
-            this.state = 230;
+            this.state = 202;
             this.signedAtom();
             break;
         case resourcePolicy.MINUS:
             this.enterOuterAlt(localctx, 2);
-            this.state = 231;
+            this.state = 203;
             this.match(resourcePolicy.MINUS);
-            this.state = 232;
+            this.state = 204;
             this.signedAtom();
             break;
         case resourcePolicy.SUM:
             this.enterOuterAlt(localctx, 3);
-            this.state = 233;
+            this.state = 205;
             this.built_in_function();
             break;
         case resourcePolicy.PI:
@@ -2897,7 +2447,7 @@ resourcePolicy.prototype.signedAtom = function() {
         case resourcePolicy.INT:
         case resourcePolicy.ID:
             this.enterOuterAlt(localctx, 4);
-            this.state = 234;
+            this.state = 206;
             this.atom();
             break;
         default:
@@ -2997,29 +2547,29 @@ resourcePolicy.Built_in_functionContext = Built_in_functionContext;
 resourcePolicy.prototype.built_in_function = function() {
 
     var localctx = new Built_in_functionContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 56, resourcePolicy.RULE_built_in_function);
+    this.enterRule(localctx, 46, resourcePolicy.RULE_built_in_function);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 237;
+        this.state = 209;
         this.funcname();
-        this.state = 238;
+        this.state = 210;
         this.match(resourcePolicy.LPAREN);
-        this.state = 239;
+        this.state = 211;
         this.expression();
-        this.state = 244;
+        this.state = 216;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         while(_la===resourcePolicy.COMMA) {
-            this.state = 240;
+            this.state = 212;
             this.match(resourcePolicy.COMMA);
-            this.state = 241;
+            this.state = 213;
             this.expression();
-            this.state = 246;
+            this.state = 218;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
         }
-        this.state = 247;
+        this.state = 219;
         this.match(resourcePolicy.RPAREN);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -3084,10 +2634,10 @@ resourcePolicy.FuncnameContext = FuncnameContext;
 resourcePolicy.prototype.funcname = function() {
 
     var localctx = new FuncnameContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 58, resourcePolicy.RULE_funcname);
+    this.enterRule(localctx, 48, resourcePolicy.RULE_funcname);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 249;
+        this.state = 221;
         this.match(resourcePolicy.SUM);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -3176,40 +2726,40 @@ resourcePolicy.AtomContext = AtomContext;
 resourcePolicy.prototype.atom = function() {
 
     var localctx = new AtomContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 60, resourcePolicy.RULE_atom);
+    this.enterRule(localctx, 50, resourcePolicy.RULE_atom);
     try {
-        this.state = 259;
+        this.state = 231;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case resourcePolicy.SCIENTIFIC_NUMBER:
             this.enterOuterAlt(localctx, 1);
-            this.state = 251;
+            this.state = 223;
             this.scientific();
             break;
         case resourcePolicy.PI:
         case resourcePolicy.EULER:
             this.enterOuterAlt(localctx, 2);
-            this.state = 252;
+            this.state = 224;
             this.constant();
             break;
         case resourcePolicy.LPAREN:
             this.enterOuterAlt(localctx, 3);
-            this.state = 253;
+            this.state = 225;
             this.match(resourcePolicy.LPAREN);
-            this.state = 254;
+            this.state = 226;
             this.expression();
-            this.state = 255;
+            this.state = 227;
             this.match(resourcePolicy.RPAREN);
             break;
         case resourcePolicy.INT:
             this.enterOuterAlt(localctx, 4);
-            this.state = 257;
+            this.state = 229;
             this.match(resourcePolicy.INT);
             break;
         case resourcePolicy.VARIABLE_CONTRACT:
         case resourcePolicy.ID:
             this.enterOuterAlt(localctx, 5);
-            this.state = 258;
+            this.state = 230;
             this.variable();
             break;
         default:
@@ -3278,10 +2828,10 @@ resourcePolicy.ScientificContext = ScientificContext;
 resourcePolicy.prototype.scientific = function() {
 
     var localctx = new ScientificContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 62, resourcePolicy.RULE_scientific);
+    this.enterRule(localctx, 52, resourcePolicy.RULE_scientific);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 261;
+        this.state = 233;
         this.match(resourcePolicy.SCIENTIFIC_NUMBER);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -3350,11 +2900,11 @@ resourcePolicy.ConstantContext = ConstantContext;
 resourcePolicy.prototype.constant = function() {
 
     var localctx = new ConstantContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 64, resourcePolicy.RULE_constant);
+    this.enterRule(localctx, 54, resourcePolicy.RULE_constant);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 263;
+        this.state = 235;
         _la = this._input.LA(1);
         if(!(_la===resourcePolicy.PI || _la===resourcePolicy.EULER)) {
         this._errHandler.recoverInline(this);
@@ -3477,21 +3027,21 @@ resourcePolicy.VariableContext = VariableContext;
 resourcePolicy.prototype.variable = function() {
 
     var localctx = new VariableContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 66, resourcePolicy.RULE_variable);
+    this.enterRule(localctx, 56, resourcePolicy.RULE_variable);
     try {
-        this.state = 267;
+        this.state = 239;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case resourcePolicy.VARIABLE_CONTRACT:
             localctx = new VariableEnvironmentContext(this, localctx);
             this.enterOuterAlt(localctx, 1);
-            this.state = 265;
+            this.state = 237;
             this.environment_variable();
             break;
         case resourcePolicy.ID:
             localctx = new VariableArgContext(this, localctx);
             this.enterOuterAlt(localctx, 2);
-            this.state = 266;
+            this.state = 238;
             this.match(resourcePolicy.ID);
             break;
         default:
@@ -3564,21 +3114,21 @@ resourcePolicy.Expression_call_or_literalContext = Expression_call_or_literalCon
 resourcePolicy.prototype.expression_call_or_literal = function() {
 
     var localctx = new Expression_call_or_literalContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 68, resourcePolicy.RULE_expression_call_or_literal);
+    this.enterRule(localctx, 58, resourcePolicy.RULE_expression_call_or_literal);
     try {
-        this.state = 271;
+        this.state = 243;
         this._errHandler.sync(this);
-        var la_ = this._interp.adaptivePredict(this._input,21,this._ctx);
+        var la_ = this._interp.adaptivePredict(this._input,20,this._ctx);
         switch(la_) {
         case 1:
             this.enterOuterAlt(localctx, 1);
-            this.state = 269;
+            this.state = 241;
             this.expression_call();
             break;
 
         case 2:
             this.enterOuterAlt(localctx, 2);
-            this.state = 270;
+            this.state = 242;
             this.expression();
             break;
 
@@ -3677,37 +3227,37 @@ resourcePolicy.Expression_callContext = Expression_callContext;
 resourcePolicy.prototype.expression_call = function() {
 
     var localctx = new Expression_callContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 70, resourcePolicy.RULE_expression_call);
+    this.enterRule(localctx, 60, resourcePolicy.RULE_expression_call);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 273;
+        this.state = 245;
         this.expression_handle();
-        this.state = 274;
+        this.state = 246;
         this.match(resourcePolicy.LPAREN);
-        this.state = 285;
+        this.state = 257;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         while(_la===resourcePolicy.VARIABLE_CONTRACT || _la===resourcePolicy.INT) {
-            this.state = 275;
+            this.state = 247;
             this.expression_call_argument();
-            this.state = 280;
+            this.state = 252;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
             while(_la===resourcePolicy.COMMA) {
-                this.state = 276;
+                this.state = 248;
                 this.match(resourcePolicy.COMMA);
-                this.state = 277;
+                this.state = 249;
                 this.expression_call_argument();
-                this.state = 282;
+                this.state = 254;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
             }
-            this.state = 287;
+            this.state = 259;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
         }
-        this.state = 288;
+        this.state = 260;
         this.match(resourcePolicy.RPAREN);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -3776,19 +3326,19 @@ resourcePolicy.Expression_call_argumentContext = Expression_call_argumentContext
 resourcePolicy.prototype.expression_call_argument = function() {
 
     var localctx = new Expression_call_argumentContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 72, resourcePolicy.RULE_expression_call_argument);
+    this.enterRule(localctx, 62, resourcePolicy.RULE_expression_call_argument);
     try {
-        this.state = 292;
+        this.state = 264;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case resourcePolicy.INT:
             this.enterOuterAlt(localctx, 1);
-            this.state = 290;
+            this.state = 262;
             this.match(resourcePolicy.INT);
             break;
         case resourcePolicy.VARIABLE_CONTRACT:
             this.enterOuterAlt(localctx, 2);
-            this.state = 291;
+            this.state = 263;
             this.environment_variable();
             break;
         default:
@@ -3857,10 +3407,10 @@ resourcePolicy.Environment_variableContext = Environment_variableContext;
 resourcePolicy.prototype.environment_variable = function() {
 
     var localctx = new Environment_variableContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 74, resourcePolicy.RULE_environment_variable);
+    this.enterRule(localctx, 64, resourcePolicy.RULE_environment_variable);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 294;
+        this.state = 266;
         this.match(resourcePolicy.VARIABLE_CONTRACT);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -3967,39 +3517,39 @@ resourcePolicy.EventContext = EventContext;
 resourcePolicy.prototype.event = function() {
 
     var localctx = new EventContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 76, resourcePolicy.RULE_event);
+    this.enterRule(localctx, 66, resourcePolicy.RULE_event);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 296;
+        this.state = 268;
         this.match(resourcePolicy.TILDE);
-        this.state = 297;
+        this.state = 269;
         localctx.eventService = this.match(resourcePolicy.EVENT_SERVICE_PATH_NAME);
-        this.state = 298;
+        this.state = 270;
         this.match(resourcePolicy.EVENT_POINT);
-        this.state = 302;
+        this.state = 274;
         this._errHandler.sync(this);
-        var la_ = this._interp.adaptivePredict(this._input,25,this._ctx);
+        var la_ = this._interp.adaptivePredict(this._input,24,this._ctx);
         if(la_===1) {
-            this.state = 299;
+            this.state = 271;
             this.event_path();
-            this.state = 300;
+            this.state = 272;
             this.match(resourcePolicy.EVENT_POINT);
 
         }
-        this.state = 304;
+        this.state = 276;
         localctx.eventName = this.match(resourcePolicy.EVENT_SERVICE_PATH_NAME);
-        this.state = 305;
+        this.state = 277;
         this.match(resourcePolicy.EVENT_LPAREN);
-        this.state = 307;
+        this.state = 279;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         if(_la===resourcePolicy.EVENT_ARG) {
-            this.state = 306;
+            this.state = 278;
             this.event_args();
         }
 
-        this.state = 309;
+        this.state = 281;
         this.match(resourcePolicy.EVENT_RPAREN);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -4084,24 +3634,24 @@ resourcePolicy.Event_pathContext = Event_pathContext;
 resourcePolicy.prototype.event_path = function() {
 
     var localctx = new Event_pathContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 78, resourcePolicy.RULE_event_path);
+    this.enterRule(localctx, 68, resourcePolicy.RULE_event_path);
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 311;
+        this.state = 283;
         this.match(resourcePolicy.EVENT_SERVICE_PATH_NAME);
-        this.state = 316;
+        this.state = 288;
         this._errHandler.sync(this);
-        var _alt = this._interp.adaptivePredict(this._input,27,this._ctx)
+        var _alt = this._interp.adaptivePredict(this._input,26,this._ctx)
         while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
             if(_alt===1) {
-                this.state = 312;
+                this.state = 284;
                 this.match(resourcePolicy.EVENT_POINT);
-                this.state = 313;
+                this.state = 285;
                 this.match(resourcePolicy.EVENT_SERVICE_PATH_NAME); 
             }
-            this.state = 318;
+            this.state = 290;
             this._errHandler.sync(this);
-            _alt = this._interp.adaptivePredict(this._input,27,this._ctx);
+            _alt = this._interp.adaptivePredict(this._input,26,this._ctx);
         }
 
     } catch (re) {
@@ -4187,21 +3737,21 @@ resourcePolicy.Event_argsContext = Event_argsContext;
 resourcePolicy.prototype.event_args = function() {
 
     var localctx = new Event_argsContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 80, resourcePolicy.RULE_event_args);
+    this.enterRule(localctx, 70, resourcePolicy.RULE_event_args);
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 319;
+        this.state = 291;
         this.match(resourcePolicy.EVENT_ARG);
-        this.state = 324;
+        this.state = 296;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         while(_la===resourcePolicy.EVENT_COMMA) {
-            this.state = 320;
+            this.state = 292;
             this.match(resourcePolicy.EVENT_COMMA);
-            this.state = 321;
+            this.state = 293;
             this.match(resourcePolicy.EVENT_ARG);
-            this.state = 326;
+            this.state = 298;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
         }

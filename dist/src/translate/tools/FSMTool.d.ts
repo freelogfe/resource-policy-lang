@@ -7,7 +7,7 @@ import { EventTranslateInfo } from "../strategy/EventTranslateStrategy";
  */
 export declare class FSMTool {
     static report(fsmEntities: FSMEntity[]): FSMInfo[];
-    static transfer(fsmEntities: FSMEntity[], fsmTransfers: FsmTransfer[]): any;
+    static transfer(fsmEntities: FSMEntity[], fsmTransfers: FsmTransfer[], transferSetMapJson?: any): any;
     static generateServiceStatesCode(serviceStates: string[]): number;
     static generateEventServiceStatesStr(eventStr: string, serviceStates: string[]): string;
     /**
@@ -36,7 +36,7 @@ export declare class FSMEntity {
     events?: EventEntity[];
 }
 export declare class FsmTransfer {
-    id: any;
+    id?: any;
     state: string;
     fromState: string;
     toState: string;

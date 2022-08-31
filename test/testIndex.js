@@ -6,18 +6,16 @@ main();
 // main2();
 
 async function main2() {
-    let ID = "[a-zA-z]\\w+"
-    let reg = new RegExp(`\\$\\{(${ID}(\\.${ID}(\\[\\d+])?\\.${ID})?)}`, "g");
-    let str = "hello ${name},${name} 今天的心情是${color.green.str}的";
-    let rst = null;
-    while (rst = reg.exec(str)) {
-        console.log(rst);
-    }
+    const REGEX_ID = "[a-zA-z]\\w+";
+    const REGEX = `^(${REGEX_ID})\\.${REGEX_ID} => (${REGEX_ID})$`;
+    const content = "auth.TransactionEvent => auth_month";
+    console.log(content.match(REGEX));
+    console.log(new RegExp(REGEX,'g').exec(content));
 }
 
 async function main() {
     try {
-        let result = await policy_lang.compile(fs.readFileSync("./resources/zhaojn.sc", "utf-8"), "resource", null, "dev");
+        let result = await policy_lang.compile(fs.readFileSync("./resources/zhaojn.sc", "utf-8"), "resource", "http://qi.testfreelog.com", "dev");
 
         fs.writeFile("./resources/zhaojn.json", JSON.stringify(result, null, 4), (err) => {
             if (err) throw err;

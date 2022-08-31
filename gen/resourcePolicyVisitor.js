@@ -36,14 +36,8 @@ resourcePolicyVisitor.prototype.visitAudience = function(ctx) {
 };
 
 
-// Visit a parse tree produced by resourcePolicy#requirement.
-resourcePolicyVisitor.prototype.visitRequirement = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by resourcePolicy#contract_with_subject.
-resourcePolicyVisitor.prototype.visitContract_with_subject = function(ctx) {
+// Visit a parse tree produced by resourcePolicy#subject_icon_strict.
+resourcePolicyVisitor.prototype.visitSubject_icon_strict = function(ctx) {
   return this.visitChildren(ctx);
 };
 
@@ -108,38 +102,14 @@ resourcePolicyVisitor.prototype.visitState_transition = function(ctx) {
 };
 
 
-// Visit a parse tree produced by resourcePolicy#subject_id.
-resourcePolicyVisitor.prototype.visitSubject_id = function(ctx) {
+// Visit a parse tree produced by resourcePolicy#subject_icon.
+resourcePolicyVisitor.prototype.visitSubject_icon = function(ctx) {
   return this.visitChildren(ctx);
 };
 
 
-// Visit a parse tree produced by resourcePolicy#entity_bracket.
-resourcePolicyVisitor.prototype.visitEntity_bracket = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by resourcePolicy#account.
-resourcePolicyVisitor.prototype.visitAccount = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by resourcePolicy#subject.
-resourcePolicyVisitor.prototype.visitSubject = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by resourcePolicy#subject_service.
-resourcePolicyVisitor.prototype.visitSubject_service = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
-// Visit a parse tree produced by resourcePolicy#user_organization_name.
-resourcePolicyVisitor.prototype.visitUser_organization_name = function(ctx) {
+// Visit a parse tree produced by resourcePolicy#subject_icon_lv.
+resourcePolicyVisitor.prototype.visitSubject_icon_lv = function(ctx) {
   return this.visitChildren(ctx);
 };
 

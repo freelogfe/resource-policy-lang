@@ -1,5 +1,11 @@
 "use strict"
 
+/**
+ * 解释器：直接执行源程序所指定的运算
+ * 编译器：一种翻译器，它的特点是目标语言比源语言低级
+ * 翻译器：能够完成从一种语言到另一种语言的保语义转换的软件
+ */
+
 const antlr4 = require("antlr4");
 const gen_dir = "./gen";
 const LexToken = require(`${gen_dir}/LexToken`);
@@ -57,7 +63,7 @@ exports.report = function (contract) {
     return ContractTool.report({audiences: contract.audiences, fsmStates: fsmStates});
 }
 
-exports.transfer = function (states, fsmTransfers) {
+exports.transfer = function (states, fsmTransfers, transferSetMapJson) {
     let fsmEntities = [];
     for (let state in states) {
         fsmEntities.push({
@@ -71,7 +77,7 @@ exports.transfer = function (states, fsmTransfers) {
         fsmTransfer.state = fsmTransfer.toState;
     });
     // 排序扭转记录
-    fsmTransfers.sort(((a, b) => {
+    fsmTransfers.sort((a, b) => {
         if (a.time < b.time) {
             return -1;
         } else if (a.time > b.time) {
@@ -79,9 +85,9 @@ exports.transfer = function (states, fsmTransfers) {
         } else {
             return 0;
         }
-    }));
+    });
 
-    return FSMTool.transfer(fsmEntities, fsmTransfers);
+    return FSMTool.transfer(fsmEntities, fsmTransfers, transferSetMapJson);
 }
 
 exports.compareRoutes = function (routes, routesB, options) {

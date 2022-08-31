@@ -15,7 +15,6 @@ const eventDefinitionMap = {};
     }
 }
 
-
 class UserPolicyCustomVisitor extends resourcePolicyVisitor {
 
     /**
@@ -25,20 +24,21 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
      */
     constructor(subjectType, targetUrl, env) {
         super();
-        if (subjectType == null || !(subjectType in serviceStateResourceAddressMap)) {
+
+        this.subjectType = (subjectType ?? "").toString().toLowerCase();
+        if (!(this.subjectType in serviceStateResourceAddressMap)) {
             throw new Error("参数错误${subjectType}");
         }
-        this.subjectType = subjectType.toString().toLowerCase();
 
         this.targetUrl = targetUrl;
 
-        if (env == null || !(env in serviceStateResourceAddressMap[subjectType])) {
+        this.env = (env ?? "").toString().toLowerCase();
+        if (!(this.env in serviceStateResourceAddressMap[this.subjectType])) {
             throw new Error("参数错误${env}");
         }
-        this.env = env.toLowerCase();
 
-        if (targetUrl == null) {
-            switch (env) {
+        if (this.targetUrl == null) {
+            switch (this.env) {
                 case "dev":
                     this.targetUrl = "http://api.testfreelog.com";
                     break;
@@ -83,6 +83,7 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
 
     visitPolicy(ctx) {
         this.state_machine['audiences'] = [];
+        this.state_machine["subjectIcon"] = {};
         // this.state_machine["contract"] = {};
         this.state_machine['declarations'] = {};
         let declarations = this.state_machine["declarations"];
@@ -136,13 +137,14 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
         return super.visitAudience(ctx);
     }
 
-    visitSubject(ctx) {
-        // let contract = this.state_machine["contract"];
-        // contract["service"] = ctx.subject_service().getText().substring(1);
-        // contract["organization"] = ctx.user_organization_name().getText().substring(1);
-        // contract["id"] = ctx.SUBJECT_ID().getText().substring(1);
+    visitSubject_icon_strict(ctx) {
+        let name = ctx.subject_icon().getText();
+        let condition = ctx.subject_icon_lv().getText();
 
-        return super.visitSubject(ctx);
+        this.state_machine["subjectIcon"]["name"] = name;
+        this.state_machine["subjectIcon"]["condition"] = condition;
+
+        return super.visitSubject_icon_strict(ctx);
     }
 
     visitService_state_constant(ctx) {

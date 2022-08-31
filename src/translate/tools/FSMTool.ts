@@ -29,7 +29,7 @@ export class FSMTool {
         return results;
     }
 
-    static transfer(fsmEntities: FSMEntity[], fsmTransfers: FsmTransfer[]): any {
+    static transfer(fsmEntities: FSMEntity[], fsmTransfers: FsmTransfer[], transferSetMapJson?): any {
         let fsmTransferResults = [];
         let content = "";
 
@@ -95,9 +95,21 @@ export class FSMTool {
 
             // 最终流转状态
             if (fsmTransfer.isLast && fsmEntity.events.length != 0) {
+                const generateTransferSetKey = function (state: string, eventName: string, toState: string) {
+                    return `${state}.${eventName} => ${toState}`;
+                };
+
                 eventSelectStr = "请选择以下任一事件执行：";
                 eventSectionStrs = fsmEntity.events.map(event => {
                     let eventTranslateInfo = eventTranslateStrategyFactory.getEventTranslateStrategy(event.name).translate4UnFinish(event);
+
+                    if (transferSetMapJson != null) {
+                        let sourceKey = generateTransferSetKey(fsmEntity.name, event.name, event.toState);
+                        if (sourceKey in transferSetMapJson) {
+                            eventTranslateInfo.content = transferSetMapJson[sourceKey];
+                        }
+                    }
+
                     if (fsmEntityMap[event.toState].events.length != 0) {
                         return this.generateEventServiceStatesStr(eventTranslateInfo.content, fsmEntityMap[event.toState].serviceStates);
                     } else {
@@ -339,13 +351,19 @@ export class FSMEntity {
 }
 
 export class FsmTransfer {
-    id: any;
+    // 扭转记录id号
+    id?: any;
+    // 当前状态
     state: string;
+    // 从哪里来
     fromState: string;
+    // 到哪里去(和state相同)
     toState: string;
     // 是否是最后一条扭转记录
     isLast?: boolean;
+    // 发生时间
     time: string;
+    // 由哪个事件触发扭转
     event: EventEntity;
 }
 

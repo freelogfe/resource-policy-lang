@@ -23,7 +23,13 @@
       {
         "name": "timeUnit",
         "type": "timeUnit",
-        "enum": ["year","month","week","day","cycle"]
+        "enum": [
+          "year",
+          "month",
+          "week",
+          "day",
+          "cycle"
+        ]
       }
     ],
     "singleton": false
@@ -80,7 +86,15 @@
       {
         "name": "timeUnit",
         "type": "timeUnit",
-        "enum": ["year","month","week","day","cycle","hour","minute"]
+        "enum": [
+          "year",
+          "month",
+          "week",
+          "day",
+          "cycle",
+          "hour",
+          "minute"
+        ]
       }
     ],
     "singleton": false
@@ -137,7 +151,13 @@
       {
         "name": "currencyUnit",
         "type": "string",
-        "enum": ["feather","dollar","yuan","jiao","fen"]
+        "enum": [
+          "feather",
+          "dollar",
+          "yuan",
+          "jiao",
+          "fen"
+        ]
       }
     ],
     "singleton": true
@@ -162,6 +182,29 @@
       {
         "name": "account",
         "type": "none"
+      }
+    ],
+    "singleton": true
+  },
+  {
+    "code": "S401",
+    "name": "IconChangeEvent",
+    "description": "fired when icon changed",
+    "params": [
+      {
+        "name": "comparator",
+        "type": "string",
+        "enum": [
+          "gt",
+          "gte",
+          "eq",
+          "lt",
+          "lte"
+        ]
+      },
+      {
+        "name": "lv",
+        "type": "string"
       }
     ],
     "singleton": true
