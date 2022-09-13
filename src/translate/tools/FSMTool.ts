@@ -92,6 +92,7 @@ export class FSMTool {
             let eventSelectStr = "";
             // 事件选项翻译
             let eventSectionStrs = [];
+            let eventSectionEntities = [];
 
             // 最终流转状态
             if (fsmTransfer.isLast && fsmEntity.events.length != 0) {
@@ -111,14 +112,18 @@ export class FSMTool {
                     }
 
                     if (fsmEntityMap[event.toState].events.length != 0) {
-                        return this.generateEventServiceStatesStr(eventTranslateInfo.content, fsmEntityMap[event.toState].serviceStates);
+                        eventTranslateInfo.content = this.generateEventServiceStatesStr(eventTranslateInfo.content, fsmEntityMap[event.toState].serviceStates);
                     } else {
                         if (fsmEntity.events.length > 1) {
-                            return `${eventTranslateInfo.content}，若未执行其它事件，合约将自动终止`;
+                            eventTranslateInfo.content = `${eventTranslateInfo.content}，若未执行其它事件，合约将自动终止`;
                         } else {
-                            return `${eventTranslateInfo.content}，合约将自动终止`;
+                            eventTranslateInfo.content = `${eventTranslateInfo.content}，合约将自动终止`;
                         }
                     }
+
+                    eventSectionEntities.push(eventTranslateInfo);
+
+                    return eventTranslateInfo.content;
                 });
             }
 
@@ -130,7 +135,8 @@ export class FSMTool {
                 stateInfoStr: stateInfoStr,
                 eventStr: eventStr,
                 eventSelectStr: eventSelectStr,
-                eventSectionStrs: eventSectionStrs
+                eventSectionStrs: eventSectionStrs,
+                eventSectionEntities: eventSectionEntities
             } as FsmTransferResult);
 
             content += `· ${stateStr}\n`

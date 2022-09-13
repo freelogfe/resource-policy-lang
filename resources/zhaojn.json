@@ -19,16 +19,13 @@
             "initial": {
                 "transitions": [
                     {
-                        "toState": "finish",
+                        "toState": "Nowveregp9",
                         "service": "freelog",
                         "name": "RelativeTimeEvent",
                         "args": {
                             "elapsed": 1,
                             "timeUnit": "month"
-                        },
-                        "code": "A103",
-                        "description": "fired when certain amount of time elapsed",
-                        "isSingleton": false
+                        }
                     }
                 ],
                 "serviceStates": [
@@ -47,8 +44,14 @@
             }
         }
     },
-    "warnings": [],
-    "warningObjects": [],
+    "warnings": [
+        "该事件指向的状态不存在：{\"toState\":\"Nowveregp9\",\"service\":\"freelog\",\"name\":\"RelativeTimeEvent\",\"args\":{\"elapsed\":1,\"timeUnit\":\"month\"}}"
+    ],
+    "warningObjects": [
+        {
+            "msg": "该事件指向的状态不存在：{\"toState\":\"Nowveregp9\",\"service\":\"freelog\",\"name\":\"RelativeTimeEvent\",\"args\":{\"elapsed\":1,\"timeUnit\":\"month\"}}"
+        }
+    ],
     "errors": [],
     "errorObjects": []
 }

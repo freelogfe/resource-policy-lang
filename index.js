@@ -16,7 +16,7 @@ const {UserPolicyErrorListener} = require("./UserPolicyErrorListener");
 const {UserPolicyErrorLexerListener} = require("./UserPolicyErrorLexerListener");
 const {EventTool} = require("./dist/src/translate/tools/EventTool");
 const {StateTool} = require("./dist/src/translate/tools/StateTool");
-const {AudienceTool} = require("./dist/src/translate/tools/AudienceTool")
+const {AudienceTool} = require("./dist/src/translate/tools/AudienceTool");
 const UserPolicyCustomVisitor = require("./UserPolicyCustomVisitor").UserPolicyCustomVisitor;
 
 const eventDefinitionMap = {};
@@ -27,10 +27,22 @@ const eventDefinitionMap = {};
     }
 }
 
+/**
+ * 翻译状态机状态
+ * @param stateName 状态名
+ * @returns {string}
+ */
 exports.translateState = function (stateName) {
     return StateTool.getName4State(stateName);
 }
 
+/**
+ * 翻译事件参数
+ * @param eventName 事件名称
+ * @param argName 参数名称
+ * @param argValue 参数值
+ * @returns {string}
+ */
 exports.translateEventArg = function (eventName, argName, argValue) {
     return EventTool.translateEventArg(eventName, argName, argValue);
 }
