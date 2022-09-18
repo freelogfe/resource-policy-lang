@@ -5,6 +5,8 @@ import {EventTranslateInfo} from "../strategy/EventTranslateStrategy";
 import {EventTranslateStrategyFactory} from "../index";
 import {TerminateEventTranslateStrategy} from "../strategy/TerminateEventTranslateStrategy";
 
+const crypto = require('crypto');
+
 /**
  * 状态机工具
  */
@@ -101,8 +103,15 @@ export class FSMTool {
                 };
 
                 eventSelectStr = "请选择以下任一事件执行：";
+                let eventIndex = 0;
                 eventSectionStrs = fsmEntity.events.map(event => {
-                    let eventTranslateInfo = eventTranslateStrategyFactory.getEventTranslateStrategy(event.name).translate4UnFinish(event);
+                    let eventTranslateInfo: EventTranslateInfo = eventTranslateStrategyFactory.getEventTranslateStrategy(event.name).translate4UnFinish(event);
+                    eventTranslateInfo.origin["id"] = this.generateEventHashCode({
+                        code: eventTranslateInfo.origin["code"],
+                        state: fsmEntity.name,
+                        toState: eventTranslateInfo.origin["toState"],
+                        index: eventIndex
+                    });
 
                     if (transferSetMapJson != null) {
                         let sourceKey = generateTransferSetKey(fsmEntity.name, event.name, event.toState);
@@ -122,6 +131,8 @@ export class FSMTool {
                     }
 
                     eventSectionEntities.push(eventTranslateInfo);
+
+                    eventIndex++;
 
                     return eventTranslateInfo.content;
                 });
@@ -183,6 +194,11 @@ export class FSMTool {
             serviceStatesStr = `获得${nextServiceStatesStrArray}`;
         }
         return `${eventStr}，${serviceStatesStr}`;
+    }
+
+    static generateEventHashCode(event: { code: string, state: string, toState: string, index: number }) {
+        let hashCode = crypto.createHash("SHA256").update(`${event.code}-${event.state}-${event.toState}-${event.index}`).digest("hex");
+        return hashCode.substring(0, 8);
     }
 
     /**
@@ -341,6 +357,25 @@ export class FSMTool {
                 let msg = route.map(re => re.event ? re.event.name : "null").join(" => ");
                 throw new Error(`不能够匹配到路径：${msg}`);
             }
+    }
+
+    /**
+     * 比较路由 顺序相关 OS(ordered sensitive)
+     * @param routes
+     * @param routesB
+     * @param options
+     */
+    static compareRoutesOS(routes: FSMRouteElement[][], routesB: FSMRouteElement[][], options ?: CompareRoutesOptions): void {
+        if (routes == null || routesB == null || routes.length == 0 || routesB.length == 0) {
+            throw new Error("参数错误");
+        }
+        if (routes.length != routesB.length) {
+            throw new Error(`路径数目不同，routes[${routes.length}]，routesB[${routesB.length}]`);
+        }
+
+        for (let i = 0; i < routes.length; i++) {
+            this.compareRoutes([[...routes[i]]], [[...routesB[i]]], options);
+        }
     }
 }
 

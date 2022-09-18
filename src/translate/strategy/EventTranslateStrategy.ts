@@ -18,5 +18,4 @@ export interface EventTranslateStrategy {
 }
 
 export class EventTranslateInfo extends ContractElementInfo {
-    args?: object;
 }

@@ -106,6 +106,10 @@ exports.compareRoutes = function (routes, routesB, options) {
     FSMTool.compareRoutes(routes, routesB, options);
 }
 
+exports.compareRoutesOS = function (routes, routesB, options) {
+    FSMTool.compareRoutesOS(routes, routesB, options);
+}
+
 exports.parseRoutes = function (states, stateName, routes, route) {
     FSMTool.parseRoutes(states, stateName, routes, route);
 }
@@ -147,4 +151,8 @@ exports.compile = async function (policyText, targetType, targetUrl, env) {
         errors: [...errorListener.errors, ...visitor.errorObjects.map(eo => eo.msg)],
         errorObjects: [...errorListener.errorObjects, ...visitor.errorObjects]
     };
+}
+
+exports.generateEventHashCode = function (event) {
+    return FSMTool.generateEventHashCode(event);
 }

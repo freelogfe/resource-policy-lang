@@ -19,19 +19,37 @@
             "initial": {
                 "transitions": [
                     {
-                        "toState": "Nowveregp9",
+                        "toState": "finish",
                         "service": "freelog",
-                        "name": "RelativeTimeEvent",
+                        "name": "TimeEvent",
                         "args": {
-                            "elapsed": 1,
-                            "timeUnit": "month"
-                        }
+                            "dateTime": "2022-10-30 00:00"
+                        },
+                        "code": "A102",
+                        "description": "fired on a pre-determined time",
+                        "isSingleton": false
+                    },
+                    {
+                        "toState": "auth",
+                        "service": "freelog",
+                        "name": "TransactionEvent",
+                        "args": {
+                            "amount": 123,
+                            "account": "self.account"
+                        },
+                        "code": "S201",
+                        "description": "one time transaction",
+                        "isSingleton": true
                     }
                 ],
+                "serviceStates": [],
+                "isInitial": true
+            },
+            "auth": {
+                "transitions": [],
                 "serviceStates": [
                     "active"
-                ],
-                "isInitial": true
+                ]
             },
             "finish": {
                 "transitions": [],
@@ -40,18 +58,14 @@
         },
         "description": {
             "symbolArgs": {
-                "envArgs": []
+                "envArgs": [
+                    "self.account"
+                ]
             }
         }
     },
-    "warnings": [
-        "该事件指向的状态不存在：{\"toState\":\"Nowveregp9\",\"service\":\"freelog\",\"name\":\"RelativeTimeEvent\",\"args\":{\"elapsed\":1,\"timeUnit\":\"month\"}}"
-    ],
-    "warningObjects": [
-        {
-            "msg": "该事件指向的状态不存在：{\"toState\":\"Nowveregp9\",\"service\":\"freelog\",\"name\":\"RelativeTimeEvent\",\"args\":{\"elapsed\":1,\"timeUnit\":\"month\"}}"
-        }
-    ],
+    "warnings": [],
+    "warningObjects": [],
     "errors": [],
     "errorObjects": []
 }

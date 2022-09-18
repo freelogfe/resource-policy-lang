@@ -5,6 +5,8 @@ let routes = [];
 parseRoutes(states, "initial", routes, []);
 cleanUpRoutes(routes);
 
+console.log(routes);
+
 let stateMap = new Map();
 for (let state in states) {
     let transitionMap = new Map();

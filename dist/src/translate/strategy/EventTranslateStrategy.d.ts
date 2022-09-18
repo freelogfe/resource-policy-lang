@@ -8,5 +8,4 @@ export interface EventTranslateStrategy {
     translate4EventArg(argName: string, argValue: string): string;
 }
 export declare class EventTranslateInfo extends ContractElementInfo {
-    args?: object;
 }

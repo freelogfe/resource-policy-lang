@@ -10,6 +10,12 @@ export declare class FSMTool {
     static transfer(fsmEntities: FSMEntity[], fsmTransfers: FsmTransfer[], transferSetMapJson?: any): any;
     static generateServiceStatesCode(serviceStates: string[]): number;
     static generateEventServiceStatesStr(eventStr: string, serviceStates: string[]): string;
+    static generateEventHashCode(event: {
+        code: string;
+        state: string;
+        toState: string;
+        index: number;
+    }): any;
     /**
      * 解析路由
      * @param states 状态机
@@ -26,6 +32,13 @@ export declare class FSMTool {
      * @param options
      */
     static compareRoutes(routes: FSMRouteElement[][], routesB: FSMRouteElement[][], options?: CompareRoutesOptions): void;
+    /**
+     * 比较路由 顺序相关 OS(ordered sensitive)
+     * @param routes
+     * @param routesB
+     * @param options
+     */
+    static compareRoutesOS(routes: FSMRouteElement[][], routesB: FSMRouteElement[][], options?: CompareRoutesOptions): void;
 }
 /**
  * 状态机实体

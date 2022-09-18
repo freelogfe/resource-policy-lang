@@ -30,13 +30,16 @@ export class ContractElementInfo {
     content: string;
 }
 
-
 // export function report(contract: ContractEntity): ContractInfo {
 //     return ContractTool.report(contract);
 // }
 
 export function compareRoutes(routes: FSMRouteElement[][], routesB: FSMRouteElement[][], options?: CompareRoutesOptions): void {
     FSMTool.compareRoutes(routes, routesB, options);
+}
+
+export function compareRoutesOS(routes: FSMRouteElement[][], routesB: FSMRouteElement[][], options?: CompareRoutesOptions): void {
+    FSMTool.compareRoutesOS(routes, routesB, options);
 }
 
 export function parseRoutes(states, stateName: string, routes: FSMRouteElement[][], route: FSMRouteElement[]): void {
