@@ -6,6 +6,9 @@ const path = require('path');
 const http = require("http");
 
 const transitionEventArgsMatchUtil = new TransitionEventArgsMatchUtil.TransitionEventArgsMatchUtil();
+
+const {FSMTool} = require("./dist/src/translate/tools/FSMTool");
+
 const serviceStateResourceAddressMap = require("./resources/service_state_resource_addresses.json");
 const eventDefinitionMap = {};
 {
@@ -25,14 +28,14 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
     constructor(subjectType, targetUrl, env) {
         super();
 
-        this.subjectType = (subjectType ?? "").toString().toLowerCase();
+        this.subjectType = (subjectType || "").toString().toLowerCase();
         if (!(this.subjectType in serviceStateResourceAddressMap)) {
             throw new Error("参数错误${subjectType}");
         }
 
         this.targetUrl = targetUrl;
 
-        this.env = (env ?? "").toString().toLowerCase();
+        this.env = (env || "").toString().toLowerCase();
         if (!(this.env in serviceStateResourceAddressMap[this.subjectType])) {
             throw new Error("参数错误${env}");
         }
@@ -307,6 +310,10 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
                         }
                         event["args"] = args;
                     }
+
+                    event["state"] = this.current_state;
+                    event["index"] = transitions.length;
+
                     transitions.push(event);
 
                     this.transitionEvents.push(event);
@@ -549,6 +556,16 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
             event["code"] = eventDefinition["code"];
             event["description"] = eventDefinition["description"];
             event["isSingleton"] = eventDefinition["singleton"];
+
+            event["id"] = FSMTool.generateEventHashCode({
+                code: event["code"],
+                state: event["state"],
+                toState: event["toState"],
+                index: event["index"]
+            });
+
+            delete event["state"];
+            delete event["index"];
         }
     }
 

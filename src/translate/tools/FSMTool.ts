@@ -80,10 +80,12 @@ export class FSMTool {
                 if (fsmEntity.events.length != 0) {
                     stateInfoStr = this.generateEventServiceStatesStr(stateInfoStr, fsmEntity.serviceStates);
                 } else {
-                    if (fsmEntityMap[fsmTransfer.fromState].events.length > 1) {
-                        stateInfoStr = `${stateInfoStr}，未执行其它事件，合约已自动终止`;
-                    } else {
-                        stateInfoStr = `${stateInfoStr}，合约已自动终止`;
+                    if (fsmEntity.serviceStates == null || fsmEntity.serviceStates.indexOf("active") == -1) {
+                        if (fsmEntityMap[fsmTransfer.fromState].events.length > 1) {
+                            stateInfoStr = `${stateInfoStr}，未执行其它事件，合约已自动终止`;
+                        } else {
+                            stateInfoStr = `${stateInfoStr}，合约已自动终止`;
+                        }
                     }
                 }
             }
@@ -113,20 +115,26 @@ export class FSMTool {
                         index: eventIndex
                     });
 
+                    let isInTransferSet: boolean = false;
                     if (transferSetMapJson != null) {
                         let sourceKey = generateTransferSetKey(fsmEntity.name, event.name, event.toState);
                         if (sourceKey in transferSetMapJson) {
                             eventTranslateInfo.content = transferSetMapJson[sourceKey];
+                            isInTransferSet = true;
                         }
                     }
 
                     if (fsmEntityMap[event.toState].events.length != 0) {
-                        eventTranslateInfo.content = this.generateEventServiceStatesStr(eventTranslateInfo.content, fsmEntityMap[event.toState].serviceStates);
+                        if (!isInTransferSet) {
+                            eventTranslateInfo.content = this.generateEventServiceStatesStr(eventTranslateInfo.content, fsmEntityMap[event.toState].serviceStates);
+                        }
                     } else {
-                        if (fsmEntity.events.length > 1) {
-                            eventTranslateInfo.content = `${eventTranslateInfo.content}，若未执行其它事件，合约将自动终止`;
-                        } else {
-                            eventTranslateInfo.content = `${eventTranslateInfo.content}，合约将自动终止`;
+                        if (fsmEntityMap[event.toState].serviceStates == null || fsmEntityMap[event.toState].serviceStates.indexOf("active") == -1) {
+                            if (fsmEntity.events.length > 1) {
+                                eventTranslateInfo.content = `${eventTranslateInfo.content}，若未执行其它事件，合约将自动终止`;
+                            } else {
+                                eventTranslateInfo.content = `${eventTranslateInfo.content}，合约将自动终止`;
+                            }
                         }
                     }
 

@@ -1,8 +1,14 @@
 for public
+
+
+
+
 initial:
-  ~freelog.TimeEvent("2022-10-30 00:00") => finish
-  ~freelog.TransactionEvent("123","self.account") => auth
-auth[active]:
-  terminate
+	~freelog.RelativeTimeEvent("24", "hour") => auth_expiration
+	~freelog.TransactionEvent("0.19", "self.account") => auth_permanent
+auth_expiration[active]:
+	~freelog.RelativeTimeEvent("72", "hour") => finish
+auth_permanent[active]:
+	terminate
 finish:
-  terminate
+	terminate
