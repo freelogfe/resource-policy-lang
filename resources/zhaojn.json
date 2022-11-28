@@ -36,7 +36,7 @@
                         "service": "freelog",
                         "name": "TransactionEvent",
                         "args": {
-                            "amount": 0.19,
+                            "amount": 0,
                             "account": "self.account"
                         },
                         "code": "S201",
@@ -87,8 +87,27 @@
             }
         }
     },
-    "warnings": [],
-    "warningObjects": [],
+    "warnings": [
+        "支付事件的支付金额必须大于0"
+    ],
+    "warningObjects": [
+        {
+            "msg": "支付事件的支付金额必须大于0",
+            "source": {
+                "toState": "auth_permanent",
+                "service": "freelog",
+                "name": "TransactionEvent",
+                "args": {
+                    "amount": 0,
+                    "account": "self.account"
+                },
+                "code": "S201",
+                "description": "one time transaction",
+                "isSingleton": true,
+                "id": "b83b71fc"
+            }
+        }
+    ],
     "errors": [],
     "errorObjects": []
 }

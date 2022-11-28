@@ -18,6 +18,7 @@ const {EventTool} = require("./dist/src/translate/tools/EventTool");
 const {StateTool} = require("./dist/src/translate/tools/StateTool");
 const {AudienceTool} = require("./dist/src/translate/tools/AudienceTool");
 const UserPolicyCustomVisitor = require("./UserPolicyCustomVisitor").UserPolicyCustomVisitor;
+const UserPolicyReformatVisitor = require("./UserPolicyReformatVisitor").UserPolicyReformatVisitor;
 
 const eventDefinitionMap = {};
 {
@@ -144,12 +145,47 @@ exports.compile = async function (policyText, targetType, targetUrl, env) {
     let visitor = new UserPolicyCustomVisitor(targetType, targetUrl, env);
     visitor.visit(tree);
     await visitor.verify();
+
     return {
         state_machine: visitor.state_machine,
         warnings: visitor.warningObjects.map(wo => wo.msg),
         warningObjects: visitor.warningObjects,
         errors: [...errorListener.errors, ...visitor.errorObjects.map(eo => eo.msg)],
         errorObjects: [...errorListener.errorObjects, ...visitor.errorObjects]
+    };
+}
+
+exports.reformat = async function (policyText) {
+    let chars = new antlr4.InputStream(policyText);
+
+    let lexer = new LexToken.LexToken(chars);
+    lexer.removeErrorListeners();
+    let lexerErrorListener = new UserPolicyErrorLexerListener();
+    lexer.addErrorListener(lexerErrorListener);
+    let stream = new antlr4.CommonTokenStream(lexer);
+    let parser = new resourcePolicy.resourcePolicy(stream);
+    parser.removeErrorListeners();
+    let errorListener = new UserPolicyErrorListener();
+    parser.addErrorListener(errorListener);
+    // 关闭恢复机制
+    // parser._errHandler = new antlr4.error.BailErrorStrategy();
+
+    let tree = parser.policy();
+    if (lexerErrorListener.errors.length !== 0) {
+        return {
+            errors: lexerErrorListener.errors,
+            errorObjects: lexerErrorListener.errorObjects
+        };
+    }
+
+    let reformatVisitor = new UserPolicyReformatVisitor();
+    reformatVisitor.visit(tree);
+
+    return {
+        policyText: reformatVisitor.sb,
+        positions: reformatVisitor.positions,
+        errors: errorListener.errors,
+        errorObjects: errorListener.errorObjects
     };
 }
 

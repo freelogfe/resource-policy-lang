@@ -326,6 +326,15 @@ resourcePolicyListener.prototype.exitEvent = function(ctx) {
 };
 
 
+// Enter a parse tree produced by resourcePolicy#event_organization.
+resourcePolicyListener.prototype.enterEvent_organization = function(ctx) {
+};
+
+// Exit a parse tree produced by resourcePolicy#event_organization.
+resourcePolicyListener.prototype.exitEvent_organization = function(ctx) {
+};
+
+
 // Enter a parse tree produced by resourcePolicy#event_path.
 resourcePolicyListener.prototype.enterEvent_path = function(ctx) {
 };

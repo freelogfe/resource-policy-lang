@@ -21,7 +21,9 @@ async function main() {
             if (err) throw err;
         });
 
-        console.log(new UserPolicyDecompiler().decompile(result));
+        // console.log(new UserPolicyDecompiler().decompile(result));
+
+        console.log(await policy_lang.reformat(fs.readFileSync("./resources/zhaojn.sc", "utf-8")));
     } catch (e) {
         console.log(e);
     }

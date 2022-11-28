@@ -222,6 +222,12 @@ resourcePolicyVisitor.prototype.visitEvent = function(ctx) {
 };
 
 
+// Visit a parse tree produced by resourcePolicy#event_organization.
+resourcePolicyVisitor.prototype.visitEvent_organization = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by resourcePolicy#event_path.
 resourcePolicyVisitor.prototype.visitEvent_path = function(ctx) {
   return this.visitChildren(ctx);

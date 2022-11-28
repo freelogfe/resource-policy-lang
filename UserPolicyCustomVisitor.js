@@ -140,69 +140,69 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
         return super.visitAudience(ctx);
     }
 
-    visitSubject_icon_strict(ctx) {
-        let name = ctx.subject_icon().getText();
-        let condition = ctx.subject_icon_lv().getText();
+    // visitSubject_icon_strict(ctx) {
+    //     let name = ctx.subject_icon().getText();
+    //     let condition = ctx.subject_icon_lv().getText();
+    //
+    //     this.state_machine["subjectIcon"]["name"] = name;
+    //     this.state_machine["subjectIcon"]["condition"] = condition;
+    //
+    //     return super.visitSubject_icon_strict(ctx);
+    // }
 
-        this.state_machine["subjectIcon"]["name"] = name;
-        this.state_machine["subjectIcon"]["condition"] = condition;
+    // visitService_state_constant(ctx) {
+    //     this.service_state_constant_map.set(ctx.service_state_scope().getText(), ctx.service_state().getText());
+    //     let service_state_constants = this.state_machine["declarations"]["serviceStateConstants"];
+    //     let service_state = {
+    //         scope: ctx.service_state_scope().getText(),
+    //         state: ctx.service_state().getText()
+    //     };
+    //
+    //     // // 色块校验
+    //     // this.checkServiceState(service_state["state"]);
+    //
+    //     service_state_constants.push(service_state);
+    //
+    //     return super.visitService_state_constant(ctx);
+    // }
 
-        return super.visitSubject_icon_strict(ctx);
-    }
-
-    visitService_state_constant(ctx) {
-        this.service_state_constant_map.set(ctx.service_state_scope().getText(), ctx.service_state().getText());
-        let service_state_constants = this.state_machine["declarations"]["serviceStateConstants"];
-        let service_state = {
-            scope: ctx.service_state_scope().getText(),
-            state: ctx.service_state().getText()
-        };
-
-        // // 色块校验
-        // this.checkServiceState(service_state["state"]);
-
-        service_state_constants.push(service_state);
-
-        return super.visitService_state_constant(ctx);
-    }
-
-    visitExpression_assignment(ctx) {
-        let expressions = this.state_machine["declarations"]["expressions"];
-
-        let func_name = ctx.expression_handle().getText();
-        for (let ex of expressions) {
-            if (ex["funcName"] === func_name) {
-                this.errorObjects.push({
-                    line: ctx.start.line,
-                    msg: "存在相同的函数名：" + func_name
-                });
-                break;
-            }
-        }
-        let func_args = [];
-        for (let func_arg of ctx.ID()) {
-            if (func_args.indexOf(func_arg.getText()) > -1) {
-                console.log(ctx.start.line)
-                console.log(ctx.start.column)
-                this.errorObjects.push({
-                    line: ctx.start.line,
-                    msg: "存在相同的参数名：" + func_arg.getText()
-                });
-                break;
-            }
-            func_args.push(func_arg.getText());
-        }
-
-        let expression = {
-            funcName: func_name,
-            funcArgs: func_args,
-            funcBody: ctx.expression().getText()
-        };
-        expressions.push(expression);
-        this.current_expression = func_name;
-
-        return super.visitExpression_assignment(ctx);
-    }
+    // visitExpression_assignment(ctx) {
+    //     let expressions = this.state_machine["declarations"]["expressions"];
+    //
+    //     let func_name = ctx.expression_handle().getText();
+    //     for (let ex of expressions) {
+    //         if (ex["funcName"] === func_name) {
+    //             this.errorObjects.push({
+    //                 line: ctx.start.line,
+    //                 msg: "存在相同的函数名：" + func_name
+    //             });
+    //             break;
+    //         }
+    //     }
+    //     let func_args = [];
+    //     for (let func_arg of ctx.ID()) {
+    //         if (func_args.indexOf(func_arg.getText()) > -1) {
+    //             console.log(ctx.start.line)
+    //             console.log(ctx.start.column)
+    //             this.errorObjects.push({
+    //                 line: ctx.start.line,
+    //                 msg: "存在相同的参数名：" + func_arg.getText()
+    //             });
+    //             break;
+    //         }
+    //         func_args.push(func_arg.getText());
+    //     }
+    //
+    //     let expression = {
+    //         funcName: func_name,
+    //         funcArgs: func_args,
+    //         funcBody: ctx.expression().getText()
+    //     };
+    //     expressions.push(expression);
+    //     this.current_expression = func_name;
+    //
+    //     return super.visitExpression_assignment(ctx);
+    // }
 
     visitVariableArg(ctx) {
         let expressions = this.state_machine["declarations"]["expressions"];
@@ -296,8 +296,8 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
                 } else {
                     let event = {};
                     event["toState"] = ctx.state_name().getText();
-                    event["service"] = ctx.event().eventService.text;
-                    if (ctx.event().event_path() != null) {
+                    event["service"] = ctx.event().event_organization().eventService.text;
+                    if (ctx.event().event_organization().event_path() != null) {
                         event["path"] = ctx.event().event_path().getText();
                     }
                     if (ctx.event().eventName != null) {
@@ -504,19 +504,19 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
     verifyEvents() {
         for (let event of this.transitionEvents) {
             if (event["service"] !== "freelog") {
-                this.warningObjects.push({msg: "该事件服务不合法：" + JSON.stringify(event)});
+                this.warningObjects.push({msg: "该事件服务不合法", source: event});
                 continue;
             }
             let eventDefinition = eventDefinitionMap[event["name"]];
             if (eventDefinition == null) {
-                this.warningObjects.push({msg: "该事件未定义：" + JSON.stringify(event)});
+                this.warningObjects.push({msg: "该事件未定义", source: event});
                 continue;
             }
             let params = eventDefinition["params"];
             if (params != null) {
                 let args = event["args"];
                 if (args == null || args.length !== params.length) {
-                    this.warningObjects.push({msg: "该事件缺少参数：" + JSON.stringify(event)});
+                    this.warningObjects.push({msg: "该事件缺少参数", source: event});
                     continue;
                 }
 
@@ -524,7 +524,7 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
                 for (let i = 0; i < params.length; i++) {
                     let param = params[i];
                     if (!transitionEventArgsMatchUtil.match(param, args[i])) {
-                        this.warningObjects.push({msg: "该事件参数不合法：" + JSON.stringify(event)});
+                        this.warningObjects.push({msg: "该事件参数不合法", source: event});
                         continue;
                     }
                     argO[param["name"]] = args[i];
@@ -532,7 +532,7 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
                     if (param["type"] === "decimal") {
                         if (event.name === "TransactionEvent" && param["name"] === "amount") {
                             if (parseFloat(args[i]) <= 0) {
-                                this.warningObjects.push({msg: "支付事件的支付金额必须大于0" + JSON.stringify(event)});
+                                this.warningObjects.push({msg: "支付事件的支付金额必须大于0", source: event});
                             }
                         }
                         argO[param["name"]] = parseFloat(args[i]);
@@ -549,7 +549,7 @@ class UserPolicyCustomVisitor extends resourcePolicyVisitor {
             }
 
             if (!(event["toState"] in this.state_machine.states)) {
-                this.warningObjects.push({msg: "该事件指向的状态不存在：" + JSON.stringify(event)});
+                this.warningObjects.push({msg: "该事件指向的状态不存在", source: event});
                 continue;
             }
 
