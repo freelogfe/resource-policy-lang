@@ -1,16 +1,17 @@
 const fs = require("fs");
 const policy_lang = require("../index");
 const {UserPolicyDecompiler} = require("../UserPolicyDecompiler");
-
-main();
-// main2();
+const lodash = require('lodash');
+// main();
+main2();
 
 async function main2() {
-    const REGEX_ID = "[a-zA-z]\\w+";
-    const REGEX = `^(${REGEX_ID})\\.${REGEX_ID} => (${REGEX_ID})$`;
-    const content = "auth.TransactionEvent => auth_month";
-    console.log(content.match(REGEX));
-    console.log(new RegExp(REGEX,'g').exec(content));
+    // const REGEX_ID = "[a-zA-z]\\w+";
+    // const REGEX = `^(${REGEX_ID})\\.${REGEX_ID} => (${REGEX_ID})$`;
+    // const content = "auth.TransactionEvent => auth_month";
+    // console.log(content.match(REGEX));
+    // console.log(new RegExp(REGEX,'g').exec(content));
+    console.log(lodash.toPairs(lodash.countBy([{type: "a"}, {type: "b"}, {type: "b"}], cpd => cpd["type"])).filter(array=>{return array[1]>1}));
 }
 
 async function main() {
