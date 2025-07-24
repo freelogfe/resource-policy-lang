@@ -13,8 +13,8 @@
     "Strategy": "于%s，进入 %s"
   },
   "TransactionEvent": {
-    "Strategy": "支付 %s枚 羽币%s，进入 %s",
-    "UnFinish": "支付 %s枚 羽币%s，可进入 %s",
-    "Finished": "已支付 %s枚 羽币%s，进入 %s"
+    "Strategy": "支付 %s 元%s，进入 %s",
+    "UnFinish": "支付 %s 元%s，可进入 %s",
+    "Finished": "已支付 %s 元%s，进入 %s"
   }
 }
