@@ -19,57 +19,58 @@
             "initial": {
                 "transitions": [
                     {
-                        "toState": "auth_expiration",
+                        "toState": "get_auth",
                         "service": "freelog",
                         "name": "RelativeTimeEvent",
                         "args": {
-                            "elapsed": 24,
-                            "timeUnit": "hour"
+                            "elapsed": 1,
+                            "timeUnit": "week"
                         },
                         "code": "A103",
                         "description": "fired when certain amount of time elapsed",
                         "isSingleton": false,
-                        "id": "65a2b384"
-                    },
+                        "id": "96d450bb"
+                    }
+                ],
+                "serviceStates": [
+                    "active"
+                ],
+                "isInitial": true
+            },
+            "get_auth": {
+                "transitions": [
                     {
-                        "toState": "auth_permanent",
+                        "toState": "auth",
                         "service": "freelog",
                         "name": "TransactionEvent",
                         "args": {
-                            "amount": 0,
+                            "amount": 29.99,
                             "account": "self.account"
                         },
                         "code": "S201",
                         "description": "one time transaction",
                         "isSingleton": true,
-                        "id": "b83b71fc"
+                        "id": "fa2c31b6"
                     }
                 ],
-                "serviceStates": [],
-                "isInitial": true
+                "serviceStates": []
             },
-            "auth_expiration": {
+            "auth": {
                 "transitions": [
                     {
                         "toState": "finish",
                         "service": "freelog",
                         "name": "RelativeTimeEvent",
                         "args": {
-                            "elapsed": 72,
-                            "timeUnit": "hour"
+                            "elapsed": 1,
+                            "timeUnit": "month"
                         },
                         "code": "A103",
                         "description": "fired when certain amount of time elapsed",
                         "isSingleton": false,
-                        "id": "98cdd7b0"
+                        "id": "007d1d54"
                     }
                 ],
-                "serviceStates": [
-                    "active"
-                ]
-            },
-            "auth_permanent": {
-                "transitions": [],
                 "serviceStates": [
                     "active"
                 ]
@@ -87,27 +88,8 @@
             }
         }
     },
-    "warnings": [
-        "支付事件的支付金额必须大于0"
-    ],
-    "warningObjects": [
-        {
-            "msg": "支付事件的支付金额必须大于0",
-            "source": {
-                "toState": "auth_permanent",
-                "service": "freelog",
-                "name": "TransactionEvent",
-                "args": {
-                    "amount": 0,
-                    "account": "self.account"
-                },
-                "code": "S201",
-                "description": "one time transaction",
-                "isSingleton": true,
-                "id": "b83b71fc"
-            }
-        }
-    ],
+    "warnings": [],
+    "warningObjects": [],
     "errors": [],
     "errorObjects": []
 }

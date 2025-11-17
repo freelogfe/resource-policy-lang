@@ -1,14 +1,13 @@
 for public
 
-initial:
-~freelog.RelativeTimeEvent("24","hour")  =>  auth_expiration		//设置等待周期
-~freelog.TransactionEvent("0","self.account") => auth_permanent		//设置价格
+initial[active]:
+~freelog.RelativeTimeEvent("1","week")  => get_auth		//设置免费试用周期
 
-auth_expiration [active]:
-~freelog.RelativeTimeEvent("72","hour")  => finish		// 设置免费周期
+get_auth:
+~freelog.TransactionEvent("29.99","self.account") => auth		//设置价格
 
-auth_permanent [active]:
-	terminate
+auth[active]:
+~freelog.RelativeTimeEvent("1","month")  => finish		//设置订阅周期
 
 finish:
 	terminate

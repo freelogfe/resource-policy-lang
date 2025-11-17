@@ -1,8 +1,6 @@
 class UserPolicyDecompiler {
 
-    decompile(result) {
-        let stateMachine = result["state_machine"];
-
+    decompile(stateMachine) {
         let content = "";
         content += `\n${this.decompileAudiences(stateMachine["audiences"])}`;
         content += `\n${this.decompileDeclarations(stateMachine["declarations"])}`;

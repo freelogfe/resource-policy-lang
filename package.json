@@ -1,6 +1,6 @@
 {
   "name": "@freelog/resource-policy-lang",
-  "version": "1.5.7",
+  "version": "1.5.11",
   "description": "policy language compiler for freelog",
   "main": "index.js",
   "dependencies": {
@@ -9,7 +9,8 @@
     "decimal.js": "^10.2.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
-    "ts-node": "^10.7.0"
+    "ts-node": "^10.7.0",
+    "typescript": "^4.9.5"
   },
   "scripts": {
     "publish": "npm publish --access=public",

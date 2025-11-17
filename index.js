@@ -17,6 +17,7 @@ const {UserPolicyErrorLexerListener} = require("./UserPolicyErrorLexerListener")
 const {EventTool} = require("./dist/src/translate/tools/EventTool");
 const {StateTool} = require("./dist/src/translate/tools/StateTool");
 const {AudienceTool} = require("./dist/src/translate/tools/AudienceTool");
+const {UserPolicyDecompiler} = require("./UserPolicyDecompiler");
 const UserPolicyCustomVisitor = require("./UserPolicyCustomVisitor").UserPolicyCustomVisitor;
 const UserPolicyReformatVisitor = require("./UserPolicyReformatVisitor").UserPolicyReformatVisitor;
 
@@ -153,6 +154,10 @@ exports.compile = async function (policyText, targetType, targetUrl, env) {
         errors: [...errorListener.errors, ...visitor.errorObjects.map(eo => eo.msg)],
         errorObjects: [...errorListener.errorObjects, ...visitor.errorObjects]
     };
+}
+
+exports.decompile = function(stateMachine){
+    return new UserPolicyDecompiler().decompile(stateMachine);
 }
 
 exports.reformat = async function (policyText) {
